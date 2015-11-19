@@ -81,9 +81,8 @@ public class Player : Entity, IAttacker {
         Def = 0.1f;
         Speed = 3.5f;
 
-
         attackDirection = AttackDirectionState.right;
-        Debug.Log("Player ATK: " + Atk + " | DEF: " + Def);
+        //Debug.Log("Player ATK: " + Atk + " | DEF: " + Def);
     }
 
     #region Attacking Logic - Update(), IEnum Attack(), IEnum DelayAttack()
@@ -187,7 +186,7 @@ public class Player : Entity, IAttacker {
 
             if (rb2D.velocity == Vector2.zero && actionState != ActionState.EngagedInBattle)
             {
-                Debug.Log("Changing state to Idle");
+                //Debug.Log("Changing state to Idle");
                 actionState = ActionState.Idle;
             }            
             else
@@ -216,7 +215,7 @@ public class Player : Entity, IAttacker {
             yield return new WaitForSeconds(0.3f);
             if (horizontal == 0f && vertical == 0f && actionState == ActionState.Idle)
             {
-                Debug.Log("Changing animation state to Idle");
+                //Debug.Log("Changing animation state to Idle");
                 anim.SetBool("Idle", true);
             }
         }
@@ -227,8 +226,9 @@ public class Player : Entity, IAttacker {
     {
         if(wellBeing == WellBeingState.Alive)
         {
+            IWeapon weapon = Interface.Find<IWeapon>(other.collider.gameObject);
             IAttacker attacker = Interface.Find<IAttacker>(other.gameObject);
-            if (attacker != null)  // If it's an attacker
+            if (attacker != null && weapon != null)  // If it's an attacker
             {
                 float dmg = attacker.Atk - (attacker.Atk * Def);
                 actionState = ActionState.EngagedInBattle;

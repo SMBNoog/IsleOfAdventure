@@ -19,14 +19,14 @@ public class Enemy : Entity {
 
     // When the Players Weapon hits this enemy, take damage and engage
     protected void OnCollisionEnter2D(Collision2D other)
-    {
+    {   
+
         IWeapon weapon = Interface.Find<IWeapon>(other.collider.gameObject);
         if (weapon != null)
         {
             float wAtk = weapon.Atk;            
-            float pAtk = other.gameObject.GetComponentInParent<Player>().Atk; //hack
-            float dmg = (pAtk + wAtk) - ((pAtk + wAtk) * Def);
-            Debug.Log("Weapon ATK = " + wAtk + "\nPlayer ATK = " + pAtk);
+            float dmg = wAtk - (wAtk * Def);
+            Debug.Log("Weapon ATK = " + wAtk);
             DamagedBy(dmg);
             //actionState = ActionState.EngagedInBattle;
             SoundManager.Instance.Play(TypeOfClip.SwordHit);            

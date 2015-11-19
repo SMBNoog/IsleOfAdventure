@@ -27,7 +27,7 @@ public class Skeleton : Enemy, IAttacker
         anim = GetComponent<Animator>();  
         HP_Slider.maxValue = HP;
 
-        Debug.Log(this + " HP: " + HP +      " | ATK: " + Atk + " | DEF: " + Def + " | Speed: " + Speed);
+        //Debug.Log(this + " HP: " + HP +      " | ATK: " + Atk + " | DEF: " + Def + " | Speed: " + Speed);
     }
 
     // Skeleton Instance
