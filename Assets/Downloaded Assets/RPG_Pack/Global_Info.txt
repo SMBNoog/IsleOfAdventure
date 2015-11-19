@@ -1,0 +1,32 @@
+ ___        __       
+|_ _|_ __  / _| ___  
+ | || '_ \| |_ / _ \ 
+ | || | | |  _| (_) |
+|___|_| |_|_|  \___/ 
+
+
+--######### ----------------
+
+-- About Simple Enemy "mucus":
+	#-Mucus is waiting for detect to the player, each character (Knight, Roghe...) contains an "Activation_Area".
+	#-The character is detected by "mucus" when ontriggerenter2d with character "Activation_Area".
+
+-- Scripts associated:
+	#-"Example_Simple_Enemy_Controller.cs"
+
+
+--######### ----------------
+
+--About Characters:
+		#Keys (1,2,3) basic weapon, green weapon and pink weapon. 
+		#The character contains a lifebar and a lifebar_group, when character receive damage the lifebar width is decreased.
+		#The character get life after x seconds.
+
+-- Scripts associated:
+	#-"Example_Motion_Attack_Controller.cs"
+
+
+--######### ----------------
+
+--About creating maps:
+	#-The pack contains a few "basic terrain tiles assets" prepared to be used.
