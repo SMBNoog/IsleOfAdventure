@@ -123,11 +123,16 @@ public class Skeleton : Enemy, IAttacker
     {
         // Play death animation
         numberOfSkeletons -= 1;
-        // Increase HP, Atk or Def for the Player
+        anim.SetTrigger("Death");
         Debug.Log("I am of type : " + typeOfStatIncrease);
         GiveStatsToPlayerAponDeath(amountOfStatToGiveAponDeath, typeOfStatIncrease);
-        Destroy(gameObject);
-        
+        rb2D.isKinematic = true;
+        foreach(Collider2D col in GetComponents<Collider2D>())
+        {
+            col.enabled = false;
+        }
+        Destroy(gameObject, 3f);
+
     }
 
     //void OnDrawGizmosSelected()
