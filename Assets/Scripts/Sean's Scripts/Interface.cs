@@ -3,7 +3,7 @@ using System.Collections;
 
 public enum Team { Player, Enemy }
 public enum WellBeingState { Alive, Dead }
-public enum ActionState { Idle, Walking, EngagedInBattle, AggroByEnemy, ChargeAtPlayer }
+public enum ActionState { Idle, Patrolling, EngagedInBattle, AggroByEnemy, ChargeAtPlayer }
 public enum TypeOfStatIncrease { HP, ATK, DEF }
 
 public interface IAttacker

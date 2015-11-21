@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Idle : StateMachineBehaviour {
+public class AttackingSMB : StateMachineBehaviour {
 
 	 // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
 	//override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
@@ -27,4 +27,6 @@ public class Idle : StateMachineBehaviour {
 	//override public void OnStateIK(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
 	//
 	//}
+
+
 }

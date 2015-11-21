@@ -43,14 +43,43 @@ public class Skeleton : Enemy, IAttacker
         numberOfSkeletons += 1;
         amountOfStatToGiveAponDeath = amountToStatToGive;
         typeOfStatIncrease = stat;
-        
-
     }
+
+    IEnumerator SwitchToPatrol()
+    {
+        switching = true;
+        yield return new WaitForSeconds(UnityEngine.Random.Range(3, 5));
+        if (anim.GetBool("Idle"))
+        {
+            anim.SetBool("Patrol", true);
+            anim.SetBool("Idle", false);
+        }
+        switching = false;
+    }
+
+    IEnumerator SwitchToIdle()
+    {
+        switching = true;
+        yield return new WaitForSeconds(UnityEngine.Random.Range(3, 5));
+        if (anim.GetBool("Patrol"))
+        {
+            anim.SetBool("Patrol", false);
+            anim.SetBool("Idle", true);
+        }
+        switching = false;
+    }
+
 
     void Update()
     {
         if (HP_Slider.value != HP)
             HP_Slider.value = HP;
+
+        if (anim.GetBool("Idle") && !switching)
+            StartCoroutine(SwitchToPatrol());
+        else if (anim.GetBool("Patrol") && !switching)
+            StartCoroutine(SwitchToIdle());
+
 
         //rays = new List<RaycastHit2D>();
         //RayCasting2D();
@@ -68,7 +97,8 @@ public class Skeleton : Enemy, IAttacker
 
         //////lastPosition = myT.position;
     }
-    
+
+
 
     //void RayCasting2D()
     //{
@@ -117,7 +147,7 @@ public class Skeleton : Enemy, IAttacker
     //        }
     //    }
     //}
-    
+
     void FixedUpdate()
     {
         

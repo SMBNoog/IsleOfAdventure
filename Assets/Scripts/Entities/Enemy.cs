@@ -18,6 +18,8 @@ public class Enemy : Entity {
     protected float Amount_Start;
     protected TypeOfEnemy Type_Start;
 
+    protected bool switching;
+
     public static List<DeadEnemy> deadEnemyList;
 
 

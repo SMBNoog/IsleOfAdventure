@@ -89,7 +89,7 @@ public class Player : Entity, IAttacker {
         //Debug.Log("Player ATK: " + Atk + " | DEF: " + Def);
     }
 
-    #region Attacking Logic - Update(), IEnum Attack(), IEnum DelayAttack()
+    #region Animator state
     void Update()
     {
         if (wellBeing == WellBeingState.Alive)
@@ -195,23 +195,14 @@ public class Player : Entity, IAttacker {
             }            
             else
             {
-                actionState = ActionState.Walking;
+                actionState = ActionState.Patrolling;
                 anim.SetBool("Idle", false);
             }
 
             StartCoroutine(CheckIfIdle(horizontal, vertical));
         }
     }
-
-    //// Dynamically turn on and off depending on the scene.
-    //void OnTriggerStay(Collider2D other)
-    //{
-    //    if(other.collider == null)
-    //    {
-
-    //    }
-    //}
-
+    
     IEnumerator CheckIfIdle(float horizontal, float vertical)
     {
         if (horizontal == 0f && vertical == 0f)
@@ -230,9 +221,8 @@ public class Player : Entity, IAttacker {
     {
         if(wellBeing == WellBeingState.Alive)
         {
-            IWeapon weapon = Interface.Find<IWeapon>(other.collider.gameObject);
             IAttacker attacker = Interface.Find<IAttacker>(other.gameObject);
-            if (attacker != null && weapon != null)  // If it's an attacker
+            if (attacker != null)  // If it's an attacker
             {
                 float dmg = attacker.Atk - (attacker.Atk * Def);
                 actionState = ActionState.EngagedInBattle;

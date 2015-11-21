@@ -52,23 +52,40 @@ public class NewEnemyAI : MonoBehaviour {
 
     void Update()
     {
-        RaycastHit2D rayToPlayer = Physics2D.Linecast(transform.position, target.position, 1 << 10);
-        
 
-        if (myT.position != target.position)
+        if(target != null)
         {
-            direction = target.position - myT.position;
-            direction.Normalize();
-            anim.SetFloat("DirectionX", direction.x);
-            anim.SetFloat("DirectionY", direction.y);
-        }        
+            RaycastHit2D rayToPlayer = Physics2D.Linecast(transform.position, target.position, 1 << 10);
+            
+
+            if (rayToPlayer.distance > 30f)
+            {
+                anim.SetBool("CanSeePlayer", false);
+                anim.SetBool("Idle", true);
+                Debug.Log("Can't see player");
+
+                target = null;
+                return;
+                //pathIsEnded = true;
+            }
+
+            if (myT.position != target.position)
+            {
+                direction = target.position - myT.position;
+                direction.Normalize();
+                anim.SetFloat("DirectionX", direction.x);
+                anim.SetFloat("DirectionY", direction.y);
+            }
+        }
+
+      
     }
 
     void FixedUpdate()
     {
         if (target == null)
         {
-            target = FindObjectOfType<Player>().gameObject.transform;
+            //target = FindObjectOfType<Player>().gameObject.transform;
             return;
         }
 
@@ -117,8 +134,8 @@ public class NewEnemyAI : MonoBehaviour {
     {
         if (target == null)
         {
-            target = FindObjectOfType<Player>().gameObject.transform;
-            yield return false;
+            //target = FindObjectOfType<Player>().gameObject.transform;
+            yield break;
         }
 
         seeker.StartPath(transform.position, target.position, OnPathComplete);
@@ -132,6 +149,10 @@ public class NewEnemyAI : MonoBehaviour {
         IAttacker attacker = Interface.Find<IAttacker>(other.gameObject);
         if (attacker != null && attacker.Team == Team.Player)
         {
+            anim.SetBool("CanSeePlayer", true);
+            anim.SetBool("Idle", false);
+            anim.SetBool("Patrol", false);
+            Debug.Log("Can see the player!");
             target = other.gameObject.transform;
             seeker.StartPath(transform.position, target.position, OnPathComplete);
             StartCoroutine(UpdatePath());
@@ -145,6 +166,7 @@ public class NewEnemyAI : MonoBehaviour {
         {
             path = p;
             currentWaypoint = 0;
+            //anim.SetBool("CanSeePlayer", false);
         }
     }
 }
