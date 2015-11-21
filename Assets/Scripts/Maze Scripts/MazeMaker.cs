@@ -6,6 +6,7 @@ public class MazeMaker : MonoBehaviour
     public GameObject Tile;
     public GameObject RLTile;
     public GameObject UDTile;
+    public GameObject Enemy;
 
     void Start()
     {
@@ -41,7 +42,12 @@ public class MazeMaker : MonoBehaviour
                 {
                     Dungeon[i][j] = 'C';
                     Instantiate(Tile, new Vector3(i, j, 0f), Quaternion.identity);
-                }                  
+                }        
+                else if (Random.Range(0f, 1f) < 0.3f)
+                {
+                    Dungeon[i][j] = 'D';
+                    Instantiate(Enemy, new Vector3(i, j, 0f), Quaternion.identity);
+                }          
             }
     }
 }
