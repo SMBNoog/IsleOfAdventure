@@ -54,11 +54,15 @@ public class Player : Entity, IAttacker {
 
     private WeaponType currentWeapon;
 
-    private float getAtk() { return Atk;  }
+    
+
+    // When the Player GameObject is enabled.
     public void OnEnable()
     {
+        // Search the children to find Weapons.
         foreach (var weapon in gameObject.GetComponentsInChildren<Weapon>())
         {
+            // Add a blank method as shortcut. Instead of typing >>> private float getAtk() { return Atk;  }
             weapon.GetBaseAtkDelegate += () => { return Atk; };
         }
     }

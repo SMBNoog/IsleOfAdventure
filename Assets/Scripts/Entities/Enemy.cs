@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System;
+using System.Collections.Generic;
 
 public enum EnemyFacing { left, right, up, down }
 
@@ -9,6 +10,16 @@ public class Enemy : Entity {
     protected float amountOfStatToGiveAponDeath { get; set; }
     protected Vector3 targetPlayer { get; set; }
     protected Rigidbody2D rb2D;
+    protected Vector2 spawnPosition;
+    protected float HP_Start;
+    protected float Atk_Start;
+    protected float Def_Start;
+    protected TypeOfStatIncrease Stat_Start;
+    protected float Amount_Start;
+    protected TypeOfEnemy Type_Start;
+
+    public static List<DeadEnemy> deadEnemyList;
+
 
     // Apon death give stats to player
     protected void GiveStatsToPlayerAponDeath(float amount, TypeOfStatIncrease stat)
@@ -24,14 +35,14 @@ public class Enemy : Entity {
         IWeapon weapon = Interface.Find<IWeapon>(other.collider.gameObject);
         if (weapon != null)
         {
-            float wAtk = weapon.Atk;            
+            float wAtk = weapon.Atk;  //weapon + base          
             float dmg = wAtk - (wAtk * Def);
             Debug.Log("Weapon ATK = " + wAtk);
             DamagedBy(dmg);
             //actionState = ActionState.EngagedInBattle;
             SoundManager.Instance.Play(TypeOfClip.SwordHit);            
         }
-    }
+    }   
 
     public override void Die()
     {

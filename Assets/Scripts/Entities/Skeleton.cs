@@ -16,6 +16,7 @@ public class Skeleton : Enemy, IAttacker
     public Team Team { get { return Team.Enemy; } }
     public Vector2 Pos { get { return transform.position; } }
     public float Atk { get; set; }
+    public DeadEnemy startingSkeleton;
 
     //private float distaneOfRay = 10;
     //private List<RaycastHit2D> rays;
@@ -27,6 +28,7 @@ public class Skeleton : Enemy, IAttacker
         anim = GetComponent<Animator>();  
         HP_Slider.maxValue = HP;
 
+        spawnPosition = myT.position;
         //Debug.Log(this + " HP: " + HP +      " | ATK: " + Atk + " | DEF: " + Def + " | Speed: " + Speed);
     }
 
@@ -40,7 +42,9 @@ public class Skeleton : Enemy, IAttacker
         this.Speed = Speed;
         numberOfSkeletons += 1;
         amountOfStatToGiveAponDeath = amountToStatToGive;
-        typeOfStatIncrease = stat;     
+        typeOfStatIncrease = stat;
+        
+
     }
 
     void Update()
@@ -131,9 +135,11 @@ public class Skeleton : Enemy, IAttacker
         {
             col.enabled = false;
         }
+        // assign method from another class to it
+        //SpawnEnemies.enemiesInstantiated.RemoveAt(SpawnEnemies.enemiesInstantiated.Count - 1);
         Destroy(gameObject, 3f);
-
     }
+    
 
     //void OnDrawGizmosSelected()
     //{

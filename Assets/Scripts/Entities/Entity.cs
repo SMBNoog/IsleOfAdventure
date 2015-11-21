@@ -2,6 +2,19 @@
 using System.Collections;
 using System;
 
+[Serializable]
+public class DeadEnemy
+{
+    public GameObject prefab;
+    public Vector2 pos;
+    public float HP;
+    public float Atk;
+    public float Def;
+    public float AmountOfStatToGive;
+    public TypeOfEnemy TypeEnemy;
+    public TypeOfStatIncrease TypeStat;
+}
+
 public abstract class Entity : MonoBehaviour {
 
     //public abstract WellBeingState wellBeing { get; set; }
