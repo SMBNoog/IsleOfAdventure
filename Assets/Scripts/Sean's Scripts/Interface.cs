@@ -3,8 +3,10 @@ using System.Collections;
 
 public enum Team { Player, Enemy }
 public enum WellBeingState { Alive, Dead }
-public enum ActionState { Idle, Patrolling, EngagedInBattle, AggroByEnemy, ChargeAtPlayer }
+public enum ActionState { Idle, Patrolling, EngagedInBattle, AggroByEnemy, ChargeAtPlayer, RunningAway }
 public enum TypeOfStatIncrease { HP, ATK, DEF }
+public enum WeaponType { Wooden, Bronze, Silver, Gold, Epic }
+
 
 public interface IAttacker
 {
@@ -19,7 +21,8 @@ public interface IAttacker
 public interface IWeapon
 {
     float Atk { get; set; }
-    float Def { get; set; }    
+    float Def { get; set; }
+    WeaponType WeaponType { get; set; }
 }
 
 public static class Interface

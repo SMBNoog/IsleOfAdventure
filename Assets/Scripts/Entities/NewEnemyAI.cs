@@ -56,9 +56,18 @@ public class NewEnemyAI : MonoBehaviour {
         if(target != null)
         {
             RaycastHit2D rayToPlayer = Physics2D.Linecast(transform.position, target.position, 1 << 10);
-            
 
-            if (rayToPlayer.distance > 30f)
+            float dis = rayToPlayer.distance;
+
+            anim.SetFloat("DistanceFromTarget", dis);
+            
+            if(dis < 1)
+            {
+                target = null;
+                return;
+            }
+            
+            if (dis > 30f)
             {
                 anim.SetBool("CanSeePlayer", false);
                 anim.SetBool("Idle", true);
@@ -68,6 +77,7 @@ public class NewEnemyAI : MonoBehaviour {
                 return;
                 //pathIsEnded = true;
             }
+            
 
             if (myT.position != target.position)
             {
@@ -98,7 +108,7 @@ public class NewEnemyAI : MonoBehaviour {
             {
                 return;
             }
-            Debug.Log("End of path reached.");
+            //Debug.Log("End of path reached.");
             pathIsEnded = true;
             return;
         }
@@ -152,6 +162,21 @@ public class NewEnemyAI : MonoBehaviour {
             anim.SetBool("Idle", false);
             anim.SetBool("Patrol", false);
             Debug.Log("Can see the player!");
+            target = other.gameObject.transform;
+            seeker.StartPath(transform.position, target.position, OnPathComplete);
+            StartCoroutine(UpdatePath());
+        }
+    }
+
+    void OnTriggerExit2D(Collider2D other)
+    {
+        IAttacker attacker = Interface.Find<IAttacker>(other.gameObject);
+        if (attacker != null && attacker.Team == Team.Player)
+        {
+            //anim.SetBool("CanSeePlayer", true);
+            anim.SetBool("Idle", false);
+            anim.SetBool("Patrol", false);
+            //Debug.Log("Run after player!");
             target = other.gameObject.transform;
             seeker.StartPath(transform.position, target.position, OnPathComplete);
             StartCoroutine(UpdatePath());
