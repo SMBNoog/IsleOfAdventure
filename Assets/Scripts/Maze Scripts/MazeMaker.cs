@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Pathfinding;
 
 public class MazeMaker : MonoBehaviour
 {
@@ -28,26 +29,43 @@ public class MazeMaker : MonoBehaviour
                     continue;
                 if (i == 2 && j == 2)
                     continue;
-                if (Random.Range(0f, 1f) < 0.05f)
+                if (Random.Range(0f, 1f) < 0.01f)
                 {
                     Dungeon[i][j] = 'A';
+                    Instantiate(Enemy, new Vector3(i, j, 0f), Quaternion.identity);
+                }
+                else if (Random.Range(0f, 1f) < 0.05f)
+                {
+                    Dungeon[i][j] = 'B';
                     Instantiate(RLTile, new Vector3(i, j, 0f), Quaternion.identity);
                 }
                 else if (Random.Range(0f, 1f) < 0.1f)
                 {
-                    Dungeon[i][j] = 'B';
+                    Dungeon[i][j] = 'C';
                     Instantiate(UDTile, new Vector3(i, j, 0f), Quaternion.identity);
                 }
                 else if (Random.Range(0f, 1f) <  0.25f)
                 {
-                    Dungeon[i][j] = 'C';
-                    Instantiate(Tile, new Vector3(i, j, 0f), Quaternion.identity);
-                }        
-                else if (Random.Range(0f, 1f) < 0.3f)
-                {
                     Dungeon[i][j] = 'D';
-                    Instantiate(Enemy, new Vector3(i, j, 0f), Quaternion.identity);
-                }          
+                    Instantiate(Tile, new Vector3(i, j, 0f), Quaternion.identity);
+                }               
             }
     }
+
+    //void Update()
+    //{
+    //    //// This holds all graph data
+    //    //AstarData data = AstarPath.active.astarData;
+    //    //// This creates a Grid Graph
+    //    //GridGraph gg = data.AddGraph(typeof(GridGraph)) as GridGraph;
+    //    //// Setup a grid graph with some values
+    //    ////gg.width = 120;
+    //    //gg.depth = 120;
+    //    //gg.nodeSize = 1;
+    //    //gg.center = new Vector3(50, 50, 0);
+    //    //// Updates internal size from the above values
+    //    //gg.UpdateSizeFromWidthDepth();
+    //    //// Scans all graphs, do not call gg.Scan(), that is an internal method
+    //    AstarPath.active.Scan();
+    //}
 }
