@@ -28,22 +28,22 @@ public class EndGame : MonoBehaviour
     {
         if (Random.Range(0f, 1f) < .70f)
         {
-            weaponreward = WeaponType.bronze;
+            weaponreward = WeaponType.Bronze;
             Debug2Screen.Log("You Win!\n You Obtained The Bronze Sword");
         }
         else if (Random.Range(0f, 1f) < .90f)
         {
-            weaponreward = WeaponType.silver;
+            weaponreward = WeaponType.Silver;
             Debug2Screen.Log("You Win!\n You Obtained The Silver Sword");
         }
         else if (Random.Range(0f, 1f) < .98f)
         {
-            weaponreward = WeaponType.gold;
+            weaponreward = WeaponType.Gold;
             Debug2Screen.Log("You Win!\n You Obtained The Gold Sword");
         }
         else
         {
-            weaponreward = WeaponType.epic;
+            weaponreward = WeaponType.Epic;
             Debug2Screen.Log("You Win!\n You Obtained The Epic Sword");
         }
     }
