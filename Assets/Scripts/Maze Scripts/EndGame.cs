@@ -5,26 +5,63 @@ public class EndGame : MonoBehaviour
 {
     public GameObject openchest;
     public GameObject UI;
+    public WeaponType weaponreward;
+    Player player;
+
+    void Start()
+    {
+        player = FindObjectOfType<Player>();
+    }
 
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Player")
         {
             openchest.SetActive(true);
-            Debug2Screen.Log("You Win");
+            UI.SetActive(true);
             GiveWeapon();
+            Time.timeScale = 0f;
         }
     }
 
     void GiveWeapon()
     {
         if (Random.Range(0f, 1f) < .70f)
-            Debug2Screen.Log("You Obtained The Bronze Sword");
+        {
+            weaponreward = WeaponType.bronze;
+            Debug2Screen.Log("You Win!\n You Obtained The Bronze Sword");
+        }
         else if (Random.Range(0f, 1f) < .90f)
-            Debug2Screen.Log("You Obtained The Silver Sword");
+        {
+            weaponreward = WeaponType.silver;
+            Debug2Screen.Log("You Win!\n You Obtained The Silver Sword");
+        }
         else if (Random.Range(0f, 1f) < .98f)
-            Debug2Screen.Log("You Obtained The Gold Sword");
+        {
+            weaponreward = WeaponType.gold;
+            Debug2Screen.Log("You Win!\n You Obtained The Gold Sword");
+        }
         else
-            Debug2Screen.Log("You Obtained The Epic Sword");
+        {
+            weaponreward = WeaponType.epic;
+            Debug2Screen.Log("You Win!\n You Obtained The Epic Sword");
+        }
+    }
+
+    //Button Control Scripts Below...
+
+    public void TakeWeapon()
+    {
+        player.ChangeWeapon(weaponreward);
+        //save
+        //exit to world
+        Application.LoadLevel(0);
+    }
+
+    public void LeaveWeapon()
+    {
+        //save
+        //exit to world
+        Application.LoadLevel(0);
     }
 }

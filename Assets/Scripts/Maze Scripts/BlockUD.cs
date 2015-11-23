@@ -39,19 +39,15 @@ public class BlockUD : MonoBehaviour
 
     void FixedUpdate()
     {
-        int layerMask;
-        layerMask = int.MaxValue;
-        layerMask = layerMask ^ 1 << LayerMask.NameToLayer("Block");
-
         if (movingUp)
         {
-            RaycastHit2D hit = Physics2D.Raycast(centerPoint.position, Vector2.up, wallTestDistance, layerMask);
+            RaycastHit2D hit = Physics2D.Raycast(centerPoint.position, Vector2.up, wallTestDistance);
             if (hit.collider != null && hit.collider.gameObject.tag != "Player")
                 movingUp = false;
         }
         else
         {
-            RaycastHit2D hit = Physics2D.Raycast(centerPoint2.position, -Vector2.up, wallTestDistance, layerMask);
+            RaycastHit2D hit = Physics2D.Raycast(centerPoint2.position, -Vector2.up, wallTestDistance);
             if (hit.collider != null && hit.collider.gameObject.tag != "Player")
             {
                 movingUp = true;
