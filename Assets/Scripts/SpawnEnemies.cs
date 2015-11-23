@@ -26,7 +26,6 @@ public class SpawnEnemies : MonoBehaviour {
 
     public List<SpawnArea> spawnAreas;
     
-
     public Skeleton CreateSkeleton(GameObject prefab, Vector2 pos, 
         float HP, float Atk, float Def, float Speed, float AmountOfStatToGive, TypeOfStatIncrease Type)
     {

@@ -43,6 +43,8 @@ public class Skeleton : Enemy, IAttacker
         numberOfSkeletons += 1;
         amountOfStatToGiveAponDeath = amountToStatToGive;
         typeOfStatIncrease = stat;
+
+        //assign
     }
 
     IEnumerator SwitchToPatrol()
@@ -167,9 +169,10 @@ public class Skeleton : Enemy, IAttacker
         }
         // assign method from another class to it
         //SpawnEnemies.enemiesInstantiated.RemoveAt(SpawnEnemies.enemiesInstantiated.Count - 1);
-        Destroy(gameObject, 3f);
+        Destroy(gameObject, 3f); //wait until respawn, disable
     }
     
+    // IEnum to respawn;
 
     //void OnDrawGizmosSelected()
     //{

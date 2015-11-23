@@ -111,9 +111,8 @@ public class NewEnemyAI : MonoBehaviour {
         //calculate the dot product here and print to log
         float dotAngle = Vector2.Dot(myT.position.normalized, dir1);
         //Debug.Log("Dot Angle: " + dotAngle);
-        //Move AI        
+        //Move AI
         rb.AddForce(dir, fMode);
-        //rb.velocity = dir;
 
         if(dotAngle < 0.10 && dotAngle > -0.10)
         {
