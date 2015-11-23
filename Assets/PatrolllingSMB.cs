@@ -19,7 +19,7 @@ public class PatrolllingSMB : StateMachineBehaviour {
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         // Patrolling
-        Debug.Log("X: " + x + "Y: " + y);
+        //Debug.Log("X: " + x + "Y: " + y);
         rb.velocity = (new Vector2(x, y) * 1f).normalized;
 
         if (rb.transform.position != lastPos);
