@@ -64,5 +64,6 @@ public class BlockRL : MonoBehaviour
     void OnDrawGizmos()
     {
         Gizmos.DrawLine(centerPoint.position, centerPoint.position + (movingRight ? Vector3.right : -Vector3.right) * wallTestDistance);
+        Gizmos.DrawLine(centerPoint2.position, centerPoint2.position + (movingRight ? Vector3.right : -Vector3.right) * wallTestDistance);
     }
 }

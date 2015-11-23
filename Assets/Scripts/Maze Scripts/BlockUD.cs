@@ -62,5 +62,6 @@ public class BlockUD : MonoBehaviour
     void OnDrawGizmos()
     {
         Gizmos.DrawLine(centerPoint.position, centerPoint.position + (movingUp ? Vector3.up : -Vector3.up) * wallTestDistance);
+        Gizmos.DrawLine(centerPoint2.position, centerPoint2.position + (movingUp ? Vector3.up : -Vector3.up) * wallTestDistance);
     }
 }
