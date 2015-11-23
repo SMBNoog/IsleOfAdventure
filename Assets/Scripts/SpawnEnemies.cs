@@ -102,41 +102,41 @@ public class SpawnEnemies : MonoBehaviour {
             {
                 if (area.typeOfEnemy == TypeOfEnemy.Skeleton)
                 {
-                    CreateSkeleton(area.prefab, area.spawnLocation.position,
+                    CreateSkeleton(area.prefab, area.spawnLocation.position + new Vector3(i, i, 0f),
                         HP_Median, Atk_Median, Def_Median,
                         AmountOfStatToGive, area.typeOfStatDrop);
                 }
                 else if (area.typeOfEnemy == TypeOfEnemy.Solider)
                 {
-                    CreateSolider(area.prefab, area.spawnLocation.position,
+                    CreateSolider(area.prefab, area.spawnLocation.position + new Vector3(i, i, 0f),
                         HP_Median, Atk_Median, Def_Median,
                         AmountOfStatToGive, area.typeOfStatDrop);
                 }
             }
         }
-        StartCoroutine(RespawnEnemys());
+        //StartCoroutine(RespawnEnemys());
 
         //Debug.Log(enemiesInstantiated.Count);
     }
 
-    IEnumerator RespawnEnemys()
-    {
-        float r = Random.Range(60, 180);
-        yield return new WaitForSeconds(r);
-        // spawn enemies in the dead enemies array
-        StartCoroutine(RespawnEnemys());
-    }
+    //IEnumerator RespawnEnemys()
+    //{
+    //    float r = Random.Range(60, 180);
+    //    yield return new WaitForSeconds(r);
+    //    // spawn enemies in the dead enemies array
+    ////    StartCoroutine(RespawnEnemys());
+    //}
     
-    public void RespawnWhat(GameObject prefab, Vector2 pos, float HP, float Atk, float Def,
-                        float Speed, float AmountOfStatToGive, TypeOfEnemy TypeEnemy, TypeOfStatIncrease TypeStat)
-    {
-        if (TypeEnemy == TypeOfEnemy.Skeleton)
-        {
-            CreateSkeleton(prefab, pos, HP, Atk, Def, AmountOfStatToGive, TypeStat);
-        }
-        else if (TypeEnemy == TypeOfEnemy.Solider)
-        {
-            CreateSolider(prefab, pos, HP, Atk, Def, AmountOfStatToGive, TypeStat);
-        }
-    }
+    //public void RespawnWhat(GameObject prefab, Vector2 pos, float HP, float Atk, float Def,
+    //                    float Speed, float AmountOfStatToGive, TypeOfEnemy TypeEnemy, TypeOfStatIncrease TypeStat)
+    //{
+    //    if (TypeEnemy == TypeOfEnemy.Skeleton)
+    //    {
+    //        CreateSkeleton(prefab, pos, HP, Atk, Def, AmountOfStatToGive, TypeStat);
+    //    }
+    //    else if (TypeEnemy == TypeOfEnemy.Solider)
+    //    {
+    //        CreateSolider(prefab, pos, HP, Atk, Def, AmountOfStatToGive, TypeStat);
+    //    }
+    //}
 }

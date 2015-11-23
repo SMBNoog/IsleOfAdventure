@@ -93,6 +93,7 @@ public class Player : Entity, IAttacker {
     #region Animator state
     void Update()
     {
+        //Debug.Log("Action State : " + actionState);
         if (wellBeing == WellBeingState.Alive)
         {
             if(HP_Slider.maxValue != maxHP_Slider)

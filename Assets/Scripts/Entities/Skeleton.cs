@@ -16,7 +16,7 @@ public class Skeleton : Enemy, IAttacker
     public Team Team { get { return Team.Enemy; } }
     public Vector2 Pos { get { return transform.position; } }
     public float Atk { get; set; }
-    public DeadEnemy startingSkeleton;
+    //public GameObject startingSkeleton;
 
     //private float distaneOfRay = 10;
     //private List<RaycastHit2D> rays;
@@ -43,7 +43,13 @@ public class Skeleton : Enemy, IAttacker
         amountOfStatToGiveAponDeath = amountToStatToGive;
         typeOfStatIncrease = stat;
 
-        //assign
+        //startingSkeleton = new GameObject();
+        //Skeleton s = startingSkeleton.GetComponent<Skeleton>();
+        //s.HP = HP;
+        //s.Atk = Atk;
+        //s.Def = Def;
+        //s.amountOfStatToGiveAponDeath = amountToStatToGive;
+        //s.typeOfStatIncrease = stat;
     }
 
     IEnumerator SwitchToPatrol()
@@ -168,13 +174,18 @@ public class Skeleton : Enemy, IAttacker
         {
             col.enabled = false;
         }
-        // assign method from another class to it
-        //SpawnEnemies.enemiesInstantiated.RemoveAt(SpawnEnemies.enemiesInstantiated.Count - 1);
-        Destroy(gameObject, 3f); //wait until respawn, disable
+        //StartCoroutine(Respawn());
+        //gameObject.SetActive(false);
+        //Destroy(gameObject, 3f); //wait until respawn, disable
     }
-    
-    // IEnum to respawn;
 
+    //private IEnumerator Respawn()
+    //{
+    //    yield return new WaitForSeconds(1f);
+        
+    //    //Instantiate(startingSkeleton, spawnPosition, Quaternion.identity);
+    //    Destroy(gameObject);
+    //}
     //void OnDrawGizmosSelected()
     //{
     //    Gizmos.color = new Color(1f, .0f, 0f, .2f);
