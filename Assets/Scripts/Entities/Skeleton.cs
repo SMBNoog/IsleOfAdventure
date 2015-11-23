@@ -33,13 +33,12 @@ public class Skeleton : Enemy, IAttacker
     }
 
     // Skeleton Instance
-    public void Initialize(float HP, float Atk, float Def, float Speed, float amountToStatToGive, TypeOfStatIncrease stat)
+    public void Initialize(float HP, float Atk, float Def, float amountToStatToGive, TypeOfStatIncrease stat)
     {
         float multiplier = UnityEngine.Random.Range(-.1f, .1f);
         this.HP = HP + (HP * multiplier);
         this.Atk = Atk + (Atk * multiplier);
         this.Def = Def + (Def * multiplier);
-        this.Speed = Speed;
         numberOfSkeletons += 1;
         amountOfStatToGiveAponDeath = amountToStatToGive;
         typeOfStatIncrease = stat;
@@ -159,10 +158,12 @@ public class Skeleton : Enemy, IAttacker
     {
         // Play death animation
         numberOfSkeletons -= 1;
-        anim.SetTrigger("Death");
+        anim.SetBool("Death", true);
+        anim.SetTrigger("DeathAni");
         Debug.Log("I am of type : " + typeOfStatIncrease);
         GiveStatsToPlayerAponDeath(amountOfStatToGiveAponDeath, typeOfStatIncrease);
         rb2D.isKinematic = true;
+        ////rb2D.constraints = RigidbodyConstraints2D.FreezeAll;
         foreach(Collider2D col in GetComponents<Collider2D>())
         {
             col.enabled = false;

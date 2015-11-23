@@ -33,7 +33,7 @@ public class Solider : Enemy, IAttacker
     }
 
     // Skeleton Instance
-    public void Initialize(float HP, float Atk, float Def, float Speed, float amountToStatToGive, TypeOfStatIncrease stat)
+    public void Initialize(float HP, float Atk, float Def, float amountToStatToGive, TypeOfStatIncrease stat)
     {
         float multiplier = UnityEngine.Random.Range(-.1f, .1f);
         this.HP = HP + (HP * multiplier);

@@ -6,7 +6,6 @@ using System;
 using CnControls;
 
 public enum AttackDirectionState { up, down, left, right }
-public enum WeaponType { wooden, bronze, brass, silver, gold, epic}
 
 [System.Serializable]
 public class AttackDirection
@@ -32,7 +31,7 @@ public class Player : Entity, IAttacker {
     public List<Weapons> weaponList;
 
     public float HP_Cap = 1000;
-    public float DEF_Cap = 0.25f;
+    public float DEF_Cap = 0.50f;
     public Slider HP_Slider;
     [SerializeField]
     private float maxHP_Slider = 100f;
@@ -52,7 +51,7 @@ public class Player : Entity, IAttacker {
     private Rigidbody2D rb2D;
     private Vector3 lastPosition;
 
-    private WeaponType currentWeapon;
+    public WeaponType currentWeapon;
 
     
 
@@ -77,13 +76,15 @@ public class Player : Entity, IAttacker {
         wellBeing = WellBeingState.Alive;
 
         //ChangeWeapon(1, 1);
-        currentWeapon = WeaponType.wooden;
+        currentWeapon = WeaponType.Wooden;
 
         // Player starting stats
         HP = maxHP_Slider; // set in inspecter
         Atk = 8f;
         Def = 0.1f;
         Speed = 3.5f;
+
+        ChangeWeapon(WeaponType.Bronze);
 
         attackDirection = AttackDirectionState.right;
         //Debug.Log("Player ATK: " + Atk + " | DEF: " + Def);
@@ -99,7 +100,7 @@ public class Player : Entity, IAttacker {
 
             // Regen when Idle
             if (actionState == ActionState.Idle && HP < maxHP_Slider)
-                HP += 0.1f;
+                HP += maxHP_Slider * .001f;
 
             if (anim.GetCurrentAnimatorStateInfo(0).IsName("Walk_Right") || anim.GetCurrentAnimatorStateInfo(0).IsName("Idle_Right"))
                 attackDirection = AttackDirectionState.right;
@@ -190,12 +191,11 @@ public class Player : Entity, IAttacker {
 
             if (rb2D.velocity == Vector2.zero && actionState != ActionState.EngagedInBattle)
             {
-                //Debug.Log("Changing state to Idle");
+                Debug.Log("Changing state to Idle");
                 actionState = ActionState.Idle;
             }            
             else
             {
-                actionState = ActionState.Patrolling;
                 anim.SetBool("Idle", false);
             }
 
@@ -217,7 +217,7 @@ public class Player : Entity, IAttacker {
     }
 
     // Enemy is hitting player
-    void OnCollisionEnter2D(Collision2D other)
+    void OnCollisionStay2D(Collision2D other)
     {
         if(wellBeing == WellBeingState.Alive)
         {
@@ -228,11 +228,19 @@ public class Player : Entity, IAttacker {
                 actionState = ActionState.EngagedInBattle;
                 if (canTakeDamage)
                 {
+                    actionState = ActionState.EngagedInBattle;
+                    StartCoroutine(DelayToChangeToIdle());
                     StartCoroutine(DelayDamageReceived(dmg));
                     canTakeDamage = false;
                 }
             }
         }
+    }
+
+    IEnumerator DelayToChangeToIdle()
+    {
+        yield return new WaitForSeconds(3f);
+        actionState = ActionState.RunningAway;
     }
 
     IEnumerator DelayDamageReceived(float dmg)
@@ -284,6 +292,26 @@ public class Player : Entity, IAttacker {
     public void ChangeWeapon(WeaponType type)
     {
         currentWeapon = type;
+        if (type == WeaponType.Bronze)
+        {
+            maxHP_Slider += 1000f;
+            //Atk += 100f;
+        }
+        else if (type == WeaponType.Silver)
+        {
+            maxHP_Slider += 10000f;
+            //Atk += 1000f;
+        }
+        else if (type == WeaponType.Gold)
+        {
+            maxHP_Slider += 2500f;
+            //Atk += 250f;
+        }
+        else if (type == WeaponType.Epic)
+        {
+            maxHP_Slider += 7500f;
+            //Atk += 2000f;
+        }
     }
 
     public override void Die()

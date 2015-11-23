@@ -10,6 +10,7 @@ public class Weapon : MonoBehaviour, IWeapon
 
     public float atk;
     public float def;
+    public WeaponType type;
 
     public float Atk { get
         {
@@ -24,4 +25,6 @@ public class Weapon : MonoBehaviour, IWeapon
         set { atk = value; } }
 
     public float Def { get { return def; } set { def = value; } }
+
+    public WeaponType WeaponType { get; set; }
 }
