@@ -40,7 +40,7 @@ public class Skeleton : Enemy, IAttacker
     // Skeleton Instance
     public void Initialize(float HP, float Atk, float Def, float amountToStatToGive, TypeOfStatIncrease stat)
     {
-        float multiplier = UnityEngine.Random.Range(-.1f, .1f);
+        float multiplier = UnityEngine.Random.Range(-.1f, .3f);
         this.HP = HP + (HP * multiplier);
         this.Atk = Atk + (Atk * multiplier);
         this.Def = Def + (Def * multiplier);

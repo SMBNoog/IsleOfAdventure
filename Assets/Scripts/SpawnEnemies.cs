@@ -12,11 +12,6 @@ public class SpawnArea {
     public GameObject prefab;
     public TypeOfEnemy typeOfEnemy;
     public int numberToSpawn;
-    //public float HP_Median;
-    //public float Atk_Median;
-    //public float Def_Median;
-    //public float Speed;
-    //public float AmountOfStatToGive;
     public TypeOfStatIncrease typeOfStatDrop;
 }
 
@@ -34,7 +29,7 @@ public class SpawnEnemies : MonoBehaviour, ISpawner {
 
     private List<SpawnResult> spawnResults;
 
-    public GameObject interfaceProvider; //player game object or whatever we need to find an interface on
+    public GameObject interfaceProvider; // The gameobject to find the interface on.
 
     private IPlayerCurrentWeapon playerCurrentWeapon;
 
@@ -88,9 +83,7 @@ public class SpawnEnemies : MonoBehaviour, ISpawner {
                 }
                 else if (area.typeOfEnemy == TypeOfEnemy.Solider)
                 {
-                    CreateSolider(area.prefab, area.spawnLocation.position + new Vector3(i, i, 0f),
-                        HP_Median, Atk_Median, Def_Median,
-                        AmountOfStatToGive, area.typeOfStatDrop);
+                    // TODO
                 }
             }
         }
@@ -101,7 +94,7 @@ public class SpawnEnemies : MonoBehaviour, ISpawner {
         TypeOfStatIncrease typeOfStat = spawnAreas[0].typeOfStatDrop;
         switch (playerCurrentWeapon.weaponType)
         {
-            case WeaponType.Wooden:
+            case WeaponType.Wooden:  // Wooden enemy stats
                 HP_Median = 100;
                 Atk_Median = 10;
                 Def_Median = 0.01f;
@@ -118,7 +111,7 @@ public class SpawnEnemies : MonoBehaviour, ISpawner {
                 Def_Median = 0.03f;
                 switch (typeOfStat)
                 {
-                    case TypeOfStatIncrease.ATK: AmountOfStatToGive = 10f; break;
+                    case TypeOfStatIncrease.ATK: AmountOfStatToGive = 1f; break;
                     case TypeOfStatIncrease.DEF: AmountOfStatToGive = 0.005f; break;
                     case TypeOfStatIncrease.HP: AmountOfStatToGive = 10; break;
                 }
@@ -156,26 +149,20 @@ public class SpawnEnemies : MonoBehaviour, ISpawner {
         float r = UnityEngine.Random.Range(60f, 480f);
         yield return new WaitForSeconds(r);
 
-        SpawnResult result = new SpawnResult();
-        var skeleton = CreateSkeleton(sr.source.prefab, sr.source.spawnLocation.position,
-            HP_Median, Atk_Median, Def_Median,
-            AmountOfStatToGive, sr.source.typeOfStatDrop);
-        skeleton.Spawner = this;
-        result.enemy = skeleton;  //polymorphism, reference this skeleton to compare later
-        result.source = sr.source;   // reference this area values for respawning
-        spawnResults[spawnResults.IndexOf(sr)] = result; // assign new enemy into dead enemy's index in the list        
+        if (sr.source.typeOfEnemy == TypeOfEnemy.Skeleton)
+        {
+            SpawnResult result = new SpawnResult();
+            var skeleton = CreateSkeleton(sr.source.prefab, sr.source.spawnLocation.position,
+                HP_Median, Atk_Median, Def_Median,
+                AmountOfStatToGive, sr.source.typeOfStatDrop);
+            skeleton.Spawner = this;
+            result.enemy = skeleton;  //polymorphism, reference this skeleton to compare later
+            result.source = sr.source;   // reference this area values for respawning
+            spawnResults[spawnResults.IndexOf(sr)] = result; // assign new enemy into dead enemy's index in the list  
+        }
+        else if(sr.source.typeOfEnemy == TypeOfEnemy.Solider)
+        {
+            //TODO
+        } 
     }
-
-    //public void RespawnWhat(GameObject prefab, Vector2 pos, float HP, float Atk, float Def,
-    //                    float Speed, float AmountOfStatToGive, TypeOfEnemy TypeEnemy, TypeOfStatIncrease TypeStat)
-    //{
-    //    if (TypeEnemy == TypeOfEnemy.Skeleton)
-    //    {
-    //        CreateSkeleton(prefab, pos, HP, Atk, Def, AmountOfStatToGive, TypeStat);
-    //    }
-    //    else if (TypeEnemy == TypeOfEnemy.Solider)
-    //    {
-    //        CreateSolider(prefab, pos, HP, Atk, Def, AmountOfStatToGive, TypeStat);
-    //    }
-    //}
 }
