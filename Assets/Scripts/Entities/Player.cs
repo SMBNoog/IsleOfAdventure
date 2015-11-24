@@ -23,7 +23,7 @@ public class Weapons
     public List<AttackDirection> attackSpriteArray;
 }
 
-public class Player : Entity, IAttacker {
+public class Player : Entity, IAttacker, IPlayerCurrentWeapon {
 
     [SerializeField]
     private AttackDirectionState attackDirection;
@@ -42,7 +42,12 @@ public class Player : Entity, IAttacker {
     public Vector2 Pos { get { return transform.position; } }
     public float Atk { get; set; }
     public TypeOfStatIncrease typeOfStatIncrease { get; set; } // Doesn't use
-    
+
+    public WeaponType weaponType
+    {
+        get { return currentWeapon; }
+    }
+
     public float delayBetweenAutoAttacks = 0.4f;
     public float delayBetweenSpamAttacks = 0.1f;
 
@@ -103,13 +108,15 @@ public class Player : Entity, IAttacker {
             if (actionState == ActionState.Idle && HP < maxHP_Slider)
                 HP += maxHP_Slider * .001f;
 
-            if (anim.GetCurrentAnimatorStateInfo(0).IsName("Walk_Right") || anim.GetCurrentAnimatorStateInfo(0).IsName("Idle_Right"))
+            AnimatorStateInfo stateName = anim.GetCurrentAnimatorStateInfo(0);
+            
+            if (stateName.IsName("Walk_Right") || stateName.IsName("Idle_Right"))
                 attackDirection = AttackDirectionState.right;
-            else if (anim.GetCurrentAnimatorStateInfo(0).IsName("Walk_Left") || anim.GetCurrentAnimatorStateInfo(0).IsName("Idle_Left"))
+            else if (stateName.IsName("Walk_Left") || stateName.IsName("Idle_Left"))
                 attackDirection = AttackDirectionState.left;
-            else if (anim.GetCurrentAnimatorStateInfo(0).IsName("Walk_Up") || anim.GetCurrentAnimatorStateInfo(0).IsName("Idle_Up"))
+            else if (stateName.IsName("Walk_Up") || stateName.IsName("Idle_Up"))
                 attackDirection = AttackDirectionState.up;
-            else if (anim.GetCurrentAnimatorStateInfo(0).IsName("Walk_Down") || anim.GetCurrentAnimatorStateInfo(0).IsName("Idle_Down"))
+            else if (stateName.IsName("Walk_Down") || stateName.IsName("Idle_Down"))
                 attackDirection = AttackDirectionState.down;
 
             // Spam attack

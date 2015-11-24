@@ -3,14 +3,17 @@ using System.Collections;
 
 public class PatrolllingSMB : StateMachineBehaviour {
 
+
     Rigidbody2D rb;
     float x, y;
     Vector3 lastPos;
+    
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     { 
         rb = animator.gameObject.GetComponent<Rigidbody2D>();
+                
         x = Random.Range(-1f, 1f);
         y = Random.Range(-1f, 1f);
     }
@@ -22,7 +25,7 @@ public class PatrolllingSMB : StateMachineBehaviour {
         //Debug.Log("X: " + x + "Y: " + y);
         rb.velocity = (new Vector2(x, y) * 1f).normalized;
 
-        if (rb.transform.position != lastPos);
+        if (rb.transform.position != lastPos)
         {
             Vector3 direction = rb.transform.position - lastPos;
             direction.Normalize();

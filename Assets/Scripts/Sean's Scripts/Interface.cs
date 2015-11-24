@@ -25,6 +25,16 @@ public interface IWeapon
     WeaponType WeaponType { get; set; }
 }
 
+public interface ISpawner
+{
+    void Died(Enemy enemy);
+}
+
+public interface IPlayerCurrentWeapon
+{
+    WeaponType weaponType { get; }
+}
+
 public static class Interface
 {
     public static T Find<T>(GameObject gameObject, bool debug = false) where T : class

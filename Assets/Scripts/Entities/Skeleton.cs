@@ -9,6 +9,11 @@ public class Skeleton : Enemy, IAttacker
     public static int numberOfSkeletons;
     public Slider HP_Slider;
 
+    public ISpawner Spawner  // reference to the interface to Respawn this enemy when it dies
+    {
+        get; set;
+    }
+
     // Interface properties
     public WellBeingState wellBeing { get; set; }    
     public ActionState actionState { get; set; }
@@ -176,6 +181,9 @@ public class Skeleton : Enemy, IAttacker
         }
         //StartCoroutine(Respawn());
         //gameObject.SetActive(false);
+
+        Spawner.Died(this);
+
         Destroy(gameObject, 3f); //wait until respawn, disable
     }
 
