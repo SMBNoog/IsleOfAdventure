@@ -93,7 +93,7 @@ public class Player : Entity, IAttacker {
     #region Animator state
     void Update()
     {
-        //Debug.Log("Action State : " + actionState);
+        Debug.Log("Action State : " + actionState);
         if (wellBeing == WellBeingState.Alive)
         {
             if(HP_Slider.maxValue != maxHP_Slider)
@@ -198,6 +198,7 @@ public class Player : Entity, IAttacker {
             else
             {
                 anim.SetBool("Idle", false);
+                actionState = ActionState.RunningAway;
             }
 
             StartCoroutine(CheckIfIdle(horizontal, vertical));

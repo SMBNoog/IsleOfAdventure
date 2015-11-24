@@ -176,7 +176,7 @@ public class Skeleton : Enemy, IAttacker
         }
         //StartCoroutine(Respawn());
         //gameObject.SetActive(false);
-        //Destroy(gameObject, 3f); //wait until respawn, disable
+        Destroy(gameObject, 3f); //wait until respawn, disable
     }
 
     //private IEnumerator Respawn()
