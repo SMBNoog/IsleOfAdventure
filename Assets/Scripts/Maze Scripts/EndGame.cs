@@ -8,6 +8,15 @@ public class EndGame : MonoBehaviour
     public WeaponType weaponreward;
     Player player;
 
+    void Awake()
+    {
+        //load info about player
+
+        //check player weapon
+
+        //change enemies based on weapon
+    }
+
     void Start()
     {
         player = FindObjectOfType<Player>();
