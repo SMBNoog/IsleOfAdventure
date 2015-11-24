@@ -35,6 +35,15 @@ public interface IPlayerCurrentWeapon
     WeaponType weaponType { get; }
 }
 
+public interface INPCMessage
+{
+    string message { get; }
+
+    void OnDialogBoxClosed();
+
+    void OnTriggerEnter2D(Collider2D other);
+}
+
 public static class Interface
 {
     public static T Find<T>(GameObject gameObject, bool debug = false) where T : class
