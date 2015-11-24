@@ -1,15 +1,22 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ButtonTeller : MonoBehaviour {
+public class ButtonTeller : MonoBehaviour
+{
+    Player player;
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    void Start()
+    {
+        player = FindObjectOfType<Player>();
+    }
+
+    public void TakeWeapon()
+    {
+
+    }
+
+    public void LeaveWeapon()
+    {
+
+    }
 }
