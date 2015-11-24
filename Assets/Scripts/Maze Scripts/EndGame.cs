@@ -64,6 +64,7 @@ public class EndGame : MonoBehaviour
         player.ChangeWeapon(weaponreward);
         //save
         //exit to world
+        Time.timeScale = 1;
         Application.LoadLevel(0);
     }
 
@@ -71,6 +72,7 @@ public class EndGame : MonoBehaviour
     {
         //save
         //exit to world
+        Time.timeScale = 1;
         Application.LoadLevel(0);
     }
 }

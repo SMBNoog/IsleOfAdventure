@@ -52,20 +52,24 @@ public class MazeMaker : MonoBehaviour
             }
     }
 
-    //void Update()
-    //{
-    //    //// This holds all graph data
-    //    //AstarData data = AstarPath.active.astarData;
-    //    //// This creates a Grid Graph
-    //    //GridGraph gg = data.AddGraph(typeof(GridGraph)) as GridGraph;
-    //    //// Setup a grid graph with some values
-    //    ////gg.width = 120;
-    //    //gg.depth = 120;
-    //    //gg.nodeSize = 1;
-    //    //gg.center = new Vector3(50, 50, 0);
-    //    //// Updates internal size from the above values
-    //    //gg.UpdateSizeFromWidthDepth();
-    //    //// Scans all graphs, do not call gg.Scan(), that is an internal method
-    //    AstarPath.active.Scan();
-    //}
+    void Update()
+    {
+        //// This holds all graph data
+        //AstarData data = AstarPath.active.astarData;
+
+        //// This creates a Grid Graph
+        //GridGraph gg = data.AddGraph(typeof(GridGraph)) as GridGraph;
+
+        //// Setup a grid graph with some values
+        //gg.width = 120;
+        //gg.depth = 120;
+        //gg.nodeSize = 1;
+        //gg.center = new Vector3(50, 50, 0);
+
+        //// Updates internal size from the above values
+        //gg.UpdateSizeFromWidthDepth();
+
+        // Scans all graphs, do not call gg.Scan(), that is an internal method
+        AstarPath.active.Scan();
+    }
 }
