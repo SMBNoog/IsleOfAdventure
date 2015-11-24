@@ -27,11 +27,11 @@ public class SpawnEnemies : MonoBehaviour {
 
     private Player player;
 
-    public float HP_Median;
-    public float Atk_Median;
-    public float Def_Median;
-    public float AmountOfStatToGive;
-    public TypeOfStatIncrease typeOfStat;
+    private float HP_Median;
+    private float Atk_Median;
+    private float Def_Median;
+    private float AmountOfStatToGive;
+    private TypeOfStatIncrease typeOfStat;
 
     public Skeleton CreateSkeleton(GameObject prefab, Vector2 pos, 
         float HP, float Atk, float Def, float AmountOfStatToGive, TypeOfStatIncrease Type)
