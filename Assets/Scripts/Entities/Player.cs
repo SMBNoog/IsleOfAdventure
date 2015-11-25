@@ -98,7 +98,7 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon {
     #region Animator state
     void Update()
     {
-        Debug.Log("Action State : " + actionState);
+        //Debug.Log("Action State : " + actionState);
         if (wellBeing == WellBeingState.Alive)
         {
             if(HP_Slider.maxValue != maxHP_Slider)
@@ -199,7 +199,7 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon {
 
             if (rb2D.velocity == Vector2.zero && actionState != ActionState.EngagedInBattle)
             {
-                Debug.Log("Changing state to Idle");
+                //Debug.Log("Changing state to Idle");
                 actionState = ActionState.Idle;
             }            
             else

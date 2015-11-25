@@ -39,7 +39,7 @@ public interface INPCMessage
 {
     string message { get; }
 
-    void OnDialogBoxClosed();
+    void OnClickOK();
 
     void OnTriggerEnter2D(Collider2D other);
 }
