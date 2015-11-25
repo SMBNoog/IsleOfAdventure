@@ -22,15 +22,11 @@ public class SpawnResult
 }
 
 public class SpawnEnemies : MonoBehaviour, ISpawner {
-
-    //public static List<GameObject> enemiesInstantiated;
-
+    
     public List<SpawnArea> spawnAreas;
+    public GameObject interfaceProvider; // The gameobject to find an interface on.
 
     private List<SpawnResult> spawnResults;
-
-    public GameObject interfaceProvider; // The gameobject to find the interface on.
-
     private IPlayerCurrentWeapon playerCurrentWeapon;
 
     private float HP_Median;
@@ -56,30 +52,36 @@ public class SpawnEnemies : MonoBehaviour, ISpawner {
         return solider_Clone;
     }
 
-    void Start()
+    void Start() 
     {
         playerCurrentWeapon = Interface.Find<IPlayerCurrentWeapon>(interfaceProvider);
+        if (playerCurrentWeapon == null)
+            Debug.LogError("The script does not contain an interface called, \"IPlayerCurrentWeapon\"");
 
-        spawnResults = new List<SpawnResult>();
-
-        ScaleEnemyToWeaponType();       
+        spawnResults = new List<SpawnResult>();     
      
-        //enemiesInstantiated = new List<GameObject>();
         foreach (SpawnArea area in spawnAreas)
         {
             for (int i = 0; i < area.numberToSpawn; i++)
             {
+                float y = area.spawnLocation.position.y;
+                if (y > -40f && y < 20f) // easy
+                    ScaleEnemyToWeaponType(1);
+                else if (y > 20f && y < 80f) // moderate
+                    ScaleEnemyToWeaponType(2);
+                else if (y > 80f && y < 170f) // hard
+                    ScaleEnemyToWeaponType(4);
+
                 if (area.typeOfEnemy == TypeOfEnemy.Skeleton)
                 {
                     SpawnResult result = new SpawnResult();
                     var skeleton = CreateSkeleton(area.prefab, area.spawnLocation.position + new Vector3(i, i, 0f),
                         HP_Median, Atk_Median, Def_Median,
                         AmountOfStatToGive, area.typeOfStatDrop);
-                    Debug.Log("Skeleton spawned");
-                    skeleton.Spawner = this;    // 
+                    skeleton.Spawner = this;    
                     result.enemy = skeleton;  //polymorphism, reference this skeleton to compare later
                     result.source = area;   // reference this area values for respawning
-                    spawnResults.Add(result); // add enemy to the list
+                    spawnResults.Add(result); // add enemy to the list of spawned enemies
                 }
                 else if (area.typeOfEnemy == TypeOfEnemy.Solider)
                 {
@@ -89,46 +91,50 @@ public class SpawnEnemies : MonoBehaviour, ISpawner {
         }
     }
 
-    public void ScaleEnemyToWeaponType()
+    // The weapon type sets the base then the scale is based on the y cooridinate (south to north, easy to harder)
+    public void ScaleEnemyToWeaponType(float scale)
     {
-        TypeOfStatIncrease typeOfStat = spawnAreas[0].typeOfStatDrop;
-        switch (playerCurrentWeapon.weaponType)
-        {
-            case WeaponType.Wooden:  // Wooden enemy stats
-                HP_Median = 100;
-                Atk_Median = 10;
-                Def_Median = 0.01f;
-                switch (typeOfStat)
-                {
-                    case TypeOfStatIncrease.ATK: AmountOfStatToGive = 0.5f; break;
-                    case TypeOfStatIncrease.DEF: AmountOfStatToGive = 0.0025f; break;
-                    case TypeOfStatIncrease.HP: AmountOfStatToGive = 1; break;
-                }
-                break;
-            case WeaponType.Bronze:
-                HP_Median = 1000;
-                Atk_Median = 100;
-                Def_Median = 0.03f;
-                switch (typeOfStat)
-                {
-                    case TypeOfStatIncrease.ATK: AmountOfStatToGive = 1f; break;
-                    case TypeOfStatIncrease.DEF: AmountOfStatToGive = 0.005f; break;
-                    case TypeOfStatIncrease.HP: AmountOfStatToGive = 10; break;
-                }
-                break;
-            case WeaponType.Silver:
-            case WeaponType.Gold:
-            case WeaponType.Epic:
-                HP_Median = 10000;
-                Atk_Median = 1000;
-                Def_Median = 0.1f;
-                switch (typeOfStat)
-                {
-                    case TypeOfStatIncrease.ATK: AmountOfStatToGive = 10f; break;
-                    case TypeOfStatIncrease.DEF: AmountOfStatToGive = 0.005f; break;
-                    case TypeOfStatIncrease.HP: AmountOfStatToGive = 100f; break;
-                }
-                break;
+        if (playerCurrentWeapon != null)
+        { 
+            TypeOfStatIncrease typeOfStat = spawnAreas[0].typeOfStatDrop;
+            switch (playerCurrentWeapon.weaponType)
+            {
+                case WeaponType.Wooden:  // Wooden enemy stats
+                    HP_Median = 100f * scale;
+                    Atk_Median = 10f * scale;
+                    Def_Median = 0.01f * scale;
+                    switch (typeOfStat)
+                    {
+                        case TypeOfStatIncrease.ATK: AmountOfStatToGive = 0.5f; break;
+                        case TypeOfStatIncrease.DEF: AmountOfStatToGive = 0.0025f; break;
+                        case TypeOfStatIncrease.HP: AmountOfStatToGive = 1; break;
+                    }
+                    break;
+                case WeaponType.Bronze:
+                    HP_Median = 1000 * scale;
+                    Atk_Median = 100 * scale;
+                    Def_Median = 0.03f * scale;
+                    switch (typeOfStat)
+                    {
+                        case TypeOfStatIncrease.ATK: AmountOfStatToGive = 1f; break;
+                        case TypeOfStatIncrease.DEF: AmountOfStatToGive = 0.005f; break;
+                        case TypeOfStatIncrease.HP: AmountOfStatToGive = 10; break;
+                    }
+                    break;
+                case WeaponType.Silver:
+                case WeaponType.Gold:
+                case WeaponType.Epic:
+                    HP_Median = 10000 * scale;
+                    Atk_Median = 1000 * scale;
+                    Def_Median = 0.1f * scale;
+                    switch (typeOfStat)
+                    {
+                        case TypeOfStatIncrease.ATK: AmountOfStatToGive = 10f; break;
+                        case TypeOfStatIncrease.DEF: AmountOfStatToGive = 0.005f; break;
+                        case TypeOfStatIncrease.HP: AmountOfStatToGive = 100f; break;
+                    }
+                    break;
+            }
         }
     }
 
@@ -138,7 +144,6 @@ public class SpawnEnemies : MonoBehaviour, ISpawner {
         {
             if (enemy == sr.enemy) // find the dead enemy 
             {
-                ScaleEnemyToWeaponType();
                 StartCoroutine(RespawnEnemy(sr));
             }
         }
@@ -146,8 +151,16 @@ public class SpawnEnemies : MonoBehaviour, ISpawner {
 
     IEnumerator RespawnEnemy(SpawnResult sr)
     {
-        float r = UnityEngine.Random.Range(60f, 480f);
+        float r = UnityEngine.Random.Range(10f, 20f);
         yield return new WaitForSeconds(r);
+
+        float y = sr.source.spawnLocation.position.y;
+        if (y > -40f && y < 20f) // easy
+            ScaleEnemyToWeaponType(1);
+        else if (y > 20f && y < 80f)
+            ScaleEnemyToWeaponType(2);
+        else if (y > 80f && y < 170f)
+            ScaleEnemyToWeaponType(4);
 
         if (sr.source.typeOfEnemy == TypeOfEnemy.Skeleton)
         {

@@ -5,14 +5,14 @@ using UnityEngine.UI;
 using System;
 using CnControls;
 
-public enum AttackDirectionState { up, down, left, right }
+//public enum AttackDirectionState { up, down, left, right }
 
-[System.Serializable]
-public class AttackDirection
-{
-    public GameObject obj;
-    public AttackDirectionState state;
-}
+//[System.Serializable]
+//public class AttackDirection
+//{
+//    public GameObject obj;
+//    public AttackDirectionState state;
+//}
 
 [System.Serializable]
 public class Weapons
@@ -20,15 +20,16 @@ public class Weapons
     public string name;
     public GameObject weapon;
     public WeaponType weaponType;
-    public List<AttackDirection> attackSpriteArray;
+    //public List<AttackDirection> attackSpriteArray;
 }
 
 public class Player : Entity, IAttacker, IPlayerCurrentWeapon {
 
-    [SerializeField]
-    private AttackDirectionState attackDirection;
+    //[SerializeField]
+    //private AttackDirectionState attackDirection;
 
     public List<Weapons> weaponList;
+    public GameObject weaponNEW;
 
     public float HP_Cap = 1000;
     public float DEF_Cap = 0.50f;
@@ -84,14 +85,15 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon {
         currentWeapon = WeaponType.Wooden;
 
         // Player starting stats
-        HP = maxHP_Slider; // set in inspecter
         Atk = 8f;
         Def = 0.1f;
-        Speed = 3.5f;
+        Speed = 4f;
 
         ChangeWeapon(WeaponType.Bronze);
 
-        attackDirection = AttackDirectionState.right;
+        HP = maxHP_Slider; // set in inspecter
+
+        //attackDirection = AttackDirectionState.right;
         //Debug.Log("Player ATK: " + Atk + " | DEF: " + Def);
     }
 
@@ -110,51 +112,61 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon {
 
             AnimatorStateInfo stateName = anim.GetCurrentAnimatorStateInfo(0);
             
-            if (stateName.IsName("Walk_Right") || stateName.IsName("Idle_Right"))
-                attackDirection = AttackDirectionState.right;
-            else if (stateName.IsName("Walk_Left") || stateName.IsName("Idle_Left"))
-                attackDirection = AttackDirectionState.left;
-            else if (stateName.IsName("Walk_Up") || stateName.IsName("Idle_Up"))
-                attackDirection = AttackDirectionState.up;
-            else if (stateName.IsName("Walk_Down") || stateName.IsName("Idle_Down"))
-                attackDirection = AttackDirectionState.down;
+            //if (stateName.IsName("Walk_Right") || stateName.IsName("Idle_Right"))
+            //    attackDirection = AttackDirectionState.right;
+            //else if (stateName.IsName("Walk_Left") || stateName.IsName("Idle_Left"))
+            //    attackDirection = AttackDirectionState.left;
+            //else if (stateName.IsName("Walk_Up") || stateName.IsName("Idle_Up"))
+            //    attackDirection = AttackDirectionState.up;
+            //else if (stateName.IsName("Walk_Down") || stateName.IsName("Idle_Down"))
+            //    attackDirection = AttackDirectionState.down;
 
-            // Spam attack
-            if (CnInputManager.GetButtonDown("Swing"))
-            {
-                foreach(Weapons w in weaponList)
-                {
-                    if(w.weaponType == currentWeapon)
-                    {
-                        foreach (AttackDirection att in w.attackSpriteArray)
-                        {
-                            if (att.state == attackDirection)
-                                StartCoroutine(Attack(att.obj));
-                        }
-                    }
-                }
-
-            }
+            //// Spam attack
+            //if (CnInputManager.GetButtonDown("Swing"))
+            //{
+            //    StartCoroutine(AttackWith(weaponNEW));
+            //    //foreach (Weapons w in weaponList)
+            //    //{
+            //    //    if(w.weaponType == currentWeapon)
+            //    //    {
+            //    //        foreach (AttackDirection att in w.attackSpriteArray)
+            //    //        {
+            //    //            if (att.state == attackDirection)
+            //    //                StartCoroutine(Attack(att.obj));
+            //    //        }
+            //    //    }
+            //    //}
+                
+            //}
 
             // Auto attack
             if (CnInputManager.GetButton("Swing"))
             {
-                foreach(Weapons w in weaponList)
-                {
-                    if (w.weaponType == currentWeapon)
-                    {
-                        foreach (AttackDirection atkDir in w.attackSpriteArray)
-                        {
-                            if (atkDir.state == attackDirection && canAttackMonsters)
-                            {
-                                canAttackMonsters = false;
-                                StartCoroutine(Attack(atkDir.obj));
-                                StartCoroutine(DelayAttack());
-                            }
-                        }
-                    }
-                }
+
+                //StartCoroutine(DelayAttack(weaponNEW)); 
+
+                //foreach (Weapons w in weaponList)
+                //{
+                //    if (w.weaponType == currentWeapon)
+                //    {
+                //        foreach (AttackDirection atkDir in w.attackSpriteArray)
+                //        {
+                //            if (atkDir.state == attackDirection && canAttackMonsters)
+                //            {
+                //                canAttackMonsters = false;
+                //                StartCoroutine(Attack(atkDir.obj));
+                //                StartCoroutine(DelayAttack(atkDir));
+                //            }
+                //        }
+                //    }
+                //}
             }
+
+            //if (CnInputManager.GetButtonUp("Swing"))
+            //{
+
+            //    weaponNEW.gameObject.SetActive(false);
+            //}
 
             lastPosition = myT.position;
         } 
@@ -163,31 +175,33 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon {
             HP_Slider.value = HP;
     }// end Update
 
-    IEnumerator Attack(GameObject obj)
-    {
-        if (wellBeing == WellBeingState.Alive)
-        {
-            obj.SetActive(true); // Turn on sword in selected direction
-            actionState = ActionState.EngagedInBattle;
-            SoundManager.Instance.Play(TypeOfClip.SwordMiss);
-            yield return new WaitForSeconds(delayBetweenSpamAttacks);
-            obj.SetActive(false);
-        }
-    }
+    //IEnumerator AttackWith(GameObject weapon)
+    //{
+    //    if (wellBeing == WellBeingState.Alive)
+    //    {
+    //        weapon.SetActive(true); // Turn on sword in selected direction
+    //        actionState = ActionState.EngagedInBattle;
+    //        SoundManager.Instance.Play(TypeOfClip.SwordMiss);
+    //        yield return new WaitForSeconds(delayBetweenSpamAttacks);
+    //        weapon.SetActive(false);
+    //    }
+    //}
 
-    IEnumerator DelayAttack()
-    {
-        if(wellBeing == WellBeingState.Alive)
-        {
-            yield return new WaitForSeconds(delayBetweenAutoAttacks);
-            canAttackMonsters = true;
-        }
-    }
+    //IEnumerator DelayAttack(/*AttackDirection atkDir*/GameObject weapon)
+    //{
+    //    if(wellBeing == WellBeingState.Alive)
+    //    {
+    //        yield return new WaitForSeconds(delayBetweenAutoAttacks);
+    //        //canAttackMonsters = true;
+
+    //        // power up then fire special weapon
+    //        StartCoroutine(AttackWith(weapon));
+    //    }
+    //}
     #endregion
 
     void FixedUpdate()
     {
-        // Movement of Player
         if (wellBeing == WellBeingState.Alive)
         {
             float horizontal = CnInputManager.GetAxis("Horizontal");
@@ -196,6 +210,34 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon {
             anim.SetFloat("Vertical Input", vertical);
 
             rb2D.velocity = new Vector2(horizontal * Speed, vertical * Speed);
+
+            //if (horizontal != 0f && vertical != 0f)
+            //{
+                float oldH = horizontal;
+                float oldV = vertical;
+
+            //if(horizontal > 0.001f)
+            //    horizontal = 1f;
+            //if (horizontal < -0.001f)
+            //    horizontal = -1f;
+            //if (vertical > 0.001f)
+            //    vertical = 1f;
+            //if (vertical < -0.001f)
+            //    vertical = -1f;
+            
+            if (oldV < 0.5f && oldV != 0)
+                weaponNEW.GetComponentInChildren<SpriteRenderer>().sortingOrder = 101;
+            else
+                weaponNEW.GetComponentInChildren<SpriteRenderer>().sortingOrder = 80;
+
+            //if(horizontal >= 1 || horizontal <= -1 || vertical >= 1 || vertical <= -1)
+            weaponNEW.transform.localPosition = new Vector2(oldH, oldV - .4f) * .07f;
+            float myAngle = Mathf.Atan2(oldV, oldH) * Mathf.Rad2Deg;
+            weaponNEW.transform.eulerAngles = new Vector3(0f, 0f, myAngle);
+            //}
+
+
+
 
             if (rb2D.velocity == Vector2.zero && actionState != ActionState.EngagedInBattle)
             {
