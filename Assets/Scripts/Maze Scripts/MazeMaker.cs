@@ -70,6 +70,7 @@ public class MazeMaker : MonoBehaviour
         //gg.UpdateSizeFromWidthDepth();
 
         // Scans all graphs, do not call gg.Scan(), that is an internal method
+
         AstarPath.active.Scan();
     }
 }

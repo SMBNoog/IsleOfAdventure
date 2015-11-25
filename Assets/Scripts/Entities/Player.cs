@@ -199,7 +199,7 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon {
 
             if (rb2D.velocity == Vector2.zero && actionState != ActionState.EngagedInBattle)
             {
-                Debug.Log("Changing state to Idle");
+                //Debug.Log("Changing state to Idle");
                 actionState = ActionState.Idle;
             }            
             else
