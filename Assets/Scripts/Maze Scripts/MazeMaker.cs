@@ -7,25 +7,23 @@ public class MazeMaker : MonoBehaviour
     public GameObject Tile;
     public GameObject RLTile;
     public GameObject UDTile;
-    public GameObject Player;
+    public GameObject player;
     public GameObject Enemy;
+    // This creates a Grid Graph
+    GridGraph gg;
 
     void Start()
     {
-        // This holds all graph data
-        AstarData data = AstarPath.active.astarData;
+        //// This holds all graph data
+        //AstarData data = AstarPath.active.astarData;
 
-        // This creates a Grid Graph
-        GridGraph gg = data.AddGraph(typeof(GridGraph)) as GridGraph;
+        //// This creates a Grid Graph
+        //gg = data.AddGraph(typeof(GridGraph)) as GridGraph;
 
-        // Setup a grid graph with some values
-        gg.width = 15;
-        gg.depth = 15;
-        gg.nodeSize = 0.5f;
-        gg.center = Player.transform.position;
-
-        // Updates internal size from the above values
-        gg.UpdateSizeFromWidthDepth();
+        //// Setup a grid graph with some values
+        //gg.width = 15;
+        //gg.depth = 15;
+        //gg.nodeSize = 0.7f;
 
         char[][] Dungeon = new char[100][];
 
@@ -68,9 +66,14 @@ public class MazeMaker : MonoBehaviour
             }
     }
 
-    void Update()
-    {
-        // Scans all graphs, do not call gg.Scan(), that is an internal method
-        AstarPath.active.Scan();
-    }
+    //void Update()
+    //{
+    //    gg.center = player.transform.position;
+
+    //    // Updates internal size from the above values
+    //    gg.UpdateSizeFromWidthDepth();
+
+    //    // Scans all graphs, do not call gg.Scan(), that is an internal method
+    //    AstarPath.active.Scan();
+    //}
 }
