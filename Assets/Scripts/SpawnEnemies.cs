@@ -110,7 +110,7 @@ public class SpawnEnemies : MonoBehaviour, ISpawner {
                         case TypeOfStatIncrease.HP: AmountOfStatToGive = 1; break;
                     }
                     break;
-                case WeaponType.Bronze:
+                case WeaponType.Flame:
                     HP_Median = 1000 * scale;
                     Atk_Median = 100 * scale;
                     Def_Median = 0.03f * scale;

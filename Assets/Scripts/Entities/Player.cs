@@ -29,7 +29,6 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon {
     //private AttackDirectionState attackDirection;
 
     public List<Weapons> weaponList;
-    public GameObject weaponNEW;
 
     public float HP_Cap = 1000;
     public float DEF_Cap = 0.50f;
@@ -80,16 +79,13 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon {
         myT = transform;
 
         wellBeing = WellBeingState.Alive;
-
-        //ChangeWeapon(1, 1);
-        currentWeapon = WeaponType.Wooden;
-
+        
         // Player starting stats
         Atk = 8f;
         Def = 0.1f;
         Speed = 4f;
 
-        ChangeWeapon(WeaponType.Bronze);
+        ChangeWeapon(WeaponType.Flame);
 
         HP = maxHP_Slider; // set in inspecter
 
@@ -145,21 +141,13 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon {
 
                 //StartCoroutine(DelayAttack(weaponNEW)); 
 
-                //foreach (Weapons w in weaponList)
-                //{
-                //    if (w.weaponType == currentWeapon)
-                //    {
-                //        foreach (AttackDirection atkDir in w.attackSpriteArray)
-                //        {
-                //            if (atkDir.state == attackDirection && canAttackMonsters)
-                //            {
-                //                canAttackMonsters = false;
-                //                StartCoroutine(Attack(atkDir.obj));
-                //                StartCoroutine(DelayAttack(atkDir));
-                //            }
-                //        }
-                //    }
-                //}
+                foreach (Weapons w in weaponList)
+                {
+                    if (w.weaponType == currentWeapon)
+                    {
+                        // power up weapon move here
+                    }
+                }
             }
 
             //if (CnInputManager.GetButtonUp("Swing"))
@@ -211,33 +199,20 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon {
 
             rb2D.velocity = new Vector2(horizontal * Speed, vertical * Speed);
 
-            //if (horizontal != 0f && vertical != 0f)
-            //{
-                float oldH = horizontal;
-                float oldV = vertical;
+            foreach (Weapons w in weaponList)
+            {
+                if (w.weaponType == currentWeapon)
+                {
+                    if (vertical < 0.5f && vertical != 0)
+                        w.weapon.GetComponentInChildren<SpriteRenderer>().sortingOrder = 101;
+                    else
+                        w.weapon.GetComponentInChildren<SpriteRenderer>().sortingOrder = 80;
 
-            //if(horizontal > 0.001f)
-            //    horizontal = 1f;
-            //if (horizontal < -0.001f)
-            //    horizontal = -1f;
-            //if (vertical > 0.001f)
-            //    vertical = 1f;
-            //if (vertical < -0.001f)
-            //    vertical = -1f;
-            
-            if (oldV < 0.5f && oldV != 0)
-                weaponNEW.GetComponentInChildren<SpriteRenderer>().sortingOrder = 101;
-            else
-                weaponNEW.GetComponentInChildren<SpriteRenderer>().sortingOrder = 80;
-
-            //if(horizontal >= 1 || horizontal <= -1 || vertical >= 1 || vertical <= -1)
-            weaponNEW.transform.localPosition = new Vector2(oldH, oldV - .4f) * .07f;
-            float myAngle = Mathf.Atan2(oldV, oldH) * Mathf.Rad2Deg;
-            weaponNEW.transform.eulerAngles = new Vector3(0f, 0f, myAngle);
-            //}
-
-
-
+                    w.weapon.transform.localPosition = new Vector2(horizontal, vertical - .4f) * .07f;
+                    float myAngle = Mathf.Atan2(vertical, horizontal) * Mathf.Rad2Deg;
+                    w.weapon.transform.eulerAngles = new Vector3(0f, 0f, myAngle);
+                }
+            }
 
             if (rb2D.velocity == Vector2.zero && actionState != ActionState.EngagedInBattle)
             {
@@ -318,6 +293,7 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon {
             PlayerPrefs.GetFloat("Atk");
             PlayerPrefs.GetFloat("Def");
             PlayerPrefs.GetFloat("Speed");
+            // Include weapon
         }
         else
             Debug.Log("Key's have not been Set.");
@@ -343,24 +319,52 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon {
     public void ChangeWeapon(WeaponType type)
     {
         currentWeapon = type;
-        if (type == WeaponType.Bronze)
+        if (type == WeaponType.Flame)
         {
             maxHP_Slider += 1000f;
+            foreach(Weapons w in weaponList)
+            {
+                if (type != w.weaponType)
+                    w.weapon.gameObject.SetActive(false);
+                else
+                    w.weapon.SetActive(true);
+            }
             //Atk += 100f;
         }
         else if (type == WeaponType.Silver)
         {
             maxHP_Slider += 10000f;
+            foreach (Weapons w in weaponList)
+            {
+                if (type != w.weaponType)
+                    w.weapon.gameObject.SetActive(false);
+                else
+                    w.weapon.SetActive(true);
+            }
             //Atk += 1000f;
         }
         else if (type == WeaponType.Gold)
         {
             maxHP_Slider += 2500f;
+            foreach (Weapons w in weaponList)
+            {
+                if (type != w.weaponType)
+                    w.weapon.gameObject.SetActive(false);
+                else
+                    w.weapon.SetActive(true);
+            }
             //Atk += 250f;
         }
         else if (type == WeaponType.Epic)
         {
             maxHP_Slider += 7500f;
+            foreach (Weapons w in weaponList)
+            {
+                if (type != w.weaponType)
+                    w.weapon.gameObject.SetActive(false);
+                else
+                    w.weapon.SetActive(true);
+            }
             //Atk += 2000f;
         }
     }

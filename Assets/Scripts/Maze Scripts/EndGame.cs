@@ -37,7 +37,7 @@ public class EndGame : MonoBehaviour
     {
         if (Random.Range(0f, 1f) < .70f)
         {
-            weaponreward = WeaponType.Bronze;
+            weaponreward = WeaponType.Flame;
             Debug2Screen.Log("You Win!\n You Obtained The Bronze Sword");
         }
         else if (Random.Range(0f, 1f) < .90f)
