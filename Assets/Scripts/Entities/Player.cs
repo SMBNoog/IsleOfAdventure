@@ -57,8 +57,7 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon {
     private Vector3 lastPosition;
 
     public WeaponType currentWeapon;
-
-    
+       
 
     // When the Player GameObject is enabled.
     public void OnEnable()
@@ -85,7 +84,7 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon {
         Def = 0.1f;
         Speed = 4f;
 
-        ChangeWeapon(WeaponType.Flame);
+        ChangeWeapon(WeaponType.Silver);
 
         HP = maxHP_Slider; // set in inspecter
 
@@ -106,7 +105,7 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon {
             if (actionState == ActionState.Idle && HP < maxHP_Slider)
                 HP += maxHP_Slider * .001f;
 
-            AnimatorStateInfo stateName = anim.GetCurrentAnimatorStateInfo(0);
+            //AnimatorStateInfo stateName = anim.GetCurrentAnimatorStateInfo(0);
             
             //if (stateName.IsName("Walk_Right") || stateName.IsName("Idle_Right"))
             //    attackDirection = AttackDirectionState.right;
@@ -135,20 +134,20 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon {
                 
             //}
 
-            // Auto attack
-            if (CnInputManager.GetButton("Swing"))
-            {
+            //// Auto attack
+            //if (CnInputManager.GetButton("Swing"))
+            //{
 
-                //StartCoroutine(DelayAttack(weaponNEW)); 
+            //    //StartCoroutine(DelayAttack(weaponNEW)); 
 
-                foreach (Weapons w in weaponList)
-                {
-                    if (w.weaponType == currentWeapon)
-                    {
-                        // power up weapon move here
-                    }
-                }
-            }
+            //    foreach (Weapons w in weaponList)
+            //    {
+            //        if (w.weaponType == currentWeapon)
+            //        {
+            //            // power up weapon move here
+            //        }
+            //    }
+            //}
 
             //if (CnInputManager.GetButtonUp("Swing"))
             //{
@@ -197,19 +196,29 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon {
             anim.SetFloat("Horizontal Input", horizontal);
             anim.SetFloat("Vertical Input", vertical);
 
+            float horizontalR = CnInputManager.GetAxis("HorizontalRight");
+            float verticalR = CnInputManager.GetAxis("VerticalRight");
+
             rb2D.velocity = new Vector2(horizontal * Speed, vertical * Speed);
 
             foreach (Weapons w in weaponList)
             {
                 if (w.weaponType == currentWeapon)
                 {
-                    if (vertical < 0.5f && vertical != 0)
+                    if (verticalR == 0f && horizontalR == 0f)
+                        w.weapon.GetComponentInChildren<Collider2D>().enabled = false;
+                    else
+                        w.weapon.GetComponentInChildren<Collider2D>().enabled = true;
+                    
+                    if (verticalR < -0.2f)
                         w.weapon.GetComponentInChildren<SpriteRenderer>().sortingOrder = 101;
                     else
                         w.weapon.GetComponentInChildren<SpriteRenderer>().sortingOrder = 80;
+                    
 
-                    w.weapon.transform.localPosition = new Vector2(horizontal, vertical - .4f) * .07f;
-                    float myAngle = Mathf.Atan2(vertical, horizontal) * Mathf.Rad2Deg;
+
+                    w.weapon.transform.localPosition = new Vector2(horizontalR, verticalR - .4f) * .07f;
+                    float myAngle = Mathf.Atan2(verticalR, horizontalR) * Mathf.Rad2Deg;
                     w.weapon.transform.eulerAngles = new Vector3(0f, 0f, myAngle);
                 }
             }

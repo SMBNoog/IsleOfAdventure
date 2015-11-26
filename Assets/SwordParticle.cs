@@ -36,25 +36,28 @@ public class SwordParticle : MonoBehaviour {
         float movementSpeed = movement.magnitude;
         lastPos = pos;
 
-        float particlesPerSecond = movementSpeed * 500f;
+        float particlesPerSecond = movementSpeed * 25f;
 
         if (movementSpeed != 0)
             elapsedTime += Time.deltaTime;
 
-        while (elapsedTime > 1f / particlesPerSecond)
+        if (ps != null)
         {
-            ps.Emit(1); //view overloads
-            elapsedTime -= 1f / particlesPerSecond;
-        }
+            while (elapsedTime > 1f / particlesPerSecond)
+            {
+                ps.Emit(1); //view overloads
+                elapsedTime -= 1f / particlesPerSecond;
+            }
 
-        Particle[] particles = new Particle[ps.particleCount];
-        ps.GetParticles(particles);
-        Debug.Log(particles.Length);
-        for (int i = 0; i < particles.Length; i++)
-        {
-            Vector3 velocity = particles[i].velocity;
-            velocity.y += 10f * Time.deltaTime;
-            particles[i].velocity = velocity;
+            Particle[] particles = new Particle[ps.particleCount];
+            ps.GetParticles(particles);
+            //Debug.Log(particles.Length);
+            for (int i = 0; i < particles.Length; i++)
+            {
+                Vector3 velocity = particles[i].velocity;
+                velocity.y += 10f * Time.deltaTime;
+                particles[i].velocity = velocity;
+            }
         }
 
         
