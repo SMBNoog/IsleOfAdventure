@@ -13,6 +13,7 @@ public class SpawnArea {
     public TypeOfEnemy typeOfEnemy;
     public int numberToSpawn;
     public TypeOfStatIncrease typeOfStatDrop;
+    public bool tutorialSkeleton;
 }
 
 public class SpawnResult
@@ -65,7 +66,7 @@ public class SpawnEnemies : MonoBehaviour, ISpawner {
             for (int i = 0; i < area.numberToSpawn; i++)
             {
                 float y = area.spawnLocation.position.y;
-                if (y > -40f && y < 20f) // easy
+                if (y < 20f) // easy
                     ScaleEnemyToWeaponType(1);
                 else if (y > 20f && y < 80f) // moderate
                     ScaleEnemyToWeaponType(2);
@@ -110,7 +111,7 @@ public class SpawnEnemies : MonoBehaviour, ISpawner {
                         case TypeOfStatIncrease.HP: AmountOfStatToGive = 1; break;
                     }
                     break;
-                case WeaponType.Flame:
+                case WeaponType.Bronze:
                     HP_Median = 1000 * scale;
                     Atk_Median = 100 * scale;
                     Def_Median = 0.03f * scale;
@@ -144,7 +145,8 @@ public class SpawnEnemies : MonoBehaviour, ISpawner {
         {
             if (enemy == sr.enemy) // find the dead enemy 
             {
-                StartCoroutine(RespawnEnemy(sr));
+                if(!sr.source.tutorialSkeleton)
+                    StartCoroutine(RespawnEnemy(sr));
             }
         }
     }

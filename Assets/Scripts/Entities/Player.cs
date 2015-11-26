@@ -56,8 +56,7 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon {
     private Rigidbody2D rb2D;
     private Vector3 lastPosition;
 
-    public WeaponType currentWeapon;
-       
+    public WeaponType currentWeapon;      
 
     // When the Player GameObject is enabled.
     public void OnEnable()
@@ -70,6 +69,11 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon {
         }
     }
 
+    void Awake()
+    {
+        currentWeapon = WeaponType.Wooden;
+    }
+
     void Start () {
         anim = GetComponent<Animator>();
         rb2D = GetComponent<Rigidbody2D>();
@@ -80,11 +84,11 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon {
         wellBeing = WellBeingState.Alive;
         
         // Player starting stats
-        Atk = 8f;
+        Atk = 10f;
         Def = 0.1f;
         Speed = 4f;
 
-        ChangeWeapon(WeaponType.Silver);
+        ChangeWeapon(WeaponType.Wooden);
 
         HP = maxHP_Slider; // set in inspecter
 
@@ -328,7 +332,19 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon {
     public void ChangeWeapon(WeaponType type)
     {
         currentWeapon = type;
-        if (type == WeaponType.Flame)
+        if(type == WeaponType.Wooden)
+        {
+            maxHP_Slider += 100f;
+            foreach (Weapons w in weaponList)
+            {
+                if (type != w.weaponType)
+                    w.weapon.gameObject.SetActive(false);
+                else
+                    w.weapon.gameObject.SetActive(true);
+            }
+            //Atk += 10f;
+        }
+        if (type == WeaponType.Bronze)
         {
             maxHP_Slider += 1000f;
             foreach(Weapons w in weaponList)
@@ -336,7 +352,7 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon {
                 if (type != w.weaponType)
                     w.weapon.gameObject.SetActive(false);
                 else
-                    w.weapon.SetActive(true);
+                    w.weapon.gameObject.SetActive(true);
             }
             //Atk += 100f;
         }
@@ -348,7 +364,7 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon {
                 if (type != w.weaponType)
                     w.weapon.gameObject.SetActive(false);
                 else
-                    w.weapon.SetActive(true);
+                    w.weapon.gameObject.SetActive(true);
             }
             //Atk += 1000f;
         }
@@ -360,7 +376,7 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon {
                 if (type != w.weaponType)
                     w.weapon.gameObject.SetActive(false);
                 else
-                    w.weapon.SetActive(true);
+                    w.weapon.gameObject.SetActive(true);
             }
             //Atk += 250f;
         }
@@ -372,7 +388,7 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon {
                 if (type != w.weaponType)
                     w.weapon.gameObject.SetActive(false);
                 else
-                    w.weapon.SetActive(true);
+                    w.weapon.gameObject.SetActive(true);
             }
             //Atk += 2000f;
         }
