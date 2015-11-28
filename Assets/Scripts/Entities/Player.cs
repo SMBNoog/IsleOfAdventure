@@ -23,7 +23,8 @@ public class Weapons
     //public List<AttackDirection> attackSpriteArray;
 }
 
-public class Player : Entity, IAttacker, IPlayerCurrentWeapon {
+public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IPlayerAccumulatedHP
+{
 
     //[SerializeField]
     //private AttackDirectionState attackDirection;
@@ -34,7 +35,7 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon {
     public float DEF_Cap = 0.50f;
     public Slider HP_Slider;
     [SerializeField]
-    private float maxHP_Slider = 100f;
+    private float maxHP = 100f;
 
     public WellBeingState wellBeing { get; set; }
     public ActionState actionState { get; set; }
@@ -47,16 +48,29 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon {
     {
         get { return currentWeapon; }
     }
+    public WeaponType currentWeapon;
+
+    public float a_HP { get; set; } // Aquired HP in this zone
 
     public float delayBetweenAutoAttacks = 0.4f;
     public float delayBetweenSpamAttacks = 0.1f;
 
+    public Transform respawnInTheWorld;
+    public Transform tutorialSpawn;
+
     private bool canTakeDamage = true;
     private bool canAttackMonsters = true;
     private Rigidbody2D rb2D;
-    private Vector3 lastPosition;
+    //private Vector3 lastPosition;
 
-    public WeaponType currentWeapon;      
+    public Button respawnButton;
+
+    // Debug Text to see current stats
+    public Text debugHP_Text;
+    public Text debugMaxHP_Text;
+    public Text debugAtk_Text;
+    public Text debugDef_Text;
+    public Text debugWeapon_Text;
 
     // When the Player GameObject is enabled.
     public void OnEnable()
@@ -71,29 +85,42 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon {
 
     void Awake()
     {
-        currentWeapon = WeaponType.Wooden;
+        wellBeing = WellBeingState.Alive;                
+        
+        if (GameInfo.currentArea == GameInfo.Area.TutorialArea)
+        {
+            // Player starting stats
+            Atk = 10f;
+            Def = 0.1f;
+            Speed = 4f;
+            HP = 100f;
+            ChangeWeapon(WeaponType.Wooden); // will add 100 more hp
+            Debug.Log("Player Starting HP: " + HP + " | ATK: " + Atk + " | DEF: " + Def);
+        }
+        else
+        {
+            LoadAttributes();
+            LoadWeapon(currentWeapon);            
+        }
     }
 
     void Start () {
         anim = GetComponent<Animator>();
         rb2D = GetComponent<Rigidbody2D>();
-        anim.SetFloat("Horizontal Input", 0f);
+
+        if (GameInfo.currentArea == GameInfo.Area.TutorialArea)
+            TeleportToSpawnLocation(true);
+        else
+            TeleportToSpawnLocation(false);
+
         
-        myT = transform;
-
-        wellBeing = WellBeingState.Alive;
-        
-        // Player starting stats
-        Atk = 10f;
-        Def = 0.1f;
-        Speed = 4f;
-
-        ChangeWeapon(WeaponType.Wooden);
-
-        HP = maxHP_Slider; // set in inspecter
-
+        //anim.SetFloat("Horizontal Input", 0f);
         //attackDirection = AttackDirectionState.right;
-        //Debug.Log("Player ATK: " + Atk + " | DEF: " + Def);
+    }
+
+    public void TeleportToSpawnLocation(bool tutorial)
+    {
+        rb2D.transform.position = tutorial? tutorialSpawn.position:respawnInTheWorld.position; 
     }
 
     #region Animator state
@@ -102,12 +129,18 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon {
         //Debug.Log("Action State : " + actionState);
         if (wellBeing == WellBeingState.Alive)
         {
-            if(HP_Slider.maxValue != maxHP_Slider)
-                HP_Slider.maxValue = maxHP_Slider;
+            if(HP_Slider.maxValue != maxHP)
+                HP_Slider.maxValue = maxHP;
 
             // Regen when Idle
-            if (actionState == ActionState.Idle && HP < maxHP_Slider)
-                HP += maxHP_Slider * .001f;
+            if (actionState == ActionState.Idle && HP < maxHP)
+                HP += maxHP * .001f;
+
+            debugHP_Text.text = "HP: " + HP;
+            debugMaxHP_Text.text = "MaxHP: " + maxHP;
+            debugAtk_Text.text = "Atk: " + Atk;
+            debugDef_Text.text = "Def: " + Def;
+            debugWeapon_Text.text = currentWeapon+"";
 
             //AnimatorStateInfo stateName = anim.GetCurrentAnimatorStateInfo(0);
             
@@ -159,7 +192,7 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon {
             //    weaponNEW.gameObject.SetActive(false);
             //}
 
-            lastPosition = myT.position;
+            //lastPosition = transform.position;
         } 
 
         if (HP_Slider.value != HP)
@@ -292,21 +325,26 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon {
     public void SaveAttributes()
     {
         PlayerPrefs.SetFloat("HP", HP);
+        PlayerPrefs.SetFloat("MaxHP", maxHP);
         PlayerPrefs.SetFloat("Atk", Atk);
         PlayerPrefs.SetFloat("Def", Def);
         PlayerPrefs.SetFloat("Speed", Speed);
-        // TODO: include weapon
+        Debug.Log(currentWeapon + "     " + (int)currentWeapon);
+        PlayerPrefs.SetInt("WeaponType", (int)currentWeapon);
+        
     }
 
     public void LoadAttributes()
     {
-        if (PlayerPrefs.HasKey("HP") && PlayerPrefs.HasKey("Atk") && PlayerPrefs.HasKey("Def") && PlayerPrefs.HasKey("Speed"))
+        if (PlayerPrefs.HasKey("HP"))
         {
-            PlayerPrefs.GetFloat("HP");
-            PlayerPrefs.GetFloat("Atk");
-            PlayerPrefs.GetFloat("Def");
-            PlayerPrefs.GetFloat("Speed");
-            // Include weapon
+            HP = PlayerPrefs.GetFloat("HP") + a_HP;
+            maxHP = PlayerPrefs.GetFloat("MaxHP", maxHP);
+            Atk = PlayerPrefs.GetFloat("Atk");
+            Def = PlayerPrefs.GetFloat("Def");
+            Speed = PlayerPrefs.GetFloat("Speed");
+            Debug.Log(currentWeapon + "     " + (int)currentWeapon);
+            currentWeapon = (WeaponType)PlayerPrefs.GetInt("WeaponType", (int)currentWeapon);            
         }
         else
             Debug.Log("Key's have not been Set.");
@@ -319,94 +357,86 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon {
         {
             switch (stat)
             {
-                case TypeOfStatIncrease.HP: maxHP_Slider += amount;
-                    Debug.Log("Max HP is now = " + maxHP_Slider); break;
+                case TypeOfStatIncrease.HP:
+                    maxHP += amount;
+                    a_HP += amount;
+                    //Debug.Log("Max HP is now = " + maxCurrentHP); 
+                    break;
                 case TypeOfStatIncrease.ATK: Atk += amount;
-                    Debug.Log("Max Atk is now = " + Atk); break;
+                    //Debug.Log("Max Atk is now = " + Atk);
+                    break;
                 case TypeOfStatIncrease.DEF: Def += amount;
-                    Debug.Log("Max Def is now = " + Def); break;
+                    //Debug.Log("Max Def is now = " + Def);
+                    break;
             }
+        }
+    }
+
+    public void LoadWeapon(WeaponType type)
+    {
+        currentWeapon = type;
+        foreach (Weapons w in weaponList)
+        {
+            if (type != w.weaponType)
+                w.weapon.gameObject.SetActive(false);
+            else
+                w.weapon.gameObject.SetActive(true);
         }
     }
 
     public void ChangeWeapon(WeaponType type)
     {
         currentWeapon = type;
-        if(type == WeaponType.Wooden)
+        switch(type)
         {
-            maxHP_Slider += 100f;
-            foreach (Weapons w in weaponList)
-            {
-                if (type != w.weaponType)
-                    w.weapon.gameObject.SetActive(false);
-                else
-                    w.weapon.gameObject.SetActive(true);
-            }
-            //Atk += 10f;
+            case WeaponType.Wooden: maxHP += 100f; break;
+            case WeaponType.Bronze: maxHP += 1000f; break;
+            case WeaponType.Silver: maxHP += 10000f; break;
+            case WeaponType.Gold: maxHP += 2500f; break;
+            case WeaponType.Epic: maxHP += 7500f; break;
         }
-        if (type == WeaponType.Bronze)
-        {
-            maxHP_Slider += 1000f;
-            foreach(Weapons w in weaponList)
-            {
-                if (type != w.weaponType)
-                    w.weapon.gameObject.SetActive(false);
-                else
-                    w.weapon.gameObject.SetActive(true);
-            }
-            //Atk += 100f;
-        }
-        else if (type == WeaponType.Silver)
-        {
-            maxHP_Slider += 10000f;
-            foreach (Weapons w in weaponList)
-            {
-                if (type != w.weaponType)
-                    w.weapon.gameObject.SetActive(false);
-                else
-                    w.weapon.gameObject.SetActive(true);
-            }
-            //Atk += 1000f;
-        }
-        else if (type == WeaponType.Gold)
-        {
-            maxHP_Slider += 2500f;
-            foreach (Weapons w in weaponList)
-            {
-                if (type != w.weaponType)
-                    w.weapon.gameObject.SetActive(false);
-                else
-                    w.weapon.gameObject.SetActive(true);
-            }
-            //Atk += 250f;
-        }
-        else if (type == WeaponType.Epic)
-        {
-            maxHP_Slider += 7500f;
-            foreach (Weapons w in weaponList)
-            {
-                if (type != w.weaponType)
-                    w.weapon.gameObject.SetActive(false);
-                else
-                    w.weapon.gameObject.SetActive(true);
-            }
-            //Atk += 2000f;
-        }
+        LoadWeapon(type);
     }
 
     public override void Die()
     {
-        anim.SetTrigger("Death");
-        wellBeing = WellBeingState.Dead;
-        rb2D.isKinematic = true;
-        StartCoroutine(DelayThenEndGame());
+        if(wellBeing != WellBeingState.Dead)
+        {
+            wellBeing = WellBeingState.Dead;
+            rb2D.isKinematic = true; // freeze player position
+            StartCoroutine(DelayForAnimationThenRespawn());
+            
+            // save attributes
+        }        
     }
 
     // Wait for Death animation
-    IEnumerator DelayThenEndGame()
+    IEnumerator DelayForAnimationThenRespawn()
     {
-        yield return new WaitForSeconds(2f);
+        anim.SetTrigger("Death");
+
+        yield return new WaitForSeconds(3f);
+        respawnButton.gameObject.SetActive(true);
         Time.timeScale = 0.0f;
-        InputType.Instance.retry.gameObject.SetActive(true);   
+        //RespawnPlayer();  
+    }
+
+    public void RespawnPlayer()
+    {
+        foreach(Weapons w in weaponList)
+        {
+            if(currentWeapon == w.weaponType)
+            {
+                ChangeWeapon(w.weaponType);
+                maxHP += a_HP; // add in accumulated hp
+                transform.position = respawnInTheWorld.position;
+                Time.timeScale = 1.0f;
+                wellBeing = WellBeingState.Alive;
+                rb2D.isKinematic = false;
+                anim.gameObject.SetActive(true);
+                anim.SetTrigger("Respawn");
+            }
+        }
+        respawnButton.gameObject.SetActive(false);
     }
 }

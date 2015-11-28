@@ -97,7 +97,7 @@ public class SpawnEnemies : MonoBehaviour, ISpawner {
     {
         if (playerCurrentWeapon != null)
         { 
-            TypeOfStatIncrease typeOfStat = spawnAreas[0].typeOfStatDrop;
+            TypeOfStatIncrease typeOfStat = spawnAreas[0].typeOfStatDrop;  //fix this
             switch (playerCurrentWeapon.weaponType)
             {
                 case WeaponType.Wooden:  // Wooden enemy stats

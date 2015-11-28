@@ -24,11 +24,11 @@ public class Solider : Enemy, IAttacker
     void Start()
     {
         rb2D = GetComponent<Rigidbody2D>();
-        myT = GetComponent<Transform>();
+        transform = GetComponent<Transform>();
         anim = GetComponent<Animator>();
         HP_Slider.maxValue = HP;
 
-        spawnPosition = myT.position;
+        spawnPosition = transform.position;
         //Debug.Log(this + " HP: " + HP +      " | ATK: " + Atk + " | DEF: " + Def + " | Speed: " + Speed);
     }
 

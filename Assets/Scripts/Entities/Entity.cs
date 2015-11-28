@@ -28,7 +28,7 @@ public abstract class Entity : MonoBehaviour {
     protected float Def;
     protected float Speed;
 
-    protected Transform myT;
+    protected Transform transform;
 
     protected Animator anim;
 
