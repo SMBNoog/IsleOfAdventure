@@ -72,6 +72,8 @@ public class SpawnEnemies : MonoBehaviour, ISpawner {
                     ScaleEnemyToWeaponType(2);
                 else if (y > 80f && y < 170f) // hard
                     ScaleEnemyToWeaponType(4);
+                else if (y > 170f)
+                    ScaleEnemyToWeaponType(5);
 
                 if (area.typeOfEnemy == TypeOfEnemy.Skeleton)
                 {

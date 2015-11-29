@@ -61,7 +61,7 @@ public class EndGame : MonoBehaviour
 
     public void TakeWeapon()
     {
-        player.ChangeWeapon(weaponreward);
+        player.UpgradeWeapon(weaponreward);
         //save
         //exit to world
         Time.timeScale = 1;

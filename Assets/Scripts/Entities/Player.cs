@@ -23,7 +23,7 @@ public class Weapons
     //public List<AttackDirection> attackSpriteArray;
 }
 
-public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IPlayerAccumulatedHP
+public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManager/*, IPlayerAccumulatedHP*/
 {
 
     //[SerializeField]
@@ -50,12 +50,13 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IPlayerAccumulate
     }
     public WeaponType currentWeapon;
 
-    public float a_HP { get; set; } // Aquired HP in this zone
+    //public float a_HP { get; set; } // Aquired HP in this zone
 
     public float delayBetweenAutoAttacks = 0.4f;
     public float delayBetweenSpamAttacks = 0.1f;
 
-    public Transform respawnInTheWorld;
+    // only set in the world
+    public Transform respawnInTheWorld;    
     public Transform tutorialSpawn;
 
     private bool canTakeDamage = true;
@@ -94,7 +95,8 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IPlayerAccumulate
             Def = 0.1f;
             Speed = 4f;
             HP = 100f;
-            ChangeWeapon(WeaponType.Wooden); // will add 100 more hp
+            UpgradeWeapon(WeaponType.Wooden); // will add 100 more hp
+            HP = maxHP;
             Debug.Log("Player Starting HP: " + HP + " | ATK: " + Atk + " | DEF: " + Def);
         }
         else
@@ -110,7 +112,7 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IPlayerAccumulate
 
         if (GameInfo.currentArea == GameInfo.Area.TutorialArea)
             TeleportToSpawnLocation(true);
-        else
+        else if (GameInfo.currentArea == GameInfo.Area.World)
             TeleportToSpawnLocation(false);
 
         
@@ -134,7 +136,7 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IPlayerAccumulate
 
             // Regen when Idle
             if (actionState == ActionState.Idle && HP < maxHP)
-                HP += maxHP * .001f;
+                HP += maxHP * .005f;
 
             debugHP_Text.text = "HP: " + HP;
             debugMaxHP_Text.text = "MaxHP: " + maxHP;
@@ -322,29 +324,41 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IPlayerAccumulate
         canTakeDamage = true;
     }
     
+    // Save attributes before zoning
     public void SaveAttributes()
     {
-        PlayerPrefs.SetFloat("HP", HP);
-        PlayerPrefs.SetFloat("MaxHP", maxHP);
-        PlayerPrefs.SetFloat("Atk", Atk);
-        PlayerPrefs.SetFloat("Def", Def);
-        PlayerPrefs.SetFloat("Speed", Speed);
-        Debug.Log(currentWeapon + "     " + (int)currentWeapon);
-        PlayerPrefs.SetInt("WeaponType", (int)currentWeapon);
+        GameInfo.PlayerMaxHP = maxHP;
+        GameInfo.PlayerAtk = Atk;
+        GameInfo.PlayerDef = Def;
+        GameInfo.PlayerSpeed = Speed;
+        GameInfo.CurrentWeapon = currentWeapon;
+
+        //PlayerPrefs.SetFloat("HP", HP);
+        //PlayerPrefs.SetFloat("MaxHP", maxHP);
+        //PlayerPrefs.SetFloat("Atk", Atk);
+        //PlayerPrefs.SetFloat("Def", Def);
+        //PlayerPrefs.SetFloat("Speed", Speed);
+        //PlayerPrefs.SetInt("WeaponType", (int)currentWeapon);
         
     }
 
+    // Load attributes after zoning
     public void LoadAttributes()
     {
         if (PlayerPrefs.HasKey("HP"))
         {
-            HP = PlayerPrefs.GetFloat("HP") + a_HP;
-            maxHP = PlayerPrefs.GetFloat("MaxHP", maxHP);
-            Atk = PlayerPrefs.GetFloat("Atk");
-            Def = PlayerPrefs.GetFloat("Def");
-            Speed = PlayerPrefs.GetFloat("Speed");
-            Debug.Log(currentWeapon + "     " + (int)currentWeapon);
-            currentWeapon = (WeaponType)PlayerPrefs.GetInt("WeaponType", (int)currentWeapon);            
+            maxHP = GameInfo.PlayerMaxHP;
+            Atk = GameInfo.PlayerAtk;
+            Def = GameInfo.PlayerDef;
+            Speed = GameInfo.PlayerSpeed;
+            currentWeapon = GameInfo.CurrentWeapon;
+
+            //HP = PlayerPrefs.GetFloat("HP") + a_HP;
+            //maxHP = PlayerPrefs.GetFloat("MaxHP");
+            //Atk = PlayerPrefs.GetFloat("Atk");
+            //Def = PlayerPrefs.GetFloat("Def");
+            //Speed = PlayerPrefs.GetFloat("Speed");
+            //currentWeapon = (WeaponType)PlayerPrefs.GetInt("WeaponType");            
         }
         else
             Debug.Log("Key's have not been Set.");
@@ -359,7 +373,7 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IPlayerAccumulate
             {
                 case TypeOfStatIncrease.HP:
                     maxHP += amount;
-                    a_HP += amount;
+                    //a_HP += amount;
                     //Debug.Log("Max HP is now = " + maxCurrentHP); 
                     break;
                 case TypeOfStatIncrease.ATK: Atk += amount;
@@ -384,11 +398,11 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IPlayerAccumulate
         }
     }
 
-    public void ChangeWeapon(WeaponType type)
+    public void UpgradeWeapon(WeaponType type)
     {
         currentWeapon = type;
         switch(type)
-        {
+        {   // When upgrading weapon boost max HP
             case WeaponType.Wooden: maxHP += 100f; break;
             case WeaponType.Bronze: maxHP += 1000f; break;
             case WeaponType.Silver: maxHP += 10000f; break;
@@ -398,15 +412,26 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IPlayerAccumulate
         LoadWeapon(type);
     }
 
+    public void DebugChangeToBronze()
+    {
+        UpgradeWeapon(WeaponType.Bronze);
+    }
+
+    public void DebugChangeToSilver()
+    {
+        UpgradeWeapon(WeaponType.Silver);
+    }
+
     public override void Die()
     {
         if(wellBeing != WellBeingState.Dead)
         {
             wellBeing = WellBeingState.Dead;
             rb2D.isKinematic = true; // freeze player position
-            StartCoroutine(DelayForAnimationThenRespawn());
+            SaveAttributes(); // save current stats
+            StartCoroutine(DelayForAnimationThenRespawn()); //delay for tombstone
+
             
-            // save attributes
         }        
     }
 
@@ -414,7 +439,6 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IPlayerAccumulate
     IEnumerator DelayForAnimationThenRespawn()
     {
         anim.SetTrigger("Death");
-
         yield return new WaitForSeconds(3f);
         respawnButton.gameObject.SetActive(true);
         Time.timeScale = 0.0f;
@@ -423,13 +447,23 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IPlayerAccumulate
 
     public void RespawnPlayer()
     {
-        foreach(Weapons w in weaponList)
+        Debug.Log("Button hit");
+        LoadAttributes();
+        HP = maxHP;
+        foreach (Weapons w in weaponList)
         {
             if(currentWeapon == w.weaponType)
             {
-                ChangeWeapon(w.weaponType);
-                maxHP += a_HP; // add in accumulated hp
-                transform.position = respawnInTheWorld.position;
+                Debug.Log("found weapon");
+
+                LoadWeapon(w.weaponType);         
+                if(GameInfo.currentArea == GameInfo.Area.World)       
+                    rb2D.transform.position = respawnInTheWorld.position;
+                else
+                {
+                    Debug.Log("Goingt o the world!");
+                    Application.LoadLevel("SceneLoader");
+                }
                 Time.timeScale = 1.0f;
                 wellBeing = WellBeingState.Alive;
                 rb2D.isKinematic = false;

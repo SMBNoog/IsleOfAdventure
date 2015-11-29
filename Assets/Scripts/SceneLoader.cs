@@ -11,7 +11,7 @@ public class SceneLoader : MonoBehaviour {
     void Start()
     {
         //StartCoroutine(LoadALevel(GameInfo.sceneToLoad));
-        StartCoroutine(LoadALevel("TheWorld"));
+        StartCoroutine(LoadALevel("World"));
     }
 
     private IEnumerator LoadALevel(string levelName)
