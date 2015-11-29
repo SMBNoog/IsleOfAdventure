@@ -29,7 +29,7 @@ public class Skeleton : Enemy, IAttacker
     void Start()
     {
         rb2D = GetComponent<Rigidbody2D>();
-        transform = GetComponent<Transform>();
+        //transform = GetComponent<Transform>();
         anim = GetComponent<Animator>();  
         HP_Slider.maxValue = HP;
 
@@ -171,7 +171,7 @@ public class Skeleton : Enemy, IAttacker
         numberOfSkeletons -= 1;
         anim.SetBool("Death", true);
         anim.SetTrigger("DeathAni");
-        Debug.Log("I am of type : " + typeOfStatIncrease);
+        //Debug.Log("I am of type : " + typeOfStatIncrease);
         GiveStatsToPlayerAponDeath(amountOfStatToGiveAponDeath, typeOfStatIncrease);
         rb2D.isKinematic = true;
         ////rb2D.constraints = RigidbodyConstraints2D.FreezeAll;

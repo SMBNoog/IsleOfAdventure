@@ -8,7 +8,7 @@ static class GameInfo {
 
     public static Area currentArea = Area.TutorialArea;
 
-    public static string sceneToLoad { get { return sceneToLoad; } set { sceneToLoad = currentArea + ""; } }
+    public static string sceneToLoad { get { return currentArea + ""; } }
 
     public static string playerName;
 

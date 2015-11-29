@@ -60,7 +60,7 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
     public Transform tutorialSpawn;
 
     private bool canTakeDamage = true;
-    private bool canAttackMonsters = true;
+    //private bool canAttackMonsters = true;
     private Rigidbody2D rb2D;
     //private Vector3 lastPosition;
 
@@ -69,7 +69,7 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
     // Debug Text to see current stats
     public Text debugHP_Text;
     public Text debugMaxHP_Text;
-    public Text debugAtk_Text;
+    //public Text debugAtk_Text;
     public Text debugDef_Text;
     public Text debugWeapon_Text;
 
@@ -101,6 +101,7 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
         }
         else
         {
+            Debug.Log("Loading attributes");
             LoadAttributes();
             LoadWeapon(currentWeapon);            
         }
@@ -111,16 +112,16 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
         rb2D = GetComponent<Rigidbody2D>();
 
         if (GameInfo.currentArea == GameInfo.Area.TutorialArea)
-            TeleportToSpawnLocation(true);
+            TeleportToTutorialArea(true);
         else if (GameInfo.currentArea == GameInfo.Area.World)
-            TeleportToSpawnLocation(false);
+            TeleportToTutorialArea(false);
 
         
         //anim.SetFloat("Horizontal Input", 0f);
         //attackDirection = AttackDirectionState.right;
     }
 
-    public void TeleportToSpawnLocation(bool tutorial)
+    public void TeleportToTutorialArea(bool tutorial)
     {
         rb2D.transform.position = tutorial? tutorialSpawn.position:respawnInTheWorld.position; 
     }
@@ -140,7 +141,7 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
 
             debugHP_Text.text = "HP: " + HP;
             debugMaxHP_Text.text = "MaxHP: " + maxHP;
-            debugAtk_Text.text = "Atk: " + Atk;
+            //debugAtk_Text.text = "Atk: " + Atk;
             debugDef_Text.text = "Def: " + Def;
             debugWeapon_Text.text = currentWeapon+"";
 
@@ -345,8 +346,8 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
     // Load attributes after zoning
     public void LoadAttributes()
     {
-        if (PlayerPrefs.HasKey("HP"))
-        {
+        //if (PlayerPrefs.HasKey("HP"))
+        //{
             maxHP = GameInfo.PlayerMaxHP;
             Atk = GameInfo.PlayerAtk;
             Def = GameInfo.PlayerDef;
@@ -359,9 +360,9 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
             //Def = PlayerPrefs.GetFloat("Def");
             //Speed = PlayerPrefs.GetFloat("Speed");
             //currentWeapon = (WeaponType)PlayerPrefs.GetInt("WeaponType");            
-        }
-        else
-            Debug.Log("Key's have not been Set.");
+        //}
+        //else
+        //    Debug.Log("Key's have not been Set.");
     }
 
     // Killed enemy, increase stat

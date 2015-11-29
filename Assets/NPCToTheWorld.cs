@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public enum NPCTo { Forest, Castle, World }
+public enum NPCTo { Forest, Castle, World, SceneLoader }
 
 public class NPCToTheWorld : MonoBehaviour {
 
@@ -19,8 +19,9 @@ public class NPCToTheWorld : MonoBehaviour {
                 case NPCTo.World: GameInfo.setArea(GameInfo.Area.World); GameInfo.TutorialCompleted = true; break;
                 case NPCTo.Forest: GameInfo.setArea(GameInfo.Area.Forest); break;
                 case NPCTo.Castle: GameInfo.setArea(GameInfo.Area.Castle); break;
+                case NPCTo.SceneLoader: break;
             }
-            Application.LoadLevel(NPCTo+"");            
+            Application.LoadLevel("SceneLoader");            
         }
     }
 }

@@ -161,7 +161,7 @@ public class NewEnemyAI : MonoBehaviour {
             anim.SetBool("CanSeePlayer", true);
             anim.SetBool("Idle", false);
             anim.SetBool("Patrol", false);
-            Debug.Log("Can see the player!");
+            //Debug.Log("Can see the player!");
             target = other.gameObject.transform;
             seeker.StartPath(transform.position, target.position, OnPathComplete);
             StartCoroutine(UpdatePath());
@@ -185,7 +185,7 @@ public class NewEnemyAI : MonoBehaviour {
 
     public void OnPathComplete(Path p)
     {
-        Debug.Log("We got a path. Did it have an error? " + p.error);
+        //Debug.Log("We got a path. Did it have an error? " + p.error);
         if (!p.error)
         {
             path = p;

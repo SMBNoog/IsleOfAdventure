@@ -10,22 +10,26 @@ public class SceneLoader : MonoBehaviour {
 
     void Start()
     {
-        //StartCoroutine(LoadALevel(GameInfo.sceneToLoad));
-        StartCoroutine(LoadALevel("World"));
+        StartCoroutine(LoadALevel(GameInfo.sceneToLoad));
+        //StartCoroutine(LoadALevel("World"));
     }
 
-    private IEnumerator LoadALevel(string levelName)
+    private IEnumerator LoadALevel(string sceneName)
     {
-        async = Application.LoadLevelAsync(levelName);
+        async = Application.LoadLevelAsync(sceneName);
         yield return async;
 
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
     }
 
     void Update()
     {
-        Debug.Log(async.progress);
-        progressBar.value = async.progress * 100f;
+        if(async != null)
+        {
+            //Debug.Log(async.progress);
+            progressBar.value = async.progress * 100f;
+        }
+
     }
 
 }

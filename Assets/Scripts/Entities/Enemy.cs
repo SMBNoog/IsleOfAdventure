@@ -39,7 +39,7 @@ public class Enemy : Entity {
         {
             float wAtk = weapon.Atk;  //weapon + base          
             float dmg = wAtk - (wAtk * Def);
-            Debug.Log("Weapon ATK = " + wAtk);
+            //Debug.Log("Weapon ATK = " + wAtk);
             DamagedBy(dmg);
             //actionState = ActionState.EngagedInBattle;
             SoundManager.Instance.Play(TypeOfClip.SwordHit);            
