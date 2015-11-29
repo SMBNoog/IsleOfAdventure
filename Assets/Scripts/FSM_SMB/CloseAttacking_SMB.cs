@@ -36,7 +36,7 @@ public class CloseAttacking_SMB : StateMachineBehaviour {
                 animator.SetFloat("DistanceFromTarget", rayToPlayer.distance);
 
                 Vector2 direction = rayToPlayer.transform.position - myR.transform.position;
-                myR.velocity = direction * 1f;
+                myR.velocity = direction * 10f;
             }
             else
                 Debug.Log("collider is null");

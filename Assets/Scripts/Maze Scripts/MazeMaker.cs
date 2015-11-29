@@ -9,8 +9,8 @@ public class MazeMaker : MonoBehaviour
     public GameObject UDTile;
     public GameObject player;
     public GameObject Enemy;
-    // This creates a Grid Graph
-    GridGraph gg;
+    //// This creates a Grid Graph
+    //GridGraph gg;
 
     void Start()
     {
@@ -72,8 +72,19 @@ public class MazeMaker : MonoBehaviour
 
     //    // Updates internal size from the above values
     //    gg.UpdateSizeFromWidthDepth();
-
     //    // Scans all graphs, do not call gg.Scan(), that is an internal method
     //    AstarPath.active.Scan();
     //}
-}
+        //// Setup a grid graph with some values
+        //gg.width = 120;
+        //gg.depth = 120;
+        //gg.nodeSize = 1;
+        //gg.center = new Vector3(50, 50, 0);
+
+        //// Updates internal size from the above values
+        //gg.UpdateSizeFromWidthDepth();
+
+        //// Scans all graphs, do not call gg.Scan(), that is an internal method
+
+        //AstarPath.active.Scan();
+    }

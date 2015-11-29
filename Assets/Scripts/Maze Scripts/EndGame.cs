@@ -61,7 +61,7 @@ public class EndGame : MonoBehaviour
 
     public void TakeWeapon()
     {
-        player.ChangeWeapon(weaponreward);
+        player.UpgradeWeapon(weaponreward);
         //save
 
         //unpause game and exit to world

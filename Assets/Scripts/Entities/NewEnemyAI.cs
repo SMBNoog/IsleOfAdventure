@@ -43,7 +43,7 @@ public class NewEnemyAI : MonoBehaviour {
 
         if(target == null)
         {
-            Debug.LogError("No Player found");
+            //Debug.LogError("No Player found");
             return;
         }       
 

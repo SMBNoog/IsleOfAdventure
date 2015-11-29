@@ -35,6 +35,17 @@ public interface IPlayerCurrentWeapon
     WeaponType weaponType { get; }
 }
 
+//public interface IPlayerAccumulatedHP
+//{
+//    float a_HP { get; set; }
+//}
+
+public interface IAttributesManager
+{
+    void LoadAttributes();
+    void SaveAttributes();
+}
+
 public interface INPCMessage
 {
     string message { get; }

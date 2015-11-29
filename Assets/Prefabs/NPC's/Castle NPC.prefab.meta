@@ -1,6 +1,11 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/Prefabs/NPC's/Castle NPC.prefab.meta
 guid: 25606a5212dcfcd41acefcd940913bfa
 timeCreated: 1448410675
+=======
+guid: b1cfb36ed8e2cbc4cbddd35230416e18
+timeCreated: 1448518396
+>>>>>>> 10b93e49b28c5fd385b1fb5c00a514c7d7a579e4:Assets/Prefabs/A_.prefab.meta
 licenseType: Free
 NativeFormatImporter:
   userData: 
