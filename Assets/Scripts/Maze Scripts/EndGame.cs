@@ -63,7 +63,8 @@ public class EndGame : MonoBehaviour
     {
         player.ChangeWeapon(weaponreward);
         //save
-        //exit to world
+
+        //unpause game and exit to world
         Time.timeScale = 1;
         Application.LoadLevel(0);
     }
@@ -71,7 +72,8 @@ public class EndGame : MonoBehaviour
     public void LeaveWeapon()
     {
         //save
-        //exit to world
+
+        //unpause game and exit to world
         Time.timeScale = 1;
         Application.LoadLevel(0);
     }

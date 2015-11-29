@@ -14,7 +14,7 @@ public class CastleNPC : MonoBehaviour, INPCMessage
 
     public void OnClickOK()
     {
-        //save player infor
+        //save player info
         //load the castle level
         Debug.Log("Castle guy loaded a new scene");
     }
