@@ -39,13 +39,9 @@ public class BlockRL : MonoBehaviour
 
     void FixedUpdate()
     {
-        int layerMask;
-        layerMask = int.MaxValue;
-        layerMask = layerMask ^ 1 << LayerMask.NameToLayer("Block");
-
         if (movingRight)
         {
-            RaycastHit2D hit = Physics2D.Raycast(centerPoint.position, Vector2.right, wallTestDistance, layerMask);
+            RaycastHit2D hit = Physics2D.Raycast(centerPoint.position, Vector2.right, wallTestDistance);
             if (hit.collider != null && hit.collider.gameObject.tag != "Player")
             {
                 movingRight = false;
@@ -53,7 +49,7 @@ public class BlockRL : MonoBehaviour
         }
         else
         {
-            RaycastHit2D hit = Physics2D.Raycast(centerPoint2.position, -Vector2.right, wallTestDistance, layerMask);
+            RaycastHit2D hit = Physics2D.Raycast(centerPoint2.position, -Vector2.right, wallTestDistance);
             if (hit.collider != null && hit.collider.gameObject.tag != "Player")
             {
                 movingRight = true;
@@ -64,5 +60,6 @@ public class BlockRL : MonoBehaviour
     void OnDrawGizmos()
     {
         Gizmos.DrawLine(centerPoint.position, centerPoint.position + (movingRight ? Vector3.right : -Vector3.right) * wallTestDistance);
+        Gizmos.DrawLine(centerPoint2.position, centerPoint2.position + (movingRight ? Vector3.right : -Vector3.right) * wallTestDistance);
     }
 }

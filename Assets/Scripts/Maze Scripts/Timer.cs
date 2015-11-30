@@ -16,6 +16,7 @@ public class Timer : MonoBehaviour
         }
         else
         {
+            //save new stats then load the world
             Application.LoadLevel(0);
         }
     }

@@ -24,22 +24,21 @@ public class Solider : Enemy, IAttacker
     void Start()
     {
         rb2D = GetComponent<Rigidbody2D>();
-        myT = GetComponent<Transform>();
+        //transform = GetComponent<Transform>();
         anim = GetComponent<Animator>();
         HP_Slider.maxValue = HP;
 
-        spawnPosition = myT.position;
+        spawnPosition = transform.position;
         //Debug.Log(this + " HP: " + HP +      " | ATK: " + Atk + " | DEF: " + Def + " | Speed: " + Speed);
     }
 
     // Skeleton Instance
-    public void Initialize(float HP, float Atk, float Def, float Speed, float amountToStatToGive, TypeOfStatIncrease stat)
+    public void Initialize(float HP, float Atk, float Def, float amountToStatToGive, TypeOfStatIncrease stat)
     {
         float multiplier = UnityEngine.Random.Range(-.1f, .1f);
         this.HP = HP + (HP * multiplier);
         this.Atk = Atk + (Atk * multiplier);
         this.Def = Def + (Def * multiplier);
-        this.Speed = Speed;
         numberOfSoliders += 1;
         amountOfStatToGiveAponDeath = amountToStatToGive;
         typeOfStatIncrease = stat;

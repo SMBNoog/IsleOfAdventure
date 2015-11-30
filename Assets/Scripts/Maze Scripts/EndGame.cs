@@ -3,22 +3,78 @@ using System.Collections;
 
 public class EndGame : MonoBehaviour
 {
+    public GameObject openchest;
+    public GameObject UI;
+    public WeaponType weaponreward;
+    Player player;
+
+    void Awake()
+    {
+        //load info about player
+
+        //check player weapon
+
+        //change enemies based on weapon
+    }
+
+    void Start()
+    {
+        player = FindObjectOfType<Player>();
+    }
+
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Player")
         {
-            Debug.Log("You Win");
+            openchest.SetActive(true);
+            UI.SetActive(true);
             GiveWeapon();
+            Time.timeScale = 0f;
         }
     }
 
     void GiveWeapon()
     {
         if (Random.Range(0f, 1f) < .70f)
-            Debug.Log("You Obtained The Common Sword");
-        else if (Random.Range(0f, 1f) < .95f)
-            Debug.Log("You Obtained The Uncommon Sword");
+        {
+            weaponreward = WeaponType.Bronze;
+            Debug2Screen.Log("You Win!\n You Obtained The Bronze Sword");
+        }
+        else if (Random.Range(0f, 1f) < .90f)
+        {
+            weaponreward = WeaponType.Silver;
+            Debug2Screen.Log("You Win!\n You Obtained The Silver Sword");
+        }
+        else if (Random.Range(0f, 1f) < .98f)
+        {
+            weaponreward = WeaponType.Gold;
+            Debug2Screen.Log("You Win!\n You Obtained The Gold Sword");
+        }
         else
-            Debug.Log("You Obtained The Rare Sword");
+        {
+            weaponreward = WeaponType.Epic;
+            Debug2Screen.Log("You Win!\n You Obtained The Epic Sword");
+        }
+    }
+
+    //Button Control Scripts Below...
+
+    public void TakeWeapon()
+    {
+        player.UpgradeWeapon(weaponreward);
+        //save
+
+        //unpause game and exit to world
+        Time.timeScale = 1;
+        Application.LoadLevel(0);
+    }
+
+    public void LeaveWeapon()
+    {
+        //save
+
+        //unpause game and exit to world
+        Time.timeScale = 1;
+        Application.LoadLevel(0);
     }
 }

@@ -9,6 +9,11 @@ public class Skeleton : Enemy, IAttacker
     public static int numberOfSkeletons;
     public Slider HP_Slider;
 
+    public ISpawner Spawner  // reference to the interface to Respawn this enemy when it dies
+    {
+        get; set;
+    }
+
     // Interface properties
     public WellBeingState wellBeing { get; set; }    
     public ActionState actionState { get; set; }
@@ -16,7 +21,7 @@ public class Skeleton : Enemy, IAttacker
     public Team Team { get { return Team.Enemy; } }
     public Vector2 Pos { get { return transform.position; } }
     public float Atk { get; set; }
-    public DeadEnemy startingSkeleton;
+    //public GameObject startingSkeleton;
 
     //private float distaneOfRay = 10;
     //private List<RaycastHit2D> rays;
@@ -24,27 +29,32 @@ public class Skeleton : Enemy, IAttacker
     void Start()
     {
         rb2D = GetComponent<Rigidbody2D>();
-        myT = GetComponent<Transform>();
+        //transform = GetComponent<Transform>();
         anim = GetComponent<Animator>();  
         HP_Slider.maxValue = HP;
 
-        spawnPosition = myT.position;
+        spawnPosition = transform.position;
         //Debug.Log(this + " HP: " + HP +      " | ATK: " + Atk + " | DEF: " + Def + " | Speed: " + Speed);
     }
 
     // Skeleton Instance
-    public void Initialize(float HP, float Atk, float Def, float Speed, float amountToStatToGive, TypeOfStatIncrease stat)
+    public void Initialize(float HP, float Atk, float Def, float amountToStatToGive, TypeOfStatIncrease stat)
     {
-        float multiplier = UnityEngine.Random.Range(-.1f, .1f);
+        float multiplier = UnityEngine.Random.Range(-.1f, .3f);
         this.HP = HP + (HP * multiplier);
         this.Atk = Atk + (Atk * multiplier);
         this.Def = Def + (Def * multiplier);
-        this.Speed = Speed;
         numberOfSkeletons += 1;
         amountOfStatToGiveAponDeath = amountToStatToGive;
         typeOfStatIncrease = stat;
 
-        //assign
+        //startingSkeleton = new GameObject();
+        //Skeleton s = startingSkeleton.GetComponent<Skeleton>();
+        //s.HP = HP;
+        //s.Atk = Atk;
+        //s.Def = Def;
+        //s.amountOfStatToGiveAponDeath = amountToStatToGive;
+        //s.typeOfStatIncrease = stat;
     }
 
     IEnumerator SwitchToPatrol()
@@ -159,21 +169,31 @@ public class Skeleton : Enemy, IAttacker
     {
         // Play death animation
         numberOfSkeletons -= 1;
-        anim.SetTrigger("Death");
-        Debug.Log("I am of type : " + typeOfStatIncrease);
+        anim.SetBool("Death", true);
+        anim.SetTrigger("DeathAni");
+        //Debug.Log("I am of type : " + typeOfStatIncrease);
         GiveStatsToPlayerAponDeath(amountOfStatToGiveAponDeath, typeOfStatIncrease);
         rb2D.isKinematic = true;
+        ////rb2D.constraints = RigidbodyConstraints2D.FreezeAll;
         foreach(Collider2D col in GetComponents<Collider2D>())
         {
             col.enabled = false;
         }
-        // assign method from another class to it
-        //SpawnEnemies.enemiesInstantiated.RemoveAt(SpawnEnemies.enemiesInstantiated.Count - 1);
+        //StartCoroutine(Respawn());
+        //gameObject.SetActive(false);
+
+        Spawner.Died(this);
+
         Destroy(gameObject, 3f); //wait until respawn, disable
     }
-    
-    // IEnum to respawn;
 
+    //private IEnumerator Respawn()
+    //{
+    //    yield return new WaitForSeconds(1f);
+        
+    //    //Instantiate(startingSkeleton, spawnPosition, Quaternion.identity);
+    //    Destroy(gameObject);
+    //}
     //void OnDrawGizmosSelected()
     //{
     //    Gizmos.color = new Color(1f, .0f, 0f, .2f);
