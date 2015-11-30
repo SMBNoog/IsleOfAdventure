@@ -325,7 +325,7 @@ yield return StartCoroutine (p.WaitForPath ());
 			}
 
 			if (AstarPath.active.logPathResults != PathLog.None && AstarPath.active.logPathResults != PathLog.InGame) {
-				//Debug.LogWarning (msg);
+				Debug.LogWarning (msg);
 			}
 		}
 
