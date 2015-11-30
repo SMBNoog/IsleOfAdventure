@@ -435,9 +435,9 @@ public class AIPath : MonoBehaviour {
 
 		rot = Quaternion.Slerp (rot,toTarget,turningSpeed*Time.deltaTime);
 		Vector3 euler = rot.eulerAngles;
-        euler.z = 0;
-        euler.x = 0;
-        rot = Quaternion.Euler (euler);
+		euler.z = 0;
+		euler.x = 0;
+		rot = Quaternion.Euler (euler);
 
 		tr.rotation = rot;
 	}
