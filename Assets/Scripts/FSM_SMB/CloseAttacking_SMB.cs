@@ -15,10 +15,7 @@ public class CloseAttacking_SMB : StateMachineBehaviour {
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         myR = FindObjectOfType<Rigidbody2D>();
-
-        attacker = Interface.Find<IAttacker>(interfaceSupplier);
-
-
+        attacker = Interface.Find<IAttacker>(FindObjectOfType<Player>().gameObject);
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -28,19 +25,21 @@ public class CloseAttacking_SMB : StateMachineBehaviour {
         {
             //Debug.Log("Enemy pos: " + animator.gameObject.transform.position);
             //Debug.Log("Player pos: " + player.Pos);
-            RaycastHit2D rayToPlayer = Physics2D.Linecast(animator.gameObject.transform.position, attacker.Pos, 1 << 10);
-            if (rayToPlayer.collider != null)
-            {
-                //Debug.Log("Collider hit: " + rayToPlayer.collider);
-                //Debug.Log("Distance to player: " + rayToPlayer.distance);
-                animator.SetFloat("DistanceFromTarget", rayToPlayer.distance);
+            //RaycastHit2D rayToPlayer = Physics2D.Linecast(animator.gameObject.transform.position, attacker.Pos, 1 << 10);
+            //if (rayToPlayer.collider != null)
+            //{
+            //Debug.Log("Collider hit: " + rayToPlayer.collider);
+            //Debug.Log("Distance to player: " + rayToPlayer.distance);
 
-                Vector2 direction = rayToPlayer.transform.position - myR.transform.position;
-                myR.velocity = direction * 10f;
-            }
-            else
-                Debug.Log("collider is null");
+
+            Vector2 direction = (Vector3)attacker.Pos - myR.transform.position;
+            myR.velocity = direction.normalized * 2f;
+            //}
+            //else
+            //    Debug.Log("collider is null");
         }
+        else
+            Debug.Log("Attacker is Null");
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state

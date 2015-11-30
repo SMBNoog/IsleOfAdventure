@@ -5,82 +5,69 @@ using UnityEngine.UI;
 using System;
 using CnControls;
 
-//public enum AttackDirectionState { up, down, left, right }
-
-//[System.Serializable]
-//public class AttackDirection
-//{
-//    public GameObject obj;
-//    public AttackDirectionState state;
-//}
-
 [System.Serializable]
 public class Weapons
 {
     public string name;
     public GameObject weapon;
     public WeaponType weaponType;
-    //public List<AttackDirection> attackSpriteArray;
 }
 
-public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManager/*, IPlayerAccumulatedHP*/
+public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManager
 {
+    public List<Weapons> weaponList;  // Set list of weapons in the inspector
 
-    //[SerializeField]
-    //private AttackDirectionState attackDirection;
-
-    public List<Weapons> weaponList;
-
-    public float HP_Cap = 1000;
+    // IPlayerCurrentWeapon interface
+    public WeaponType weaponType { get { return currentWeapon; } }    
+    private WeaponType currentWeapon;
+    
+    // Player Starting stats
+    public float HP_Cap = 1000000;
     public float DEF_Cap = 0.50f;
+    public float startingHP = 100f;
+    public float regenHP_Multiplier = 0.005f;
+    public float startingAtk = 10f;
+    public float startingDef = 0.1f;
+    public float startingSpeed = 4f;
+    
     public Slider HP_Slider;
-    [SerializeField]
-    private float maxHP = 100f;
-
+    
+    // IAttacker interface
     public WellBeingState wellBeing { get; set; }
     public ActionState actionState { get; set; }
     public Team Team { get { return Team.Player; } }
     public Vector2 Pos { get { return transform.position; } }
     public float Atk { get; set; }
     public TypeOfStatIncrease typeOfStatIncrease { get; set; } // Doesn't use
-
-    public WeaponType weaponType
-    {
-        get { return currentWeapon; }
-    }
-    public WeaponType currentWeapon;
-
-    //public float a_HP { get; set; } // Aquired HP in this zone
-
-    public float delayBetweenAutoAttacks = 0.4f;
-    public float delayBetweenSpamAttacks = 0.1f;
-
-    // only set in the world
+        
+    // only set in the world     (how to only let 1 scene use these var's?)
     public Transform respawnInTheWorld;    
     public Transform tutorialSpawn;
 
-    private bool canTakeDamage = true;
-    //private bool canAttackMonsters = true;
-    private Rigidbody2D rb2D;
-    //private Vector3 lastPosition;
+    public Button respawnButton; ///////////// REMOVE THIS WHEN MAIN MENU IS CREATED /////////////
 
-    public Button respawnButton;
-
-    // Debug Text to see current stats
+    // Debug Text to see current status, ATK set in Weapon class
     public Text debugHP_Text;
     public Text debugMaxHP_Text;
-    //public Text debugAtk_Text;
     public Text debugDef_Text;
     public Text debugWeapon_Text;
 
-    // When the Player GameObject is enabled.
+    [SerializeField]
+    private float maxHP = 100f;     // Maximum HP updated when increased
+
+    // Taking damage 
+    private bool canTakeDamage = true;
+    public float delayToTakeDamageAgain = 1.0f;
+
+    private Rigidbody2D rb2D;
+    
     public void OnEnable()
     {
         // Search the children to find Weapons.
         foreach (var weapon in gameObject.GetComponentsInChildren<Weapon>())
         {
-            // Add a blank method as shortcut. Instead of typing >>> private float getAtk() { return Atk;  }
-            weapon.GetBaseAtkDelegate += () => { return Atk; };
+            // Add a blank method as shortcut. Instead of typing the method >>> private float getAtk() { return Atk;  }
+            weapon.GetBaseAtkDelegate += () => { return Atk; };  
         }
     }
 
@@ -91,17 +78,15 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
         if (GameInfo.currentArea == GameInfo.Area.TutorialArea)
         {
             // Player starting stats
-            Atk = 10f;
-            Def = 0.1f;
-            Speed = 4f;
-            HP = 100f;
-            UpgradeWeapon(WeaponType.Wooden); // will add 100 more hp
-            HP = maxHP;
+            HP = startingHP;
+            Atk = startingAtk;
+            Def = startingDef;
+            Speed = startingSpeed;
+            UpgradeWeapon(WeaponType.Wooden); // will add 100 more hp            
             Debug.Log("Player Starting HP: " + HP + " | ATK: " + Atk + " | DEF: " + Def);
         }
         else
         {
-            Debug.Log("Loading attributes");
             LoadAttributes();
             LoadWeapon(currentWeapon);            
         }
@@ -116,9 +101,7 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
         else if (GameInfo.currentArea == GameInfo.Area.World)
             TeleportToTutorialArea(false);
 
-        
-        //anim.SetFloat("Horizontal Input", 0f);
-        //attackDirection = AttackDirectionState.right;
+        HP = maxHP;
     }
 
     public void TeleportToTutorialArea(bool tutorial)
@@ -126,143 +109,71 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
         rb2D.transform.position = tutorial? tutorialSpawn.position:respawnInTheWorld.position; 
     }
 
-    #region Animator state
     void Update()
     {
-        //Debug.Log("Action State : " + actionState);
         if (wellBeing == WellBeingState.Alive)
         {
-            if(HP_Slider.maxValue != maxHP)
+            // Update the Slider UI for HP
+            if (HP_Slider.maxValue != maxHP) 
                 HP_Slider.maxValue = maxHP;
+            if (HP_Slider.value != HP)
+                HP_Slider.value = HP;
 
-            // Regen when Idle
+            // Regen when Idle and not max HP
             if (actionState == ActionState.Idle && HP < maxHP)
-                HP += maxHP * .005f;
+                HP += maxHP * regenHP_Multiplier;
 
+            // Debug
             debugHP_Text.text = "HP: " + HP;
             debugMaxHP_Text.text = "MaxHP: " + maxHP;
-            //debugAtk_Text.text = "Atk: " + Atk;
             debugDef_Text.text = "Def: " + Def;
             debugWeapon_Text.text = currentWeapon+"";
 
-            //AnimatorStateInfo stateName = anim.GetCurrentAnimatorStateInfo(0);
+            // Right Stick (Weapon Movement)
+            float horizontalR = CnInputManager.GetAxis("HorizontalRight");
+            float verticalR = CnInputManager.GetAxis("VerticalRight");
             
-            //if (stateName.IsName("Walk_Right") || stateName.IsName("Idle_Right"))
-            //    attackDirection = AttackDirectionState.right;
-            //else if (stateName.IsName("Walk_Left") || stateName.IsName("Idle_Left"))
-            //    attackDirection = AttackDirectionState.left;
-            //else if (stateName.IsName("Walk_Up") || stateName.IsName("Idle_Up"))
-            //    attackDirection = AttackDirectionState.up;
-            //else if (stateName.IsName("Walk_Down") || stateName.IsName("Idle_Down"))
-            //    attackDirection = AttackDirectionState.down;
+            foreach (Weapons w in weaponList)
+            {
+                if (w.weaponType == currentWeapon)
+                {
+                    // If Weapon is not being used, disable the collider
+                    if (verticalR == 0f && horizontalR == 0f)
+                        w.weapon.GetComponentInChildren<Collider2D>().enabled = false;
+                    else
+                        w.weapon.GetComponentInChildren<Collider2D>().enabled = true;
 
-            //// Spam attack
-            //if (CnInputManager.GetButtonDown("Swing"))
-            //{
-            //    StartCoroutine(AttackWith(weaponNEW));
-            //    //foreach (Weapons w in weaponList)
-            //    //{
-            //    //    if(w.weaponType == currentWeapon)
-            //    //    {
-            //    //        foreach (AttackDirection att in w.attackSpriteArray)
-            //    //        {
-            //    //            if (att.state == attackDirection)
-            //    //                StartCoroutine(Attack(att.obj));
-            //    //        }
-            //    //    }
-            //    //}
-                
-            //}
+                    // If Weapon is below the waist of the player change the sorting order to display above
+                    if (verticalR < -0.2f)
+                        w.weapon.GetComponentInChildren<SpriteRenderer>().sortingOrder = 101;
+                    else
+                        w.weapon.GetComponentInChildren<SpriteRenderer>().sortingOrder = 80;
 
-            //// Auto attack
-            //if (CnInputManager.GetButton("Swing"))
-            //{
-
-            //    //StartCoroutine(DelayAttack(weaponNEW)); 
-
-            //    foreach (Weapons w in weaponList)
-            //    {
-            //        if (w.weaponType == currentWeapon)
-            //        {
-            //            // power up weapon move here
-            //        }
-            //    }
-            //}
-
-            //if (CnInputManager.GetButtonUp("Swing"))
-            //{
-
-            //    weaponNEW.gameObject.SetActive(false);
-            //}
-
-            //lastPosition = transform.position;
+                    // Move the weapon to the direction the Right stick is pointing
+                    w.weapon.transform.localPosition = new Vector2(horizontalR, verticalR - .4f) * .07f;
+                    // Calculate the angle the Right stick is pointing
+                    float myAngle = Mathf.Atan2(verticalR, horizontalR) * Mathf.Rad2Deg;
+                    // Change the angle of the weapon to point the direction of the Right stick
+                    w.weapon.transform.eulerAngles = new Vector3(0f, 0f, myAngle);
+                }
+            }
         } 
-
-        if (HP_Slider.value != HP)
-            HP_Slider.value = HP;
     }// end Update
-
-    //IEnumerator AttackWith(GameObject weapon)
-    //{
-    //    if (wellBeing == WellBeingState.Alive)
-    //    {
-    //        weapon.SetActive(true); // Turn on sword in selected direction
-    //        actionState = ActionState.EngagedInBattle;
-    //        SoundManager.Instance.Play(TypeOfClip.SwordMiss);
-    //        yield return new WaitForSeconds(delayBetweenSpamAttacks);
-    //        weapon.SetActive(false);
-    //    }
-    //}
-
-    //IEnumerator DelayAttack(/*AttackDirection atkDir*/GameObject weapon)
-    //{
-    //    if(wellBeing == WellBeingState.Alive)
-    //    {
-    //        yield return new WaitForSeconds(delayBetweenAutoAttacks);
-    //        //canAttackMonsters = true;
-
-    //        // power up then fire special weapon
-    //        StartCoroutine(AttackWith(weapon));
-    //    }
-    //}
-    #endregion
-
+    
     void FixedUpdate()
     {
         if (wellBeing == WellBeingState.Alive)
         {
+            // Left Stick (Player Movement)
             float horizontal = CnInputManager.GetAxis("Horizontal");
             float vertical = CnInputManager.GetAxis("Vertical");
             anim.SetFloat("Horizontal Input", horizontal);
             anim.SetFloat("Vertical Input", vertical);
 
-            float horizontalR = CnInputManager.GetAxis("HorizontalRight");
-            float verticalR = CnInputManager.GetAxis("VerticalRight");
-
+            // Move Player
             rb2D.velocity = new Vector2(horizontal * Speed, vertical * Speed);
-
-            foreach (Weapons w in weaponList)
-            {
-                if (w.weaponType == currentWeapon)
-                {
-                    if (verticalR == 0f && horizontalR == 0f)
-                        w.weapon.GetComponentInChildren<Collider2D>().enabled = false;
-                    else
-                        w.weapon.GetComponentInChildren<Collider2D>().enabled = true;
-                    
-                    if (verticalR < -0.2f)
-                        w.weapon.GetComponentInChildren<SpriteRenderer>().sortingOrder = 101;
-                    else
-                        w.weapon.GetComponentInChildren<SpriteRenderer>().sortingOrder = 80;
-                    
-
-
-                    w.weapon.transform.localPosition = new Vector2(horizontalR, verticalR - .4f) * .07f;
-                    float myAngle = Mathf.Atan2(verticalR, horizontalR) * Mathf.Rad2Deg;
-                    w.weapon.transform.eulerAngles = new Vector3(0f, 0f, myAngle);
-                }
-            }
-
+            
+            // If the conditions for idle exist...
             if (rb2D.velocity == Vector2.zero && actionState != ActionState.EngagedInBattle)
             {
                 //Debug.Log("Changing state to Idle");
@@ -271,9 +182,8 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
             else
             {
                 anim.SetBool("Idle", false);
-                actionState = ActionState.RunningAway;
+                actionState = ActionState.Running;
             }
-
             StartCoroutine(CheckIfIdle(horizontal, vertical));
         }
     }
@@ -291,7 +201,7 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
         }
     }
 
-    // Enemy is hitting player
+    // Enemy is hitting player (Change to RayCast maybe)
     void OnCollisionStay2D(Collision2D other)
     {
         if(wellBeing == WellBeingState.Alive)
@@ -303,25 +213,17 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
                 actionState = ActionState.EngagedInBattle;
                 if (canTakeDamage)
                 {
-                    actionState = ActionState.EngagedInBattle;
-                    StartCoroutine(DelayToChangeToIdle());
-                    StartCoroutine(DelayDamageReceived(dmg));
                     canTakeDamage = false;
+                    DamagedBy(dmg);
+                    StartCoroutine(DelayWhenDamageCanBeRecieved());
                 }
             }
         }
     }
 
-    IEnumerator DelayToChangeToIdle()
+    IEnumerator DelayWhenDamageCanBeRecieved()
     {
-        yield return new WaitForSeconds(3f);
-        actionState = ActionState.RunningAway;
-    }
-
-    IEnumerator DelayDamageReceived(float dmg)
-    {
-        DamagedBy(dmg);
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(delayToTakeDamageAgain);
         canTakeDamage = true;
     }
     
@@ -333,36 +235,21 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
         GameInfo.PlayerDef = Def;
         GameInfo.PlayerSpeed = Speed;
         GameInfo.CurrentWeapon = currentWeapon;
-
-        //PlayerPrefs.SetFloat("HP", HP);
-        //PlayerPrefs.SetFloat("MaxHP", maxHP);
-        //PlayerPrefs.SetFloat("Atk", Atk);
-        //PlayerPrefs.SetFloat("Def", Def);
-        //PlayerPrefs.SetFloat("Speed", Speed);
-        //PlayerPrefs.SetInt("WeaponType", (int)currentWeapon);
-        
     }
 
     // Load attributes after zoning
     public void LoadAttributes()
     {
-        //if (PlayerPrefs.HasKey("HP"))
-        //{
+        if (PlayerPrefs.HasKey("HP"))
+        {
             maxHP = GameInfo.PlayerMaxHP;
             Atk = GameInfo.PlayerAtk;
             Def = GameInfo.PlayerDef;
             Speed = GameInfo.PlayerSpeed;
-            currentWeapon = GameInfo.CurrentWeapon;
-
-            //HP = PlayerPrefs.GetFloat("HP") + a_HP;
-            //maxHP = PlayerPrefs.GetFloat("MaxHP");
-            //Atk = PlayerPrefs.GetFloat("Atk");
-            //Def = PlayerPrefs.GetFloat("Def");
-            //Speed = PlayerPrefs.GetFloat("Speed");
-            //currentWeapon = (WeaponType)PlayerPrefs.GetInt("WeaponType");            
-        //}
-        //else
-        //    Debug.Log("Key's have not been Set.");
+            currentWeapon = GameInfo.CurrentWeapon;        
+        }
+        else
+            Debug.Log("Key's have not been Set.");
     }
 
     // Killed enemy, increase stat
@@ -372,17 +259,9 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
         {
             switch (stat)
             {
-                case TypeOfStatIncrease.HP:
-                    maxHP += amount;
-                    //a_HP += amount;
-                    //Debug.Log("Max HP is now = " + maxCurrentHP); 
-                    break;
-                case TypeOfStatIncrease.ATK: Atk += amount;
-                    //Debug.Log("Max Atk is now = " + Atk);
-                    break;
-                case TypeOfStatIncrease.DEF: Def += amount;
-                    //Debug.Log("Max Def is now = " + Def);
-                    break;
+                case TypeOfStatIncrease.HP: maxHP += amount; break;
+                case TypeOfStatIncrease.ATK: Atk += amount; break;
+                case TypeOfStatIncrease.DEF: Def += amount; break;
             }
         }
     }
@@ -392,9 +271,9 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
         currentWeapon = type;
         foreach (Weapons w in weaponList)
         {
-            if (type != w.weaponType)
+            if (type != w.weaponType) 
                 w.weapon.gameObject.SetActive(false);
-            else
+            else  // Turn on weapon of current type
                 w.weapon.gameObject.SetActive(true);
         }
     }
@@ -413,12 +292,12 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
         LoadWeapon(type);
     }
 
-    public void DebugChangeToBronze()
+    public void DebugChangeToBronzeButton()
     {
         UpgradeWeapon(WeaponType.Bronze);
     }
 
-    public void DebugChangeToSilver()
+    public void DebugChangeToSilverButton()
     {
         UpgradeWeapon(WeaponType.Silver);
     }
@@ -428,11 +307,9 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
         if(wellBeing != WellBeingState.Dead)
         {
             wellBeing = WellBeingState.Dead;
-            rb2D.isKinematic = true; // freeze player position
-            SaveAttributes(); // save current stats
-            StartCoroutine(DelayForAnimationThenRespawn()); //delay for tombstone
-
-            
+            rb2D.isKinematic = true; 
+            SaveAttributes(); 
+            StartCoroutine(DelayForAnimationThenRespawn()); //delay for tombstone            
         }        
     }
 
@@ -442,36 +319,35 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
         anim.SetTrigger("Death");
         yield return new WaitForSeconds(3f);
         respawnButton.gameObject.SetActive(true);
-        Time.timeScale = 0.0f;
-        //RespawnPlayer();  
+        Time.timeScale = 0.0f;  //pause until button pressed
     }
 
-    public void RespawnPlayer()
+    public void RespawnPlayerButton()
     {
         Debug.Log("Button hit");
         LoadAttributes();
         HP = maxHP;
+        Time.timeScale = 1.0f;
         foreach (Weapons w in weaponList)
         {
             if(currentWeapon == w.weaponType)
             {
-                Debug.Log("found weapon");
-
                 LoadWeapon(w.weaponType);         
-                if(GameInfo.currentArea == GameInfo.Area.World)       
+                if(GameInfo.currentArea == GameInfo.Area.World)
+                {
                     rb2D.transform.position = respawnInTheWorld.position;
+                    wellBeing = WellBeingState.Alive;
+                    rb2D.isKinematic = false;
+                    anim.gameObject.SetActive(true);
+                    anim.SetTrigger("Respawn");
+                }                    
                 else
                 {
-                    Debug.Log("Goingt o the world!");
+                    //Debug.Log("Going to the world!");
                     Application.LoadLevel("SceneLoader");
                 }
-                Time.timeScale = 1.0f;
-                wellBeing = WellBeingState.Alive;
-                rb2D.isKinematic = false;
-                anim.gameObject.SetActive(true);
-                anim.SetTrigger("Respawn");
             }
         }
-        respawnButton.gameObject.SetActive(false);
+        respawnButton.gameObject.SetActive(false);        
     }
 }

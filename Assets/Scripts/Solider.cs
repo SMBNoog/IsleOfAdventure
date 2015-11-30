@@ -39,7 +39,6 @@ public class Solider : Enemy, IAttacker
         this.HP = HP + (HP * multiplier);
         this.Atk = Atk + (Atk * multiplier);
         this.Def = Def + (Def * multiplier);
-        this.Speed = Speed;
         numberOfSoliders += 1;
         amountOfStatToGiveAponDeath = amountToStatToGive;
         typeOfStatIncrease = stat;
