@@ -16,7 +16,6 @@ public class Solider : Enemy, IAttacker
     public Team Team { get { return Team.Enemy; } }
     public Vector2 Pos { get { return transform.position; } }
     public float Atk { get; set; }
-    public DeadEnemy startingSkeleton;
 
     //private float distaneOfRay = 10;
     //private List<RaycastHit2D> rays;

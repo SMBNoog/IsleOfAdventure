@@ -21,15 +21,10 @@ public class Skeleton : Enemy, IAttacker
     public Team Team { get { return Team.Enemy; } }
     public Vector2 Pos { get { return transform.position; } }
     public float Atk { get; set; }
-    //public GameObject startingSkeleton;
-
-    //private float distaneOfRay = 10;
-    //private List<RaycastHit2D> rays;
-
+    
     void Start()
     {
         rb2D = GetComponent<Rigidbody2D>();
-        //transform = GetComponent<Transform>();
         anim = GetComponent<Animator>();  
         HP_Slider.maxValue = HP;
 

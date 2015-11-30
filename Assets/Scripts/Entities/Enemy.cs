@@ -20,7 +20,7 @@ public class Enemy : Entity {
 
     protected bool switching;
 
-    public static List<DeadEnemy> deadEnemyList;
+    //public static List<DeadEnemy> deadEnemyList;
 
 
     // Apon death give stats to player

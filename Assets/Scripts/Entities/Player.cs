@@ -157,8 +157,15 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
                     w.weapon.transform.eulerAngles = new Vector3(0f, 0f, myAngle);
                 }
             }
+            StartCoroutine(AutoSave());
         } 
     }// end Update
+
+    IEnumerator AutoSave()
+    {
+        yield return new WaitForSeconds(10f);
+        SaveAttributes();
+    }
     
     void FixedUpdate()
     {
@@ -235,6 +242,7 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
         GameInfo.PlayerDef = Def;
         GameInfo.PlayerSpeed = Speed;
         GameInfo.CurrentWeapon = currentWeapon;
+        PlayerPrefs.Save();
     }
 
     // Load attributes after zoning
@@ -290,6 +298,7 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
             case WeaponType.Epic: maxHP += 7500f; break;
         }
         LoadWeapon(type);
+        //save
     }
 
     public void DebugChangeToBronzeButton()
@@ -300,6 +309,16 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
     public void DebugChangeToSilverButton()
     {
         UpgradeWeapon(WeaponType.Silver);
+    }
+
+    public void DebugChangeToGoldButton()
+    {
+        UpgradeWeapon(WeaponType.Gold);
+    }
+
+    public void DebugChangeToEpicButton()
+    {
+        UpgradeWeapon(WeaponType.Epic);
     }
 
     public override void Die()

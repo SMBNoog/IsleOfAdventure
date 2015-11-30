@@ -25,6 +25,7 @@ public class SoundManager : MonoBehaviour
     void Awake()
     {
         Instance = this;
+        DontDestroyOnLoad(this);
     }
 
     public void Play(TypeOfClip type)

@@ -1,9 +1,10 @@
 using UnityEngine;
 using System.Collections;
+using System;
 
 public enum Team { Player, Enemy }
 public enum WellBeingState { Alive, Dead }
-public enum ActionState { Idle, Patrolling, EngagedInBattle, AggroByEnemy, ChargeAtPlayer, RunningAway }
+public enum ActionState { Idle, Patrolling, EngagedInBattle, AggroByEnemy, ChargeAtPlayer, Running }
 public enum TypeOfStatIncrease { HP, ATK, DEF }
 public enum WeaponType { Wooden, Bronze, Silver, Gold, Epic }
 
@@ -35,24 +36,24 @@ public interface IPlayerCurrentWeapon
     WeaponType weaponType { get; }
 }
 
-//public interface IPlayerAccumulatedHP
-//{
-//    float a_HP { get; set; }
-//}
-
 public interface IAttributesManager
 {
     void LoadAttributes();
     void SaveAttributes();
 }
 
-public interface INPCMessage
+public interface IMessageDelegate
 {
-    string message { get; }
+    void OnClickOK();
+    void OnClickCancel();
+    void ShowMessage(string dialogMessage, string okButton, string cancelButton, Dialogue.DialogueDelegate onClickOK);
+}
+
+public interface INPCMessageAndAction
+{
+    string DialogMessage { get; }
 
     void OnClickOK();
-
-    void OnTriggerEnter2D(Collider2D other);
 }
 
 public static class Interface
