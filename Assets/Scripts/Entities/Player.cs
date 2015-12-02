@@ -151,8 +151,8 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
             debugWeapon_Text.text = currentWeapon+"";
 
             // Right Stick (Weapon Movement)
-            float horizontalR = CnInputManager.GetAxis("HorizontalRight");
-            float verticalR = CnInputManager.GetAxis("VerticalRight");
+            float horizontalR = CnInputManager.GetAxisRaw("HorizontalRight");
+            float verticalR = CnInputManager.GetAxisRaw("VerticalRight");
                         
             foreach (Weapons w in weaponList)   
             {
@@ -173,6 +173,8 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
                     // Move the weapon to the direction the Right stick is pointing
                     w.weapon.transform.localPosition = new Vector2(horizontalR - weaponXoffSet , verticalR - weaponYoffset) * weaponOffset;
                     // Calculate the angle the Right stick is pointing
+                    Debug.Log("H: " + horizontalR + "     V:  " + verticalR);
+                
                     float myAngle = Mathf.Atan2(verticalR, horizontalR) * Mathf.Rad2Deg;
                     // Change the angle of the weapon to point the direction of the Right stick
                     w.weapon.transform.eulerAngles = new Vector3(0f, 0f, myAngle);
