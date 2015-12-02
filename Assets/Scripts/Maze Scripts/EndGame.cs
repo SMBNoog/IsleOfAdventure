@@ -66,7 +66,8 @@ public class EndGame : MonoBehaviour
 
         //unpause game and exit to world
         Time.timeScale = 1;
-        Application.LoadLevel(0);
+        // tell gameinfo 
+        Application.LoadLevel("ScneneLoader");
     }
 
     public void LeaveWeapon()
