@@ -3,7 +3,7 @@ using System.Collections;
 using System;
 using System.Collections.Generic;
 
-public enum NPCTo { Tutorial, Forest, Castle, World, SceneLoader, NoWhere }
+public enum NPCTo { Tutorial, Forest, Castle, World, NoWhere, MainMenu }
 
 [Serializable]
 public class MessageByType
@@ -22,6 +22,11 @@ public class NPCMessageThenTeleport : MonoBehaviour, INPCMessageAndAction {
     public GameObject interfaceSupplierForMessageDelagate;
     public NPCTo NPCTeleportTo;
 
+    public bool TutorialNPC = false;
+
+    public bool townNPC = false;
+    public string townMessage = "Help defend the Town?";
+
     private IAttributesManager attributes;
     private IMessageDelegate messageDelegate;
 
@@ -30,12 +35,46 @@ public class NPCMessageThenTeleport : MonoBehaviour, INPCMessageAndAction {
         get
         {
             string message = "Empty Message";
-            foreach (MessageByType m in messages)
+
+            if(townNPC)
             {
-                if (m.weapon == WeaponType.Wooden)
-                    message = m.message;
-                else  // Add more conditions if needed
-                    message = m.message;
+                message = townMessage;
+            }
+            else
+            {
+                if (messages.Count == 1)
+                    message = messages[0].message;
+                else
+                {
+                    foreach (MessageByType m in messages)
+                    {
+                        if (m.weapon == WeaponType.Wooden)
+                        {
+                            message = m.message;
+                            break;
+                        }
+                        else if (m.weapon == WeaponType.Bronze)
+                        {
+                            message = m.message;
+                            break;
+                        }
+                        else if (m.weapon == WeaponType.Silver)
+                        {
+                            message = m.message;
+                            break;
+                        }
+                        else if (m.weapon == WeaponType.Gold)
+                        {
+                            message = m.message;
+                            break;
+                        }
+                        else if (m.weapon == WeaponType.Epic)
+                        {
+                            message = m.message;
+                            break;
+                        }
+                    }
+                }             
             }
             return message;
         }
@@ -45,9 +84,13 @@ public class NPCMessageThenTeleport : MonoBehaviour, INPCMessageAndAction {
     {
         if (attributes != null && NPCTeleportTo != NPCTo.NoWhere)
         {
+            if (TutorialNPC)
+            {
+                GameInfo.TutorialNotCompleted = false;
+            }
             attributes.SaveAttributes();
             Time.timeScale = 1.0f;
-
+            GameInfo.TutorialNotCompleted = true;
             Application.LoadLevel(GameInfo.sceneToLoad);
         }
     }
@@ -61,12 +104,12 @@ public class NPCMessageThenTeleport : MonoBehaviour, INPCMessageAndAction {
 
             switch (NPCTeleportTo)
             {
-                case NPCTo.Tutorial: GameInfo.setArea(GameInfo.Area.TutorialArea); break;
-                case NPCTo.World: GameInfo.setArea(GameInfo.Area.World); GameInfo.TutorialCompleted = true; break;
-                case NPCTo.Forest: GameInfo.setArea(GameInfo.Area.Forest); break;
-                case NPCTo.Castle: GameInfo.setArea(GameInfo.Area.Castle); break;
+                case NPCTo.Tutorial: GameInfo.AreaToTeleportTo = GameInfo.Area.TutorialArea; break;
+                case NPCTo.World: GameInfo.AreaToTeleportTo = GameInfo.Area.World; break;
+                case NPCTo.Forest: GameInfo.AreaToTeleportTo = GameInfo.Area.Forest; break;
+                case NPCTo.Castle: GameInfo.AreaToTeleportTo = GameInfo.Area.Castle; break;
+                case NPCTo.MainMenu: GameInfo.AreaToTeleportTo = GameInfo.Area.MainMenu; break;
                 case NPCTo.NoWhere: break;
-                case NPCTo.SceneLoader: break;
             }            
 
             IMessageDelegate messageDelegate = Interface.Find<IMessageDelegate>(interfaceSupplierForMessageDelagate);
