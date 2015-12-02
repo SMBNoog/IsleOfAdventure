@@ -23,9 +23,9 @@ public class SpawnResult
 }
 
 public class SpawnEnemies : MonoBehaviour, ISpawner {
-    
-    public List<SpawnArea> spawnAreas;
     public GameObject interfaceProvider; // The gameobject to find an interface on.
+
+    public List<SpawnArea> spawnAreas;
 
     private List<SpawnResult> spawnResults;
     private IPlayerCurrentWeapon playerCurrentWeapon;

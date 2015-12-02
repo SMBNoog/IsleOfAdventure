@@ -1,12 +1,22 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System;
+using System.Collections.Generic;
 
 public enum NPCTo { Tutorial, Forest, Castle, World, SceneLoader, NoWhere }
 
+[Serializable]
+public class MessageByType
+{
+    public string message;
+    public WeaponType weapon;
+}
+
 public class NPCMessageThenTeleport : MonoBehaviour, INPCMessageAndAction {
 
-    public string dialogMessage;
+    // Add check for weapon
+
+    public List<MessageByType> messages;
     public string okButton;
     public string cancelButton;
     public GameObject interfaceSupplierForMessageDelagate;
@@ -19,16 +29,25 @@ public class NPCMessageThenTeleport : MonoBehaviour, INPCMessageAndAction {
     {
         get
         {
-            return dialogMessage;
+            string message = "Empty Message";
+            foreach (MessageByType m in messages)
+            {
+                if (m.weapon == WeaponType.Wooden)
+                    message = m.message;
+                else  // Add more conditions if needed
+                    message = m.message;
+            }
+            return message;
         }
     }
 
     public void OnClickOK()
     {
-        Debug.Log("Running Ok click from delegate");
         if (attributes != null && NPCTeleportTo != NPCTo.NoWhere)
         {
             attributes.SaveAttributes();
+            Time.timeScale = 1.0f;
+
             Application.LoadLevel(GameInfo.sceneToLoad);
         }
     }
@@ -57,7 +76,6 @@ public class NPCMessageThenTeleport : MonoBehaviour, INPCMessageAndAction {
                 messageDelegate.ShowMessage(DialogMessage, okButton, cancelButton, OnClickOK);
             }
         }
-
     }
 
 

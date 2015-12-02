@@ -10,7 +10,7 @@ public class SceneLoader : MonoBehaviour {
 
     void Start()
     {
-        StartCoroutine(LoadALevel(GameInfo.sceneToLoad));
+        StartCoroutine(LoadALevel(GameInfo.areaToTeleportTo+""));
         //StartCoroutine(LoadALevel("World"));
     }
 

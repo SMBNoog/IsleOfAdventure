@@ -20,7 +20,11 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
     // IPlayerCurrentWeapon interface
     public WeaponType weaponType { get { return currentWeapon; } }    
     private WeaponType currentWeapon;
-    
+
+    public float weaponYoffset = 0.6f;
+    public float weaponXoffSet = 0.6f;
+    public float weaponOffset = 0.07f;
+
     // Player Starting stats
     public float HP_Cap = 1000000;
     public float DEF_Cap = 0.50f;
@@ -60,6 +64,8 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
     public float delayToTakeDamageAgain = 1.0f;
 
     private Rigidbody2D rb2D;
+
+    private bool savingAttributes = false;
     
     public void OnEnable()
     {
@@ -73,22 +79,24 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
 
     void Awake()
     {
-        wellBeing = WellBeingState.Alive;                
+        wellBeing = WellBeingState.Alive;           
         
-        if (GameInfo.currentArea == GameInfo.Area.TutorialArea)
+        //if(!GameInfo.TutorialCompleted)     
+        
+        if (GameInfo.areaToTeleportTo == GameInfo.Area.TutorialArea)
         {
             // Player starting stats
             HP = startingHP;
             Atk = startingAtk;
             Def = startingDef;
             Speed = startingSpeed;
-            UpgradeWeapon(WeaponType.Wooden); // will add 100 more hp            
+            UpgradeWeapon(WeaponType.Wooden); // will add 100 more hp     
+            SaveAttributes();       
             Debug.Log("Player Starting HP: " + HP + " | ATK: " + Atk + " | DEF: " + Def);
         }
         else
         {
-            LoadAttributes();
-            LoadWeapon(currentWeapon);            
+          
         }
     }
 
@@ -96,10 +104,23 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
         anim = GetComponent<Animator>();
         rb2D = GetComponent<Rigidbody2D>();
 
-        if (GameInfo.currentArea == GameInfo.Area.TutorialArea)
+        
+        
+
+        if (GameInfo.areaToTeleportTo == GameInfo.Area.TutorialArea)
             TeleportToTutorialArea(true);
-        else if (GameInfo.currentArea == GameInfo.Area.World)
+        else if (GameInfo.areaToTeleportTo == GameInfo.Area.World)
+        {            
+            LoadAttributes();
+            LoadWeapon(currentWeapon);
             TeleportToTutorialArea(false);
+        }
+        else
+        {
+            LoadAttributes();
+            LoadWeapon(currentWeapon);
+        }
+            
 
         HP = maxHP;
     }
@@ -132,8 +153,8 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
             // Right Stick (Weapon Movement)
             float horizontalR = CnInputManager.GetAxis("HorizontalRight");
             float verticalR = CnInputManager.GetAxis("VerticalRight");
-            
-            foreach (Weapons w in weaponList)
+                        
+            foreach (Weapons w in weaponList)   
             {
                 if (w.weaponType == currentWeapon)
                 {
@@ -150,21 +171,26 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
                         w.weapon.GetComponentInChildren<SpriteRenderer>().sortingOrder = 80;
 
                     // Move the weapon to the direction the Right stick is pointing
-                    w.weapon.transform.localPosition = new Vector2(horizontalR, verticalR - .4f) * .07f;
+                    w.weapon.transform.localPosition = new Vector2(horizontalR - weaponXoffSet , verticalR - weaponYoffset) * weaponOffset;
                     // Calculate the angle the Right stick is pointing
                     float myAngle = Mathf.Atan2(verticalR, horizontalR) * Mathf.Rad2Deg;
                     // Change the angle of the weapon to point the direction of the Right stick
                     w.weapon.transform.eulerAngles = new Vector3(0f, 0f, myAngle);
+
+                    break; // found weapon break loop
                 }
             }
-            StartCoroutine(AutoSave());
+            if(!savingAttributes)
+                StartCoroutine(AutoSave());
         } 
     }// end Update
 
     IEnumerator AutoSave()
     {
-        yield return new WaitForSeconds(10f);
+        savingAttributes = true;
+        yield return new WaitForSeconds(30f);
         SaveAttributes();
+        savingAttributes = false;
     }
     
     void FixedUpdate()
@@ -237,6 +263,7 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
     // Save attributes before zoning
     public void SaveAttributes()
     {
+        //Debug.Log("Saving");
         GameInfo.PlayerMaxHP = maxHP;
         GameInfo.PlayerAtk = Atk;
         GameInfo.PlayerDef = Def;
@@ -248,7 +275,7 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
     // Load attributes after zoning
     public void LoadAttributes()
     {
-        if (PlayerPrefs.HasKey("HP"))
+        if (PlayerPrefs.HasKey("MaxHP"))
         {
             maxHP = GameInfo.PlayerMaxHP;
             Atk = GameInfo.PlayerAtk;
@@ -352,7 +379,7 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
             if(currentWeapon == w.weaponType)
             {
                 LoadWeapon(w.weaponType);         
-                if(GameInfo.currentArea == GameInfo.Area.World)
+                if(GameInfo.areaToTeleportTo == GameInfo.Area.World)
                 {
                     rb2D.transform.position = respawnInTheWorld.position;
                     wellBeing = WellBeingState.Alive;
