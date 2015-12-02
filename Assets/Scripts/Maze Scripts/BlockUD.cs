@@ -5,7 +5,7 @@ public class BlockUD : MonoBehaviour
 {
     bool movingUp = true;
     public float targetSpeed = 1f;
-    public Rigidbody2D rigidbody2D;
+    public Rigidbody2D myrigidbody2D;
     public float wallTestDistance = 1.5f;
     public Transform centerPoint;
     public Transform centerPoint2;
@@ -13,7 +13,7 @@ public class BlockUD : MonoBehaviour
 
     void Start()
     {
-        velocity = rigidbody2D.velocity;
+        velocity = myrigidbody2D.velocity;
         StartCoroutine(DelayMovement());
     }
 
@@ -28,12 +28,12 @@ public class BlockUD : MonoBehaviour
             {
                 DelayTime -= Time.fixedDeltaTime;
                 if (movingUp && velocity.y < targetSpeed)
-                    rigidbody2D.MovePosition(transform.position + Vector3.up * Time.deltaTime);
+                    myrigidbody2D.MovePosition(transform.position + Vector3.up * Time.deltaTime);
                 else if (!movingUp && velocity.y > -targetSpeed)
-                    rigidbody2D.MovePosition(transform.position + -Vector3.up * Time.deltaTime);
+                    myrigidbody2D.MovePosition(transform.position + -Vector3.up * Time.deltaTime);
                 yield return new WaitForFixedUpdate();
             }
-            rigidbody2D.velocity = new Vector2(0f, 0f);
+            myrigidbody2D.velocity = new Vector2(0f, 0f);
         }
     }
 
