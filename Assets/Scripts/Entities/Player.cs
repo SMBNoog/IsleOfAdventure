@@ -13,6 +13,14 @@ public class Weapons
     public WeaponType weaponType;
 }
 
+//public static class Foo
+//{
+//    public static void DoSomething<T>(T thing) where T : IAttacker, IPlayerCurrentWeapon
+//    {
+        
+//    }
+//}
+
 public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManager
 {
     public List<Weapons> weaponList;  // Set list of weapons in the inspector
@@ -71,6 +79,8 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
             // Add a blank method as shortcut. Instead of typing the method >>> private float getAtk() { return Atk;  }
             weapon.GetBaseAtkDelegate += () => { return Atk; };  
         }
+
+        Debug.Log("Tutorial not completed? " + GameInfo.StartTutorial);
     }
 
     void Awake()
@@ -256,7 +266,8 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
         GameInfo.PlayerAtk = Atk;
         GameInfo.PlayerDef = Def;
         GameInfo.PlayerSpeed = Speed;
-        GameInfo.CurrentWeapon = currentWeapon;
+        GameInfo.CurrentWeapon = currentWeapon;       
+        GameInfo.LastPos = transform.position;
         PlayerPrefs.Save();
     }
 

@@ -8,7 +8,6 @@ public enum ActionState { Idle, Patrolling, EngagedInBattle, AggroByEnemy, Charg
 public enum TypeOfStatIncrease { HP, ATK, DEF }
 public enum WeaponType { Wooden, Bronze, Silver, Gold, Epic, Any }
 
-
 public interface IAttacker
 {
     WellBeingState wellBeing { get; set; }
@@ -52,7 +51,6 @@ public interface IMessageDelegate
 public interface INPCMessageAndAction
 {
     string DialogMessage { get; }
-
     void OnClickOK();
 }
 

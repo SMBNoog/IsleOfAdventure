@@ -85,12 +85,9 @@ public class NPCMessageThenTeleport : MonoBehaviour, INPCMessageAndAction {
         if (attributes != null && NPCTeleportTo != NPCTo.NoWhere)
         {
             if (TutorialNPC)
-            {
-                GameInfo.TutorialNotCompleted = false;
-            }
+                GameInfo.StartTutorial = false;
             attributes.SaveAttributes();
             Time.timeScale = 1.0f;
-            GameInfo.TutorialNotCompleted = true;
             Application.LoadLevel(GameInfo.sceneToLoad);
         }
     }

@@ -5,16 +5,14 @@ using System.Collections;
 static class GameInfo {
 
     public enum Area { TutorialArea, World, Forest, Town, Castle, MainMenu }
-            
-
-        
+                        
     // Called by NPC's and Play Button
     public static string sceneToLoad { get { return "SceneLoader"; } }
 
     public static string PlayerName {
         get { return PlayerPrefs.GetString("PlayerName"); }
         set { PlayerPrefs.GetString("PlayerName", value); } }
-    public static bool TutorialNotCompleted {
+    public static bool StartTutorial {
         get { return PlayerPrefs.GetInt("TutorialCompleted") == 1 ? true : false; }
         set { int b = value == true ? 1 : 0; PlayerPrefs.SetInt("TutorialCompleted", b); } }
     public static float PlayerMaxHP {
@@ -35,4 +33,8 @@ static class GameInfo {
     public static Area AreaToTeleportTo {
         get { return (Area)PlayerPrefs.GetInt("AreaToTeleportTo"); }
         set { PlayerPrefs.SetInt("AreaToTeleportTo", (int)value); } }
+    public static Vector2 LastPos {
+        get { return new Vector2(PlayerPrefs.GetFloat("LastPosX"), PlayerPrefs.GetFloat("LastPosY")); }
+        set { PlayerPrefs.SetFloat("LastPosX", LastPos.x);
+              PlayerPrefs.SetFloat("LastPosY", LastPos.y); } }
 }

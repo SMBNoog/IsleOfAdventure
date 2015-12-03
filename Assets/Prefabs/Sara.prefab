@@ -15,7 +15,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &104524
 GameObject:
   m_ObjectHideFlags: 1
@@ -534,7 +534,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 140212}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.29999995, y: -13.6000004, z: 0}
+  m_LocalPosition: {x: -2.70000005, y: -17.7000008, z: 0}
   m_LocalScale: {x: 5, y: 5, z: 1}
   m_Children:
   - {fileID: 471690}
@@ -1496,7 +1496,7 @@ MonoBehaviour:
   - name: New Sword(Epic)
     weapon: {fileID: 112962}
     weaponType: 4
-  weaponYoffset: 1.20000005
+  weaponYoffset: 2
   weaponXoffSet: 0
   weaponOffset: .0500000007
   HP_Cap: 1e+06
@@ -1507,8 +1507,6 @@ MonoBehaviour:
   startingDef: .100000001
   startingSpeed: 4
   HP_Slider: {fileID: 11498426}
-  respawnInTheWorld: {fileID: 0}
-  tutorialSpawn: {fileID: 0}
   respawnButton: {fileID: 0}
   debugHP_Text: {fileID: 0}
   debugMaxHP_Text: {fileID: 0}
@@ -6161,7 +6159,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 100
-  m_Sprite: {fileID: 21300120, guid: 2079cd6248fd14e46984c32865440bba, type: 3}
+  m_Sprite: {fileID: 21300054, guid: 2079cd6248fd14e46984c32865440bba, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!212 &21276046
 SpriteRenderer:
