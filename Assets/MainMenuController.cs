@@ -7,8 +7,12 @@ public class MainMenuController : MonoBehaviour {
     public Text userName;
     public Image inputField;
 
+    public GameObject inputCanvas;
+
     void Start()
     {
+        inputCanvas.SetActive(false);
+
         if (GameInfo.PlayerName == null)
         {
             userName.text = GameInfo.PlayerName;
@@ -23,6 +27,8 @@ public class MainMenuController : MonoBehaviour {
             GameInfo.AreaToTeleportTo = GameInfo.Area.TutorialArea;
         else
             GameInfo.AreaToTeleportTo = GameInfo.Area.World;
+
+        inputCanvas.SetActive(true);
 
         Application.LoadLevel("SceneLoader");
     }

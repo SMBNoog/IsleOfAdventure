@@ -79,8 +79,6 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
             // Add a blank method as shortcut. Instead of typing the method >>> private float getAtk() { return Atk;  }
             weapon.GetBaseAtkDelegate += () => { return Atk; };  
         }
-
-        Debug.Log("Tutorial not completed? " + GameInfo.StartTutorial);
     }
 
     void Awake()
@@ -156,9 +154,14 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
                 {
                     // If Weapon is not being used, disable the collider
                     if (verticalR == 0f && horizontalR == 0f)
-                        w.weapon.GetComponentInChildren<Collider2D>().enabled = false;
+                    {
+                        //w.weapon.GetComponentInChildren<Collider2D>().enabled = false;
+                        w.weapon.gameObject.SetActive(false);
+                        break;
+                    }
                     else
-                        w.weapon.GetComponentInChildren<Collider2D>().enabled = true;
+                        w.weapon.gameObject.SetActive(true);
+                    //w.weapon.GetComponentInChildren<Collider2D>().enabled = true;
 
                     // If Weapon is below the waist of the player change the sorting order to display above
                     if (verticalR < -0.2f)
