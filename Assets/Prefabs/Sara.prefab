@@ -65,6 +65,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
+--- !u!1 &115840
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 478250}
+  m_Layer: 8
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &118158
 GameObject:
   m_ObjectHideFlags: 1
@@ -544,6 +559,7 @@ Transform:
   - {fileID: 472298}
   - {fileID: 401744}
   - {fileID: 488198}
+  - {fileID: 478250}
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!4 &414436
@@ -722,6 +738,18 @@ Transform:
   - {fileID: 458452}
   m_Father: {fileID: 410020}
   m_RootOrder: 4
+--- !u!4 &478250
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 115840}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 410020}
+  m_RootOrder: 7
 --- !u!4 &480932
 Transform:
   m_ObjectHideFlags: 1
@@ -885,9 +913,9 @@ CircleCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_Offset: {x: -.00999999978, y: -.0599999987}
+  m_Offset: {x: -0, y: -.189999998}
   serializedVersion: 2
-  m_Radius: .0591154583
+  m_Radius: .0916351303
 --- !u!58 &5895448
 CircleCollider2D:
   m_ObjectHideFlags: 1
@@ -898,9 +926,9 @@ CircleCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_Offset: {x: -.00999999978, y: .0199999996}
+  m_Offset: {x: 0, y: -.0199999996}
   serializedVersion: 2
-  m_Radius: .0698756427
+  m_Radius: .107040405
 --- !u!58 &5895606
 CircleCollider2D:
   m_ObjectHideFlags: 1
