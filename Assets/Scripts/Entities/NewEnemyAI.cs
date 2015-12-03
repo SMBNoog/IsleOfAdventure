@@ -55,7 +55,7 @@ public class NewEnemyAI : MonoBehaviour {
 
         if(target != null)
         {
-            RaycastHit2D rayToPlayer = Physics2D.Linecast(transform.position, target.position, 1 << 10);
+            RaycastHit2D rayToPlayer = Physics2D.Linecast(transform.position, target.position, 1 << LayerMask.NameToLayer("Player"));
 
             float dis = rayToPlayer.distance;
 
