@@ -43,6 +43,12 @@ public class MazeMaker : MonoBehaviour
                     continue;
                 if (i == 2 && j == 2)
                     continue;
+                if (i == 100 && j == 2)
+                    continue;
+                if (i == 100 && j == 100)
+                    continue;
+                if (i == 2 && j == 100)
+                    continue;
                 if (Random.Range(0f, 1f) < 0.01f)
                 {
                     Dungeon[i][j] = 'A';
