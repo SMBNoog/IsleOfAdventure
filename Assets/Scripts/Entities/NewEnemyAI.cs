@@ -44,16 +44,16 @@ public class NewEnemyAI : MonoBehaviour {
         myT = GetComponent<Transform>();
         anim = GetComponent<Animator>();
 
-        clockTower = FindObjectOfType<ClockTower>().gameObject;
-        if (townNPC)
-        {
-            anim.SetBool("CanSeePlayer", true);
-            anim.SetBool("Idle", false);
-            anim.SetBool("Patrol", false);
-            target = clockTower.transform;
-            seeker.StartPath(transform.position, target.position, OnPathComplete);
-            StartCoroutine(UpdatePath());
-        }
+        //clockTower = FindObjectOfType<ClockTower>().gameObject;
+        //if (townNPC)
+        //{
+        //    anim.SetBool("CanSeePlayer", true);
+        //    anim.SetBool("Idle", false);
+        //    anim.SetBool("Patrol", false);
+        //    //target = clockTower.transform;
+        //    seeker.StartPath(transform.position, target.position, OnPathComplete);
+        //    StartCoroutine(UpdatePath());
+        //}
 
             if (target == null)
         {
