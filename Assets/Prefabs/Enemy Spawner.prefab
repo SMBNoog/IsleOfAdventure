@@ -264,63 +264,134 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interfaceProvider: {fileID: 0}
-  spawnAreas:
-  - name: ToForest01
-    spawnLocation: {fileID: 462272}
-    prefab: {fileID: 136932, guid: 59fb698acc1d93b40989614e160b23a4, type: 2}
-    typeOfEnemy: 0
-    numberToSpawn: 5
-    typeOfStatDrop: 0
-    tutorialSkeleton: 0
-  - name: ToForest02
-    spawnLocation: {fileID: 430840}
-    prefab: {fileID: 136932, guid: 59fb698acc1d93b40989614e160b23a4, type: 2}
-    typeOfEnemy: 0
-    numberToSpawn: 4
-    typeOfStatDrop: 0
-    tutorialSkeleton: 0
-  - name: ByBeachWest
-    spawnLocation: {fileID: 489542}
-    prefab: {fileID: 136932, guid: 59fb698acc1d93b40989614e160b23a4, type: 2}
-    typeOfEnemy: 0
-    numberToSpawn: 3
-    typeOfStatDrop: 0
-    tutorialSkeleton: 0
-  - name: ToTown01
-    spawnLocation: {fileID: 420336}
-    prefab: {fileID: 136932, guid: 59fb698acc1d93b40989614e160b23a4, type: 2}
-    typeOfEnemy: 0
-    numberToSpawn: 4
-    typeOfStatDrop: 0
-    tutorialSkeleton: 0
-  - name: Castle
-    spawnLocation: {fileID: 486390}
-    prefab: {fileID: 136932, guid: 59fb698acc1d93b40989614e160b23a4, type: 2}
-    typeOfEnemy: 0
-    numberToSpawn: 5
-    typeOfStatDrop: 0
-    tutorialSkeleton: 0
-  - name: Castle Spawn
-    spawnLocation: {fileID: 473242}
-    prefab: {fileID: 136932, guid: 59fb698acc1d93b40989614e160b23a4, type: 2}
-    typeOfEnemy: 0
-    numberToSpawn: 8
-    typeOfStatDrop: 0
-    tutorialSkeleton: 0
-  - name: Tutorial Spawn
-    spawnLocation: {fileID: 411742}
-    prefab: {fileID: 136932, guid: 59fb698acc1d93b40989614e160b23a4, type: 2}
-    typeOfEnemy: 0
-    numberToSpawn: 2
-    typeOfStatDrop: 0
-    tutorialSkeleton: 1
+  spawnAreas: []
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: spawnAreas.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: spawnAreas.Array.data[0].name
+      value: ToForest01
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: spawnAreas.Array.data[0].spawnLocation
+      value: 
+      objectReference: {fileID: 462272}
+    - target: {fileID: 0}
+      propertyPath: spawnAreas.Array.data[0].prefab
+      value: 
+      objectReference: {fileID: 136932, guid: 59fb698acc1d93b40989614e160b23a4, type: 2}
+    - target: {fileID: 0}
+      propertyPath: spawnAreas.Array.data[0].numberToSpawn
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: spawnAreas.Array.data[1].name
+      value: ToForest02
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: spawnAreas.Array.data[1].spawnLocation
+      value: 
+      objectReference: {fileID: 430840}
+    - target: {fileID: 0}
+      propertyPath: spawnAreas.Array.data[1].prefab
+      value: 
+      objectReference: {fileID: 136932, guid: 59fb698acc1d93b40989614e160b23a4, type: 2}
+    - target: {fileID: 0}
+      propertyPath: spawnAreas.Array.data[1].numberToSpawn
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: spawnAreas.Array.data[2].name
+      value: ByBeachWest
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: spawnAreas.Array.data[2].spawnLocation
+      value: 
+      objectReference: {fileID: 489542}
+    - target: {fileID: 0}
+      propertyPath: spawnAreas.Array.data[2].prefab
+      value: 
+      objectReference: {fileID: 136932, guid: 59fb698acc1d93b40989614e160b23a4, type: 2}
+    - target: {fileID: 0}
+      propertyPath: spawnAreas.Array.data[2].numberToSpawn
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: spawnAreas.Array.data[3].name
+      value: ToTown01
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: spawnAreas.Array.data[3].spawnLocation
+      value: 
+      objectReference: {fileID: 420336}
+    - target: {fileID: 0}
+      propertyPath: spawnAreas.Array.data[3].prefab
+      value: 
+      objectReference: {fileID: 136932, guid: 59fb698acc1d93b40989614e160b23a4, type: 2}
+    - target: {fileID: 0}
+      propertyPath: spawnAreas.Array.data[3].numberToSpawn
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: spawnAreas.Array.data[4].name
+      value: Castle
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: spawnAreas.Array.data[4].spawnLocation
+      value: 
+      objectReference: {fileID: 486390}
+    - target: {fileID: 0}
+      propertyPath: spawnAreas.Array.data[4].prefab
+      value: 
+      objectReference: {fileID: 136932, guid: 59fb698acc1d93b40989614e160b23a4, type: 2}
+    - target: {fileID: 0}
+      propertyPath: spawnAreas.Array.data[4].numberToSpawn
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: spawnAreas.Array.data[5].name
+      value: Castle Spawn
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: spawnAreas.Array.data[5].spawnLocation
+      value: 
+      objectReference: {fileID: 473242}
+    - target: {fileID: 0}
+      propertyPath: spawnAreas.Array.data[5].prefab
+      value: 
+      objectReference: {fileID: 136932, guid: 59fb698acc1d93b40989614e160b23a4, type: 2}
+    - target: {fileID: 0}
+      propertyPath: spawnAreas.Array.data[5].numberToSpawn
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: spawnAreas.Array.data[6].name
+      value: Tutorial Spawn
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: spawnAreas.Array.data[6].spawnLocation
+      value: 
+      objectReference: {fileID: 411742}
+    - target: {fileID: 0}
+      propertyPath: spawnAreas.Array.data[6].prefab
+      value: 
+      objectReference: {fileID: 136932, guid: 59fb698acc1d93b40989614e160b23a4, type: 2}
+    - target: {fileID: 0}
+      propertyPath: spawnAreas.Array.data[6].numberToSpawn
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: spawnAreas.Array.data[6].tutorialSkeleton
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 128820}

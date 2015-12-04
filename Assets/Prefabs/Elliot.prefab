@@ -237,7 +237,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &145190
 GameObject:
   m_ObjectHideFlags: 1
@@ -1546,6 +1546,9 @@ MonoBehaviour:
   - name: New Sword(Epic)
     weapon: {fileID: 183338}
     weaponType: 4
+  weaponYoffset: .600000024
+  weaponXoffSet: .600000024
+  weaponOffset: .0700000003
   HP_Cap: 1e+06
   DEF_Cap: .5
   startingHP: 100
@@ -1554,8 +1557,6 @@ MonoBehaviour:
   startingDef: .100000001
   startingSpeed: 4
   HP_Slider: {fileID: 11465686}
-  respawnInTheWorld: {fileID: 0}
-  tutorialSpawn: {fileID: 0}
   respawnButton: {fileID: 0}
   debugHP_Text: {fileID: 0}
   debugMaxHP_Text: {fileID: 0}
@@ -6186,8 +6187,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 22466102}
   m_RootOrder: 0
-  m_AnchorMin: {x: 1, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: .5, y: .5}
@@ -6204,7 +6205,7 @@ RectTransform:
   m_Father: {fileID: 22499746}
   m_RootOrder: 0
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: -1.7285347e-06, y: 7.74860382e-07}
   m_SizeDelta: {x: 3.81469999e-06, y: 0}
   m_Pivot: {x: .5, y: .5}

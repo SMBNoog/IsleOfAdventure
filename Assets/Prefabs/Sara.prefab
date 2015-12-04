@@ -9,13 +9,13 @@ GameObject:
   m_Component:
   - 4: {fileID: 432514}
   - 114: {fileID: 11453030}
-  m_Layer: 10
+  m_Layer: 8
   m_Name: Wooden Sword(Wooden)
   m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &104524
 GameObject:
   m_ObjectHideFlags: 1
@@ -27,7 +27,7 @@ GameObject:
   - 222: {fileID: 22293024}
   - 114: {fileID: 11486474}
   - 114: {fileID: 11495016}
-  m_Layer: 10
+  m_Layer: 8
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42,7 +42,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 224: {fileID: 22488282}
-  m_Layer: 10
+  m_Layer: 8
   m_Name: Handle Slide Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -58,13 +58,28 @@ GameObject:
   m_Component:
   - 4: {fileID: 488198}
   - 114: {fileID: 11416438}
-  m_Layer: 10
+  m_Layer: 8
   m_Name: New Sword(Epic)
   m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
+--- !u!1 &115840
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 478250}
+  m_Layer: 8
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &118158
 GameObject:
   m_ObjectHideFlags: 1
@@ -77,7 +92,7 @@ GameObject:
   - 114: {fileID: 11410408}
   - 58: {fileID: 5832972}
   - 68: {fileID: 6841488}
-  m_Layer: 10
+  m_Layer: 8
   m_Name: Sprite
   m_TagString: Weapon
   m_Icon: {fileID: 0}
@@ -93,7 +108,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 487502}
   - 96: {fileID: 9684346}
-  m_Layer: 10
+  m_Layer: 8
   m_Name: TrailSword
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -111,7 +126,7 @@ GameObject:
   - 198: {fileID: 19804122}
   - 199: {fileID: 19993872}
   - 114: {fileID: 11448196}
-  m_Layer: 10
+  m_Layer: 8
   m_Name: ParticleSword
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -127,7 +142,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 495244}
   - 96: {fileID: 9687384}
-  m_Layer: 10
+  m_Layer: 8
   m_Name: TrailSword
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -143,7 +158,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 472298}
   - 114: {fileID: 11436132}
-  m_Layer: 10
+  m_Layer: 8
   m_Name: Purple Sword(Silver)
   m_TagString: Weapon
   m_Icon: {fileID: 0}
@@ -164,7 +179,7 @@ GameObject:
   - 50: {fileID: 5068514}
   - 58: {fileID: 5895448}
   - 58: {fileID: 5894898}
-  m_Layer: 10
+  m_Layer: 8
   m_Name: Sara
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -181,7 +196,7 @@ GameObject:
   - 224: {fileID: 22431746}
   - 222: {fileID: 22274590}
   - 114: {fileID: 11435900}
-  m_Layer: 10
+  m_Layer: 8
   m_Name: Handle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -196,7 +211,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 224: {fileID: 22461022}
-  m_Layer: 10
+  m_Layer: 8
   m_Name: Fill Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -213,7 +228,7 @@ GameObject:
   - 224: {fileID: 22464124}
   - 222: {fileID: 22298146}
   - 114: {fileID: 11497178}
-  m_Layer: 10
+  m_Layer: 8
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -229,7 +244,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 461886}
   - 96: {fileID: 9667348}
-  m_Layer: 10
+  m_Layer: 8
   m_Name: TrailSword
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -245,7 +260,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 414436}
   - 96: {fileID: 9635354}
-  m_Layer: 10
+  m_Layer: 8
   m_Name: TrailSword
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -261,7 +276,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 440684}
   - 114: {fileID: 11405598}
-  m_Layer: 10
+  m_Layer: 8
   m_Name: Flame Sword(Bronze)
   m_TagString: Weapon
   m_Icon: {fileID: 0}
@@ -277,7 +292,7 @@ GameObject:
   m_Component:
   - 224: {fileID: 22463600}
   - 114: {fileID: 11498426}
-  m_Layer: 10
+  m_Layer: 8
   m_Name: Slider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -293,7 +308,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 427824}
   - 96: {fileID: 9605498}
-  m_Layer: 10
+  m_Layer: 8
   m_Name: TrailSword
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -310,7 +325,7 @@ GameObject:
   - 224: {fileID: 22434702}
   - 223: {fileID: 22381490}
   - 114: {fileID: 11463172}
-  m_Layer: 10
+  m_Layer: 8
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -328,7 +343,7 @@ GameObject:
   - 198: {fileID: 19887454}
   - 199: {fileID: 19969376}
   - 114: {fileID: 11481102}
-  m_Layer: 10
+  m_Layer: 8
   m_Name: ParticleSword
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -347,7 +362,7 @@ GameObject:
   - 114: {fileID: 11494986}
   - 58: {fileID: 5820602}
   - 68: {fileID: 6845520}
-  m_Layer: 10
+  m_Layer: 8
   m_Name: Sprite
   m_TagString: Weapon
   m_Icon: {fileID: 0}
@@ -365,7 +380,7 @@ GameObject:
   - 198: {fileID: 19832146}
   - 199: {fileID: 19939314}
   - 114: {fileID: 11456816}
-  m_Layer: 10
+  m_Layer: 8
   m_Name: ParticleSword
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -384,7 +399,7 @@ GameObject:
   - 114: {fileID: 11403682}
   - 58: {fileID: 5811144}
   - 68: {fileID: 6864044}
-  m_Layer: 10
+  m_Layer: 8
   m_Name: Sprite
   m_TagString: Weapon
   m_Icon: {fileID: 0}
@@ -402,7 +417,7 @@ GameObject:
   - 198: {fileID: 19895436}
   - 199: {fileID: 19913816}
   - 114: {fileID: 11469648}
-  m_Layer: 10
+  m_Layer: 8
   m_Name: ParticleSword
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -420,7 +435,7 @@ GameObject:
   - 212: {fileID: 21276046}
   - 114: {fileID: 11410176}
   - 58: {fileID: 5849608}
-  m_Layer: 10
+  m_Layer: 8
   m_Name: Sprite
   m_TagString: Weapon
   m_Icon: {fileID: 0}
@@ -436,7 +451,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 401744}
   - 114: {fileID: 11431704}
-  m_Layer: 10
+  m_Layer: 8
   m_Name: New Sword(Gold)
   m_TagString: Weapon
   m_Icon: {fileID: 0}
@@ -456,7 +471,7 @@ GameObject:
   - 124: {fileID: 12456212}
   - 81: {fileID: 8173162}
   - 114: {fileID: 11426120}
-  m_Layer: 10
+  m_Layer: 8
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -475,7 +490,7 @@ GameObject:
   - 114: {fileID: 11443506}
   - 58: {fileID: 5895606}
   - 68: {fileID: 6897636}
-  m_Layer: 10
+  m_Layer: 8
   m_Name: Sprite
   m_TagString: Weapon
   m_Icon: {fileID: 0}
@@ -493,7 +508,7 @@ GameObject:
   - 222: {fileID: 22212892}
   - 114: {fileID: 11480886}
   - 114: {fileID: 11449104}
-  m_Layer: 10
+  m_Layer: 8
   m_Name: Background White
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -534,7 +549,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 140212}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -85.3399963, y: -108.93, z: 0}
+  m_LocalPosition: {x: -84.2669754, y: -107.554848, z: 0}
   m_LocalScale: {x: 5, y: 5, z: 1}
   m_Children:
   - {fileID: 471690}
@@ -544,6 +559,7 @@ Transform:
   - {fileID: 472298}
   - {fileID: 401744}
   - {fileID: 488198}
+  - {fileID: 478250}
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!4 &414436
@@ -667,7 +683,7 @@ Transform:
   m_GameObject: {fileID: 185142}
   m_LocalRotation: {x: 0, y: 0, z: -.707106829, w: .707106709}
   m_LocalPosition: {x: .103, y: 0, z: 0}
-  m_LocalScale: {x: .200000003, y: .349999994, z: .200000003}
+  m_LocalScale: {x: .300000012, y: .5, z: .200000003}
   m_Children:
   - {fileID: 416894}
   - {fileID: 414436}
@@ -722,6 +738,18 @@ Transform:
   - {fileID: 458452}
   m_Father: {fileID: 410020}
   m_RootOrder: 4
+--- !u!4 &478250
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 115840}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 410020}
+  m_RootOrder: 7
 --- !u!4 &480932
 Transform:
   m_ObjectHideFlags: 1
@@ -782,7 +810,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: .471020758, g: .4765715, b: .485294104, a: .0196078438}
+  m_BackGroundColor: {r: .223529428, g: .501960814, b: .741176486, a: .0196078438}
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -885,9 +913,9 @@ CircleCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_Offset: {x: -.00999999978, y: -.0599999987}
+  m_Offset: {x: -0, y: -.189999998}
   serializedVersion: 2
-  m_Radius: .0591154583
+  m_Radius: .0916351303
 --- !u!58 &5895448
 CircleCollider2D:
   m_ObjectHideFlags: 1
@@ -898,9 +926,9 @@ CircleCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_Offset: {x: -.00999999978, y: .0199999996}
+  m_Offset: {x: 0, y: -.0199999996}
   serializedVersion: 2
-  m_Radius: .0698756427
+  m_Radius: .107040405
 --- !u!58 &5895606
 CircleCollider2D:
   m_ObjectHideFlags: 1
@@ -1496,9 +1524,9 @@ MonoBehaviour:
   - name: New Sword(Epic)
     weapon: {fileID: 112962}
     weaponType: 4
-  weaponYoffset: 1.20000005
+  weaponYoffset: 2
   weaponXoffSet: 0
-  weaponOffset: .0500000007
+  weaponOffset: .0700000003
   HP_Cap: 1e+06
   DEF_Cap: .5
   startingHP: 100
@@ -1507,8 +1535,6 @@ MonoBehaviour:
   startingDef: .100000001
   startingSpeed: 4
   HP_Slider: {fileID: 11498426}
-  respawnInTheWorld: {fileID: 0}
-  tutorialSpawn: {fileID: 0}
   respawnButton: {fileID: 0}
   debugHP_Text: {fileID: 0}
   debugMaxHP_Text: {fileID: 0}
@@ -6161,7 +6187,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 100
-  m_Sprite: {fileID: 21300120, guid: 2079cd6248fd14e46984c32865440bba, type: 3}
+  m_Sprite: {fileID: 21300054, guid: 2079cd6248fd14e46984c32865440bba, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!212 &21276046
 SpriteRenderer:

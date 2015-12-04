@@ -46,6 +46,11 @@ public class Enemy : Entity {
         }
     }   
 
+    protected void OnTriggerEnter2D(Collider2D other)
+    {
+
+    }
+
     public override void Die()
     {
         Debug.Log("The Child hasn't been setup to die!");

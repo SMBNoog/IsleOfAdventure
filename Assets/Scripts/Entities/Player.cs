@@ -13,6 +13,14 @@ public class Weapons
     public WeaponType weaponType;
 }
 
+//public static class Foo
+//{
+//    public static void DoSomething<T>(T thing) where T : IAttacker, IPlayerCurrentWeapon
+//    {
+        
+//    }
+//}
+
 public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManager
 {
     public List<Weapons> weaponList;  // Set list of weapons in the inspector
@@ -44,10 +52,6 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
     public float Atk { get; set; }
     public TypeOfStatIncrease typeOfStatIncrease { get; set; } // Doesn't use
         
-    // only set in the world     (how to only let 1 scene use these var's?)
-    public Transform respawnInTheWorld;    
-    public Transform tutorialSpawn;
-
     public Button respawnButton; ///////////// REMOVE THIS WHEN MAIN MENU IS CREATED /////////////
 
     // Debug Text to see current status, ATK set in Weapon class
@@ -83,7 +87,7 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
         
         //if(!GameInfo.TutorialCompleted)     
         
-        if (GameInfo.areaToTeleportTo == GameInfo.Area.TutorialArea)
+        if (GameInfo.AreaToTeleportTo == GameInfo.Area.TutorialArea)
         {
             // Player starting stats
             HP = startingHP;
@@ -104,30 +108,20 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
         anim = GetComponent<Animator>();
         rb2D = GetComponent<Rigidbody2D>();
 
-        
-        
+        LoadAttributes();
+        LoadWeapon(currentWeapon);
 
-        if (GameInfo.areaToTeleportTo == GameInfo.Area.TutorialArea)
-            TeleportToTutorialArea(true);
-        else if (GameInfo.areaToTeleportTo == GameInfo.Area.World)
-        {            
-            LoadAttributes();
-            LoadWeapon(currentWeapon);
-            TeleportToTutorialArea(false);
-        }
-        else
-        {
-            LoadAttributes();
-            LoadWeapon(currentWeapon);
-        }
-            
+        // Hard code positions to spawn in each zone
+        if (GameInfo.AreaToTeleportTo == GameInfo.Area.World)
+            rb2D.transform.position = new Vector2(-2.7f, -17.7f);
+        else if (GameInfo.AreaToTeleportTo == GameInfo.Area.TutorialArea)
+            rb2D.transform.position = new Vector2(-84.2f, -107.5f);
+        else if (GameInfo.AreaToTeleportTo == GameInfo.Area.Forest)
+            Debug.Log("Randomly pick between the four corners to spawn here");
+        else if (GameInfo.AreaToTeleportTo == GameInfo.Area.Forest)
+            Debug.Log("Spawn at the entrance");
 
         HP = maxHP;
-    }
-
-    public void TeleportToTutorialArea(bool tutorial)
-    {
-        rb2D.transform.position = tutorial? tutorialSpawn.position:respawnInTheWorld.position; 
     }
 
     void Update()
@@ -151,8 +145,8 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
             debugWeapon_Text.text = currentWeapon+"";
 
             // Right Stick (Weapon Movement)
-            float horizontalR = CnInputManager.GetAxis("HorizontalRight");
-            float verticalR = CnInputManager.GetAxis("VerticalRight");
+            float horizontalR = CnInputManager.GetAxisRaw("HorizontalRight");
+            float verticalR = CnInputManager.GetAxisRaw("VerticalRight");
                         
             foreach (Weapons w in weaponList)   
             {
@@ -160,9 +154,14 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
                 {
                     // If Weapon is not being used, disable the collider
                     if (verticalR == 0f && horizontalR == 0f)
-                        w.weapon.GetComponentInChildren<Collider2D>().enabled = false;
+                    {
+                        //w.weapon.GetComponentInChildren<Collider2D>().enabled = false;
+                        w.weapon.gameObject.SetActive(false);
+                        break;
+                    }
                     else
-                        w.weapon.GetComponentInChildren<Collider2D>().enabled = true;
+                        w.weapon.gameObject.SetActive(true);
+                    //w.weapon.GetComponentInChildren<Collider2D>().enabled = true;
 
                     // If Weapon is below the waist of the player change the sorting order to display above
                     if (verticalR < -0.2f)
@@ -173,6 +172,8 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
                     // Move the weapon to the direction the Right stick is pointing
                     w.weapon.transform.localPosition = new Vector2(horizontalR - weaponXoffSet , verticalR - weaponYoffset) * weaponOffset;
                     // Calculate the angle the Right stick is pointing
+                    //Debug.Log("H: " + horizontalR + "     V:  " + verticalR);
+                
                     float myAngle = Mathf.Atan2(verticalR, horizontalR) * Mathf.Rad2Deg;
                     // Change the angle of the weapon to point the direction of the Right stick
                     w.weapon.transform.eulerAngles = new Vector3(0f, 0f, myAngle);
@@ -268,7 +269,8 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
         GameInfo.PlayerAtk = Atk;
         GameInfo.PlayerDef = Def;
         GameInfo.PlayerSpeed = Speed;
-        GameInfo.CurrentWeapon = currentWeapon;
+        GameInfo.CurrentWeapon = currentWeapon;       
+        GameInfo.LastPos = transform.position;
         PlayerPrefs.Save();
     }
 
@@ -370,7 +372,6 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
 
     public void RespawnPlayerButton()
     {
-        Debug.Log("Button hit");
         LoadAttributes();
         HP = maxHP;
         Time.timeScale = 1.0f;
@@ -379,9 +380,9 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
             if(currentWeapon == w.weaponType)
             {
                 LoadWeapon(w.weaponType);         
-                if(GameInfo.areaToTeleportTo == GameInfo.Area.World)
+                if(GameInfo.AreaToTeleportTo == GameInfo.Area.World)
                 {
-                    rb2D.transform.position = respawnInTheWorld.position;
+                    rb2D.transform.position = new Vector2(-2.7f, -17.7f);
                     wellBeing = WellBeingState.Alive;
                     rb2D.isKinematic = false;
                     anim.gameObject.SetActive(true);
@@ -389,7 +390,7 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
                 }                    
                 else
                 {
-                    //Debug.Log("Going to the world!");
+                    GameInfo.AreaToTeleportTo = GameInfo.Area.World;
                     Application.LoadLevel("SceneLoader");
                 }
             }

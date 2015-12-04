@@ -95,7 +95,7 @@ namespace CnControls
             if (AxisExists(axisName))
             {
                 return GetVirtualAxisValue(Instance._virtualAxisDictionary[axisName], axisName, isRaw);
-            }
+            }   
 
             // If we don't have the desired virtual axis registered, we just fallback to the default Unity Input behaviour
             return isRaw ? Input.GetAxisRaw(axisName) : Input.GetAxis(axisName);

@@ -2,9 +2,7 @@
 using System.Collections;
 
 public class CloseAttacking_SMB : StateMachineBehaviour {
-
-    public GameObject interfaceSupplier;
-    
+        
     Rigidbody2D myR;
     float distance;
 
