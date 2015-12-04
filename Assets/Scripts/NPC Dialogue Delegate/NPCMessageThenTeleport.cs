@@ -30,6 +30,8 @@ public class NPCMessageThenTeleport : MonoBehaviour, INPCMessageAndAction {
     private IAttributesManager attributes;
     private IMessageDelegate messageDelegate;
 
+    private GameObject tempPlayer;
+
     public string DialogMessage
     {
         get
@@ -82,21 +84,36 @@ public class NPCMessageThenTeleport : MonoBehaviour, INPCMessageAndAction {
 
     public void OnClickOK()
     {
-        if (attributes != null && NPCTeleportTo != NPCTo.NoWhere)
+        if(townNPC)
+        {
+            // Start town minigame
+            Time.timeScale = 1.0f;
+        }
+        else if (attributes != null && NPCTeleportTo != NPCTo.NoWhere)
         {
             if (TutorialNPC)
                 GameInfo.StartTutorial = false;
+            if(GameInfo.AreaToTeleportTo == GameInfo.Area.Forest)
+            {
+                ICurrentPos currentPos = Interface.Find<ICurrentPos>(tempPlayer);
+                if (currentPos != null)
+                    GameInfo.LastPos = currentPos.postion - new Vector2(-2f, -2f);
+                else
+                    Debug.Log("Couldn't find ICurrentPos");
+            }
             attributes.SaveAttributes();
             Time.timeScale = 1.0f;
-            Application.LoadLevel(GameInfo.sceneToLoad);
+            Application.LoadLevel(GameInfo.sceneLoader);
         }
     }
     
     void OnTriggerEnter2D(Collider2D other)
     {
         attributes = Interface.Find<IAttributesManager>(other.gameObject);
-        if(attributes != null)
+        
+        if (attributes != null)
         {
+            tempPlayer = other.gameObject;
             Time.timeScale = 0.0f;
 
             switch (NPCTeleportTo)

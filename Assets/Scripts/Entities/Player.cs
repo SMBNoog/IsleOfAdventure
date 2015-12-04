@@ -21,13 +21,16 @@ public class Weapons
 //    }
 //}
 
-public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManager
+public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManager, ICurrentHP, ICurrentPos
 {
     public List<Weapons> weaponList;  // Set list of weapons in the inspector
 
     // IPlayerCurrentWeapon interface
     public WeaponType weaponType { get { return currentWeapon; } }    
     private WeaponType currentWeapon;
+
+    // ICurrentHP interface
+    public float currentHP { get { return HP; } }
 
     public float weaponYoffset = 0.6f;
     public float weaponXoffSet = 0.6f;
@@ -51,16 +54,11 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
     public Vector2 Pos { get { return transform.position; } }
     public float Atk { get; set; }
     public TypeOfStatIncrease typeOfStatIncrease { get; set; } // Doesn't use
-        
+
+    public Vector2 postion { get { return Pos; } }
+
     public Button respawnButton; ///////////// REMOVE THIS WHEN MAIN MENU IS CREATED /////////////
-
-    // Debug Text to see current status, ATK set in Weapon class
-    public Text debugHP_Text;
-    public Text debugMaxHP_Text;
-    public Text debugDef_Text;
-    public Text debugWeapon_Text;
-
-    [SerializeField]
+    
     private float maxHP = 100f;     // Maximum HP updated when increased
 
     // Taking damage 
@@ -117,8 +115,8 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
         else if (GameInfo.AreaToTeleportTo == GameInfo.Area.TutorialArea)
             rb2D.transform.position = new Vector2(-84.2f, -107.5f);
         else if (GameInfo.AreaToTeleportTo == GameInfo.Area.Forest)
-            Debug.Log("Randomly pick between the four corners to spawn here");
-        else if (GameInfo.AreaToTeleportTo == GameInfo.Area.Forest)
+            Debug.Log("Bottom Left: 2,2 : Top Left, 2, 100 : Top Right 100, 100: Bottom Right 100, 2");
+        else if (GameInfo.AreaToTeleportTo == GameInfo.Area.Castle)
             Debug.Log("Spawn at the entrance");
 
         HP = maxHP;
@@ -137,13 +135,7 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
             // Regen when Idle and not max HP
             if (actionState == ActionState.Idle && HP < maxHP)
                 HP += maxHP * regenHP_Multiplier;
-
-            // Debug
-            debugHP_Text.text = "HP: " + HP;
-            debugMaxHP_Text.text = "MaxHP: " + maxHP;
-            debugDef_Text.text = "Def: " + Def;
-            debugWeapon_Text.text = currentWeapon+"";
-
+            
             // Right Stick (Weapon Movement)
             float horizontalR = CnInputManager.GetAxisRaw("HorizontalRight");
             float verticalR = CnInputManager.GetAxisRaw("VerticalRight");
@@ -270,7 +262,7 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
         GameInfo.PlayerDef = Def;
         GameInfo.PlayerSpeed = Speed;
         GameInfo.CurrentWeapon = currentWeapon;       
-        GameInfo.LastPos = transform.position;
+        GameInfo.LastPos = Pos;
         PlayerPrefs.Save();
     }
 

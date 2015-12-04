@@ -13,12 +13,12 @@ public class MainMenuController : MonoBehaviour {
     {
         inputCanvas.SetActive(false);
 
-        if (GameInfo.PlayerName == null)
-        {
-            userName.text = GameInfo.PlayerName;
-            userName.gameObject.SetActive(true);
-            inputField.gameObject.SetActive(false);
-        }
+        //if (GameInfo.PlayerName != null)
+        //{
+        //    userName.text = GameInfo.PlayerName;
+        //    userName.gameObject.SetActive(true);
+        //    inputField.gameObject.SetActive(false);
+        //}
     }
 
 	public void StartGame()

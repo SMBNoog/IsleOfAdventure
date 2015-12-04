@@ -30,9 +30,4 @@ public class Weapon : MonoBehaviour, IWeapon
     public float Def { get { return def; } set { def = value; } }
 
     public WeaponType WeaponType { get; set; }
-
-    void Update()
-    {
-        debugAtk_Text.text = "Atk: " + Atk;
-    }
 }

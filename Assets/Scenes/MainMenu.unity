@@ -116,7 +116,7 @@ RectTransform:
   m_RootOrder: 2
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: 69, y: 85}
+  m_AnchoredPosition: {x: -28, y: 32}
   m_SizeDelta: {x: 89, y: 100}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &27595121
@@ -273,7 +273,7 @@ GameObject:
   - 222: {fileID: 292464657}
   - 114: {fileID: 292464656}
   m_Layer: 5
-  m_Name: Text
+  m_Name: Main Title
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -316,7 +316,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 12800000, guid: a35cfdbe02e739c43b95f4d2f3309178, type: 3}
+    m_Font: {fileID: 12800000, guid: 05aa22dffe8818846b196c26d7362d94, type: 3}
     m_FontSize: 96
     m_FontStyle: 1
     m_BestFit: 1
@@ -1246,7 +1246,7 @@ RectTransform:
   m_RootOrder: 3
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: 119, y: 46}
+  m_AnchoredPosition: {x: 22, y: -7}
   m_SizeDelta: {x: 139, y: 157}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &1527103140
@@ -1804,6 +1804,10 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22439178, guid: ec51f6ec3f86da643b374787681caca0, type: 2}
       propertyPath: m_Pivot.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22381486, guid: ec51f6ec3f86da643b374787681caca0, type: 2}
+      propertyPath: m_SortingOrder
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

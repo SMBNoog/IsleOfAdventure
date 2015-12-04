@@ -7,7 +7,9 @@ public class SampleItem : MonoBehaviour {
     public Image image;
     public Text nameText;
     public Text weaponText;
-    public Text hpText;
+    public Slider hpSlider;
+    public Text currentHP;
+    public Text maxHP;
     public Text atkText;
     public Text defText;
 }

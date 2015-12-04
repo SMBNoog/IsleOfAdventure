@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 491330}
   - 212: {fileID: 21252826}
   - 58: {fileID: 5836782}
-  - 114: {fileID: 11475248}
+  - 114: {fileID: 11407720}
   m_Layer: 0
   m_Name: Talking Sign
   m_TagString: Untagged
@@ -18,6 +18,33 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &152040
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 443056}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &443056
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 152040}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 491330}
+  m_RootOrder: 0
 --- !u!4 &491330
 Transform:
   m_ObjectHideFlags: 1
@@ -25,9 +52,10 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 118230}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -70.5175705, y: 51.9713707, z: 0}
+  m_LocalPosition: {x: 2.30999994, y: -11.7799997, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 443056}
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!58 &5836782
@@ -43,7 +71,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 2.5
---- !u!114 &11475248
+--- !u!114 &11407720
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -54,11 +82,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 625ddeddc8d073648abbceab74a21b64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  messages: []
-  okButton: 
-  cancelButton: 
+  messages:
+  - message: 'Directions: Forest West, Town East, Castle North'
+    weapon: 0
+  okButton: Ok
+  cancelButton: Fine
   interfaceSupplierForMessageDelagate: {fileID: 0}
-  NPCTeleportTo: 0
+  NPCTeleportTo: 4
+  TutorialNPC: 0
+  townNPC: 0
+  townMessage: Help defend the Town?
 --- !u!212 &21252826
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -84,7 +117,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 100
   m_Sprite: {fileID: 21300210, guid: 78c677bc3acdba445be0f50eb4c9703f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000

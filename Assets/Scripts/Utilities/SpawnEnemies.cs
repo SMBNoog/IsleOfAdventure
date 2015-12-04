@@ -14,6 +14,7 @@ public class SpawnArea {
     public int numberToSpawn;
     public TypeOfStatIncrease typeOfStatDrop;
     public bool tutorialSkeleton;
+    public bool townSkeleton;
 }
 
 public class SpawnResult
@@ -43,24 +44,20 @@ public class SpawnEnemies : MonoBehaviour, ISpawner {
         skeleton_Clone.Initialize(HP, Atk, Def, AmountOfStatToGive, Type);
         return skeleton_Clone;
     }
-
-    public Solider CreateSolider(GameObject prefab, Vector2 pos,
-    float HP, float Atk, float Def, float AmountOfStatToGive, TypeOfStatIncrease Type)
-    {
-        GameObject solider = Instantiate(prefab, pos, Quaternion.identity) as GameObject;
-        Solider solider_Clone = solider.GetComponent<Solider>();
-        solider_Clone.Initialize(HP, Atk, Def, AmountOfStatToGive, Type);
-        return solider_Clone;
-    }
-
+    
     void Start() 
     {
         playerCurrentWeapon = Interface.Find<IPlayerCurrentWeapon>(interfaceProvider);
         if (playerCurrentWeapon == null)
             Debug.LogError("The script does not contain an interface called, \"IPlayerCurrentWeapon\"");
 
-        spawnResults = new List<SpawnResult>();     
-     
+        spawnResults = new List<SpawnResult>();
+
+        StartCoroutine(SpawnEnemiesNow());
+    }
+
+    IEnumerator SpawnEnemiesNow()
+    {
         foreach (SpawnArea area in spawnAreas)
         {
             for (int i = 0; i < area.numberToSpawn; i++)
@@ -81,16 +78,16 @@ public class SpawnEnemies : MonoBehaviour, ISpawner {
                     var skeleton = CreateSkeleton(area.prefab, area.spawnLocation.position + new Vector3(i, i, 0f),
                         HP_Median, Atk_Median, Def_Median,
                         AmountOfStatToGive, area.typeOfStatDrop);
-                    skeleton.Spawner = this;    
+                    skeleton.Spawner = this;
                     result.enemy = skeleton;  //polymorphism, reference this skeleton to compare later
                     result.source = area;   // reference this area values for respawning
                     spawnResults.Add(result); // add enemy to the list of spawned enemies
                 }
-                else if (area.typeOfEnemy == TypeOfEnemy.Solider)
-                {
-                    // TODO
-                }
+
+                if (area.townSkeleton)
+                    yield return new WaitForSeconds(UnityEngine.Random.Range(2f, 5f));
             }
+            yield return null;
         }
     }
 
@@ -103,8 +100,8 @@ public class SpawnEnemies : MonoBehaviour, ISpawner {
             switch (playerCurrentWeapon.weaponType)
             {
                 case WeaponType.Wooden:  // Wooden enemy stats
-                    HP_Median = 100f * scale;
-                    Atk_Median = 10f * scale;
+                    HP_Median = 200f * scale;
+                    Atk_Median = 20f * scale;
                     Def_Median = 0.01f * scale;
                     switch (typeOfStat)
                     {
@@ -114,8 +111,8 @@ public class SpawnEnemies : MonoBehaviour, ISpawner {
                     }
                     break;
                 case WeaponType.Bronze:
-                    HP_Median = 1000 * scale;
-                    Atk_Median = 100 * scale;
+                    HP_Median = 2000 * scale;
+                    Atk_Median = 200 * scale;
                     Def_Median = 0.03f * scale;
                     switch (typeOfStat)
                     {
@@ -127,8 +124,8 @@ public class SpawnEnemies : MonoBehaviour, ISpawner {
                 case WeaponType.Silver:
                 case WeaponType.Gold:
                 case WeaponType.Epic:
-                    HP_Median = 10000 * scale;
-                    Atk_Median = 1000 * scale;
+                    HP_Median = 20000 * scale;
+                    Atk_Median = 2000 * scale;
                     Def_Median = 0.1f * scale;
                     switch (typeOfStat)
                     {
@@ -177,9 +174,5 @@ public class SpawnEnemies : MonoBehaviour, ISpawner {
             result.source = sr.source;   // reference this area values for respawning
             spawnResults[spawnResults.IndexOf(sr)] = result; // assign new enemy into dead enemy's index in the list  
         }
-        else if(sr.source.typeOfEnemy == TypeOfEnemy.Solider)
-        {
-            //TODO
-        } 
     }
 }
