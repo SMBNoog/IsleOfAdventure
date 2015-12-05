@@ -93,7 +93,7 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
             Def = startingDef;
             Speed = startingSpeed;
             UpgradeWeapon(WeaponType.Wooden); // will add 100 more hp     
-            SaveAttributes();       
+            SaveAttributes(true);       
             Debug.Log("Player Starting HP: " + HP + " | ATK: " + Atk + " | DEF: " + Def);
         }
         else
@@ -111,13 +111,22 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
 
         // Hard code positions to spawn in each zone
         if (GameInfo.AreaToTeleportTo == GameInfo.Area.World)
-            rb2D.transform.position = new Vector2(-2.7f, -17.7f);
+            rb2D.transform.position = GameInfo.LastPos;
         else if (GameInfo.AreaToTeleportTo == GameInfo.Area.TutorialArea)
             rb2D.transform.position = new Vector2(-84.2f, -107.5f);
         else if (GameInfo.AreaToTeleportTo == GameInfo.Area.Forest)
-            Debug.Log("Bottom Left: 2,2 : Top Left, 2, 100 : Top Right 100, 100: Bottom Right 100, 2");
+        {
+            int r = (int)UnityEngine.Random.Range(0f, 4f);
+            switch (r)
+            {
+                case 1: rb2D.transform.position = new Vector2(2f, 2f); break;
+                case 2: rb2D.transform.position = new Vector2(2f, 100f); break;
+                case 3: rb2D.transform.position = new Vector2(100f, 100f); break;
+                case 4: rb2D.transform.position = new Vector2(100f, 2f); break;
+            }
+        }
         else if (GameInfo.AreaToTeleportTo == GameInfo.Area.Castle)
-            Debug.Log("Spawn at the entrance");
+            rb2D.transform.position = new Vector2(1f, -7f); 
 
         HP = maxHP;
     }
@@ -182,7 +191,7 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
     {
         savingAttributes = true;
         yield return new WaitForSeconds(30f);
-        SaveAttributes();
+        SaveAttributes(false);
         savingAttributes = false;
     }
     
@@ -254,7 +263,7 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
     }
     
     // Save attributes before zoning
-    public void SaveAttributes()
+    public void SaveAttributes(bool savePos)
     {
         //Debug.Log("Saving");
         GameInfo.PlayerMaxHP = maxHP;
@@ -262,7 +271,8 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
         GameInfo.PlayerDef = Def;
         GameInfo.PlayerSpeed = Speed;
         GameInfo.CurrentWeapon = currentWeapon;       
-        GameInfo.LastPos = Pos;
+        if(savePos)
+            GameInfo.LastPos = Pos;
         PlayerPrefs.Save();
     }
 
@@ -348,7 +358,7 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
         {
             wellBeing = WellBeingState.Dead;
             rb2D.isKinematic = true; 
-            SaveAttributes(); 
+            SaveAttributes(false); 
             StartCoroutine(DelayForAnimationThenRespawn()); //delay for tombstone            
         }        
     }
@@ -380,7 +390,7 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
                     anim.gameObject.SetActive(true);
                     anim.SetTrigger("Respawn");
                 }                    
-                else
+                else // Forest or  Castle
                 {
                     GameInfo.AreaToTeleportTo = GameInfo.Area.World;
                     Application.LoadLevel("SceneLoader");

@@ -34,8 +34,14 @@ static class GameInfo {
         get { return (Area)PlayerPrefs.GetInt("AreaToTeleportTo"); }
         set { PlayerPrefs.SetInt("AreaToTeleportTo", (int)value); } }
     public static Vector2 LastPos {
-        get { return new Vector2(PlayerPrefs.GetFloat("LastPosX"), 
-                                 PlayerPrefs.GetFloat("LastPosY")); }
+        get {
+            Debug.Log(PlayerPrefs.GetFloat("LastPosX")+ "     " + PlayerPrefs.GetFloat("LastPosY"));
+            return new Vector2(PlayerPrefs.GetFloat("LastPosX"), 
+                                 PlayerPrefs.GetFloat("LastPosY"));
+            
+        }
         set { PlayerPrefs.SetFloat("LastPosX", value.x);
-              PlayerPrefs.SetFloat("LastPosY", value.y); } }
+              PlayerPrefs.SetFloat("LastPosY", value.y);
+              Debug.Log(value.x + "   " + value.y);
+        } }
 }

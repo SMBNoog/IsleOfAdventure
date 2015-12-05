@@ -25,6 +25,9 @@ public class NPCMessageThenTeleport : MonoBehaviour, INPCMessageAndAction {
     public bool TutorialNPC = false;
 
     public bool townNPC = false;
+    public bool InsideCastle = false;
+    public bool InsideForest = false;
+
     public string townMessage = "Help defend the Town?";
 
     private IAttributesManager attributes;
@@ -92,16 +95,26 @@ public class NPCMessageThenTeleport : MonoBehaviour, INPCMessageAndAction {
         else if (attributes != null && NPCTeleportTo != NPCTo.NoWhere)
         {
             if (TutorialNPC)
+            {                
                 GameInfo.StartTutorial = false;
-            if(GameInfo.AreaToTeleportTo == GameInfo.Area.Forest)
-            {
-                ICurrentPos currentPos = Interface.Find<ICurrentPos>(tempPlayer);
-                if (currentPos != null)
-                    GameInfo.LastPos = currentPos.postion - new Vector2(-2f, -2f);
-                else
-                    Debug.Log("Couldn't find ICurrentPos");
+                GameInfo.LastPos = new Vector2(-2.7f, -17.7f);
+                attributes.SaveAttributes(false);
             }
-            attributes.SaveAttributes();
+            else if(InsideCastle || InsideForest)
+            {
+                attributes.SaveAttributes(false);
+            }
+            else
+                attributes.SaveAttributes(true);
+
+            //if (GameInfo.AreaToTeleportTo == GameInfo.Area.Forest)
+            //{
+            //    ICurrentPos currentPos = Interface.Find<ICurrentPos>(tempPlayer);
+            //    if (currentPos != null)
+            //        GameInfo.LastPos = currentPos.postion - new Vector2(-2f, -2f);
+            //    else
+            //        Debug.Log("Couldn't find ICurrentPos");           
+            
             Time.timeScale = 1.0f;
             Application.LoadLevel(GameInfo.sceneLoader);
         }

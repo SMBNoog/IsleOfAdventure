@@ -39,7 +39,7 @@ public interface IPlayerCurrentWeapon
 public interface IAttributesManager
 {
     void LoadAttributes();
-    void SaveAttributes();
+    void SaveAttributes(bool savePos);
 }
 
 public interface IMessageDelegate

@@ -6,10 +6,20 @@ public class PauseMenuController : MonoBehaviour {
 
     public Image pauseMenu;
 
-    public void ShowPauseMenu()
+    public void ShowHideMainMenuButton()
     {
-        pauseMenu.gameObject.SetActive(true);
-        Time.timeScale = 0.0f;
+        if (pauseMenu.isActiveAndEnabled)
+        {
+            pauseMenu.gameObject.SetActive(false);
+            Time.timeScale = 1.0f;
+        }
+        else
+        {
+            pauseMenu.gameObject.SetActive(true);
+            Time.timeScale = 0.0f;
+        }
+    
+        
     }
 
     public void Continue()
