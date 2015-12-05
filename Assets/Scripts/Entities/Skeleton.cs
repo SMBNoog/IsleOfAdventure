@@ -97,8 +97,4 @@ public class Skeleton : Enemy, IAttacker
         Destroy(gameObject, 3f); //wait until respawn, disable
     }    
     
-    void OnTriggerEnter2D(Collider2D other)
-    {
-
-    }
 }

@@ -7,7 +7,6 @@ public class MazeMaker : MonoBehaviour
     public GameObject Tile;
     public GameObject RLTile;
     public GameObject UDTile;
-    public GameObject player;
     public GameObject Enemy;
     //// This creates a Grid Graph
     //GridGraph gg;
@@ -52,7 +51,7 @@ public class MazeMaker : MonoBehaviour
                 if (Random.Range(0f, 1f) < 0.01f)
                 {
                     Dungeon[i][j] = 'A';
-                    Instantiate(Enemy, new Vector3(i, j, 0f), Quaternion.identity);
+                    Instantiate(RLTile, new Vector3(i, j, 0f), Quaternion.identity);
                 }
                 else if (Random.Range(0f, 1f) < 0.05f)
                 {
