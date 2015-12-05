@@ -6,6 +6,14 @@ public class Timer : MonoBehaviour
 {
     public float timeLimit;
     public Slider slider;
+    private GameObject player;
+    private Player playerscript;
+
+    void Start()
+    {
+        playerscript = FindObjectOfType<Player>();
+        player = playerscript.gameObject;
+    }
 
     void Update()
     {
@@ -16,8 +24,13 @@ public class Timer : MonoBehaviour
         }
         else
         {
-            //save new stats then load the world
-            Application.LoadLevel(0);
+            IAttributesManager attribute = Interface.Find<IAttributesManager>(player);
+            if (attribute != null)
+            {
+                attribute.SaveAttributes();
+                GameInfo.AreaToTeleportTo = GameInfo.Area.World;
+                Application.LoadLevel("SceneLoader");
+            }
         }
     }
 }

@@ -2,11 +2,22 @@
 using System.Collections;
 using System;
 
-public class Chest : MonoBehaviour, IMessageDelegate
+public class Chest : MonoBehaviour, INPCMessageAndAction
 {
     public GameObject openchest;
     public WeaponType weaponreward;
-    Player player;
+    public GameObject interfacesupplier;
+    private GameObject player;
+    private Player playerscript;
+    private string message;
+
+    public string DialogMessage
+    {
+        get
+        {
+            return message;
+        }
+    }
 
     void Awake()
     {
@@ -19,15 +30,18 @@ public class Chest : MonoBehaviour, IMessageDelegate
 
     void Start()
     {
-        player = FindObjectOfType<Player>();
+        playerscript = FindObjectOfType<Player>();
+        player = playerscript.gameObject;
     }
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Player")
+        IMessageDelegate messageDelegate = Interface.Find<IMessageDelegate>(interfacesupplier);
+        if (messageDelegate != null)
         {
+            messageDelegate.ShowMessage(DialogMessage, "Take Weapon", "Leave Weapon", OnClickOK);
             openchest.SetActive(true);
-            GiveWeapon();
+            GiveWeapon();          
             Time.timeScale = 0f;
         }
     }
@@ -37,22 +51,22 @@ public class Chest : MonoBehaviour, IMessageDelegate
         if (UnityEngine.Random.Range(0f, 1f) < .70f)
         {
             weaponreward = WeaponType.Bronze;
-            Debug2Screen.Log("You Win!\n You Obtained The Bronze Sword");
+            message = "You Win!\n You Obtained The Bronze Sword";
         }
         else if (UnityEngine.Random.Range(0f, 1f) < .90f)
         {
             weaponreward = WeaponType.Silver;
-            Debug2Screen.Log("You Win!\n You Obtained The Silver Sword");
+            message = "You Win!\n You Obtained The Silver Sword";
         }
         else if (UnityEngine.Random.Range(0f, 1f) < .98f)
         {
             weaponreward = WeaponType.Gold;
-            Debug2Screen.Log("You Win!\n You Obtained The Gold Sword");
+            message = "You Win!\n You Obtained The Gold Sword";
         }
         else
         {
             weaponreward = WeaponType.Epic;
-            Debug2Screen.Log("You Win!\n You Obtained The Epic Sword");
+            message = "You Win!\n You Obtained The Epic Sword";
         }
     }
 
@@ -60,26 +74,26 @@ public class Chest : MonoBehaviour, IMessageDelegate
 
     public void OnClickOK()
     {
-        player.UpgradeWeapon(weaponreward);
-        //save
-
-        //unpause game and exit to world
-        Time.timeScale = 1;
-        // tell gameinfo 
-        Application.LoadLevel("ScneneLoader");
+        playerscript.UpgradeWeapon(weaponreward);
+        IAttributesManager attribute = Interface.Find<IAttributesManager>(player);
+        if (attribute != null)
+        {
+            attribute.SaveAttributes();
+            Time.timeScale = 1f;
+            GameInfo.AreaToTeleportTo = GameInfo.Area.World;
+            Application.LoadLevel("ScneneLoader");
+        }
     }
 
     public void OnClickCancel()
     {
-        //save
-
-        //unpause game and exit to world
-        Time.timeScale = 1;
-        Application.LoadLevel("SceneLoader");
-    }
-
-    public void ShowMessage(string dialogMessage, string okButton, string cancelButton, Dialogue.DialogueDelegate onClickOK)
-    {
-        throw new NotImplementedException();
+        IAttributesManager attribute = Interface.Find<IAttributesManager>(player);
+        if (attribute != null)
+        {
+            attribute.SaveAttributes();
+            Time.timeScale = 1f;
+            GameInfo.AreaToTeleportTo = GameInfo.Area.World;
+            Application.LoadLevel("SceneLoader");
+        }
     }
 }
