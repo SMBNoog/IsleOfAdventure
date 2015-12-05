@@ -25,10 +25,15 @@ public class NPCMessageThenTeleport : MonoBehaviour, INPCMessageAndAction {
     public bool TutorialNPC = false;
 
     public bool townNPC = false;
+    public bool InsideCastle = false;
+    public bool InsideForest = false;
+
     public string townMessage = "Help defend the Town?";
 
     private IAttributesManager attributes;
     private IMessageDelegate messageDelegate;
+
+    private GameObject tempPlayer;
 
     public string DialogMessage
     {
@@ -82,21 +87,46 @@ public class NPCMessageThenTeleport : MonoBehaviour, INPCMessageAndAction {
 
     public void OnClickOK()
     {
-        if (attributes != null && NPCTeleportTo != NPCTo.NoWhere)
+        if(townNPC)
+        {
+            // Start town minigame
+            Time.timeScale = 1.0f;
+        }
+        else if (attributes != null && NPCTeleportTo != NPCTo.NoWhere)
         {
             if (TutorialNPC)
+            {                
                 GameInfo.StartTutorial = false;
-            attributes.SaveAttributes();
+                GameInfo.LastPos = new Vector2(-2.7f, -17.7f);
+                attributes.SaveAttributes(false);
+            }
+            else if(InsideCastle || InsideForest)
+            {
+                attributes.SaveAttributes(false);
+            }
+            else
+                attributes.SaveAttributes(true);
+
+            //if (GameInfo.AreaToTeleportTo == GameInfo.Area.Forest)
+            //{
+            //    ICurrentPos currentPos = Interface.Find<ICurrentPos>(tempPlayer);
+            //    if (currentPos != null)
+            //        GameInfo.LastPos = currentPos.postion - new Vector2(-2f, -2f);
+            //    else
+            //        Debug.Log("Couldn't find ICurrentPos");           
+            
             Time.timeScale = 1.0f;
-            Application.LoadLevel(GameInfo.sceneToLoad);
+            Application.LoadLevel(GameInfo.sceneLoader);
         }
     }
     
     void OnTriggerEnter2D(Collider2D other)
     {
         attributes = Interface.Find<IAttributesManager>(other.gameObject);
-        if(attributes != null)
+        
+        if (attributes != null)
         {
+            tempPlayer = other.gameObject;
             Time.timeScale = 0.0f;
 
             switch (NPCTeleportTo)

@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System;
+using UnityEngine.UI;
 
 public enum Team { Player, Enemy }
 public enum WellBeingState { Alive, Dead }
@@ -38,7 +39,7 @@ public interface IPlayerCurrentWeapon
 public interface IAttributesManager
 {
     void LoadAttributes();
-    void SaveAttributes();
+    void SaveAttributes(bool savePos);
 }
 
 public interface IMessageDelegate
@@ -52,6 +53,16 @@ public interface INPCMessageAndAction
 {
     string DialogMessage { get; }
     void OnClickOK();
+}
+
+public interface ICurrentPos
+{
+    Vector2 postion { get; }
+}
+
+public interface ICurrentHP
+{
+    float currentHP { get; }
 }
 
 public static class Interface

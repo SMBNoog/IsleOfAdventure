@@ -7,7 +7,7 @@ static class GameInfo {
     public enum Area { TutorialArea, World, Forest, Town, Castle, MainMenu }
                         
     // Called by NPC's and Play Button
-    public static string sceneToLoad { get { return "SceneLoader"; } }
+    public static string sceneLoader { get { return "SceneLoader"; } }
 
     public static string PlayerName {
         get { return PlayerPrefs.GetString("PlayerName"); }
@@ -34,8 +34,14 @@ static class GameInfo {
         get { return (Area)PlayerPrefs.GetInt("AreaToTeleportTo"); }
         set { PlayerPrefs.SetInt("AreaToTeleportTo", (int)value); } }
     public static Vector2 LastPos {
-        get { return new Vector2(PlayerPrefs.GetFloat("LastPosX"), 
-                                 PlayerPrefs.GetFloat("LastPosY")); }
-        set { PlayerPrefs.SetFloat("LastPosX", LastPos.x);
-              PlayerPrefs.SetFloat("LastPosY", LastPos.y); } }
+        get {
+            Debug.Log(PlayerPrefs.GetFloat("LastPosX")+ "     " + PlayerPrefs.GetFloat("LastPosY"));
+            return new Vector2(PlayerPrefs.GetFloat("LastPosX"), 
+                                 PlayerPrefs.GetFloat("LastPosY"));
+            
+        }
+        set { PlayerPrefs.SetFloat("LastPosX", value.x);
+              PlayerPrefs.SetFloat("LastPosY", value.y);
+              Debug.Log(value.x + "   " + value.y);
+        } }
 }

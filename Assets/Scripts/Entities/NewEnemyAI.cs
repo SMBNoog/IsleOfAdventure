@@ -34,6 +34,9 @@ public class NewEnemyAI : MonoBehaviour {
     // The waypoint we are currently moving towards
     private int currentWaypoint = 0;
 
+    public bool townNPC = false;
+    private GameObject clockTower;
+
     void Start()
     {
         seeker = GetComponent<Seeker>();
@@ -41,7 +44,18 @@ public class NewEnemyAI : MonoBehaviour {
         myT = GetComponent<Transform>();
         anim = GetComponent<Animator>();
 
-        if(target == null)
+        //clockTower = FindObjectOfType<ClockTower>().gameObject;
+        //if (townNPC)
+        //{
+        //    anim.SetBool("CanSeePlayer", true);
+        //    anim.SetBool("Idle", false);
+        //    anim.SetBool("Patrol", false);
+        //    //target = clockTower.transform;
+        //    seeker.StartPath(transform.position, target.position, OnPathComplete);
+        //    StartCoroutine(UpdatePath());
+        //}
+
+            if (target == null)
         {
             //Debug.LogError("No Player found");
             return;
@@ -95,7 +109,6 @@ public class NewEnemyAI : MonoBehaviour {
     {
         if (target == null)
         {
-            //target = FindObjectOfType<Player>().gameObject.transform;
             return;
         }
 
@@ -143,7 +156,6 @@ public class NewEnemyAI : MonoBehaviour {
     {
         if (target == null)
         {
-            //target = FindObjectOfType<Player>().gameObject.transform;
             yield break;
         }
 
@@ -155,6 +167,7 @@ public class NewEnemyAI : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D other)
     {
+
         IAttacker attacker = Interface.Find<IAttacker>(other.gameObject);
         if (attacker != null && attacker.Team == Team.Player)
         {
@@ -162,7 +175,10 @@ public class NewEnemyAI : MonoBehaviour {
             anim.SetBool("Idle", false);
             anim.SetBool("Patrol", false);
             //Debug.Log("Can see the player!");
-            target = other.gameObject.transform;
+            if (!townNPC)
+            {
+                target = other.gameObject.transform;
+            }
             seeker.StartPath(transform.position, target.position, OnPathComplete);
             StartCoroutine(UpdatePath());
         }

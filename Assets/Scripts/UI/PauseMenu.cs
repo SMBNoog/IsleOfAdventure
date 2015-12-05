@@ -3,56 +3,42 @@ using System.Collections;
 using UnityEngine.UI;
 using System.Collections.Generic;
 
-[System.Serializable]
-public class Item
-{
-    public string name;
-    public string weapon;
-    public int hp;
-    public int attack;
-    public int defense;
-}
+public class PauseMenu : MonoBehaviour
+{    
+    public GameObject attributePanel;
 
-public class PauseMenu : MonoBehaviour {
-
-    public GameObject sampleContent;
-    public GameObject prefab;
-    public Item item;
-
-    public Transform contentPanel;
-
-    void Start ()
+    private GameObject interfaceSupplier;
+    
+    void OnEnable ()
     {
-        item = new Item();
         UpdateItem();
-        PopulateList();
     }
 
     void UpdateItem()
     {
-        FindObjectOfType<Player>().SaveAttributes();
+        interfaceSupplier = FindObjectOfType<Player>().gameObject;
 
-        item.name = GameInfo.PlayerName+"";
-        item.weapon = GameInfo.CurrentWeapon.ToString();
-        item.hp = (int)GameInfo.PlayerMaxHP;
-        item.attack = (int)GameInfo.PlayerAtk;
-        item.defense = (int)GameInfo.PlayerDef;
-
-
-    }
-
-
-    void PopulateList()
-    {
-        GameObject newItem = Instantiate(sampleContent) as GameObject;
-        SampleItem sampleItem = newItem.GetComponent<SampleItem>();
-        sampleItem.nameText.text = item.name;
-        sampleItem.weaponText.text = item.weapon;
-        sampleItem.hpText.text = item.hp + "";
-        sampleItem.atkText.text = item.attack + "";
-        sampleItem.defText.text = item.defense + "";
-        newItem.transform.SetParent(contentPanel);
-
+        if (interfaceSupplier != null && attributePanel != null)
+        {
+            Player player = interfaceSupplier.GetComponent<Player>();
+            player.SaveAttributes(false);
+           
+        
+            SampleItem item = attributePanel.GetComponent<SampleItem>();
+                      
+            item.nameText.text = GameInfo.PlayerName+"";
+            item.weaponText.text = GameInfo.CurrentWeapon.ToString();
+            item.hpSlider.maxValue = (int)GameInfo.PlayerMaxHP;
+            ICurrentHP currentHP = Interface.Find<ICurrentHP>(interfaceSupplier);
+            if (currentHP != null)
+                item.hpSlider.value = (int)currentHP.currentHP;
+            else
+                Debug.Log("ICurrentHP couldn't be found.");
+            item.currentHP.text = (int)currentHP.currentHP+"";
+            item.maxHP.text = "\\ "+(int)GameInfo.PlayerMaxHP;
+            item.atkText.text = (int)GameInfo.PlayerAtk+"";
+            item.defText.text = (GameInfo.PlayerDef)*100+"%";
+        }
     }
 
 }

@@ -21,13 +21,16 @@ public class Weapons
 //    }
 //}
 
-public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManager
+public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManager, ICurrentHP, ICurrentPos
 {
     public List<Weapons> weaponList;  // Set list of weapons in the inspector
 
     // IPlayerCurrentWeapon interface
     public WeaponType weaponType { get { return currentWeapon; } }    
     private WeaponType currentWeapon;
+
+    // ICurrentHP interface
+    public float currentHP { get { return HP; } }
 
     public float weaponYoffset = 0.6f;
     public float weaponXoffSet = 0.6f;
@@ -51,16 +54,11 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
     public Vector2 Pos { get { return transform.position; } }
     public float Atk { get; set; }
     public TypeOfStatIncrease typeOfStatIncrease { get; set; } // Doesn't use
-        
+
+    public Vector2 postion { get { return Pos; } }
+
     public Button respawnButton; ///////////// REMOVE THIS WHEN MAIN MENU IS CREATED /////////////
-
-    // Debug Text to see current status, ATK set in Weapon class
-    public Text debugHP_Text;
-    public Text debugMaxHP_Text;
-    public Text debugDef_Text;
-    public Text debugWeapon_Text;
-
-    [SerializeField]
+    
     private float maxHP = 100f;     // Maximum HP updated when increased
 
     // Taking damage 
@@ -95,7 +93,7 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
             Def = startingDef;
             Speed = startingSpeed;
             UpgradeWeapon(WeaponType.Wooden); // will add 100 more hp     
-            SaveAttributes();       
+            SaveAttributes(true);       
             Debug.Log("Player Starting HP: " + HP + " | ATK: " + Atk + " | DEF: " + Def);
         }
         else
@@ -113,13 +111,22 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
 
         // Hard code positions to spawn in each zone
         if (GameInfo.AreaToTeleportTo == GameInfo.Area.World)
-            rb2D.transform.position = new Vector2(-2.7f, -17.7f);
+            rb2D.transform.position = GameInfo.LastPos;
         else if (GameInfo.AreaToTeleportTo == GameInfo.Area.TutorialArea)
             rb2D.transform.position = new Vector2(-84.2f, -107.5f);
         else if (GameInfo.AreaToTeleportTo == GameInfo.Area.Forest)
-            Debug.Log("Randomly pick between the four corners to spawn here");
-        else if (GameInfo.AreaToTeleportTo == GameInfo.Area.Forest)
-            Debug.Log("Spawn at the entrance");
+        {
+            int r = (int)UnityEngine.Random.Range(0f, 4f);
+            switch (r)
+            {
+                case 1: rb2D.transform.position = new Vector2(2f, 2f); break;
+                case 2: rb2D.transform.position = new Vector2(2f, 100f); break;
+                case 3: rb2D.transform.position = new Vector2(100f, 100f); break;
+                case 4: rb2D.transform.position = new Vector2(100f, 2f); break;
+            }
+        }
+        else if (GameInfo.AreaToTeleportTo == GameInfo.Area.Castle)
+            rb2D.transform.position = new Vector2(1f, -7f); 
 
         HP = maxHP;
     }
@@ -137,13 +144,7 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
             // Regen when Idle and not max HP
             if (actionState == ActionState.Idle && HP < maxHP)
                 HP += maxHP * regenHP_Multiplier;
-
-            // Debug
-            debugHP_Text.text = "HP: " + HP;
-            debugMaxHP_Text.text = "MaxHP: " + maxHP;
-            debugDef_Text.text = "Def: " + Def;
-            debugWeapon_Text.text = currentWeapon+"";
-
+            
             // Right Stick (Weapon Movement)
             float horizontalR = CnInputManager.GetAxisRaw("HorizontalRight");
             float verticalR = CnInputManager.GetAxisRaw("VerticalRight");
@@ -190,7 +191,7 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
     {
         savingAttributes = true;
         yield return new WaitForSeconds(30f);
-        SaveAttributes();
+        SaveAttributes(false);
         savingAttributes = false;
     }
     
@@ -262,7 +263,7 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
     }
     
     // Save attributes before zoning
-    public void SaveAttributes()
+    public void SaveAttributes(bool savePos)
     {
         //Debug.Log("Saving");
         GameInfo.PlayerMaxHP = maxHP;
@@ -270,7 +271,8 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
         GameInfo.PlayerDef = Def;
         GameInfo.PlayerSpeed = Speed;
         GameInfo.CurrentWeapon = currentWeapon;       
-        GameInfo.LastPos = transform.position;
+        if(savePos)
+            GameInfo.LastPos = Pos;
         PlayerPrefs.Save();
     }
 
@@ -356,7 +358,7 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
         {
             wellBeing = WellBeingState.Dead;
             rb2D.isKinematic = true; 
-            SaveAttributes(); 
+            SaveAttributes(false); 
             StartCoroutine(DelayForAnimationThenRespawn()); //delay for tombstone            
         }        
     }
@@ -388,7 +390,7 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
                     anim.gameObject.SetActive(true);
                     anim.SetTrigger("Respawn");
                 }                    
-                else
+                else // Forest or  Castle
                 {
                     GameInfo.AreaToTeleportTo = GameInfo.Area.World;
                     Application.LoadLevel("SceneLoader");
