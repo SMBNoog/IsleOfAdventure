@@ -27,7 +27,7 @@ public class Timer : MonoBehaviour
             IAttributesManager attribute = Interface.Find<IAttributesManager>(player);
             if (attribute != null)
             {
-                attribute.SaveAttributes();
+                attribute.SaveAttributes(false);
                 GameInfo.AreaToTeleportTo = GameInfo.Area.World;
                 Application.LoadLevel("SceneLoader");
             }

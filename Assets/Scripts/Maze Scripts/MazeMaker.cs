@@ -7,7 +7,6 @@ public class MazeMaker : MonoBehaviour
     public GameObject Tile;
     public GameObject RLTile;
     public GameObject UDTile;
-    public GameObject player;
     public GameObject Enemy;
     //// This creates a Grid Graph
     //GridGraph gg;

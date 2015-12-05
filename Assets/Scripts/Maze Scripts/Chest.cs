@@ -4,7 +4,8 @@ using System;
 
 public class Chest : MonoBehaviour, INPCMessageAndAction
 {
-    public GameObject openchest;
+    public GameObject openchest1;
+    public GameObject openchest2;
     public WeaponType weaponreward;
     public GameObject interfacesupplier;
     private GameObject player;
@@ -40,7 +41,8 @@ public class Chest : MonoBehaviour, INPCMessageAndAction
         if (messageDelegate != null)
         {
             messageDelegate.ShowMessage(DialogMessage, "Take Weapon", "Leave Weapon", OnClickOK);
-            openchest.SetActive(true);
+            openchest1.SetActive(true);
+            openchest2.SetActive(true);
             GiveWeapon();          
             Time.timeScale = 0f;
         }
@@ -78,7 +80,7 @@ public class Chest : MonoBehaviour, INPCMessageAndAction
         IAttributesManager attribute = Interface.Find<IAttributesManager>(player);
         if (attribute != null)
         {
-            attribute.SaveAttributes();
+            attribute.SaveAttributes(false);
             Time.timeScale = 1f;
             GameInfo.AreaToTeleportTo = GameInfo.Area.World;
             Application.LoadLevel("ScneneLoader");
@@ -90,7 +92,7 @@ public class Chest : MonoBehaviour, INPCMessageAndAction
         IAttributesManager attribute = Interface.Find<IAttributesManager>(player);
         if (attribute != null)
         {
-            attribute.SaveAttributes();
+            attribute.SaveAttributes(false);
             Time.timeScale = 1f;
             GameInfo.AreaToTeleportTo = GameInfo.Area.World;
             Application.LoadLevel("SceneLoader");
