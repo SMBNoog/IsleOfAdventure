@@ -27,6 +27,9 @@ public class Skeleton : Enemy, IAttacker
         rb2D = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();  
         HP_Slider.maxValue = HP;
+
+        // check if in castle
+        CastleController.RoomOneEnemies += 1;
     }
 
     // Skeleton Instance
@@ -93,6 +96,8 @@ public class Skeleton : Enemy, IAttacker
         }
 
         Spawner.Died(this);
+
+        CastleController.RoomOneEnemies -= 1;   
 
         Destroy(gameObject, 3f); //wait until respawn, disable
     }    
