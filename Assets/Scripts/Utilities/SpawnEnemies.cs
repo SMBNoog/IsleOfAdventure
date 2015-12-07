@@ -63,14 +63,16 @@ public class SpawnEnemies : MonoBehaviour, ISpawner {
             for (int i = 0; i < area.numberToSpawn; i++)
             {
                 float y = area.spawnLocation.position.y;
+                ScaleToYaxis(y, area.typeOfStatDrop);
+
                 if (y < 20f) // easy
-                    ScaleEnemyToWeaponType(1);
+                    ScaleEnemyToWeaponType(1, area.typeOfStatDrop);
                 else if (y > 20f && y < 80f) // moderate
-                    ScaleEnemyToWeaponType(2);
+                    ScaleEnemyToWeaponType(2, area.typeOfStatDrop);
                 else if (y > 80f && y < 170f) // hard
-                    ScaleEnemyToWeaponType(4);
+                    ScaleEnemyToWeaponType(4, area.typeOfStatDrop);
                 else if (y > 170f)
-                    ScaleEnemyToWeaponType(5);
+                    ScaleEnemyToWeaponType(5, area.typeOfStatDrop);
 
                 if (area.typeOfEnemy == TypeOfEnemy.Skeleton)
                 {
@@ -92,11 +94,11 @@ public class SpawnEnemies : MonoBehaviour, ISpawner {
     }
 
     // The weapon type sets the base then the scale is based on the y cooridinate (south to north, easy to harder)
-    public void ScaleEnemyToWeaponType(float scale)
+    public void ScaleEnemyToWeaponType(float scale, TypeOfStatIncrease type)
     {
         if (playerCurrentWeapon != null)
-        { 
-            TypeOfStatIncrease typeOfStat = spawnAreas[0].typeOfStatDrop;  //fix this
+        {
+            TypeOfStatIncrease typeOfStat = type;
             switch (playerCurrentWeapon.weaponType)
             {
                 case WeaponType.Wooden:  // Wooden enemy stats
@@ -116,9 +118,9 @@ public class SpawnEnemies : MonoBehaviour, ISpawner {
                     Def_Median = 0.03f * scale;
                     switch (typeOfStat)
                     {
-                        case TypeOfStatIncrease.ATK: AmountOfStatToGive = 1f; break;
-                        case TypeOfStatIncrease.DEF: AmountOfStatToGive = 0.005f; break;
-                        case TypeOfStatIncrease.HP: AmountOfStatToGive = 10; break;
+                        case TypeOfStatIncrease.ATK: AmountOfStatToGive = 1f * (scale - (scale / 3)); break;
+                        case TypeOfStatIncrease.DEF: AmountOfStatToGive = 0.005f * (scale - (scale / 3)); break;
+                        case TypeOfStatIncrease.HP: AmountOfStatToGive = 10 * (scale - (scale / 3)); break;
                     }
                     break;
                 case WeaponType.Silver:
@@ -129,9 +131,9 @@ public class SpawnEnemies : MonoBehaviour, ISpawner {
                     Def_Median = 0.1f * scale;
                     switch (typeOfStat)
                     {
-                        case TypeOfStatIncrease.ATK: AmountOfStatToGive = 10f; break;
-                        case TypeOfStatIncrease.DEF: AmountOfStatToGive = 0.005f; break;
-                        case TypeOfStatIncrease.HP: AmountOfStatToGive = 100f; break;
+                        case TypeOfStatIncrease.ATK: AmountOfStatToGive = 50f * (scale - (scale / 3)); break;
+                        case TypeOfStatIncrease.DEF: AmountOfStatToGive = 0.005f * (scale - (scale / 3)); break;
+                        case TypeOfStatIncrease.HP: AmountOfStatToGive = 500f * (scale - (scale / 3)); break;
                     }
                     break;
             }
@@ -150,18 +152,25 @@ public class SpawnEnemies : MonoBehaviour, ISpawner {
         }
     }
 
+    public void ScaleToYaxis(float y, TypeOfStatIncrease type)
+    {
+        if (y < 20f) // easy
+            ScaleEnemyToWeaponType(1, type);
+        else if (y > 20f && y < 80f) // moderate
+            ScaleEnemyToWeaponType(2, type);
+        else if (y > 80f && y < 170f) // hard
+            ScaleEnemyToWeaponType(4, type);
+        else if (y > 170f)
+            ScaleEnemyToWeaponType(5, type);
+    }
+
     IEnumerator RespawnEnemy(SpawnResult sr)
     {
         float r = UnityEngine.Random.Range(10f, 20f);
         yield return new WaitForSeconds(r);
 
         float y = sr.source.spawnLocation.position.y;
-        if (y > -40f && y < 20f) // easy
-            ScaleEnemyToWeaponType(1);
-        else if (y > 20f && y < 80f)
-            ScaleEnemyToWeaponType(2);
-        else if (y > 80f && y < 170f)
-            ScaleEnemyToWeaponType(4);
+        ScaleToYaxis(y, sr.source.typeOfStatDrop);
 
         if (sr.source.typeOfEnemy == TypeOfEnemy.Skeleton)
         {

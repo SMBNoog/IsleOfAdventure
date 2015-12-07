@@ -145,6 +145,7 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
             if (actionState == ActionState.Idle && HP < maxHP)
                 HP += maxHP * regenHP_Multiplier;
             
+            
             // Right Stick (Weapon Movement)
             float horizontalR = CnInputManager.GetAxisRaw("HorizontalRight");
             float verticalR = CnInputManager.GetAxisRaw("VerticalRight");
