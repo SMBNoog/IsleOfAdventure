@@ -29,7 +29,8 @@ public class Skeleton : Enemy, IAttacker
         HP_Slider.maxValue = HP;
 
         // check if in castle
-        CastleController.RoomOneEnemies += 1;
+        if(GameInfo.AreaToTeleportTo == GameInfo.Area.Castle)
+            CastleController.RoomOneEnemies += 1;
     }
 
     // Skeleton Instance
@@ -97,7 +98,7 @@ public class Skeleton : Enemy, IAttacker
 
         Spawner.Died(this);
 
-        CastleController.RoomOneEnemies -= 1;   
+        CastleController.RoomOneEnemies -= 1;
 
         Destroy(gameObject, 3f); //wait until respawn, disable
     }    
