@@ -46,6 +46,10 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
     public float startingSpeed = 4f;
     
     public Slider HP_Slider;
+
+    public GameObject hpStatUp;
+    public GameObject atkStatUp;
+    public GameObject defStatUp;
     
     // IAttacker interface
     public WellBeingState wellBeing { get; set; }
@@ -314,9 +318,24 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
         {
             switch (stat)
             {
-                case TypeOfStatIncrease.HP: maxHP += amount; break;
-                case TypeOfStatIncrease.ATK: Atk += amount; break;
-                case TypeOfStatIncrease.DEF: Def += amount; break;
+                case TypeOfStatIncrease.HP: maxHP += amount;
+                    GameObject obj1 = Instantiate(hpStatUp) as GameObject;                    
+                    obj1.transform.SetParent(transform);
+                    obj1.transform.localPosition = new Vector3(0, 0);
+                    obj1.transform.localScale = new Vector3(1f, 1f, 1f);                    
+                    obj1.gameObject.SetActive(true); break;
+                case TypeOfStatIncrease.ATK: Atk += amount;
+                    GameObject obj2 = Instantiate(atkStatUp) as GameObject;
+                    obj2.transform.SetParent(transform);
+                    obj2.transform.localPosition = new Vector3(0, 0);
+                    obj2.transform.localScale = new Vector3(1f, 1f, 1f);
+                    obj2.gameObject.SetActive(true); break; 
+                case TypeOfStatIncrease.DEF: Def += amount;
+                    GameObject obj3 = Instantiate(defStatUp) as GameObject;
+                    obj3.transform.SetParent(transform);
+                    obj3.transform.localPosition = new Vector3(0, 0);
+                    obj3.transform.localScale = new Vector3(1f, 1f, 1f);
+                    obj3.gameObject.SetActive(true); break;
             }
         }
     }

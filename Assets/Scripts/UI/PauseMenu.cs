@@ -37,7 +37,7 @@ public class PauseMenu : MonoBehaviour
             item.currentHP.text = (int)currentHP.currentHP+"";
             item.maxHP.text = "\\ "+(int)GameInfo.PlayerMaxHP;
             item.atkText.text = (int)GameInfo.PlayerAtk+"";
-            item.defText.text = (GameInfo.PlayerDef)*100+"%";
+            item.defText.text = (GameInfo.PlayerDef)*100+" %";
         }
     }
 
