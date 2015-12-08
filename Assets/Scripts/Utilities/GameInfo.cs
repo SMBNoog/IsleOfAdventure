@@ -36,6 +36,5 @@ static class GameInfo {
         get { return new Vector2(PlayerPrefs.GetFloat("LastPosX"), 
                                  PlayerPrefs.GetFloat("LastPosY")); }
         set { PlayerPrefs.SetFloat("LastPosX", value.x);
-              PlayerPrefs.SetFloat("LastPosY", value.y);
-              Debug.Log(value.x + "   " + value.y); } }
+              PlayerPrefs.SetFloat("LastPosY", value.y); } }
 }

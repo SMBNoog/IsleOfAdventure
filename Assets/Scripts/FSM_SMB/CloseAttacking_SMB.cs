@@ -29,9 +29,12 @@ public class CloseAttacking_SMB : StateMachineBehaviour {
             //Debug.Log("Collider hit: " + rayToPlayer.collider);
             //Debug.Log("Distance to player: " + rayToPlayer.distance);
 
+            if(myR != null)
+            {
+                Vector2 direction = (Vector3)attacker.Pos - myR.transform.position;
+                myR.velocity = direction.normalized * 2f;
+            }
 
-            Vector2 direction = (Vector3)attacker.Pos - myR.transform.position;
-            myR.velocity = direction.normalized * 2f;
             //}
             //else
             //    Debug.Log("collider is null");

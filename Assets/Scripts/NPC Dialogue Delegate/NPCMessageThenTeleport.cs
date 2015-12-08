@@ -123,8 +123,10 @@ public class NPCMessageThenTeleport : MonoBehaviour, INPCMessageAndAction {
     void OnTriggerEnter2D(Collider2D other)
     {
         attributes = Interface.Find<IAttributesManager>(other.gameObject);
-        
-        if (attributes != null)
+
+        //Debug.Log("Number of Tutorial skeletons" + Skeleton.numberOfTutorialSkeletons);
+
+        if (attributes != null && Skeleton.numberOfTutorialSkeletons <= 0)
         {
             tempPlayer = other.gameObject;
             Time.timeScale = 0.0f;
@@ -145,9 +147,6 @@ public class NPCMessageThenTeleport : MonoBehaviour, INPCMessageAndAction {
             {
                 messageDelegate.ShowMessage(DialogMessage, okButton, cancelButton, OnClickOK);
             }
-        }
+        }        
     }
-
-
-
 }

@@ -102,8 +102,8 @@ public class SpawnEnemies : MonoBehaviour, ISpawner {
             switch (playerCurrentWeapon.weaponType)
             {
                 case WeaponType.Wooden:  // Wooden enemy stats
-                    HP_Median = 200f * scale;
-                    Atk_Median = 20f * scale;
+                    HP_Median = 120f * scale;
+                    Atk_Median = 12f * scale;
                     Def_Median = 0.01f * scale;
                     switch (typeOfStat)
                     {
@@ -113,8 +113,8 @@ public class SpawnEnemies : MonoBehaviour, ISpawner {
                     }
                     break;
                 case WeaponType.Bronze:
-                    HP_Median = 2000 * scale;
-                    Atk_Median = 200 * scale;
+                    HP_Median = 1200 * scale;
+                    Atk_Median = 120 * scale;
                     Def_Median = 0.03f * scale;
                     switch (typeOfStat)
                     {
@@ -126,8 +126,8 @@ public class SpawnEnemies : MonoBehaviour, ISpawner {
                 case WeaponType.Silver:
                 case WeaponType.Gold:
                 case WeaponType.Epic:
-                    HP_Median = 20000 * scale;
-                    Atk_Median = 2000 * scale;
+                    HP_Median = 12000 * scale;
+                    Atk_Median = 1200 * scale;
                     Def_Median = 0.1f * scale;
                     switch (typeOfStat)
                     {

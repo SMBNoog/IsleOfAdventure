@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 public class Skeleton : Enemy, IAttacker
 {
-    public static int numberOfSkeletons;
+    public static int numberOfTutorialSkeletons;
     public Slider HP_Slider;
 
     public ISpawner Spawner  // reference to the interface to Respawn this enemy when it dies
@@ -29,8 +29,8 @@ public class Skeleton : Enemy, IAttacker
         HP_Slider.maxValue = HP;
 
         // check if in castle
-        if(GameInfo.AreaToTeleportTo == GameInfo.Area.Castle)
-            CastleController.RoomOneEnemies += 1;
+        //if(GameInfo.AreaToTeleportTo == GameInfo.Area.Castle)
+        //    CastleController.RoomOneEnemies += 1;
     }
 
     // Skeleton Instance
@@ -40,7 +40,10 @@ public class Skeleton : Enemy, IAttacker
         this.HP = HP + (HP * multiplier);
         this.Atk = Atk + (Atk * multiplier);
         this.Def = Def + (Def * multiplier);
-        numberOfSkeletons += 1;
+
+        if(GameInfo.AreaToTeleportTo == GameInfo.Area.TutorialArea)
+            numberOfTutorialSkeletons += 1;
+
         amountOfStatToGiveAponDeath = amountToStatToGive;
         typeOfStatIncrease = stat;
         
@@ -83,8 +86,9 @@ public class Skeleton : Enemy, IAttacker
 
     public override void Die()
     {
-        // Play death animation
-        numberOfSkeletons -= 1;
+        if(GameInfo.AreaToTeleportTo == GameInfo.Area.TutorialArea)
+            numberOfTutorialSkeletons -= 1;
+
         anim.SetBool("Death", true);
         anim.SetTrigger("DeathAni");
         //Debug.Log("I am of type : " + typeOfStatIncrease);
@@ -98,7 +102,7 @@ public class Skeleton : Enemy, IAttacker
 
         Spawner.Died(this);
 
-        CastleController.RoomOneEnemies -= 1;
+        //CastleController.RoomOneEnemies -= 1;
 
         Destroy(gameObject, 3f); //wait until respawn, disable
     }    

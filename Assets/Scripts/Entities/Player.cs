@@ -68,7 +68,9 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
     private Rigidbody2D rb2D;
 
     private bool savingAttributes = false;
-    
+
+    private bool playingSwingSound = false;
+
     public void OnEnable()
     {
         // Search the children to find Weapons.
@@ -180,6 +182,12 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
                     // Change the angle of the weapon to point the direction of the Right stick
                     w.weapon.transform.eulerAngles = new Vector3(0f, 0f, myAngle);
 
+                    if (!playingSwingSound)
+                    {
+                        playingSwingSound = true;
+                        StartCoroutine(PlaySwordSwingMiss());
+                    }
+
                     break; // found weapon break loop
                 }
             }
@@ -187,6 +195,13 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
                 StartCoroutine(AutoSave());
         } 
     }// end Update
+
+    IEnumerator PlaySwordSwingMiss()
+    {
+        SoundManager.Instance.Play(TypeOfClip.SwordMiss);
+        yield return new WaitForSeconds(0.4f);
+        playingSwingSound = false;
+    }
 
     IEnumerator AutoSave()
     {
@@ -368,7 +383,7 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
     IEnumerator DelayForAnimationThenRespawn()
     {
         anim.SetTrigger("Death");
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(2f);
         respawnButton.gameObject.SetActive(true);
         Time.timeScale = 0.0f;  //pause until button pressed
     }
@@ -390,8 +405,16 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
                     rb2D.isKinematic = false;
                     anim.gameObject.SetActive(true);
                     anim.SetTrigger("Respawn");
-                }                    
-                else // Forest or  Castle
+                }            
+                else if(GameInfo.AreaToTeleportTo == GameInfo.Area.TutorialArea)
+                {
+                    rb2D.transform.position = new Vector2(-85f, -108f);
+                    wellBeing = WellBeingState.Alive;
+                    rb2D.isKinematic = false;
+                    anim.gameObject.SetActive(true);
+                    anim.SetTrigger("Respawn");
+                }    
+                else // Forest or Castle
                 {
                     GameInfo.AreaToTeleportTo = GameInfo.Area.World;
                     Application.LoadLevel("SceneLoader");

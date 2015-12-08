@@ -12,9 +12,9 @@ public class MainMenuController : MonoBehaviour {
     void Start()
     {
         inputCanvas.SetActive(false);
-        //PlayerPrefs.DeleteAll();
-        Debug.Log(GameInfo.TutorialCompleted);
-        if (GameInfo.TutorialCompleted)
+        PlayerPrefs.DeleteAll();
+        //Debug.Log(GameInfo.TutorialCompleted);
+        if (userName.text == "noname")
         {
             userName.text = GameInfo.PlayerName;
             userName.gameObject.SetActive(true);
@@ -33,9 +33,7 @@ public class MainMenuController : MonoBehaviour {
         if (!GameInfo.TutorialCompleted)
         {
             GameInfo.AreaToTeleportTo = GameInfo.Area.TutorialArea;
-            inputField.gameObject.SetActive(true);
-
-            Debug.Log(userName.text);
+            
             StartCoroutine(NameCheckThenStart());         
         }
         else
@@ -48,13 +46,14 @@ public class MainMenuController : MonoBehaviour {
 
     IEnumerator NameCheckThenStart()
     {
-        if (userName.text != "noname")
+        if (userName.text != "")
         {
             inputCanvas.SetActive(true);
             Application.LoadLevel("SceneLoader");
         }
         else
         {
+            inputField.gameObject.SetActive(true);
             yield return new WaitForSeconds(1f);
             StartCoroutine(NameCheckThenStart());
 
