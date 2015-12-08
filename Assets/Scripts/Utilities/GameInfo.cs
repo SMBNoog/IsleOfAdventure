@@ -10,7 +10,7 @@ static class GameInfo {
     public static string PlayerName {
         get { return PlayerPrefs.GetString("PlayerName"); }
         set { PlayerPrefs.SetString("PlayerName", value); } }
-    public static bool StartTutorial {
+    public static bool TutorialCompleted {
         get { return PlayerPrefs.HasKey("TutorialCompleted") ? (PlayerPrefs.GetInt("TutorialCompleted") == 1 ? true : false) : false; }
         set { int b = value == true ? 1 : 0; PlayerPrefs.SetInt("TutorialCompleted", b); } }
     public static float PlayerMaxHP {

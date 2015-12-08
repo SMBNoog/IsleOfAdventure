@@ -96,7 +96,7 @@ public class NPCMessageThenTeleport : MonoBehaviour, INPCMessageAndAction {
         {
             if (TutorialNPC)
             {                
-                GameInfo.StartTutorial = false;
+                GameInfo.TutorialCompleted = true;
                 GameInfo.LastPos = new Vector2(-2.7f, -17.7f);
                 attributes.SaveAttributes(false);
             }

@@ -12,7 +12,13 @@ public class MainMenuController : MonoBehaviour {
     void Start()
     {
         inputCanvas.SetActive(false);
-
+        //PlayerPrefs.DeleteAll();
+        Debug.Log(GameInfo.TutorialCompleted);
+        if (GameInfo.TutorialCompleted)
+        {
+            userName.text = GameInfo.PlayerName;
+            userName.gameObject.SetActive(true);
+        }
         //if (GameInfo.PlayerName != null)
         //{
         //    userName.text = GameInfo.PlayerName;
@@ -22,21 +28,46 @@ public class MainMenuController : MonoBehaviour {
     }
 
 	public void StartGame()
-    {
-        if (GameInfo.StartTutorial)
+    {        
+        
+        if (!GameInfo.TutorialCompleted)
+        {
             GameInfo.AreaToTeleportTo = GameInfo.Area.TutorialArea;
+            inputField.gameObject.SetActive(true);
+
+            Debug.Log(userName.text);
+            StartCoroutine(NameCheckThenStart());         
+        }
         else
+        {            
             GameInfo.AreaToTeleportTo = GameInfo.Area.World;
+            inputCanvas.SetActive(true);
+            Application.LoadLevel("SceneLoader");
+        }
+    }
 
-        inputCanvas.SetActive(true);
+    IEnumerator NameCheckThenStart()
+    {
+        if (userName.text != "noname")
+        {
+            inputCanvas.SetActive(true);
+            Application.LoadLevel("SceneLoader");
+        }
+        else
+        {
+            yield return new WaitForSeconds(1f);
+            StartCoroutine(NameCheckThenStart());
 
-        Application.LoadLevel("SceneLoader");
+        }
+
+        yield return null;
+            
     }
 
     public void ClearPlayerPrefs()
     {
         PlayerPrefs.DeleteAll();
-        GameInfo.StartTutorial = true;
+        GameInfo.TutorialCompleted = true;
     }
 
     public void SetPlayerName(Text name)
