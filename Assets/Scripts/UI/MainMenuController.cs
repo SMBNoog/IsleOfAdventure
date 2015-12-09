@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class MainMenuController : MonoBehaviour {
 
@@ -14,11 +15,14 @@ public class MainMenuController : MonoBehaviour {
         inputCanvas.SetActive(false);
         PlayerPrefs.DeleteAll();
         //Debug.Log(GameInfo.TutorialCompleted);
+
         if (userName.text == "noname")
         {
             userName.text = GameInfo.PlayerName;
             userName.gameObject.SetActive(true);
         }
+
+
         //if (GameInfo.PlayerName != null)
         //{
         //    userName.text = GameInfo.PlayerName;
@@ -40,7 +44,7 @@ public class MainMenuController : MonoBehaviour {
         {            
             GameInfo.AreaToTeleportTo = GameInfo.Area.World;
             inputCanvas.SetActive(true);
-            Application.LoadLevel("SceneLoader");
+            SceneManager.LoadScene("SceneLoader");
         }
     }
 
@@ -49,7 +53,7 @@ public class MainMenuController : MonoBehaviour {
         if (userName.text != "")
         {
             inputCanvas.SetActive(true);
-            Application.LoadLevel("SceneLoader");
+            SceneManager.LoadScene("SceneLoader");
         }
         else
         {

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using System;
 using CnControls;
+using UnityEngine.SceneManagement;
 
 [System.Serializable]
 public class Weapons
@@ -173,7 +174,7 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
 
                     // If Weapon is below the waist of the player change the sorting order to display above
                     if (verticalR < -0.2f)
-                        w.weapon.GetComponentInChildren<SpriteRenderer>().sortingOrder = 101;
+                        w.weapon.GetComponentInChildren<SpriteRenderer>().sortingOrder = 111;
                     else
                         w.weapon.GetComponentInChildren<SpriteRenderer>().sortingOrder = 80;
 
@@ -436,7 +437,7 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
                 else // Forest or Castle
                 {
                     GameInfo.AreaToTeleportTo = GameInfo.Area.World;
-                    Application.LoadLevel("SceneLoader");
+                    SceneManager.LoadScene("SceneLoader");
                 }
             }
         }

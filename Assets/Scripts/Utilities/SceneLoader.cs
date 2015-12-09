@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class SceneLoader : MonoBehaviour {
 
@@ -16,7 +17,7 @@ public class SceneLoader : MonoBehaviour {
 
     private IEnumerator LoadALevel(string sceneName)
     {
-        async = Application.LoadLevelAsync(sceneName);
+        async = SceneManager.LoadSceneAsync(sceneName);
         yield return async;
 
         yield return new WaitForSeconds(1f);
