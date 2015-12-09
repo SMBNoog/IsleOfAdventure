@@ -44,9 +44,10 @@ public interface IAttributesManager
 
 public interface IMessageDelegate
 {
-    void OnClickOK();
-    void OnClickCancel();
-    void ShowMessage(string dialogMessage, string okButton, string cancelButton, Dialogue.DialogueDelegate onClickOK);
+    void OnClickOkButtonDuo();
+    void OnClickCancelDuo();
+    void ShowMessageWithOkCancel(string dialogMessage, string okButton, string cancelButton, Dialogue.DialogueDelegate onClickOK);
+    void ShowMessageWithOk(string dialogMessage, string okButton);
 }
 
 public interface INPCMessageAndAction

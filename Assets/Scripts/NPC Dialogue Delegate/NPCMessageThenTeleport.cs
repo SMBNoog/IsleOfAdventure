@@ -2,6 +2,7 @@
 using System.Collections;
 using System;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public enum NPCTo { Tutorial, Forest, Castle, World, NoWhere, MainMenu }
 
@@ -32,8 +33,6 @@ public class NPCMessageThenTeleport : MonoBehaviour, INPCMessageAndAction {
 
     private IAttributesManager attributes;
     private IMessageDelegate messageDelegate;
-
-    private GameObject tempPlayer;
 
     public string DialogMessage
     {
@@ -96,7 +95,7 @@ public class NPCMessageThenTeleport : MonoBehaviour, INPCMessageAndAction {
         {
             if (TutorialNPC)
             {                
-                GameInfo.StartTutorial = false;
+                GameInfo.TutorialCompleted = true;
                 GameInfo.LastPos = new Vector2(-2.7f, -17.7f);
                 attributes.SaveAttributes(false);
             }
@@ -116,17 +115,18 @@ public class NPCMessageThenTeleport : MonoBehaviour, INPCMessageAndAction {
             //        Debug.Log("Couldn't find ICurrentPos");           
             
             Time.timeScale = 1.0f;
-            Application.LoadLevel(GameInfo.sceneLoader);
+            SceneManager.LoadScene(GameInfo.sceneLoader);
         }
     }
     
     void OnTriggerEnter2D(Collider2D other)
     {
         attributes = Interface.Find<IAttributesManager>(other.gameObject);
-        
-        if (attributes != null)
+
+        //Debug.Log("Number of Tutorial skeletons" + Skeleton.numberOfTutorialSkeletons);
+
+        if (attributes != null && Skeleton.numberOfTutorialSkeletons <= 0)
         {
-            tempPlayer = other.gameObject;
             Time.timeScale = 0.0f;
 
             switch (NPCTeleportTo)
@@ -143,11 +143,8 @@ public class NPCMessageThenTeleport : MonoBehaviour, INPCMessageAndAction {
 
             if (messageDelegate != null)
             {
-                messageDelegate.ShowMessage(DialogMessage, okButton, cancelButton, OnClickOK);
+                messageDelegate.ShowMessageWithOkCancel(DialogMessage, okButton, cancelButton, OnClickOK);
             }
-        }
+        }        
     }
-
-
-
 }

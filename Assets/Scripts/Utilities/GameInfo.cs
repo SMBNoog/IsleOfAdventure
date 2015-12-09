@@ -1,6 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
-
 
 static class GameInfo {
 
@@ -12,8 +10,8 @@ static class GameInfo {
     public static string PlayerName {
         get { return PlayerPrefs.GetString("PlayerName"); }
         set { PlayerPrefs.SetString("PlayerName", value); } }
-    public static bool StartTutorial {
-        get { return PlayerPrefs.GetInt("TutorialCompleted") == 1 ? true : false; }
+    public static bool TutorialCompleted {
+        get { return PlayerPrefs.HasKey("TutorialCompleted") ? (PlayerPrefs.GetInt("TutorialCompleted") == 1 ? true : false) : false; }
         set { int b = value == true ? 1 : 0; PlayerPrefs.SetInt("TutorialCompleted", b); } }
     public static float PlayerMaxHP {
         get { return PlayerPrefs.GetFloat("MaxHP"); }
@@ -26,22 +24,17 @@ static class GameInfo {
         set { PlayerPrefs.SetFloat("Def", value); } }
     public static float PlayerSpeed {
         get { return PlayerPrefs.GetFloat("Speed"); }
-        set { PlayerPrefs.SetFloat("Speed", value);  } }
+        set { PlayerPrefs.SetFloat("Speed", value); } }
     public static WeaponType CurrentWeapon {
         get { return (WeaponType)PlayerPrefs.GetInt("WeaponType"); }
         set { PlayerPrefs.SetInt("WeaponType", (int)value); } }
-    public static Area AreaToTeleportTo {
-        get { return (Area)PlayerPrefs.GetInt("AreaToTeleportTo"); }
+    public static Area? AreaToTeleportTo {
+        get { return PlayerPrefs.HasKey("AreaToTeleportTo") ?
+                (Area?)PlayerPrefs.GetInt("AreaToTeleportTo") : null; }
         set { PlayerPrefs.SetInt("AreaToTeleportTo", (int)value); } }
     public static Vector2 LastPos {
-        get {
-            Debug.Log(PlayerPrefs.GetFloat("LastPosX")+ "     " + PlayerPrefs.GetFloat("LastPosY"));
-            return new Vector2(PlayerPrefs.GetFloat("LastPosX"), 
-                                 PlayerPrefs.GetFloat("LastPosY"));
-            
-        }
+        get { return new Vector2(PlayerPrefs.GetFloat("LastPosX"), 
+                                 PlayerPrefs.GetFloat("LastPosY")); }
         set { PlayerPrefs.SetFloat("LastPosX", value.x);
-              PlayerPrefs.SetFloat("LastPosY", value.y);
-              Debug.Log(value.x + "   " + value.y);
-        } }
+              PlayerPrefs.SetFloat("LastPosY", value.y); } }
 }

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class MainMenuController : MonoBehaviour {
 
@@ -12,6 +13,15 @@ public class MainMenuController : MonoBehaviour {
     void Start()
     {
         inputCanvas.SetActive(false);
+        PlayerPrefs.DeleteAll();
+        //Debug.Log(GameInfo.TutorialCompleted);
+
+        if (userName.text == "noname")
+        {
+            userName.text = GameInfo.PlayerName;
+            userName.gameObject.SetActive(true);
+        }
+
 
         //if (GameInfo.PlayerName != null)
         //{
@@ -22,21 +32,45 @@ public class MainMenuController : MonoBehaviour {
     }
 
 	public void StartGame()
-    {
-        if (GameInfo.StartTutorial)
+    {        
+        
+        if (!GameInfo.TutorialCompleted)
+        {
             GameInfo.AreaToTeleportTo = GameInfo.Area.TutorialArea;
+            
+            StartCoroutine(NameCheckThenStart());         
+        }
         else
+        {            
             GameInfo.AreaToTeleportTo = GameInfo.Area.World;
+            inputCanvas.SetActive(true);
+            SceneManager.LoadScene("SceneLoader");
+        }
+    }
 
-        inputCanvas.SetActive(true);
+    IEnumerator NameCheckThenStart()
+    {
+        if (userName.text != "")
+        {
+            inputCanvas.SetActive(true);
+            SceneManager.LoadScene("SceneLoader");
+        }
+        else
+        {
+            inputField.gameObject.SetActive(true);
+            yield return new WaitForSeconds(1f);
+            StartCoroutine(NameCheckThenStart());
 
-        Application.LoadLevel("SceneLoader");
+        }
+
+        yield return null;
+            
     }
 
     public void ClearPlayerPrefs()
     {
         PlayerPrefs.DeleteAll();
-        GameInfo.StartTutorial = true;
+        GameInfo.TutorialCompleted = true;
     }
 
     public void SetPlayerName(Text name)

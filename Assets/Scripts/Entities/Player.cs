@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using System;
 using CnControls;
+using UnityEngine.SceneManagement;
 
 [System.Serializable]
 public class Weapons
@@ -46,6 +47,10 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
     public float startingSpeed = 4f;
     
     public Slider HP_Slider;
+
+    public GameObject hpStatUp;
+    public GameObject atkStatUp;
+    public GameObject defStatUp;
     
     // IAttacker interface
     public WellBeingState wellBeing { get; set; }
@@ -68,7 +73,9 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
     private Rigidbody2D rb2D;
 
     private bool savingAttributes = false;
-    
+
+    private bool playingSwingSound = false;
+
     public void OnEnable()
     {
         // Search the children to find Weapons.
@@ -145,6 +152,7 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
             if (actionState == ActionState.Idle && HP < maxHP)
                 HP += maxHP * regenHP_Multiplier;
             
+            
             // Right Stick (Weapon Movement)
             float horizontalR = CnInputManager.GetAxisRaw("HorizontalRight");
             float verticalR = CnInputManager.GetAxisRaw("VerticalRight");
@@ -166,7 +174,7 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
 
                     // If Weapon is below the waist of the player change the sorting order to display above
                     if (verticalR < -0.2f)
-                        w.weapon.GetComponentInChildren<SpriteRenderer>().sortingOrder = 101;
+                        w.weapon.GetComponentInChildren<SpriteRenderer>().sortingOrder = 111;
                     else
                         w.weapon.GetComponentInChildren<SpriteRenderer>().sortingOrder = 80;
 
@@ -179,6 +187,12 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
                     // Change the angle of the weapon to point the direction of the Right stick
                     w.weapon.transform.eulerAngles = new Vector3(0f, 0f, myAngle);
 
+                    if (!playingSwingSound)
+                    {
+                        playingSwingSound = true;
+                        StartCoroutine(PlaySwordSwingMiss());
+                    }
+
                     break; // found weapon break loop
                 }
             }
@@ -186,6 +200,13 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
                 StartCoroutine(AutoSave());
         } 
     }// end Update
+
+    IEnumerator PlaySwordSwingMiss()
+    {
+        SoundManager.Instance.Play(TypeOfClip.SwordMiss);
+        yield return new WaitForSeconds(0.4f);
+        playingSwingSound = false;
+    }
 
     IEnumerator AutoSave()
     {
@@ -298,9 +319,24 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
         {
             switch (stat)
             {
-                case TypeOfStatIncrease.HP: maxHP += amount; break;
-                case TypeOfStatIncrease.ATK: Atk += amount; break;
-                case TypeOfStatIncrease.DEF: Def += amount; break;
+                case TypeOfStatIncrease.HP: maxHP += amount;
+                    GameObject obj1 = Instantiate(hpStatUp) as GameObject;                    
+                    obj1.transform.SetParent(transform);
+                    obj1.transform.localPosition = new Vector3(0, 0);
+                    obj1.transform.localScale = new Vector3(1f, 1f, 1f);                    
+                    obj1.gameObject.SetActive(true); break;
+                case TypeOfStatIncrease.ATK: Atk += amount;
+                    GameObject obj2 = Instantiate(atkStatUp) as GameObject;
+                    obj2.transform.SetParent(transform);
+                    obj2.transform.localPosition = new Vector3(0, 0);
+                    obj2.transform.localScale = new Vector3(1f, 1f, 1f);
+                    obj2.gameObject.SetActive(true); break; 
+                case TypeOfStatIncrease.DEF: Def += amount;
+                    GameObject obj3 = Instantiate(defStatUp) as GameObject;
+                    obj3.transform.SetParent(transform);
+                    obj3.transform.localPosition = new Vector3(0, 0);
+                    obj3.transform.localScale = new Vector3(1f, 1f, 1f);
+                    obj3.gameObject.SetActive(true); break;
             }
         }
     }
@@ -367,7 +403,7 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
     IEnumerator DelayForAnimationThenRespawn()
     {
         anim.SetTrigger("Death");
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(2f);
         respawnButton.gameObject.SetActive(true);
         Time.timeScale = 0.0f;  //pause until button pressed
     }
@@ -389,11 +425,19 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
                     rb2D.isKinematic = false;
                     anim.gameObject.SetActive(true);
                     anim.SetTrigger("Respawn");
-                }                    
-                else // Forest or  Castle
+                }            
+                else if(GameInfo.AreaToTeleportTo == GameInfo.Area.TutorialArea)
+                {
+                    rb2D.transform.position = new Vector2(-85f, -108f);
+                    wellBeing = WellBeingState.Alive;
+                    rb2D.isKinematic = false;
+                    anim.gameObject.SetActive(true);
+                    anim.SetTrigger("Respawn");
+                }    
+                else // Forest or Castle
                 {
                     GameInfo.AreaToTeleportTo = GameInfo.Area.World;
-                    Application.LoadLevel("SceneLoader");
+                    SceneManager.LoadScene("SceneLoader");
                 }
             }
         }

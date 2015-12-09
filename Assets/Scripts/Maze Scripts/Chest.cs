@@ -41,7 +41,7 @@ public class Chest : MonoBehaviour, INPCMessageAndAction
         IMessageDelegate messageDelegate = Interface.Find<IMessageDelegate>(interfacesupplier);
         if (messageDelegate != null)
         {
-            messageDelegate.ShowMessage(DialogMessage, "Take Weapon", "Leave Weapon", OnClickOK);
+            messageDelegate.ShowMessageWithOkCancel(DialogMessage, "Take Weapon", "Leave Weapon", OnClickOK);
             openchest1.SetActive(true);
             openchest2.SetActive(true);
             GiveWeapon();          
