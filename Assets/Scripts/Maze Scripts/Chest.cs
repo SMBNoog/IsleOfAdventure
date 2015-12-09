@@ -6,6 +6,7 @@ public class Chest : MonoBehaviour, INPCMessageAndAction
 {
     public GameObject openchest1;
     public GameObject openchest2;
+    public GameObject canvas;
     public WeaponType weaponreward;
     public GameObject interfacesupplier;
     private GameObject player;

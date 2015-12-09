@@ -4020,8 +4020,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a499f1f7c0226547b7aac54267fca0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  openchest1: {fileID: 0}
-  openchest2: {fileID: 0}
+  openchest1: {fileID: 428044221}
+  openchest2: {fileID: 1824366009}
+  canvas: {fileID: 2026963571}
   weaponreward: 0
   interfacesupplier: {fileID: 1399505291}
 --- !u!61 &1432677715
