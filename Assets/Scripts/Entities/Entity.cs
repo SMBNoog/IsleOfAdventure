@@ -36,7 +36,11 @@ public abstract class Entity : MonoBehaviour {
         //    Debug.Log(this + ":  Damage taken: " + dmg);
         HP = (HP - dmg) <= 0 ? 0 : HP - dmg;
         if (HP == 0)
-            Die();                    
+        {
+            Die();
+            Debug.Log("calling die()");
+        }
+                              
     }
 
     public abstract void Die();

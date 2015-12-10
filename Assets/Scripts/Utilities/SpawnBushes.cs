@@ -53,8 +53,7 @@ public class SpawnBushes : MonoBehaviour, ISpawner
 
         StartCoroutine(SpawnBushesNow());
     }
-
-    private bool scaled = false;
+    
     IEnumerator SpawnBushesNow()
     {
         foreach (SpawnAreaBush area in spawnAreas)
@@ -86,8 +85,8 @@ public class SpawnBushes : MonoBehaviour, ISpawner
                         tempBush = ScaleEnemyToWeaponType(4, area);                                        
 
                     SpawnResultBush result = new SpawnResultBush();
-                    //Vector3 tempPos = area.spawnLocation.position + new Vector3(i+2, j+2, 0f);
-                    var bush = CreateBush(area.prefab, area.spawnLocation.position,
+                    Vector3 tempPos = area.spawnLocation.position + new Vector3(i, j, 0f);
+                    var bush = CreateBush(area.prefab, tempPos,
                         HP_Median, Atk_Median, Def_Median,
                         tempBush.amountOfStatToGive, area.typeOfStatDrop);
                     bush.Spawner = this;
@@ -112,7 +111,7 @@ public class SpawnBushes : MonoBehaviour, ISpawner
             {
                 case WeaponType.Wooden:
                     HP_Median = 1f;
-                    Atk_Median = 0f;
+                    Atk_Median = 10f;
                     Def_Median = 0f;
                     switch (area.typeOfStatDrop)
                     {
@@ -123,7 +122,7 @@ public class SpawnBushes : MonoBehaviour, ISpawner
                     break;
                 case WeaponType.Bronze:
                     HP_Median = 1f;
-                    Atk_Median = 0f;
+                    Atk_Median = 10f;
                     Def_Median = 0f;
                     switch (area.typeOfStatDrop)
                     {
@@ -136,7 +135,7 @@ public class SpawnBushes : MonoBehaviour, ISpawner
                 case WeaponType.Gold:
                 case WeaponType.Epic:
                     HP_Median = 1f;
-                    Atk_Median = 0f;
+                    Atk_Median = 10f;
                     Def_Median = 0f;
                     switch (area.typeOfStatDrop)
                     {
@@ -158,6 +157,7 @@ public class SpawnBushes : MonoBehaviour, ISpawner
             if (enemy == sr.enemy) // find the dead enemy 
             {
                 StartCoroutine(RespawnEnemy(sr));
+                break;
             }
         }
     }
@@ -178,9 +178,7 @@ public class SpawnBushes : MonoBehaviour, ISpawner
     {
         float r = UnityEngine.Random.Range(4f, 8f);
         yield return new WaitForSeconds(r);
-
-        Debug.Log("index : BEFORE  " + spawnResults.IndexOf(sr));
-
+        
         int r1 = UnityEngine.Random.Range(1, 4);
         switch (r1)
         {
@@ -188,9 +186,7 @@ public class SpawnBushes : MonoBehaviour, ISpawner
             case 2: sr.source.typeOfStatDrop = TypeOfStatIncrease.ATK; break;
             case 3: sr.source.typeOfStatDrop = TypeOfStatIncrease.DEF; break;
             default: sr.source.typeOfStatDrop = TypeOfStatIncrease.HP; break;
-        }
-        Debug.Log("index : AFTER  " + spawnResults.IndexOf(sr));
-        
+        }        
 
         float y = sr.source.spawnLocation.position.y;
         ScaleToYaxis(y, sr.source);
@@ -202,8 +198,6 @@ public class SpawnBushes : MonoBehaviour, ISpawner
         bush.Spawner = this;
         result.enemy = bush;
         result.source = sr.source;
-        Debug.Log("index : AFTERAFTER " + spawnResults.IndexOf(sr));
-        Debug.Log("count : " + spawnResults.Count);
 
         spawnResults[spawnResults.IndexOf(sr) >= 0 ? spawnResults.IndexOf(sr) : 0] = result; 
     }

@@ -13,10 +13,12 @@ public class DestructableBush : MonoBehaviour
         {  
             leaves.gameObject.SetActive(true);
             leaves.transform.SetParent(null);            
-            IBushDie bush = Interface.Find<IBushDie>(gameObject);
-            if (bush != null)
-                bush.Die();
-            Destroy(gameObject, 0.1f);
+            ////IBushDie bush = Interface.Find<IBushDie>(gameObject);
+            ////if (bush != null)
+            ////{
+            ////    bush.Die();
+            ////}
+            Destroy(gameObject);
         }
     }    
 }

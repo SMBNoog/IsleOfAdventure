@@ -23,9 +23,9 @@ public class Bush : Enemy, IBushDie
     public void Initialize(float HP, Vector3 pos, float Atk, float Def, float amountToStatToGive, TypeOfStatIncrease stat)
     {
         float multiplier = UnityEngine.Random.Range(-.1f, .3f);
-        this.HP = 0;
-        this.Atk = 0;
-        this.Def = 0;
+        this.HP = HP;
+        this.Atk = Atk;
+        this.Def = Def;
         transform.position = pos;
         amountOfStatToGiveAponDeath = amountToStatToGive;
         typeOfStatIncrease = stat;
@@ -40,6 +40,7 @@ public class Bush : Enemy, IBushDie
             case 1: GiveStatsToPlayerAponDeath(amountOfStatToGiveAponDeath, typeOfStatIncrease); break;
             default: break;
         }
+        Debug.Log("Calling Died this");
         Spawner.Died(this);
     }
 

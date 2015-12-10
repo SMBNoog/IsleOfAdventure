@@ -12,15 +12,16 @@ public class SceneLoader : MonoBehaviour {
     void Start()
     {
         StartCoroutine(LoadALevel(GameInfo.AreaToTeleportTo + ""));
+        progressBar.value = 0f;
         //StartCoroutine(LoadALevel("World"));
     }
 
     private IEnumerator LoadALevel(string sceneName)
     {
+        yield return new WaitForSeconds(6f);
         async = SceneManager.LoadSceneAsync(sceneName);
+        //yield return new WaitForSeconds(6f);
         yield return async;
-
-        yield return new WaitForSeconds(1f);
     }
 
     void Update()
@@ -29,6 +30,11 @@ public class SceneLoader : MonoBehaviour {
         {
             //Debug.Log(async.progress);
             progressBar.value = async.progress * 100f;
+        }
+        else
+        {
+            progressBar.value += .015f;
+            return;
         }
 
     }
