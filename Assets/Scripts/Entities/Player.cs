@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using System;
 using CnControls;
+using UnityEngine.SceneManagement;
 
 [System.Serializable]
 public class Weapons
@@ -31,6 +32,7 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
 
     // ICurrentHP interface
     public float currentHP { get { return HP; } }
+    public float currentMaxHP { get { return maxHP; } }
 
     public float weaponYoffset = 0.6f;
     public float weaponXoffSet = 0.6f;
@@ -149,8 +151,12 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
 
             // Regen when Idle and not max HP
             if (actionState == ActionState.Idle && HP < maxHP)
-                HP += maxHP * regenHP_Multiplier;
-            
+            {
+                if ((maxHP * regenHP_Multiplier) + HP > maxHP)
+                    HP = maxHP;
+                else
+                    HP += maxHP * regenHP_Multiplier;
+            }                   
             
             // Right Stick (Weapon Movement)
             float horizontalR = CnInputManager.GetAxisRaw("HorizontalRight");
@@ -173,7 +179,7 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
 
                     // If Weapon is below the waist of the player change the sorting order to display above
                     if (verticalR < -0.2f)
-                        w.weapon.GetComponentInChildren<SpriteRenderer>().sortingOrder = 101;
+                        w.weapon.GetComponentInChildren<SpriteRenderer>().sortingOrder = 111;
                     else
                         w.weapon.GetComponentInChildren<SpriteRenderer>().sortingOrder = 80;
 
@@ -388,7 +394,7 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
     }
 
     public override void Die()
-    {
+    {        
         if(wellBeing != WellBeingState.Dead)
         {
             wellBeing = WellBeingState.Dead;
@@ -427,16 +433,16 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
                 }            
                 else if(GameInfo.AreaToTeleportTo == GameInfo.Area.TutorialArea)
                 {
+                    anim.SetTrigger("Respawn");
                     rb2D.transform.position = new Vector2(-85f, -108f);
                     wellBeing = WellBeingState.Alive;
                     rb2D.isKinematic = false;
                     anim.gameObject.SetActive(true);
-                    anim.SetTrigger("Respawn");
                 }    
                 else // Forest or Castle
                 {
                     GameInfo.AreaToTeleportTo = GameInfo.Area.World;
-                    Application.LoadLevel("SceneLoader");
+                    SceneManager.LoadScene("SceneLoader");
                 }
             }
         }

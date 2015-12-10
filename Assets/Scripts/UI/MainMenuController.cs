@@ -1,11 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class MainMenuController : MonoBehaviour {
 
     public Text userName;
     public Image inputField;
+
+    public Button playButton;
+    public Image playerImage;
 
     public GameObject inputCanvas;
 
@@ -14,11 +18,14 @@ public class MainMenuController : MonoBehaviour {
         inputCanvas.SetActive(false);
         PlayerPrefs.DeleteAll();
         //Debug.Log(GameInfo.TutorialCompleted);
+
         if (userName.text == "noname")
         {
             userName.text = GameInfo.PlayerName;
             userName.gameObject.SetActive(true);
         }
+
+
         //if (GameInfo.PlayerName != null)
         //{
         //    userName.text = GameInfo.PlayerName;
@@ -27,20 +34,21 @@ public class MainMenuController : MonoBehaviour {
         //}
     }
 
-	public void StartGame()
+	public void PlayButton()
     {        
         
         if (!GameInfo.TutorialCompleted)
         {
             GameInfo.AreaToTeleportTo = GameInfo.Area.TutorialArea;
-            
+            playButton.gameObject.SetActive(false);
+            playerImage.gameObject.SetActive(true);
             StartCoroutine(NameCheckThenStart());         
         }
         else
         {            
             GameInfo.AreaToTeleportTo = GameInfo.Area.World;
             inputCanvas.SetActive(true);
-            Application.LoadLevel("SceneLoader");
+            SceneManager.LoadScene("SceneLoader");
         }
     }
 
@@ -49,7 +57,7 @@ public class MainMenuController : MonoBehaviour {
         if (userName.text != "")
         {
             inputCanvas.SetActive(true);
-            Application.LoadLevel("SceneLoader");
+            SceneManager.LoadScene("SceneLoader");
         }
         else
         {

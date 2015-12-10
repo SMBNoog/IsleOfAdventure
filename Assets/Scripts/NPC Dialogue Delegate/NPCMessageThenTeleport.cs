@@ -2,6 +2,7 @@
 using System.Collections;
 using System;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public enum NPCTo { Tutorial, Forest, Castle, World, NoWhere, MainMenu }
 
@@ -32,8 +33,6 @@ public class NPCMessageThenTeleport : MonoBehaviour, INPCMessageAndAction {
 
     private IAttributesManager attributes;
     private IMessageDelegate messageDelegate;
-
-    private GameObject tempPlayer;
 
     public string DialogMessage
     {
@@ -116,7 +115,7 @@ public class NPCMessageThenTeleport : MonoBehaviour, INPCMessageAndAction {
             //        Debug.Log("Couldn't find ICurrentPos");           
             
             Time.timeScale = 1.0f;
-            Application.LoadLevel(GameInfo.sceneLoader);
+            SceneManager.LoadScene(GameInfo.sceneLoader);
         }
     }
     
@@ -128,7 +127,6 @@ public class NPCMessageThenTeleport : MonoBehaviour, INPCMessageAndAction {
 
         if (attributes != null && Skeleton.numberOfTutorialSkeletons <= 0)
         {
-            tempPlayer = other.gameObject;
             Time.timeScale = 0.0f;
 
             switch (NPCTeleportTo)
@@ -145,7 +143,7 @@ public class NPCMessageThenTeleport : MonoBehaviour, INPCMessageAndAction {
 
             if (messageDelegate != null)
             {
-                messageDelegate.ShowMessage(DialogMessage, okButton, cancelButton, OnClickOK);
+                messageDelegate.ShowMessageWithOkCancel(DialogMessage, okButton, cancelButton, OnClickOK);
             }
         }        
     }
