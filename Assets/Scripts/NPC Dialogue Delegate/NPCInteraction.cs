@@ -5,12 +5,19 @@ using UnityEngine.SceneManagement;
 public enum TypeOfNPC
 {
     InTutorialToWorld,
-    Sign,
-    ToForest,
-    ToCastle,
+    InTutorialIntro,
+    InTutorialInfo,
+    SignAtSpawnIn,
+    SignAtForest,
+    SignAtCastle,
+    SignAtTown,
+    InWorldToForest,
+    InWorldToCastle,
+    InWorldAtTown,
     InForestChestToWorld,
     InCastleBlock,
-    InCastleToWorld
+    InCastleToWorld,
+    Boss
 }
 
 public class NPCInteraction : MonoBehaviour {
@@ -74,19 +81,28 @@ public class NPCInteraction : MonoBehaviour {
                     message = DialogueDictionary.NPCMessage_Dictionary[DictionaryKey.InTutorialToWorld_Completed];
                     okButton = DialogueDictionary.NPCButtonOKText_Dictionary[DictionaryKey.InTutorialToWorld_Completed];
                     cancelButton = DialogueDictionary.NPCButtonCancelText_Dictionary[DictionaryKey.InTutorialToWorld_Completed];
-                }
-                break;
+                } break;
+            case TypeOfNPC.InTutorialIntro:
+                message = DialogueDictionary.NPCMessage_Dictionary[DictionaryKey.InTutorialIntro];
+                okButton = DialogueDictionary.NPCButtonOKText_Dictionary[DictionaryKey.InTutorialIntro];
+                Destroy(gameObject, .01f); break;
+            case TypeOfNPC.InTutorialInfo:
+                message = DialogueDictionary.NPCMessage_Dictionary[DictionaryKey.InTutorialInfo];
+                okButton = DialogueDictionary.NPCButtonOKText_Dictionary[DictionaryKey.InTutorialInfo];
+                Destroy(gameObject, .01f); break;
+
         }
     }
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        AssignMessage();
+        
 
         attributes = Interface.Find<IAttributesManager>(other.gameObject);
         
         if (attributes != null)
         {
+            AssignMessage();
             Time.timeScale = 0.0f;
 
             IMessageDelegate messageDelegate = Interface.Find<IMessageDelegate>(FindObjectOfType<Dialogue>().gameObject);

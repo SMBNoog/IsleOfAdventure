@@ -64,6 +64,12 @@ public interface ICurrentPos
 public interface ICurrentHP
 {
     float currentHP { get; }
+    float currentMaxHP { get; }
+}
+
+public interface IBushDie
+{
+    void Die();
 }
 
 public static class Interface

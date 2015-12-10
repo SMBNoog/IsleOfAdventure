@@ -119,7 +119,7 @@ public class SpawnEnemies : MonoBehaviour, ISpawner {
                     switch (typeOfStat)
                     {
                         case TypeOfStatIncrease.ATK: AmountOfStatToGive = 1f * (scale - (scale / 3)); break;
-                        case TypeOfStatIncrease.DEF: AmountOfStatToGive = 0.005f * (scale - (scale / 3)); break;
+                        case TypeOfStatIncrease.DEF: AmountOfStatToGive = 0.005f; break;
                         case TypeOfStatIncrease.HP: AmountOfStatToGive = 10 * (scale - (scale / 3)); break;
                     }
                     break;
@@ -132,7 +132,7 @@ public class SpawnEnemies : MonoBehaviour, ISpawner {
                     switch (typeOfStat)
                     {
                         case TypeOfStatIncrease.ATK: AmountOfStatToGive = 50f * (scale - (scale / 3)); break;
-                        case TypeOfStatIncrease.DEF: AmountOfStatToGive = 0.005f * (scale - (scale / 3)); break;
+                        case TypeOfStatIncrease.DEF: AmountOfStatToGive = 0.005f; break;
                         case TypeOfStatIncrease.HP: AmountOfStatToGive = 500f * (scale - (scale / 3)); break;
                     }
                     break;
@@ -166,7 +166,7 @@ public class SpawnEnemies : MonoBehaviour, ISpawner {
 
     IEnumerator RespawnEnemy(SpawnResult sr)
     {
-        float r = UnityEngine.Random.Range(10f, 20f);
+        float r = UnityEngine.Random.Range(30f, 120f);
         yield return new WaitForSeconds(r);
 
         float y = sr.source.spawnLocation.position.y;

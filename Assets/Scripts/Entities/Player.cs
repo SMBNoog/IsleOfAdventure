@@ -31,7 +31,8 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
     private WeaponType currentWeapon;
 
     // ICurrentHP interface
-    public float currentHP { get { return HP; } }
+    public float currentHP { get { return HP_Slider.value; } }
+    public float currentMaxHP { get { return maxHP; } }
 
     public float weaponYoffset = 0.6f;
     public float weaponXoffSet = 0.6f;
@@ -428,11 +429,11 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
                 }            
                 else if(GameInfo.AreaToTeleportTo == GameInfo.Area.TutorialArea)
                 {
+                    anim.SetTrigger("Respawn");
                     rb2D.transform.position = new Vector2(-85f, -108f);
                     wellBeing = WellBeingState.Alive;
                     rb2D.isKinematic = false;
                     anim.gameObject.SetActive(true);
-                    anim.SetTrigger("Respawn");
                 }    
                 else // Forest or Castle
                 {

@@ -8,6 +8,9 @@ public class MainMenuController : MonoBehaviour {
     public Text userName;
     public Image inputField;
 
+    public Button playButton;
+    public Image playerImage;
+
     public GameObject inputCanvas;
 
     void Start()
@@ -31,13 +34,14 @@ public class MainMenuController : MonoBehaviour {
         //}
     }
 
-	public void StartGame()
+	public void PlayButton()
     {        
         
         if (!GameInfo.TutorialCompleted)
         {
             GameInfo.AreaToTeleportTo = GameInfo.Area.TutorialArea;
-            
+            playButton.gameObject.SetActive(false);
+            playerImage.gameObject.SetActive(true);
             StartCoroutine(NameCheckThenStart());         
         }
         else

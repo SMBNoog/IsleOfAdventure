@@ -26,7 +26,7 @@ public class Enemy : Entity {
     // Apon death give stats to player
     protected void GiveStatsToPlayerAponDeath(float amount, TypeOfStatIncrease stat)
     {
-        Player player = FindObjectOfType<Player>();  // fix this
+        Player player = FindObjectOfType<Player>(); 
         player.IncreaseStat(amount, stat);
     }
 
@@ -40,7 +40,8 @@ public class Enemy : Entity {
             float wAtk = weapon.Atk;  //weapon + base          
             float dmg = wAtk - (wAtk * Def);
             //Debug.Log("Weapon ATK = " + wAtk);
-            DamagedBy(dmg);
+            if(HP > 0)
+                DamagedBy(dmg);
             //actionState = ActionState.EngagedInBattle;
             SoundManager.Instance.Play(TypeOfClip.SwordHit);            
         }
