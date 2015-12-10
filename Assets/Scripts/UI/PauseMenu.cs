@@ -35,7 +35,7 @@ public class PauseMenu : MonoBehaviour
             else
                 Debug.Log("ICurrentHP couldn't be found.");
             item.currentHP.text = (int)currentHP.currentHP+"";
-            item.maxHP.text = "\\ "+(int)currentHP.currentMaxHP;
+            item.maxHP.text = (int)currentHP.currentMaxHP+"";
             IPlayerCurrentWeapon weap = Interface.Find<IPlayerCurrentWeapon>(interfaceSupplier);
             if(weap != null)
             {

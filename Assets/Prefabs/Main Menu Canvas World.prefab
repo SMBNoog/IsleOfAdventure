@@ -543,7 +543,7 @@ GameObject:
   - 222: {fileID: 22205674}
   - 114: {fileID: 11439208}
   m_Layer: 5
-  m_Name: HP(Label)
+  m_Name: HP(Label \) (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -663,6 +663,23 @@ GameObject:
   - 114: {fileID: 11433522}
   m_Layer: 5
   m_Name: Text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &176744
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 224: {fileID: 22473338}
+  - 222: {fileID: 22270264}
+  - 114: {fileID: 11477004}
+  m_Layer: 5
+  m_Name: HP(Label)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1565,18 +1582,18 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 12800000, guid: 05aa22dffe8818846b196c26d7362d94, type: 3}
-    m_FontSize: 24
+    m_FontSize: 18
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 2
+    m_MinSize: 1
     m_MaxSize: 40
-    m_Alignment: 6
+    m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Health
+  m_Text: /
 --- !u!114 &11439426
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1909,7 +1926,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.678}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.822}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -2585,6 +2602,39 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Weapon
+--- !u!114 &11477004
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 176744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: 05aa22dffe8818846b196c26d7362d94, type: 3}
+    m_FontSize: 24
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 2
+    m_MaxSize: 40
+    m_Alignment: 6
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: Health
 --- !u!114 &11477834
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2689,7 +2739,7 @@ MonoBehaviour:
     m_Font: {fileID: 12800000, guid: 05aa22dffe8818846b196c26d7362d94, type: 3}
     m_FontSize: 18
     m_FontStyle: 0
-    m_BestFit: 0
+    m_BestFit: 1
     m_MinSize: 1
     m_MaxSize: 40
     m_Alignment: 5
@@ -2770,7 +2820,7 @@ MonoBehaviour:
     m_Font: {fileID: 12800000, guid: 05aa22dffe8818846b196c26d7362d94, type: 3}
     m_FontSize: 18
     m_FontStyle: 0
-    m_BestFit: 0
+    m_BestFit: 1
     m_MinSize: 1
     m_MaxSize: 40
     m_Alignment: 3
@@ -3314,6 +3364,12 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 170002}
+--- !u!222 &22270264
+CanvasRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 176744}
 --- !u!222 &22270266
 CanvasRenderer:
   m_ObjectHideFlags: 1
@@ -3420,11 +3476,11 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 22496434}
-  m_RootOrder: 2
+  m_RootOrder: 11
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -58.8, y: 25.475}
-  m_SizeDelta: {x: 66.5, y: 34}
+  m_AnchoredPosition: {x: 26.85, y: 24.736}
+  m_SizeDelta: {x: 12.4, y: 35.251}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &22403450
 RectTransform:
@@ -3458,8 +3514,8 @@ RectTransform:
   m_RootOrder: 7
   m_AnchorMin: {x: 0.54200006, y: 0.2558635}
   m_AnchorMax: {x: 0.54200006, y: 1}
-  m_AnchoredPosition: {x: -4.3379035, y: -3.586792}
-  m_SizeDelta: {x: 57.896, y: -136.43}
+  m_AnchoredPosition: {x: -14.371, y: -4.6316}
+  m_SizeDelta: {x: 51, y: -135.78679}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &22404530
 RectTransform:
@@ -4051,8 +4107,8 @@ RectTransform:
   m_RootOrder: 8
   m_AnchorMin: {x: 1, y: 0.2558635}
   m_AnchorMax: {x: 1, y: 0.2558635}
-  m_AnchoredPosition: {x: -52.713, y: 82.19}
-  m_SizeDelta: {x: 53.1, y: 35.123}
+  m_AnchoredPosition: {x: -54.8, y: 80.976}
+  m_SizeDelta: {x: 51, y: 35.3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &22459570
 RectTransform:
@@ -4123,6 +4179,23 @@ RectTransform:
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: -45, y: -39.941}
   m_SizeDelta: {x: 48.5, y: 50.6}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!224 &22473338
+RectTransform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 176744}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 22496434}
+  m_RootOrder: 2
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -61.2, y: 25.475}
+  m_SizeDelta: {x: 61.7, y: 34}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &22475126
 RectTransform:
@@ -4313,7 +4386,7 @@ RectTransform:
   m_Children:
   - {fileID: 22440692}
   - {fileID: 22477264}
-  - {fileID: 22402018}
+  - {fileID: 22473338}
   - {fileID: 22493986}
   - {fileID: 22430454}
   - {fileID: 22482916}
@@ -4322,11 +4395,12 @@ RectTransform:
   - {fileID: 22458364}
   - {fileID: 22423176}
   - {fileID: 22430562}
+  - {fileID: 22402018}
   m_Father: {fileID: 22450284}
   m_RootOrder: 0
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 141.6, y: -151.32}
+  m_AnchoredPosition: {x: 141.9, y: -151.01}
   m_SizeDelta: {x: 226.7, y: 230}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &22496650

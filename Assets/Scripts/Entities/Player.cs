@@ -31,7 +31,7 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
     private WeaponType currentWeapon;
 
     // ICurrentHP interface
-    public float currentHP { get { return HP_Slider.value; } }
+    public float currentHP { get { return HP; } }
     public float currentMaxHP { get { return maxHP; } }
 
     public float weaponYoffset = 0.6f;
@@ -151,8 +151,12 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
 
             // Regen when Idle and not max HP
             if (actionState == ActionState.Idle && HP < maxHP)
-                HP += maxHP * regenHP_Multiplier;
-            
+            {
+                if ((maxHP * regenHP_Multiplier) + HP > maxHP)
+                    HP = maxHP;
+                else
+                    HP += maxHP * regenHP_Multiplier;
+            }                   
             
             // Right Stick (Weapon Movement)
             float horizontalR = CnInputManager.GetAxisRaw("HorizontalRight");
@@ -390,7 +394,7 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
     }
 
     public override void Die()
-    {
+    {        
         if(wellBeing != WellBeingState.Dead)
         {
             wellBeing = WellBeingState.Dead;

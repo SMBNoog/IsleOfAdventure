@@ -64,6 +64,13 @@ public class NPCInteraction : MonoBehaviour {
 
             SceneManager.LoadScene(GameInfo.sceneLoader);
         }
+        
+    }
+
+    IEnumerator DelayThenEnableCollider()
+    {
+        yield return new WaitForSeconds(1.5f);
+        GetComponent<Collider2D>().enabled = true;
     }
 
     void AssignMessage()
@@ -96,10 +103,8 @@ public class NPCInteraction : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        
-
         attributes = Interface.Find<IAttributesManager>(other.gameObject);
-        
+
         if (attributes != null)
         {
             AssignMessage();
@@ -113,8 +118,10 @@ public class NPCInteraction : MonoBehaviour {
                     messageDelegate.ShowMessageWithOk(message, okButton);                
                 else
                     messageDelegate.ShowMessageWithOkCancel(message, okButton, cancelButton, OnClickOK);
-
+                GetComponent<Collider2D>().enabled = false;
+                StartCoroutine(DelayThenEnableCollider());
             }
         }
+        
     }
 }

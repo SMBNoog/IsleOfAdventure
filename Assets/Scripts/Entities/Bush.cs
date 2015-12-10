@@ -18,15 +18,15 @@ public class Bush : Enemy, IBushDie
     public Team Team { get { return Team.Enemy; } }
     public Vector2 Pos { get { return transform.position; } }
     public float Atk { get; set; }
-    
+
     // Skeleton Instance
-    public void Initialize(float HP, float Atk, float Def, float amountToStatToGive, TypeOfStatIncrease stat)
+    public void Initialize(float HP, Vector3 pos, float Atk, float Def, float amountToStatToGive, TypeOfStatIncrease stat)
     {
         float multiplier = UnityEngine.Random.Range(-.1f, .3f);
         this.HP = 0;
         this.Atk = 0;
         this.Def = 0;
-        
+        transform.position = pos;
         amountOfStatToGiveAponDeath = amountToStatToGive;
         typeOfStatIncrease = stat;
 

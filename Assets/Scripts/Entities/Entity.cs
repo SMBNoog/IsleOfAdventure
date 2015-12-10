@@ -34,7 +34,7 @@ public abstract class Entity : MonoBehaviour {
     {
         //    Debug.Log(this + ":  Current HP: " + HP);
         //    Debug.Log(this + ":  Damage taken: " + dmg);
-        HP = (HP - dmg) < 0 ? 0 : HP - dmg;
+        HP = (HP - dmg) <= 0 ? 0 : HP - dmg;
         if (HP == 0)
             Die();                    
     }
