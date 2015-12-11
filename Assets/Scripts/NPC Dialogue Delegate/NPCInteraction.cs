@@ -15,7 +15,7 @@ public enum TypeOfNPC
     InWorldToCastle,
     InWorldAtTown,
     InForestChestToWorld,
-    InCastleBlock,
+    InCastleFirstDoor,
     InCastleToWorld,
     Boss
 }
@@ -27,6 +27,7 @@ public class NPCInteraction : MonoBehaviour {
 
     private IAttributesManager attributes;
     private IMessageDelegate messageDelegate;
+    private IWeapon weapon;
 
     string message;
     string okButton;
@@ -63,6 +64,13 @@ public class NPCInteraction : MonoBehaviour {
             Time.timeScale = 1.0f;
 
             SceneManager.LoadScene(GameInfo.sceneLoader);
+        } 
+        else
+        {
+            if(GameInfo.AreaToTeleportTo == GameInfo.Area.Castle)
+            {
+                gameObject.SetActive(false);
+            }
         }
         
     }
@@ -97,12 +105,27 @@ public class NPCInteraction : MonoBehaviour {
                 message = DialogueDictionary.NPCMessage_Dictionary[DictionaryKey.InTutorialInfo];
                 okButton = DialogueDictionary.NPCButtonOKText_Dictionary[DictionaryKey.InTutorialInfo];
                 Destroy(gameObject, .01f); break;
-
+            case TypeOfNPC.InCastleFirstDoor:
+                if(weapon.WeaponType == WeaponType.Wooden)
+                {
+                    message = DialogueDictionary.NPCMessage_Dictionary[DictionaryKey.InCastleFirstDoorWooden];
+                    okButton = DialogueDictionary.NPCButtonOKText_Dictionary[DictionaryKey.InCastleFirstDoorWooden];
+                }
+                else
+                {
+                    message = DialogueDictionary.NPCMessage_Dictionary[DictionaryKey.InCastleFirstDoorNonWooden];
+                    okButton = DialogueDictionary.NPCButtonOKText_Dictionary[DictionaryKey.InCastleFirstDoorNonWooden];
+                }
+                break;
+            case TypeOfNPC.InCastleToWorld:
+                message = DialogueDictionary.NPCMessage_Dictionary[DictionaryKey.InCastleToWorld];
+                okButton = DialogueDictionary.NPCButtonOKText_Dictionary[DictionaryKey.InCastleToWorld]; break;
         }
     }
 
     void OnTriggerEnter2D(Collider2D other)
     {
+        weapon = Interface.Find<IWeapon>(other.gameObject);
         attributes = Interface.Find<IAttributesManager>(other.gameObject);
 
         if (attributes != null)
@@ -115,7 +138,7 @@ public class NPCInteraction : MonoBehaviour {
             if (messageDelegate != null)
             {
                 if (NPCTeleportTo == NPCTo.NoWhere || Skeleton.numberOfTutorialSkeletons > 0)
-                    messageDelegate.ShowMessageWithOk(message, okButton);                
+                    messageDelegate.ShowMessageWithOk(message, okButton, OnClickOK);                
                 else
                     messageDelegate.ShowMessageWithOkCancel(message, okButton, cancelButton, OnClickOK);
                 GetComponent<Collider2D>().enabled = false;

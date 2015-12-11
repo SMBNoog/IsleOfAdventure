@@ -822,6 +822,18 @@ Prefab:
       propertyPath: m_audioClip
       value: 
       objectReference: {fileID: 8300000, guid: 588aecb6c236e114a9885fa59cbf1832, type: 3}
+    - target: {fileID: 8238104, guid: 9e94189aa41b7a64d964179528cd80c3, type: 2}
+      propertyPath: panLevelCustomCurve.m_RotationOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8238104, guid: 9e94189aa41b7a64d964179528cd80c3, type: 2}
+      propertyPath: spreadCustomCurve.m_RotationOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8238104, guid: 9e94189aa41b7a64d964179528cd80c3, type: 2}
+      propertyPath: reverbZoneMixCustomCurve.m_RotationOrder
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9e94189aa41b7a64d964179528cd80c3, type: 2}
   m_IsPrefabParent: 0

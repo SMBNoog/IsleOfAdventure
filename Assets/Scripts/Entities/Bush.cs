@@ -40,7 +40,6 @@ public class Bush : Enemy, IBushDie
             case 1: GiveStatsToPlayerAponDeath(amountOfStatToGiveAponDeath, typeOfStatIncrease); break;
             default: break;
         }
-        Debug.Log("Calling Died this");
         Spawner.Died(this);
     }
 

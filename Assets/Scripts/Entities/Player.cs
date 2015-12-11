@@ -150,7 +150,7 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
                 HP_Slider.value = HP;
 
             // Regen when Idle and not max HP
-            if (actionState == ActionState.Idle && HP < maxHP)
+            if (/*actionState == ActionState.Idle &&*/ HP < maxHP && actionState != ActionState.EngagedInBattle)
             {
                 if ((maxHP * regenHP_Multiplier) + HP > maxHP)
                     HP = maxHP;
@@ -271,7 +271,7 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
             if (attacker != null)  // If it's an attacker
             {
                 float dmg = attacker.Atk - (attacker.Atk * Def);
-                actionState = ActionState.EngagedInBattle;
+                
                 if (canTakeDamage)
                 {
                     canTakeDamage = false;
@@ -280,6 +280,12 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
                 }
             }
         }
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if(other.gameObject.tag == "Enemy")
+            actionState = ActionState.EngagedInBattle;
     }
 
     IEnumerator DelayWhenDamageCanBeRecieved()

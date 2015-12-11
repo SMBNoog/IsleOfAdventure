@@ -35,6 +35,7 @@ public class Dialogue : MonoBehaviour, IMessageDelegate
     public void OnClickOkButtonSingle()
     {
         Time.timeScale = 1.0f;
+        dialogueDelegate();
         dialogue_PanelOk.gameObject.SetActive(false);
     }
     
@@ -47,10 +48,11 @@ public class Dialogue : MonoBehaviour, IMessageDelegate
         dialogue_PanelOkCancel.gameObject.SetActive(true);
     }
 
-    public void ShowMessageWithOk(string dialogMessage, string okButton)
+    public void ShowMessageWithOk(string dialogMessage, string okButton, DialogueDelegate onClickOK)
     {
         textSingle.text = dialogMessage;
         okButtonSingle.text = okButton;
+        dialogueDelegate = onClickOK;
         dialogue_PanelOk.gameObject.SetActive(true);
     }
 }

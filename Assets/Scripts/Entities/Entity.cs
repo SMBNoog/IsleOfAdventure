@@ -38,7 +38,6 @@ public abstract class Entity : MonoBehaviour {
         if (HP == 0)
         {
             Die();
-            Debug.Log("calling die()");
         }
                               
     }

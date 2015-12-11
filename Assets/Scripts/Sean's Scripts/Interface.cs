@@ -47,7 +47,7 @@ public interface IMessageDelegate
     void OnClickOkButtonDuo();
     void OnClickCancelDuo();
     void ShowMessageWithOkCancel(string dialogMessage, string okButton, string cancelButton, Dialogue.DialogueDelegate onClickOK);
-    void ShowMessageWithOk(string dialogMessage, string okButton);
+    void ShowMessageWithOk(string dialogMessage, string okButton, Dialogue.DialogueDelegate onClickOK);
 }
 
 public interface INPCMessageAndAction
