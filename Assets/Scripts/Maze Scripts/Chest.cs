@@ -67,11 +67,38 @@ public class Chest : MonoBehaviour, INPCMessageAndAction
         }
     }
 
-    //Button Control Scripts Below...
-
     public void OnClickOK()
     {
-        playerscript.UpgradeWeapon(weaponreward);
+        if (weaponreward == WeaponType.Bronze)
+        {
+            if (playerscript.weaponType == WeaponType.Silver || playerscript.weaponType == WeaponType.Bronze || playerscript.weaponType == WeaponType.Gold || playerscript.weaponType == WeaponType.Epic)
+                Debug.Log("Cannot Upgrade");
+            else
+                playerscript.UpgradeWeapon(weaponreward);
+        }
+        else if(weaponreward == WeaponType.Silver)
+        {
+            if(playerscript.weaponType == WeaponType.Bronze || playerscript.weaponType == WeaponType.Silver)
+                Debug.Log("Cannot Upgrade");
+            else
+                playerscript.UpgradeWeapon(weaponreward);
+        }
+        else if (weaponreward == WeaponType.Gold)
+        {
+            if (playerscript.weaponType == WeaponType.Bronze || playerscript.weaponType == WeaponType.Silver || playerscript.weaponType == WeaponType.Gold)
+                Debug.Log("Cannot Upgrade");
+            else
+                playerscript.UpgradeWeapon(weaponreward);
+        }
+        else if (weaponreward == WeaponType.Epic)
+        {
+            if (playerscript.weaponType == WeaponType.Epic)
+                Debug.Log("Cannot Upgrade");
+            else
+                playerscript.UpgradeWeapon(weaponreward);
+        }
+
+
         IAttributesManager attribute = Interface.Find<IAttributesManager>(player);
         if (attribute != null)
         {

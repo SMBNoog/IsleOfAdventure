@@ -367,7 +367,7 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
     public void UpgradeWeapon(WeaponType type)
     {
         currentWeapon = type;
-        switch(type)
+        switch (type)
         {   // When upgrading weapon boost max HP
             case WeaponType.Wooden: maxHP += 100f; break;
             case WeaponType.Bronze: maxHP += 1000f; break;
@@ -376,7 +376,6 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
             case WeaponType.Epic: maxHP += 7500f; break;
         }
         LoadWeapon(type);
-        //save
     }
 
     public void DebugChangeToBronzeButton()
