@@ -29,10 +29,22 @@ public class NPCInteraction : MonoBehaviour {
     //private IMessageDelegate messageDelegate;
     private IWeapon weapon;
 
-    string message;
-    string okButton;
-    string cancelButton;
+    string message = "No Message";
+    string okButton = "Ok";
+    string cancelButton = "Cancel";
     
+    void Start()
+    {
+        StartCoroutine(DelayThenTurnOnCollider());
+    }
+
+    IEnumerator DelayThenTurnOnCollider()
+    {
+        GetComponent<Collider2D>().enabled = false;
+        yield return new WaitForSeconds(3f);
+        GetComponent<Collider2D>().enabled = true;
+    }
+
     public void OnClickOK()
     {
         if (attributes != null && NPCTeleportTo != NPCTo.NoWhere)
@@ -85,7 +97,7 @@ public class NPCInteraction : MonoBehaviour {
     {
         switch (typeOfNPC)
         {
-            case TypeOfNPC.InTutorialToWorld:
+            case TypeOfNPC.InTutorialToWorld:  // Tutorial >>> World
                 if (Skeleton.numberOfTutorialSkeletons > 0) // Do checks here for weapon or enemies killed
                 {
                     message = DialogueDictionary.NPCMessage_Dictionary[DictionaryKey.InTutorialToWorld_NotCompleted];
@@ -97,15 +109,15 @@ public class NPCInteraction : MonoBehaviour {
                     okButton = DialogueDictionary.NPCButtonOKText_Dictionary[DictionaryKey.InTutorialToWorld_Completed];
                     cancelButton = DialogueDictionary.NPCButtonCancelText_Dictionary[DictionaryKey.InTutorialToWorld_Completed];
                 } break;
-            case TypeOfNPC.InTutorialIntro:
+            case TypeOfNPC.InTutorialIntro: // Tutorial Intro 
                 message = DialogueDictionary.NPCMessage_Dictionary[DictionaryKey.InTutorialIntro];
                 okButton = DialogueDictionary.NPCButtonOKText_Dictionary[DictionaryKey.InTutorialIntro];
                 Destroy(gameObject, .01f); break;
-            case TypeOfNPC.InTutorialInfo:
+            case TypeOfNPC.InTutorialInfo: // Bush Info
                 message = DialogueDictionary.NPCMessage_Dictionary[DictionaryKey.InTutorialInfo];
                 okButton = DialogueDictionary.NPCButtonOKText_Dictionary[DictionaryKey.InTutorialInfo];
                 Destroy(gameObject, .01f); break;
-            case TypeOfNPC.InCastleFirstDoor:
+            case TypeOfNPC.InCastleFirstDoor:   // Castle First Door
                 if(weapon.WeaponType == WeaponType.Wooden)
                 {
                     message = DialogueDictionary.NPCMessage_Dictionary[DictionaryKey.InCastleFirstDoorWooden];
@@ -117,9 +129,15 @@ public class NPCInteraction : MonoBehaviour {
                     okButton = DialogueDictionary.NPCButtonOKText_Dictionary[DictionaryKey.InCastleFirstDoorNonWooden];
                 }
                 break;
-            case TypeOfNPC.InCastleToWorld:
+            case TypeOfNPC.InCastleToWorld: // Castle >>> World
                 message = DialogueDictionary.NPCMessage_Dictionary[DictionaryKey.InCastleToWorld];
-                okButton = DialogueDictionary.NPCButtonOKText_Dictionary[DictionaryKey.InCastleToWorld]; break;
+                okButton = DialogueDictionary.NPCButtonOKText_Dictionary[DictionaryKey.InCastleToWorld]; 
+                cancelButton = DialogueDictionary.NPCButtonCancelText_Dictionary[DictionaryKey.InCastleToWorld]; break;
+            case TypeOfNPC.InWorldToCastle: // World >>> Castle
+                message = DialogueDictionary.NPCMessage_Dictionary[DictionaryKey.InWorldToCastle]; break;
+            case TypeOfNPC.InWorldToForest: // World >>> Forest
+                message = DialogueDictionary.NPCMessage_Dictionary[DictionaryKey.InWorldToForest]; break;
+
         }
     }
 
@@ -137,8 +155,10 @@ public class NPCInteraction : MonoBehaviour {
 
             if (messageDelegate != null)
             {
-                if (NPCTeleportTo == NPCTo.NoWhere || Skeleton.numberOfTutorialSkeletons > 0)
-                    messageDelegate.ShowMessageWithOk(message, okButton, OnClickOK);                
+                if (NPCTeleportTo == NPCTo.NoWhere)
+                    messageDelegate.ShowMessageWithOk(message, okButton, OnClickOK);
+                else if (Skeleton.numberOfTutorialSkeletons > 0)
+                    messageDelegate.ShowMessageWithOk(message, okButton);
                 else
                     messageDelegate.ShowMessageWithOkCancel(message, okButton, cancelButton, OnClickOK);
                 GetComponent<Collider2D>().enabled = false;

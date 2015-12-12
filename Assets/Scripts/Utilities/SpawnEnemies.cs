@@ -68,11 +68,11 @@ public class SpawnEnemies : MonoBehaviour, ISpawner {
                 if (y < 20f) // easy
                     ScaleEnemyToWeaponType(1, area.typeOfStatDrop);
                 else if (y > 20f && y < 80f) // moderate
-                    ScaleEnemyToWeaponType(2, area.typeOfStatDrop);
+                    ScaleEnemyToWeaponType(1.5f, area.typeOfStatDrop);
                 else if (y > 80f && y < 170f) // hard
-                    ScaleEnemyToWeaponType(4, area.typeOfStatDrop);
+                    ScaleEnemyToWeaponType(3f, area.typeOfStatDrop);
                 else if (y > 170f)
-                    ScaleEnemyToWeaponType(5, area.typeOfStatDrop);
+                    ScaleEnemyToWeaponType(4f, area.typeOfStatDrop);
 
                 if (area.typeOfEnemy == TypeOfEnemy.Skeleton)
                 {
@@ -126,8 +126,8 @@ public class SpawnEnemies : MonoBehaviour, ISpawner {
                 case WeaponType.Silver:
                 case WeaponType.Gold:
                 case WeaponType.Epic:
-                    HP_Median = 12000 * scale;
-                    Atk_Median = 1200 * scale;
+                    HP_Median = 10000 * scale;
+                    Atk_Median = 1000 * scale;
                     Def_Median = 0.1f * scale;
                     switch (typeOfStat)
                     {

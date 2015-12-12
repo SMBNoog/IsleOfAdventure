@@ -7,7 +7,8 @@ public enum DictionaryKey {
                             InTutorialToWorld_NotCompleted,
                             InTutorialToWorld_Completed,
                             DirectionsSign,
-                            ToForestWooden,
+                            InWorldToCastle,
+                            InWorldToForest,
                             ToForestNonWooden,
                             InForestWooden,
                             InForestNonWooden,
@@ -23,7 +24,7 @@ public class DialogueDictionary : MonoBehaviour
     public static Dictionary<DictionaryKey, string> NPCButtonOKText_Dictionary = new Dictionary<DictionaryKey, string>();
     public static Dictionary<DictionaryKey, string> NPCButtonCancelText_Dictionary = new Dictionary<DictionaryKey, string>();
 
-    void Start()
+    void Awake()
     {
 
         // TEMPLATE
@@ -46,6 +47,19 @@ public class DialogueDictionary : MonoBehaviour
         NPCButtonOKText_Dictionary.Add(DictionaryKey.InTutorialToWorld_Completed, "Ok!");
         NPCButtonCancelText_Dictionary.Add(DictionaryKey.InTutorialToWorld_Completed, "I like it here!");
 
+
+        /********* NPC in World area for Castle. **********/
+        NPCMessage_Dictionary.Add(DictionaryKey.InWorldToCastle, "Enter the Castle?");
+        NPCButtonOKText_Dictionary.Add(DictionaryKey.InWorldToCastle, "Ok!");
+        NPCButtonCancelText_Dictionary.Add(DictionaryKey.InWorldToCastle, "I like it here!");
+
+        /********* NPC in World area for Forest. **********/
+        NPCMessage_Dictionary.Add(DictionaryKey.InWorldToForest, "Enter the Forest?");
+
+
+
+
+
         /********* First Door in castle area. **********/
         NPCMessage_Dictionary.Add(DictionaryKey.InCastleFirstDoorWooden, "You won't have a chance with that Wooden Sword. Go to the Forest to obtain a new one.");
         NPCButtonOKText_Dictionary.Add(DictionaryKey.InCastleFirstDoorWooden, "Ok!");
@@ -56,9 +70,9 @@ public class DialogueDictionary : MonoBehaviour
         /********* NPC in Castle area to teleport back to the World. **********/
         NPCMessage_Dictionary.Add(DictionaryKey.InCastleToWorld, "Travel back to the world?");
         NPCButtonOKText_Dictionary.Add(DictionaryKey.InCastleToWorld, "Sure!");
-        NPCButtonCancelText_Dictionary.Add(DictionaryKey.InCastleToWorld, "I like it here!");
+        NPCButtonCancelText_Dictionary.Add(DictionaryKey.InCastleToWorld, "Nah");
         
-        NPCMessage_Dictionary.Add(DictionaryKey.DirectionsSign, "Message");
+        NPCMessage_Dictionary.Add(DictionaryKey.DirectionsSign, "Forst West   Castle North");
 
         //npcDialogue.Add("Forest Wood", "Message");
         //npcDialogue.Add("Forest Non Wood", "Message");

@@ -55,4 +55,11 @@ public class Dialogue : MonoBehaviour, IMessageDelegate
         dialogueDelegate = onClickOK;
         dialogue_PanelOk.gameObject.SetActive(true);
     }
+    
+    public void ShowMessageWithOk(string dialogMessage, string okButton)
+    {
+        textSingle.text = dialogMessage;
+        okButtonSingle.text = okButton;
+        dialogue_PanelOk.gameObject.SetActive(true);
+    }
 }

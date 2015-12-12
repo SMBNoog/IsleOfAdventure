@@ -638,7 +638,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 140212}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -84.266975, y: -107.55485, z: 0}
+  m_LocalPosition: {x: -2.67, y: -17.71, z: 0}
   m_LocalScale: {x: 5, y: 5, z: 1}
   m_Children:
   - {fileID: 471690}
@@ -1744,7 +1744,7 @@ MonoBehaviour:
   HP_Cap: 1000000
   DEF_Cap: 0.5
   startingHP: 100
-  regenHP_Multiplier: 0.005
+  regenHP_Multiplier: 0.001
   startingAtk: 10
   startingDef: 0.01
   startingSpeed: 4
@@ -8498,12 +8498,12 @@ Canvas:
   m_RenderMode: 0
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
-  m_PixelPerfect: 0
+  m_PixelPerfect: 1
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 5
   m_TargetDisplay: 0
 --- !u!223 &22381490
 Canvas:
@@ -8520,8 +8520,8 @@ Canvas:
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
-  m_SortingLayerID: 1479863465
-  m_SortingOrder: 103
+  m_SortingLayerID: 0
+  m_SortingOrder: 100
   m_TargetDisplay: 0
 --- !u!224 &22415932
 RectTransform:
@@ -8680,9 +8680,9 @@ RectTransform:
   m_Father: {fileID: 22494328}
   m_RootOrder: 0
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -232.29414, y: -120.52017}
-  m_SizeDelta: {x: -459, y: -294}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 64, y: 36.3}
+  m_SizeDelta: {x: 128, y: 72.6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &22488774
 RectTransform:

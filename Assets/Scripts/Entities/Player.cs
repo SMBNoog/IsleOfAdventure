@@ -403,6 +403,7 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
     {        
         if(wellBeing != WellBeingState.Dead)
         {
+            HP_Slider.value = 0f;
             wellBeing = WellBeingState.Dead;
             rb2D.isKinematic = true; 
             SaveAttributes(false); 
@@ -423,7 +424,7 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
     {
 
         //HP = maxHP;
-        //Time.timeScale = 1.0f;
+        Time.timeScale = 1.0f;
         foreach (Weapons w in weaponList)
         {
             if(currentWeapon == w.weaponType)
@@ -447,10 +448,14 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
                     rb2D.isKinematic = false;
                     anim.gameObject.SetActive(true);
                 }    
-                else // Forest or Castle
+                else if(GameInfo.AreaToTeleportTo == GameInfo.Area.Forest || GameInfo.AreaToTeleportTo == GameInfo.Area.Castle)
                 {
                     GameInfo.AreaToTeleportTo = GameInfo.Area.World;
                     SceneManager.LoadScene("SceneLoader");
+                }
+                else
+                {
+                    Debug.Log("Area To Teleport To is not set to a scene that's possiable to teleport to.");
                 }
             }
         }
