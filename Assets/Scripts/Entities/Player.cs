@@ -150,7 +150,7 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
                 HP_Slider.value = HP;
 
             // Regen when Idle and not max HP
-            if (/*actionState == ActionState.Idle &&*/ HP < maxHP && actionState != ActionState.EngagedInBattle)
+            if (actionState == ActionState.Idle && HP < maxHP && actionState != ActionState.EngagedInBattle)
             {
                 if ((maxHP * regenHP_Multiplier) + HP > maxHP)
                     HP = maxHP;
@@ -421,9 +421,9 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
 
     public void RespawnPlayerButton()
     {
-        LoadAttributes();
-        HP = maxHP;
-        Time.timeScale = 1.0f;
+
+        //HP = maxHP;
+        //Time.timeScale = 1.0f;
         foreach (Weapons w in weaponList)
         {
             if(currentWeapon == w.weaponType)
@@ -431,11 +431,13 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
                 LoadWeapon(w.weaponType);         
                 if(GameInfo.AreaToTeleportTo == GameInfo.Area.World)
                 {
-                    rb2D.transform.position = new Vector2(-2.7f, -17.7f);
+                    //rb2D.transform.position = new Vector2(-2.7f, -17.7f);
                     wellBeing = WellBeingState.Alive;
                     rb2D.isKinematic = false;
                     anim.gameObject.SetActive(true);
                     anim.SetTrigger("Respawn");
+                    GameInfo.AreaToTeleportTo = GameInfo.Area.World;
+                    SceneManager.LoadScene("SceneLoader");
                 }            
                 else if(GameInfo.AreaToTeleportTo == GameInfo.Area.TutorialArea)
                 {
@@ -452,6 +454,6 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
                 }
             }
         }
-        respawnButton.gameObject.SetActive(false);        
+        respawnButton.gameObject.SetActive(false);
     }
 }

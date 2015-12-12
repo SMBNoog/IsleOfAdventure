@@ -11,12 +11,14 @@ public class MainMenuController : MonoBehaviour {
     public Button playButton;
     public Image playerImage;
 
+    public Button exitButton;
+
     public GameObject inputCanvas;
 
     void Start()
     {
         inputCanvas.SetActive(false);
-        PlayerPrefs.DeleteAll();
+        PlayerPrefs.DeleteAll();   ////////////////////// REMOVE LATER
         //Debug.Log(GameInfo.TutorialCompleted);
 
         if (userName.text == "noname")
@@ -24,7 +26,6 @@ public class MainMenuController : MonoBehaviour {
             userName.text = GameInfo.PlayerName;
             userName.gameObject.SetActive(true);
         }
-
 
         //if (GameInfo.PlayerName != null)
         //{
@@ -83,5 +84,10 @@ public class MainMenuController : MonoBehaviour {
         userName.text = name.text;
         userName.gameObject.SetActive(true);
         inputField.gameObject.SetActive(false);
+    }
+
+    public void ExitButton()
+    {
+        Application.Quit();
     }
 }

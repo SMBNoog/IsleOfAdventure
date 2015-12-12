@@ -15,7 +15,7 @@ public class SceneLoader : MonoBehaviour {
 
     private IEnumerator LoadALevel(string sceneName)
     {
-        yield return new WaitForSeconds(6f);
+        yield return new WaitForSeconds(5f);
         async = SceneManager.LoadSceneAsync(sceneName);
         //yield return new WaitForSeconds(6f);
         yield return async;

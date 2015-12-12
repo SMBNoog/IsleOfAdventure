@@ -34,6 +34,8 @@ public class SpawnBushes : MonoBehaviour, ISpawner
     private float Def_Median;
     //private float AmountOfStatToGive;
 
+    private bool firstBush = true;
+
     public Bush CreateBush(GameObject prefab, Vector2 pos,
         float HP, float Atk, float Def, float AmountOfStatToGive, TypeOfStatIncrease type)
     {
@@ -86,15 +88,22 @@ public class SpawnBushes : MonoBehaviour, ISpawner
 
                     SpawnResultBush result = new SpawnResultBush();
                     Vector3 tempPos = area.spawnLocation.position + new Vector3(i, j, 0f);
+
                     var bush = CreateBush(area.prefab, tempPos,
                         HP_Median, Atk_Median, Def_Median,
                         tempBush.amountOfStatToGive, area.typeOfStatDrop);
+
+                    if (firstBush)
+                        firstBush = false;
+
+                    //SpawnAreaBush sab = new SpawnAreaBush();
+                    //sab = area;
+                    //sab.spawnLocation.position = tempPos;
+
                     bush.Spawner = this;
-                    result.enemy = bush;  //polymorphism, reference this skeleton to compare later
-                    //area.spawnLocation.position = tempPos;
+                    result.enemy = bush;  
                     result.source = area;   // reference this area values for respawning                    
                     spawnResults.Add(result); // add enemy to the list of spawned enemies
-
                 }
             }
             yield return null;

@@ -56,7 +56,7 @@ public class MazeMaker : MonoBehaviour
                 else if (Random.Range(0f, 1f) < 0.05f)
                 {
                     Dungeon[i][j] = 'B';
-                    Instantiate(RLTile, new Vector3(i, j, 0f), Quaternion.identity);
+                    Instantiate(Enemy, new Vector3(i, j, 0f), Quaternion.identity);
                 }
                 else if (Random.Range(0f, 1f) < 0.1f)
                 {

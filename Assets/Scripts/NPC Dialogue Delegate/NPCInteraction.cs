@@ -26,7 +26,7 @@ public class NPCInteraction : MonoBehaviour {
     public NPCTo NPCTeleportTo;
 
     private IAttributesManager attributes;
-    private IMessageDelegate messageDelegate;
+    //private IMessageDelegate messageDelegate;
     private IWeapon weapon;
 
     string message;
@@ -144,6 +144,7 @@ public class NPCInteraction : MonoBehaviour {
                 GetComponent<Collider2D>().enabled = false;
                 StartCoroutine(DelayThenEnableCollider());
             }
+            else { Debug.LogError("Dialogue could not be found."); }
         }
         
     }
