@@ -58,51 +58,52 @@ public class SpawnBushes : MonoBehaviour, ISpawner
     
     IEnumerator SpawnBushesNow()
     {
-        foreach (SpawnAreaBush area in spawnAreas)
-        {
-            for (int i = 0; i < area.row*2; i+=2)
+        //foreach (SpawnAreaBush area in spawnAreas)
+        //{
+
+        Vector3 startingPos = spawnAreas[0].spawnLocation.position;
+        for (int u = 0; u < spawnAreas.Count; u++)
+        { 
+            for (int i = 0; i < spawnAreas[u].row*2; i+=2)
             {
-                for (int j = 0; j < area.col*2; j+=2)
+                for (int j = 0; j < spawnAreas[u].col*2; j+=2)
                 {
                     int r = UnityEngine.Random.Range(1, 4);
                     switch (r)
                     {
-                        case 1: area.typeOfStatDrop = TypeOfStatIncrease.HP; break;
-                        case 2: area.typeOfStatDrop = TypeOfStatIncrease.ATK; break;
-                        case 3: area.typeOfStatDrop = TypeOfStatIncrease.DEF; break;
-                        default: area.typeOfStatDrop = TypeOfStatIncrease.HP; break;
+                        case 1: spawnAreas[u].typeOfStatDrop = TypeOfStatIncrease.HP; break;
+                        case 2: spawnAreas[u].typeOfStatDrop = TypeOfStatIncrease.ATK; break;
+                        case 3: spawnAreas[u].typeOfStatDrop = TypeOfStatIncrease.DEF; break;
+                        default: spawnAreas[u].typeOfStatDrop = TypeOfStatIncrease.HP; break;
                     }
 
-                    float y = area.spawnLocation.position.y;
-                    ScaleToYaxis(y, area);
+                    float y = spawnAreas[u].spawnLocation.position.y;
+                    ScaleToYaxis(y, spawnAreas[u]);
 
                     SpawnAreaBush tempBush = new SpawnAreaBush();
                     if (y < 20f)
-                        tempBush = ScaleEnemyToWeaponType(1, area);
+                        tempBush = ScaleEnemyToWeaponType(1, spawnAreas[u]);
                     else if (y > 20f && y < 80f) // moderate
-                        tempBush = ScaleEnemyToWeaponType(2, area);
+                        tempBush = ScaleEnemyToWeaponType(2, spawnAreas[u]);
                     else if (y > 80f && y < 170f) // hard
-                        tempBush = ScaleEnemyToWeaponType(3, area);
+                        tempBush = ScaleEnemyToWeaponType(3, spawnAreas[u]);
                     else if (y > 170f)
-                        tempBush = ScaleEnemyToWeaponType(4, area);                                        
+                        tempBush = ScaleEnemyToWeaponType(4, spawnAreas[u]);                                        
 
                     SpawnResultBush result = new SpawnResultBush();
-                    Vector3 tempPos = area.spawnLocation.position + new Vector3(i, j, 0f);
+                    Vector3 tempPos = startingPos + new Vector3(i, j, 0f);
 
-                    var bush = CreateBush(area.prefab, tempPos,
+                    var bush = CreateBush(spawnAreas[u].prefab, tempPos,
                         HP_Median, Atk_Median, Def_Median,
-                        tempBush.amountOfStatToGive, area.typeOfStatDrop);
+                        tempBush.amountOfStatToGive, spawnAreas[u].typeOfStatDrop);
 
                     if (firstBush)
                         firstBush = false;
-
-                    //SpawnAreaBush sab = new SpawnAreaBush();
-                    //sab = area;
-                    //sab.spawnLocation.position = tempPos;
-
+                    
+                    spawnAreas[u].spawnLocation.position = tempPos;
                     bush.Spawner = this;
                     result.enemy = bush;  
-                    result.source = area;   // reference this area values for respawning                    
+                    result.source = spawnAreas[u];   // reference this area values for respawning                    
                     spawnResults.Add(result); // add enemy to the list of spawned enemies
                 }
             }

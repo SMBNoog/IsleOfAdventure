@@ -68,11 +68,11 @@ public class SpawnEnemies : MonoBehaviour, ISpawner {
                 if (y < 20f) // easy
                     ScaleEnemyToWeaponType(1, area.typeOfStatDrop);
                 else if (y > 20f && y < 80f) // moderate
-                    ScaleEnemyToWeaponType(1.5f, area.typeOfStatDrop);
+                    ScaleEnemyToWeaponType(1.25f, area.typeOfStatDrop);
                 else if (y > 80f && y < 170f) // hard
-                    ScaleEnemyToWeaponType(3f, area.typeOfStatDrop);
+                    ScaleEnemyToWeaponType(1.75f, area.typeOfStatDrop);
                 else if (y > 170f)
-                    ScaleEnemyToWeaponType(4f, area.typeOfStatDrop);
+                    ScaleEnemyToWeaponType(2.5f, area.typeOfStatDrop);
 
                 if (area.typeOfEnemy == TypeOfEnemy.Skeleton)
                 {
@@ -81,8 +81,8 @@ public class SpawnEnemies : MonoBehaviour, ISpawner {
                         HP_Median, Atk_Median, Def_Median,
                         AmountOfStatToGive, area.typeOfStatDrop);
                     skeleton.Spawner = this;
-                    result.enemy = skeleton;  //polymorphism, reference this skeleton to compare later
-                    result.source = area;   // reference this area values for respawning
+                    result.enemy = skeleton;  
+                    result.source = area;  
                     spawnResults.Add(result); // add enemy to the list of spawned enemies
                 }
 

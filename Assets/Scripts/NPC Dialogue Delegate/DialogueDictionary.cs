@@ -57,9 +57,7 @@ public class DialogueDictionary : MonoBehaviour
         NPCMessage_Dictionary.Add(DictionaryKey.InWorldToForest, "Enter the Forest?");
 
 
-
-
-
+        
         /********* First Door in castle area. **********/
         NPCMessage_Dictionary.Add(DictionaryKey.InCastleFirstDoorWooden, "You won't have a chance with that Wooden Sword. Go to the Forest to obtain a new one.");
         NPCButtonOKText_Dictionary.Add(DictionaryKey.InCastleFirstDoorWooden, "Ok!");

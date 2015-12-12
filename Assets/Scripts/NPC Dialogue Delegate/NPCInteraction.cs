@@ -27,7 +27,7 @@ public class NPCInteraction : MonoBehaviour {
 
     private IAttributesManager attributes;
     //private IMessageDelegate messageDelegate;
-    private IWeapon weapon;
+    private Player player;
 
     string message = "No Message";
     string okButton = "Ok";
@@ -57,34 +57,46 @@ public class NPCInteraction : MonoBehaviour {
                 case NPCTo.Forest: GameInfo.AreaToTeleportTo = GameInfo.Area.Forest; break;
                 case NPCTo.Castle: GameInfo.AreaToTeleportTo = GameInfo.Area.Castle; break;
                 case NPCTo.MainMenu: GameInfo.AreaToTeleportTo = GameInfo.Area.MainMenu; break;
-                case NPCTo.NoWhere: break;
             }
 
-            if (typeOfNPC == TypeOfNPC.InTutorialToWorld)
+            if (typeOfNPC == TypeOfNPC.InTutorialToWorld && Skeleton.numberOfTutorialSkeletons <= 0)
             {
                 GameInfo.TutorialCompleted = true;
                 GameInfo.LastPos = new Vector2(-2.7f, -17.7f); // set spawn in world for the 1st time
                 attributes.SaveAttributes(false);
+                Time.timeScale = 1.0f;
+                SceneManager.LoadScene(GameInfo.sceneLoader);
             }
             else if (typeOfNPC == TypeOfNPC.InCastleToWorld || typeOfNPC == TypeOfNPC.InForestChestToWorld)
             {
                 attributes.SaveAttributes(false);
+                Time.timeScale = 1.0f;
+                SceneManager.LoadScene(GameInfo.sceneLoader);
             }
-            else //otherwise going from the world to Castle or Forest
-                attributes.SaveAttributes(true);
-
-            Time.timeScale = 1.0f;
-
-            SceneManager.LoadScene(GameInfo.sceneLoader);
-        } 
-        else
-        {
-            if(GameInfo.AreaToTeleportTo == GameInfo.Area.Castle)
+            else
             {
-                gameObject.SetActive(false);
+                //otherwise going from the world to Castle or Forest
+                attributes.SaveAttributes(true);
+                Time.timeScale = 1.0f;
+                SceneManager.LoadScene(GameInfo.sceneLoader);
             }
         }
-        
+        else if (typeOfNPC == TypeOfNPC.InCastleFirstDoor)
+        {
+            if (player.weaponType != WeaponType.Wooden)
+            {
+                gameObject.SetActive(false);
+                return;
+            }
+        }
+        //else
+        //{
+        //    if (GameInfo.AreaToTeleportTo == GameInfo.Area.Castle)
+        //    {
+        //        gameObject.SetActive(false);
+        //    }
+        //}
+
     }
 
     IEnumerator DelayThenEnableCollider()
@@ -118,7 +130,7 @@ public class NPCInteraction : MonoBehaviour {
                 okButton = DialogueDictionary.NPCButtonOKText_Dictionary[DictionaryKey.InTutorialInfo];
                 Destroy(gameObject, .01f); break;
             case TypeOfNPC.InCastleFirstDoor:   // Castle First Door
-                if(weapon.WeaponType == WeaponType.Wooden)
+                if(player.weaponType == WeaponType.Wooden)
                 {
                     message = DialogueDictionary.NPCMessage_Dictionary[DictionaryKey.InCastleFirstDoorWooden];
                     okButton = DialogueDictionary.NPCButtonOKText_Dictionary[DictionaryKey.InCastleFirstDoorWooden];
@@ -143,7 +155,12 @@ public class NPCInteraction : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        weapon = Interface.Find<IWeapon>(other.gameObject);
+
+        if(other.gameObject.tag == "Player")
+        {
+            player = other.GetComponent<Player>();
+        }
+
         attributes = Interface.Find<IAttributesManager>(other.gameObject);
 
         if (attributes != null)
@@ -157,7 +174,7 @@ public class NPCInteraction : MonoBehaviour {
             {
                 if (NPCTeleportTo == NPCTo.NoWhere)
                     messageDelegate.ShowMessageWithOk(message, okButton, OnClickOK);
-                else if (Skeleton.numberOfTutorialSkeletons > 0)
+                else if (NPCTeleportTo == NPCTo.World && Skeleton.numberOfTutorialSkeletons > 0)
                     messageDelegate.ShowMessageWithOk(message, okButton);
                 else
                     messageDelegate.ShowMessageWithOkCancel(message, okButton, cancelButton, OnClickOK);

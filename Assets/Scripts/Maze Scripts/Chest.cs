@@ -35,7 +35,7 @@ public class Chest : MonoBehaviour, INPCMessageAndAction
             GiveWeapon();
             openchest1.SetActive(true);
             openchest2.SetActive(true);
-            messageDelegate.ShowMessageWithOkCancel(DialogMessage, "Take Weapon", "Leave Weapon", OnClickOK);      
+            messageDelegate.ShowMessageWithOkCancel(DialogMessage, "Take Weapon", "Leave Weapon", OnClickOK, OnClickCancel);      
             
             Time.timeScale = 0f;
         }

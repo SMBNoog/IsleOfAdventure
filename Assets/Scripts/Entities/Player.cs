@@ -116,7 +116,6 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
 
         LoadAttributes();
         LoadWeapon(currentWeapon);
-
         // Hard code positions to spawn in each zone
         if (GameInfo.AreaToTeleportTo == GameInfo.Area.World)
             rb2D.transform.position = GameInfo.LastPos;
