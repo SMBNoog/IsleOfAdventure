@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System;
+using UnityEngine.SceneManagement;
 
 public class Chest : MonoBehaviour, INPCMessageAndAction
 {
@@ -84,7 +85,7 @@ public class Chest : MonoBehaviour, INPCMessageAndAction
             attribute.SaveAttributes(false);
             Time.timeScale = 1f;
             GameInfo.AreaToTeleportTo = GameInfo.Area.World;
-            Application.LoadLevel("ScneneLoader");
+            SceneManager.LoadScene("SceneLoader");
         }
     }
 
@@ -96,7 +97,7 @@ public class Chest : MonoBehaviour, INPCMessageAndAction
             attribute.SaveAttributes(false);
             Time.timeScale = 1f;
             GameInfo.AreaToTeleportTo = GameInfo.Area.World;
-            Application.LoadLevel("SceneLoader");
+            SceneManager.LoadScene("SceneLoader");
         }
     }
 }
