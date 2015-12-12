@@ -32,6 +32,7 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
 
     // ICurrentHP interface
     public float currentHP { get { return HP; } }
+    public float currentMaxHP { get { return maxHP; } }
 
     public float weaponYoffset = 0.6f;
     public float weaponXoffSet = 0.6f;
@@ -149,9 +150,13 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
                 HP_Slider.value = HP;
 
             // Regen when Idle and not max HP
-            if (actionState == ActionState.Idle && HP < maxHP)
-                HP += maxHP * regenHP_Multiplier;
-            
+            if (actionState == ActionState.Idle && HP < maxHP && actionState != ActionState.EngagedInBattle)
+            {
+                if ((maxHP * regenHP_Multiplier) + HP > maxHP)
+                    HP = maxHP;
+                else
+                    HP += maxHP * regenHP_Multiplier;
+            }                   
             
             // Right Stick (Weapon Movement)
             float horizontalR = CnInputManager.GetAxisRaw("HorizontalRight");
@@ -266,7 +271,7 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
             if (attacker != null)  // If it's an attacker
             {
                 float dmg = attacker.Atk - (attacker.Atk * Def);
-                actionState = ActionState.EngagedInBattle;
+                
                 if (canTakeDamage)
                 {
                     canTakeDamage = false;
@@ -275,6 +280,12 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
                 }
             }
         }
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if(other.gameObject.tag == "Enemy")
+            actionState = ActionState.EngagedInBattle;
     }
 
     IEnumerator DelayWhenDamageCanBeRecieved()
@@ -356,7 +367,7 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
     public void UpgradeWeapon(WeaponType type)
     {
         currentWeapon = type;
-        switch(type)
+        switch (type)
         {   // When upgrading weapon boost max HP
             case WeaponType.Wooden: maxHP += 100f; break;
             case WeaponType.Bronze: maxHP += 1000f; break;
@@ -365,7 +376,6 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
             case WeaponType.Epic: maxHP += 7500f; break;
         }
         LoadWeapon(type);
-        //save
     }
 
     public void DebugChangeToBronzeButton()
@@ -389,9 +399,10 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
     }
 
     public override void Die()
-    {
+    {        
         if(wellBeing != WellBeingState.Dead)
         {
+            HP_Slider.value = 0f;
             wellBeing = WellBeingState.Dead;
             rb2D.isKinematic = true; 
             SaveAttributes(false); 
@@ -410,8 +421,8 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
 
     public void RespawnPlayerButton()
     {
-        LoadAttributes();
-        HP = maxHP;
+
+        //HP = maxHP;
         Time.timeScale = 1.0f;
         foreach (Weapons w in weaponList)
         {
@@ -420,27 +431,33 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
                 LoadWeapon(w.weaponType);         
                 if(GameInfo.AreaToTeleportTo == GameInfo.Area.World)
                 {
-                    rb2D.transform.position = new Vector2(-2.7f, -17.7f);
+                    //rb2D.transform.position = new Vector2(-2.7f, -17.7f);
                     wellBeing = WellBeingState.Alive;
                     rb2D.isKinematic = false;
                     anim.gameObject.SetActive(true);
                     anim.SetTrigger("Respawn");
+                    GameInfo.AreaToTeleportTo = GameInfo.Area.World;
+                    SceneManager.LoadScene("SceneLoader");
                 }            
                 else if(GameInfo.AreaToTeleportTo == GameInfo.Area.TutorialArea)
                 {
+                    anim.SetTrigger("Respawn");
                     rb2D.transform.position = new Vector2(-85f, -108f);
                     wellBeing = WellBeingState.Alive;
                     rb2D.isKinematic = false;
                     anim.gameObject.SetActive(true);
-                    anim.SetTrigger("Respawn");
                 }    
-                else // Forest or Castle
+                else if(GameInfo.AreaToTeleportTo == GameInfo.Area.Forest || GameInfo.AreaToTeleportTo == GameInfo.Area.Castle)
                 {
                     GameInfo.AreaToTeleportTo = GameInfo.Area.World;
                     SceneManager.LoadScene("SceneLoader");
                 }
+                else
+                {
+                    Debug.Log("Area To Teleport To is not set to a scene that's possiable to teleport to.");
+                }
             }
         }
-        respawnButton.gameObject.SetActive(false);        
+        respawnButton.gameObject.SetActive(false);
     }
 }

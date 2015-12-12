@@ -68,11 +68,11 @@ public class SpawnEnemies : MonoBehaviour, ISpawner {
                 if (y < 20f) // easy
                     ScaleEnemyToWeaponType(1, area.typeOfStatDrop);
                 else if (y > 20f && y < 80f) // moderate
-                    ScaleEnemyToWeaponType(2, area.typeOfStatDrop);
+                    ScaleEnemyToWeaponType(1.5f, area.typeOfStatDrop);
                 else if (y > 80f && y < 170f) // hard
-                    ScaleEnemyToWeaponType(4, area.typeOfStatDrop);
+                    ScaleEnemyToWeaponType(3f, area.typeOfStatDrop);
                 else if (y > 170f)
-                    ScaleEnemyToWeaponType(5, area.typeOfStatDrop);
+                    ScaleEnemyToWeaponType(4f, area.typeOfStatDrop);
 
                 if (area.typeOfEnemy == TypeOfEnemy.Skeleton)
                 {
@@ -119,20 +119,20 @@ public class SpawnEnemies : MonoBehaviour, ISpawner {
                     switch (typeOfStat)
                     {
                         case TypeOfStatIncrease.ATK: AmountOfStatToGive = 1f * (scale - (scale / 3)); break;
-                        case TypeOfStatIncrease.DEF: AmountOfStatToGive = 0.005f * (scale - (scale / 3)); break;
+                        case TypeOfStatIncrease.DEF: AmountOfStatToGive = 0.005f; break;
                         case TypeOfStatIncrease.HP: AmountOfStatToGive = 10 * (scale - (scale / 3)); break;
                     }
                     break;
                 case WeaponType.Silver:
                 case WeaponType.Gold:
                 case WeaponType.Epic:
-                    HP_Median = 12000 * scale;
-                    Atk_Median = 1200 * scale;
+                    HP_Median = 10000 * scale;
+                    Atk_Median = 1000 * scale;
                     Def_Median = 0.1f * scale;
                     switch (typeOfStat)
                     {
                         case TypeOfStatIncrease.ATK: AmountOfStatToGive = 50f * (scale - (scale / 3)); break;
-                        case TypeOfStatIncrease.DEF: AmountOfStatToGive = 0.005f * (scale - (scale / 3)); break;
+                        case TypeOfStatIncrease.DEF: AmountOfStatToGive = 0.005f; break;
                         case TypeOfStatIncrease.HP: AmountOfStatToGive = 500f * (scale - (scale / 3)); break;
                     }
                     break;
@@ -166,7 +166,7 @@ public class SpawnEnemies : MonoBehaviour, ISpawner {
 
     IEnumerator RespawnEnemy(SpawnResult sr)
     {
-        float r = UnityEngine.Random.Range(10f, 20f);
+        float r = UnityEngine.Random.Range(30f, 120f);
         yield return new WaitForSeconds(r);
 
         float y = sr.source.spawnLocation.position.y;

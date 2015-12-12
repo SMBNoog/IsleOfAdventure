@@ -47,6 +47,7 @@ public interface IMessageDelegate
     void OnClickOkButtonDuo();
     void OnClickCancelDuo();
     void ShowMessageWithOkCancel(string dialogMessage, string okButton, string cancelButton, Dialogue.DialogueDelegate onClickOK);
+    void ShowMessageWithOk(string dialogMessage, string okButton, Dialogue.DialogueDelegate onClickOK);
     void ShowMessageWithOk(string dialogMessage, string okButton);
 }
 
@@ -64,6 +65,12 @@ public interface ICurrentPos
 public interface ICurrentHP
 {
     float currentHP { get; }
+    float currentMaxHP { get; }
+}
+
+public interface IBushDie
+{
+    void Die();
 }
 
 public static class Interface

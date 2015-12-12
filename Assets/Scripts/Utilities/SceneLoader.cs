@@ -4,9 +4,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class SceneLoader : MonoBehaviour {
-
-    public Slider progressBar;
-
+    
     private AsyncOperation async = null; // When assigned, load is in progress.
 
     void Start()
@@ -17,21 +15,12 @@ public class SceneLoader : MonoBehaviour {
 
     private IEnumerator LoadALevel(string sceneName)
     {
+        yield return new WaitForSeconds(5f);
         async = SceneManager.LoadSceneAsync(sceneName);
+        //yield return new WaitForSeconds(6f);
         yield return async;
-
-        yield return new WaitForSeconds(1f);
     }
-
-    void Update()
-    {
-        if(async != null)
-        {
-            //Debug.Log(async.progress);
-            progressBar.value = async.progress * 100f;
-        }
-
-    }
+    
 
 }
 

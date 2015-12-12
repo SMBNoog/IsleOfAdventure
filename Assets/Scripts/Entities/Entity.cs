@@ -28,17 +28,18 @@ public abstract class Entity : MonoBehaviour {
     protected float Def;
     protected float Speed;
 
-    //protected Transform transform;
-
     protected Animator anim;
 
     protected virtual void DamagedBy(float dmg)
     {
         //    Debug.Log(this + ":  Current HP: " + HP);
         //    Debug.Log(this + ":  Damage taken: " + dmg);
-        HP = (HP - dmg) < 0 ? 0 : HP - dmg;
+        HP = (HP - dmg) <= 0 ? 0 : HP - dmg;
         if (HP == 0)
-            Die();            
+        {
+            Die();
+        }
+                              
     }
 
     public abstract void Die();

@@ -35,7 +35,7 @@ public class PauseMenu : MonoBehaviour
             else
                 Debug.Log("ICurrentHP couldn't be found.");
             item.currentHP.text = (int)currentHP.currentHP+"";
-            item.maxHP.text = "\\ "+(int)GameInfo.PlayerMaxHP;
+            item.maxHP.text = (int)currentHP.currentMaxHP+"";
             IPlayerCurrentWeapon weap = Interface.Find<IPlayerCurrentWeapon>(interfaceSupplier);
             if(weap != null)
             {
@@ -50,7 +50,7 @@ public class PauseMenu : MonoBehaviour
                 }
                     item.atkText.text = ((int)GameInfo.PlayerAtk + weapAtk) + "";
             }
-            item.defText.text = (GameInfo.PlayerDef)*100+" %";
+            item.defText.text = (GameInfo.PlayerDef)*100f+"";
         }
     }
 

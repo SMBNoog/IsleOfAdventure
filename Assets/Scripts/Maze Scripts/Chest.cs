@@ -9,7 +9,6 @@ public class Chest : MonoBehaviour, INPCMessageAndAction
     public GameObject openchest2;
     public GameObject canvas;
     public WeaponType weaponreward;
-    public GameObject interfacesupplier;
     private GameObject player;
     private Player playerscript;
     private string message;
@@ -22,32 +21,27 @@ public class Chest : MonoBehaviour, INPCMessageAndAction
         }
     }
 
-    void Awake()
-    {
-        //load info about player
-
-        //check player weapon
-
-        //change enemies based on weapon
-    }
-
     void Start()
     {
         playerscript = FindObjectOfType<Player>();
         player = playerscript.gameObject;
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
+    void OnCollisionEnter2D(Collision2D other)
     {
-        IMessageDelegate messageDelegate = Interface.Find<IMessageDelegate>(interfacesupplier);
+        
+        IMessageDelegate messageDelegate = Interface.Find<IMessageDelegate>(FindObjectOfType<Dialogue>().gameObject);
         if (messageDelegate != null)
         {
-            messageDelegate.ShowMessageWithOkCancel(DialogMessage, "Take Weapon", "Leave Weapon", OnClickOK);
+            GiveWeapon();
             openchest1.SetActive(true);
             openchest2.SetActive(true);
-            GiveWeapon();          
+            messageDelegate.ShowMessageWithOkCancel(DialogMessage, "Take Weapon", "Leave Weapon", OnClickOK);      
+            
             Time.timeScale = 0f;
         }
+        else
+            Debug.Log("No IMessageDelegate found on other collider");
     }
 
     void GiveWeapon()
@@ -74,11 +68,38 @@ public class Chest : MonoBehaviour, INPCMessageAndAction
         }
     }
 
-    //Button Control Scripts Below...
-
     public void OnClickOK()
     {
-        playerscript.UpgradeWeapon(weaponreward);
+        if (weaponreward == WeaponType.Bronze)
+        {
+            if (playerscript.weaponType == WeaponType.Silver || playerscript.weaponType == WeaponType.Bronze || playerscript.weaponType == WeaponType.Gold || playerscript.weaponType == WeaponType.Epic)
+                Debug.Log("Cannot Upgrade");
+            else
+                playerscript.UpgradeWeapon(weaponreward);
+        }
+        else if(weaponreward == WeaponType.Silver)
+        {
+            if(playerscript.weaponType == WeaponType.Bronze || playerscript.weaponType == WeaponType.Silver)
+                Debug.Log("Cannot Upgrade");
+            else
+                playerscript.UpgradeWeapon(weaponreward);
+        }
+        else if (weaponreward == WeaponType.Gold)
+        {
+            if (playerscript.weaponType == WeaponType.Bronze || playerscript.weaponType == WeaponType.Silver || playerscript.weaponType == WeaponType.Gold)
+                Debug.Log("Cannot Upgrade");
+            else
+                playerscript.UpgradeWeapon(weaponreward);
+        }
+        else if (weaponreward == WeaponType.Epic)
+        {
+            if (playerscript.weaponType == WeaponType.Epic)
+                Debug.Log("Cannot Upgrade");
+            else
+                playerscript.UpgradeWeapon(weaponreward);
+        }
+
+
         IAttributesManager attribute = Interface.Find<IAttributesManager>(player);
         if (attribute != null)
         {

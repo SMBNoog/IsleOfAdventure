@@ -12,7 +12,7 @@ public class CloseAttacking_SMB : StateMachineBehaviour {
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        myR = FindObjectOfType<Rigidbody2D>();
+        myR = animator.gameObject.GetComponent<Rigidbody2D>();
         attacker = Interface.Find<IAttacker>(FindObjectOfType<Player>().gameObject);
     }
 
@@ -31,8 +31,8 @@ public class CloseAttacking_SMB : StateMachineBehaviour {
 
             if(myR != null)
             {
-                Vector2 direction = (Vector3)attacker.Pos - myR.transform.position;
-                myR.velocity = direction.normalized * 2f;
+                Vector3 direction = attacker.Pos - (Vector2)myR.transform.position;
+                myR.velocity = direction * 60f * Time.fixedDeltaTime;
             }
 
             //}
