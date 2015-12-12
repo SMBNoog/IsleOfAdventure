@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class Timer : MonoBehaviour
 {
@@ -29,7 +30,7 @@ public class Timer : MonoBehaviour
             {
                 attribute.SaveAttributes(false);
                 GameInfo.AreaToTeleportTo = GameInfo.Area.World;
-                Application.LoadLevel("SceneLoader");
+                SceneManager.LoadScene("SceneLoader");
             }
         }
     }
