@@ -84,11 +84,11 @@ public class SpawnBushes : MonoBehaviour, ISpawner
                     if (y < 20f)
                         tempBush = ScaleEnemyToWeaponType(1, spawnAreas[u]);
                     else if (y > 20f && y < 80f) // moderate
-                        tempBush = ScaleEnemyToWeaponType(2, spawnAreas[u]);
+                        tempBush = ScaleEnemyToWeaponType(1.25f, spawnAreas[u]);
                     else if (y > 80f && y < 170f) // hard
-                        tempBush = ScaleEnemyToWeaponType(3, spawnAreas[u]);
+                        tempBush = ScaleEnemyToWeaponType(1.75f, spawnAreas[u]);
                     else if (y > 170f)
-                        tempBush = ScaleEnemyToWeaponType(4, spawnAreas[u]);                                        
+                        tempBush = ScaleEnemyToWeaponType(2.5f, spawnAreas[u]);                                        
 
                     SpawnResultBush result = new SpawnResultBush();
                     Vector3 tempPos = startingPos + new Vector3(i, j, 0f);

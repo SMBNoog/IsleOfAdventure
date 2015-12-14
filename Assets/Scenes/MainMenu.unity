@@ -3587,7 +3587,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Tap here to Enter Name
+  m_Text: Enter Name
 --- !u!224 &1630376511
 RectTransform:
   m_ObjectHideFlags: 0

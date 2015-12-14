@@ -113,8 +113,8 @@ public class SpawnEnemies : MonoBehaviour, ISpawner {
                     }
                     break;
                 case WeaponType.Bronze:
-                    HP_Median = 1200 * scale;
-                    Atk_Median = 120 * scale;
+                    HP_Median = 1200f * scale;
+                    Atk_Median = 120f * scale;
                     Def_Median = 0.03f * scale;
                     switch (typeOfStat)
                     {
@@ -126,8 +126,8 @@ public class SpawnEnemies : MonoBehaviour, ISpawner {
                 case WeaponType.Silver:
                 case WeaponType.Gold:
                 case WeaponType.Epic:
-                    HP_Median = 10000 * scale;
-                    Atk_Median = 1000 * scale;
+                    HP_Median = 10000f * scale;
+                    Atk_Median = 1000f * scale;
                     Def_Median = 0.1f * scale;
                     switch (typeOfStat)
                     {

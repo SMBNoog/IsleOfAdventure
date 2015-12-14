@@ -34,7 +34,7 @@ public class Bush : Enemy, IBushDie
 
     public override void Die()
     {
-        int r = (int)UnityEngine.Random.Range(1f, 8f);
+        int r = (int)UnityEngine.Random.Range(1f, 5f);
         switch (r)
         {
             case 1: GiveStatsToPlayerAponDeath(amountOfStatToGiveAponDeath, typeOfStatIncrease); break;
