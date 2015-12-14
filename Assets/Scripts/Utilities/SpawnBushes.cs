@@ -130,7 +130,7 @@ public class SpawnBushes : MonoBehaviour, ISpawner
                         case TypeOfStatIncrease.HP: tempArea.amountOfStatToGive = 1; return tempArea;
                     }
                     break;
-                case WeaponType.Bronze:
+                case WeaponType.Flame:
                     HP_Median = 1f;
                     Atk_Median = 10f;
                     Def_Median = 0f;
@@ -186,7 +186,7 @@ public class SpawnBushes : MonoBehaviour, ISpawner
 
     IEnumerator RespawnEnemy(SpawnResultBush sr)
     {
-        float r = UnityEngine.Random.Range(4f, 8f);
+        float r = UnityEngine.Random.Range(30f, 240f);
         yield return new WaitForSeconds(r);
         
         int r1 = UnityEngine.Random.Range(1, 4);

@@ -57,7 +57,7 @@ public class NPCMessageThenTeleport : MonoBehaviour, INPCMessageAndAction {
                             message = m.message;
                             break;
                         }
-                        else if (m.weapon == WeaponType.Bronze)
+                        else if (m.weapon == WeaponType.Flame)
                         {
                             message = m.message;
                             break;

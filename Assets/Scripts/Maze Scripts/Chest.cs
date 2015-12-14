@@ -48,45 +48,45 @@ public class Chest : MonoBehaviour, INPCMessageAndAction
     {
         if (UnityEngine.Random.Range(0f, 1f) < .70f)
         {
-            weaponreward = WeaponType.Bronze;
-            message = "You Win!\n You Obtained The Bronze Sword";
+            weaponreward = WeaponType.Flame;
+            message = "You Made it!\n You Found a Flame Sword";
         }
         else if (UnityEngine.Random.Range(0f, 1f) < .90f)
         {
             weaponreward = WeaponType.Silver;
-            message = "You Win!\n You Obtained The Silver Sword";
+            message = "You Made it!\n You Found a Silver Sword";
         }
         else if (UnityEngine.Random.Range(0f, 1f) < .98f)
         {
             weaponreward = WeaponType.Gold;
-            message = "You Win!\n You Obtained The Gold Sword";
+            message = "You Made it!\n You Found a Gold Sword";
         }
         else
         {
             weaponreward = WeaponType.Epic;
-            message = "You Win!\n You Obtained The Epic Sword";
+            message = "You Made it!\n You Found the Epic Sword!";
         }
     }
 
     public void OnClickOK()
     {
-        if (weaponreward == WeaponType.Bronze)
+        if (weaponreward == WeaponType.Flame)
         {
-            if (playerscript.weaponType == WeaponType.Silver || playerscript.weaponType == WeaponType.Bronze || playerscript.weaponType == WeaponType.Gold || playerscript.weaponType == WeaponType.Epic)
+            if (playerscript.weaponType == WeaponType.Silver || playerscript.weaponType == WeaponType.Flame || playerscript.weaponType == WeaponType.Gold || playerscript.weaponType == WeaponType.Epic)
                 Debug.Log("Cannot Upgrade");
             else
                 playerscript.UpgradeWeapon(weaponreward);
         }
         else if(weaponreward == WeaponType.Silver)
         {
-            if(playerscript.weaponType == WeaponType.Bronze || playerscript.weaponType == WeaponType.Silver)
+            if(playerscript.weaponType == WeaponType.Gold || playerscript.weaponType == WeaponType.Silver || playerscript.weaponType == WeaponType.Epic)
                 Debug.Log("Cannot Upgrade");
             else
                 playerscript.UpgradeWeapon(weaponreward);
         }
         else if (weaponreward == WeaponType.Gold)
         {
-            if (playerscript.weaponType == WeaponType.Bronze || playerscript.weaponType == WeaponType.Silver || playerscript.weaponType == WeaponType.Gold)
+            if (playerscript.weaponType == WeaponType.Gold || playerscript.weaponType == WeaponType.Epic)
                 Debug.Log("Cannot Upgrade");
             else
                 playerscript.UpgradeWeapon(weaponreward);

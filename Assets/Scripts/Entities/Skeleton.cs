@@ -46,6 +46,8 @@ public class Skeleton : Enemy, IAttacker
 
         amountOfStatToGiveAponDeath = amountToStatToGive;
         typeOfStatIncrease = stat;
+
+        Debug.Log("Skeleton Stats: "+transform.position+" HP=" + HP + " Atk=" + Atk + " Def=" + Def + " StatAmount=" + amountToStatToGive);
         
     }
 

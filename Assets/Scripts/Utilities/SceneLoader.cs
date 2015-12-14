@@ -15,9 +15,10 @@ public class SceneLoader : MonoBehaviour {
 
     private IEnumerator LoadALevel(string sceneName)
     {
-        yield return new WaitForSeconds(5f);
-        //async = SceneManager.LoadSceneAsync(sceneName);
-        SceneManager.LoadScene(sceneName);
+        if(GameInfo.AreaToTeleportTo != GameInfo.Area.World)
+            yield return new WaitForSeconds(4f);
+        async = SceneManager.LoadSceneAsync(sceneName);
+        //SceneManager.LoadScene(sceneName);
         //yield return new WaitForSeconds(6f);
         yield return async;
     }

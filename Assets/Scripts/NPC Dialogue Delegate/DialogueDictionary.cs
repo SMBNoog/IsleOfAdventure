@@ -6,7 +6,7 @@ public enum DictionaryKey {
                             InTutorialInfo,
                             InTutorialToWorld_NotCompleted,
                             InTutorialToWorld_Completed,
-                            DirectionsSign,
+                            SignAtSpawnIn,
                             InWorldToCastle,
                             InWorldToForest,
                             ToForestNonWooden,
@@ -70,7 +70,7 @@ public class DialogueDictionary : MonoBehaviour
         NPCButtonOKText_Dictionary.Add(DictionaryKey.InCastleToWorld, "Sure!");
         NPCButtonCancelText_Dictionary.Add(DictionaryKey.InCastleToWorld, "Nah");
         
-        NPCMessage_Dictionary.Add(DictionaryKey.DirectionsSign, "Forst West   Castle North");
+        NPCMessage_Dictionary.Add(DictionaryKey.SignAtSpawnIn, "Forst West\nCastle North");
 
         //npcDialogue.Add("Forest Wood", "Message");
         //npcDialogue.Add("Forest Non Wood", "Message");

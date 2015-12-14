@@ -109,6 +109,7 @@ public class NPCInteraction : MonoBehaviour {
     {
         switch (typeOfNPC)
         {
+            // ************************* Tutorial
             case TypeOfNPC.InTutorialToWorld:  // Tutorial >>> World
                 if (Skeleton.numberOfTutorialSkeletons > 0) // Do checks here for weapon or enemies killed
                 {
@@ -129,6 +130,8 @@ public class NPCInteraction : MonoBehaviour {
                 message = DialogueDictionary.NPCMessage_Dictionary[DictionaryKey.InTutorialInfo];
                 okButton = DialogueDictionary.NPCButtonOKText_Dictionary[DictionaryKey.InTutorialInfo];
                 Destroy(gameObject, .01f); break;
+
+            // ************************* Castle
             case TypeOfNPC.InCastleFirstDoor:   // Castle First Door
                 if(player.weaponType == WeaponType.Wooden)
                 {
@@ -145,10 +148,14 @@ public class NPCInteraction : MonoBehaviour {
                 message = DialogueDictionary.NPCMessage_Dictionary[DictionaryKey.InCastleToWorld];
                 okButton = DialogueDictionary.NPCButtonOKText_Dictionary[DictionaryKey.InCastleToWorld]; 
                 cancelButton = DialogueDictionary.NPCButtonCancelText_Dictionary[DictionaryKey.InCastleToWorld]; break;
+
+            // ************************* World
             case TypeOfNPC.InWorldToCastle: // World >>> Castle
                 message = DialogueDictionary.NPCMessage_Dictionary[DictionaryKey.InWorldToCastle]; break;
             case TypeOfNPC.InWorldToForest: // World >>> Forest
                 message = DialogueDictionary.NPCMessage_Dictionary[DictionaryKey.InWorldToForest]; break;
+            case TypeOfNPC.SignAtSpawnIn: // Sing at spawn in
+                message = DialogueDictionary.NPCMessage_Dictionary[DictionaryKey.SignAtSpawnIn]; break;
 
         }
     }
