@@ -33,6 +33,8 @@ public class Chest : MonoBehaviour, INPCMessageAndAction
         IMessageDelegate messageDelegate = Interface.Find<IMessageDelegate>(FindObjectOfType<Dialogue>().gameObject);
         if (messageDelegate != null)
         {
+            SoundManager.Instance.StopAll();
+            SoundManager.Instance.Play(TypeOfClip.ChestOpen);
             GiveWeapon();
             openchest1.SetActive(true);
             openchest2.SetActive(true);

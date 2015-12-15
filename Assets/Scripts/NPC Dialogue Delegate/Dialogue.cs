@@ -68,7 +68,6 @@ public class Dialogue : MonoBehaviour, IMessageDelegate
 
     public void ShowMessageWithOk(string dialogMessage, string okButton, DialogueDelegate onClickOK)
     {
-        Debug.Log("ShowMessageWithOk");
         textSingle.text = dialogMessage;
         okButtonSingle.text = okButton;
         dialogueDelegate = onClickOK;

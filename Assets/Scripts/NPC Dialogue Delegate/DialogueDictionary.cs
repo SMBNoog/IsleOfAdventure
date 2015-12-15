@@ -2,18 +2,20 @@
 using System.Collections.Generic;
 
 public enum DictionaryKey {
-                            InTutorialIntro,
+                            InTutorialIntroNarration,
                             InTutorialInfo,
                             InTutorialToWorld_NotCompleted,
                             InTutorialToWorld_Completed,
                             SignAtSpawnIn,
+                            InWorldIntroNarration,
                             InWorldToCastle,
                             InWorldToForest,
-                            ToForestNonWooden,
-                            InForestWooden,
+                            InForestIntroNarration,
                             InCastleToWorld,
                             InCastleFirstDoorWooden,
-                            InCastleFirstDoorNonWooden
+                            InCastleFirstDoorAboveWooden,
+                            InCastleSecondDoorFlame,
+                            InCastleSecondDoorAboveFlame
                           }
 
 
@@ -35,13 +37,13 @@ public class DialogueDictionary : MonoBehaviour
         /********************************/
 
         /********* Intro narration. **********/
-        NPCMessage_Dictionary.Add(DictionaryKey.InTutorialIntro, "The Isle has been taken over by an evil Dragon! Use the power of your Sword to vanquish the evil Dragon Overlord!");
-        NPCButtonOKText_Dictionary.Add(DictionaryKey.InTutorialIntro, "OK!");
+        NPCMessage_Dictionary.Add(DictionaryKey.InTutorialIntroNarration, "The Isle has been taken over by an evil Dragon! Use the power of your Sword to vanquish the evil Dragon Overlord!");
+        NPCButtonOKText_Dictionary.Add(DictionaryKey.InTutorialIntroNarration, "OK!");
         
         /********* How to increase attributes **********/
         NPCMessage_Dictionary.Add(DictionaryKey.InTutorialInfo, "Bush's can incrase your Health, Attack and Defense. Check out the Menu to see your current stats.");
         NPCButtonOKText_Dictionary.Add(DictionaryKey.InTutorialInfo, "Got it!");
-        
+
         /********* NPC teleport to World **********/
         NPCMessage_Dictionary.Add(DictionaryKey.InTutorialToWorld_NotCompleted, "Help defeat the skeletons!");
         NPCButtonOKText_Dictionary.Add(DictionaryKey.InTutorialToWorld_NotCompleted, "On it!");
@@ -52,6 +54,9 @@ public class DialogueDictionary : MonoBehaviour
 
         /********* IN WORLD **********/
         /*****************************/
+
+        /********* Intro to World narration **********/
+
 
         /********* NPC teleport to Castle. **********/
         NPCMessage_Dictionary.Add(DictionaryKey.InWorldToCastle, "Enter the Castle?");
@@ -69,14 +74,24 @@ public class DialogueDictionary : MonoBehaviour
         NPCMessage_Dictionary.Add(DictionaryKey.InCastleFirstDoorWooden, "You won't have a chance with that Wooden Sword. Go to the Forest to obtain a new one.");
         NPCButtonOKText_Dictionary.Add(DictionaryKey.InCastleFirstDoorWooden, "Ok!");
         
-        NPCMessage_Dictionary.Add(DictionaryKey.InCastleFirstDoorNonWooden, "You may enter! Good Luck!");
-        NPCButtonOKText_Dictionary.Add(DictionaryKey.InCastleFirstDoorNonWooden, "Alright!");
+        NPCMessage_Dictionary.Add(DictionaryKey.InCastleFirstDoorAboveWooden, "You may enter! Good Luck!");
+        NPCButtonOKText_Dictionary.Add(DictionaryKey.InCastleFirstDoorAboveWooden, "Alright!");
+
+        /********* Second Door Check for Weapon **********/
+        NPCMessage_Dictionary.Add(DictionaryKey.InCastleSecondDoorFlame, "You won't have a chance with that Wooden Sword. Go back to the Forest!");
+
+        NPCMessage_Dictionary.Add(DictionaryKey.InCastleSecondDoorAboveFlame, "You may pass.");
 
         /********* Door way teleport back to the World. **********/
         NPCMessage_Dictionary.Add(DictionaryKey.InCastleToWorld, "Travel back to the world?");
         NPCButtonOKText_Dictionary.Add(DictionaryKey.InCastleToWorld, "Sure!");
         NPCButtonCancelText_Dictionary.Add(DictionaryKey.InCastleToWorld, "Nah");
 
+        /********* IN FOREST **********/
+        /******************************/
+
+        /********* Intro narration **********/
+        NPCMessage_Dictionary.Add(DictionaryKey.InForestIntroNarration, "Find the chest before the time runs out.");
 
         /********* IN WORLD SIGNS **********/
         /***********************************/

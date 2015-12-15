@@ -114,6 +114,8 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
         anim = GetComponent<Animator>();
         rb2D = GetComponent<Rigidbody2D>();
 
+        SoundManager.Instance.UpdateBackgroundMusic();
+
         LoadAttributes();
         LoadWeapon(currentWeapon);
         // Hard code positions to spawn in each zone

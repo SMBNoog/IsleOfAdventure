@@ -62,6 +62,15 @@ public class SpawnEnemies : MonoBehaviour, ISpawner {
         {
             for (int i = 0; i < area.numberToSpawn; i++)
             {
+                int r1 = UnityEngine.Random.Range(1, 4);
+                switch (r1)
+                {
+                    case 1: area.typeOfStatDrop = TypeOfStatIncrease.HP; break;
+                    case 2: area.typeOfStatDrop = TypeOfStatIncrease.ATK; break;
+                    case 3: area.typeOfStatDrop = TypeOfStatIncrease.DEF; break;
+                    default: area.typeOfStatDrop = TypeOfStatIncrease.HP; break;
+                }
+
                 float y = area.spawnLocation.position.y;
                 ScaleToYaxis(y, area.typeOfStatDrop);
 
@@ -118,9 +127,9 @@ public class SpawnEnemies : MonoBehaviour, ISpawner {
                     Def_Median = 0.03f * scale;
                     switch (typeOfStat)
                     {
-                        case TypeOfStatIncrease.ATK: AmountOfStatToGive = 1f * (scale - (scale / 3)); break;
+                        case TypeOfStatIncrease.ATK: AmountOfStatToGive = 2f * (scale - (scale / 3)); break;
                         case TypeOfStatIncrease.DEF: AmountOfStatToGive = 0.005f; break;
-                        case TypeOfStatIncrease.HP: AmountOfStatToGive = 10 * (scale - (scale / 3)); break;
+                        case TypeOfStatIncrease.HP: AmountOfStatToGive = 20 * (scale - (scale / 3)); break;
                     }
                     break;
                 case WeaponType.Silver:
@@ -133,7 +142,7 @@ public class SpawnEnemies : MonoBehaviour, ISpawner {
                     {
                         case TypeOfStatIncrease.ATK: AmountOfStatToGive = 50f * (scale - (scale / 3)); break;
                         case TypeOfStatIncrease.DEF: AmountOfStatToGive = 0.005f; break;
-                        case TypeOfStatIncrease.HP: AmountOfStatToGive = 500f * (scale - (scale / 3)); break;
+                        case TypeOfStatIncrease.HP: AmountOfStatToGive = 200f * (scale - (scale / 3)); break;
                     }
                     break;
             }
@@ -168,6 +177,16 @@ public class SpawnEnemies : MonoBehaviour, ISpawner {
     {
         float r = UnityEngine.Random.Range(30f, 120f);
         yield return new WaitForSeconds(r);
+
+        int r1 = UnityEngine.Random.Range(1, 6);
+        switch (r1)
+        {
+            case 1: sr.source.typeOfStatDrop = TypeOfStatIncrease.HP; break;
+            case 2:
+            case 3: sr.source.typeOfStatDrop = TypeOfStatIncrease.ATK; break;
+            case 4: sr.source.typeOfStatDrop = TypeOfStatIncrease.DEF; break;
+            default: sr.source.typeOfStatDrop = TypeOfStatIncrease.HP; break;
+        }
 
         float y = sr.source.spawnLocation.position.y;
         ScaleToYaxis(y, sr.source.typeOfStatDrop);

@@ -11,11 +11,13 @@ public enum TypeOfNPC
     SignAtForest,
     SignAtCastle,
     SignAtTown,
+    InForestIntro,
     InWorldToForest,
     InWorldToCastle,
     InWorldAtTown,
     InForestChestToWorld,
     InCastleFirstDoor,
+    InCastleSecondDoor,
     InCastleToWorld,
     Boss
 }
@@ -123,8 +125,8 @@ public class NPCInteraction : MonoBehaviour {
                     cancelButton = DialogueDictionary.NPCButtonCancelText_Dictionary[DictionaryKey.InTutorialToWorld_Completed];
                 } break;
             case TypeOfNPC.InTutorialIntro: // Tutorial Intro 
-                message = DialogueDictionary.NPCMessage_Dictionary[DictionaryKey.InTutorialIntro];
-                okButton = DialogueDictionary.NPCButtonOKText_Dictionary[DictionaryKey.InTutorialIntro];
+                message = DialogueDictionary.NPCMessage_Dictionary[DictionaryKey.InTutorialIntroNarration];
+                okButton = DialogueDictionary.NPCButtonOKText_Dictionary[DictionaryKey.InTutorialIntroNarration];
                 Destroy(gameObject, .01f); break;
             case TypeOfNPC.InTutorialInfo: // Bush Info
                 message = DialogueDictionary.NPCMessage_Dictionary[DictionaryKey.InTutorialInfo];
@@ -140,8 +142,8 @@ public class NPCInteraction : MonoBehaviour {
                 }
                 else
                 {
-                    message = DialogueDictionary.NPCMessage_Dictionary[DictionaryKey.InCastleFirstDoorNonWooden];
-                    okButton = DialogueDictionary.NPCButtonOKText_Dictionary[DictionaryKey.InCastleFirstDoorNonWooden];
+                    message = DialogueDictionary.NPCMessage_Dictionary[DictionaryKey.InCastleFirstDoorAboveWooden];
+                    okButton = DialogueDictionary.NPCButtonOKText_Dictionary[DictionaryKey.InCastleFirstDoorAboveWooden];
                 }
                 break;
             case TypeOfNPC.InCastleToWorld: // Castle >>> World

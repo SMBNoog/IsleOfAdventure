@@ -126,7 +126,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86ea2e0946b3ef346b18974d07aa1a47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  typeOfNPC: 11
+  typeOfNPC: 12
   NPCTeleportTo: 4
 --- !u!212 &21262592
 SpriteRenderer:

@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 438874}
   - 212: {fileID: 21258698}
   - 58: {fileID: 5823228}
-  - 114: {fileID: 11438750}
+  - 114: {fileID: 11400220}
   m_Layer: 0
   m_Name: RougeNPC_20 (1)
   m_TagString: Untagged
@@ -25,7 +25,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 187124}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.03, y: -11.85, z: 0}
+  m_LocalPosition: {x: 1.03, y: -13.96, z: 0}
   m_LocalScale: {x: 5, y: 5, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -44,7 +44,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: -0.04}
   serializedVersion: 2
   m_Radius: 0.35
---- !u!114 &11438750
+--- !u!114 &11400220
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -55,7 +55,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86ea2e0946b3ef346b18974d07aa1a47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  typeOfNPC: 12
+  typeOfNPC: 14
   NPCTeleportTo: 3
 --- !u!212 &21258698
 SpriteRenderer:
