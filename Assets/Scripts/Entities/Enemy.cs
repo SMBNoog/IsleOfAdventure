@@ -26,6 +26,7 @@ public class Enemy : Entity {
     // Apon death give stats to player
     protected void GiveStatsToPlayerAponDeath(float amount, TypeOfStatIncrease stat)
     {
+        Debug.Log("Type: " + stat + "  Amount:  " + amount);
         Player player = FindObjectOfType<Player>(); 
         player.IncreaseStat(amount, stat);
     }

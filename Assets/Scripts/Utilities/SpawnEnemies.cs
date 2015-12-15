@@ -13,6 +13,7 @@ public class SpawnArea {
     public TypeOfEnemy typeOfEnemy;
     public int numberToSpawn;
     public TypeOfStatIncrease typeOfStatDrop;
+    public float amountOfStatToGive;
     public bool tutorialSkeleton;
     public bool townSkeleton;
 }
@@ -58,78 +59,77 @@ public class SpawnEnemies : MonoBehaviour, ISpawner {
 
     IEnumerator SpawnEnemiesNow()
     {
-        foreach (SpawnArea area in spawnAreas)
+        for (int u = 0; u < spawnAreas.Count; u++)
         {
-            for (int i = 0; i < area.numberToSpawn; i++)
+            for (int i = 0; i < spawnAreas[u].numberToSpawn; i++)
             {
                 int r1 = UnityEngine.Random.Range(1, 4);
                 switch (r1)
                 {
-                    case 1: area.typeOfStatDrop = TypeOfStatIncrease.HP; break;
-                    case 2: area.typeOfStatDrop = TypeOfStatIncrease.ATK; break;
-                    case 3: area.typeOfStatDrop = TypeOfStatIncrease.DEF; break;
-                    default: area.typeOfStatDrop = TypeOfStatIncrease.HP; break;
+                    case 1: spawnAreas[u].typeOfStatDrop = TypeOfStatIncrease.HP; break;
+                    case 2: spawnAreas[u].typeOfStatDrop = TypeOfStatIncrease.ATK; break;
+                    case 3: spawnAreas[u].typeOfStatDrop = TypeOfStatIncrease.DEF; break;
+                    default: spawnAreas[u].typeOfStatDrop = TypeOfStatIncrease.HP; break;
                 }
 
-                float y = area.spawnLocation.position.y;
-                ScaleToYaxis(y, area.typeOfStatDrop);
+                float y = spawnAreas[u].spawnLocation.position.y;
+                //ScaleToYaxis(y, spawnAreas[u]);
 
+                SpawnArea tempArea = new SpawnArea();
                 if (y < 20f) // easy
-                    ScaleEnemyToWeaponType(1, area.typeOfStatDrop);
+                    tempArea = ScaleEnemyToWeaponType(1, spawnAreas[u]);
                 else if (y > 20f && y < 80f) // moderate
-                    ScaleEnemyToWeaponType(2f, area.typeOfStatDrop);
+                    tempArea = ScaleEnemyToWeaponType(2f, spawnAreas[u]);
                 else if (y > 80f && y < 170f) // hard
-                    ScaleEnemyToWeaponType(3f, area.typeOfStatDrop);
+                    tempArea = ScaleEnemyToWeaponType(3f, spawnAreas[u]);
                 else if (y > 170f)
-                    ScaleEnemyToWeaponType(4f, area.typeOfStatDrop);
+                    tempArea = ScaleEnemyToWeaponType(4f, spawnAreas[u]);
 
-                if (area.typeOfEnemy == TypeOfEnemy.Skeleton)
+                if (spawnAreas[u].typeOfEnemy == TypeOfEnemy.Skeleton)
                 {
                     SpawnResult result = new SpawnResult();
-                    var skeleton = CreateSkeleton(area.prefab, area.spawnLocation.position + new Vector3(i, i, 0f),
+                    var skeleton = CreateSkeleton(spawnAreas[u].prefab, spawnAreas[u].spawnLocation.position + new Vector3(i, i, 0f),
                         HP_Median, Atk_Median, Def_Median,
-                        AmountOfStatToGive, area.typeOfStatDrop);
+                        tempArea.amountOfStatToGive, spawnAreas[u].typeOfStatDrop);
                     skeleton.Spawner = this;
                     result.enemy = skeleton;  
-                    result.source = area;  
+                    result.source = spawnAreas[u];  
                     spawnResults.Add(result); // add enemy to the list of spawned enemies
                 }
-
-                if (area.townSkeleton)
-                    yield return new WaitForSeconds(UnityEngine.Random.Range(2f, 5f));
             }
             yield return null;
         }
     }
 
     // The weapon type sets the base then the scale is based on the y cooridinate (south to north, easy to harder)
-    public void ScaleEnemyToWeaponType(float scale, TypeOfStatIncrease type)
+    public SpawnArea ScaleEnemyToWeaponType(float scale, SpawnArea area)
     {
         if (playerCurrentWeapon != null)
         {
-            TypeOfStatIncrease typeOfStat = type;
+            SpawnArea tempArea = new SpawnArea();
+            tempArea = area;
             switch (playerCurrentWeapon.weaponType)
             {
                 case WeaponType.Wooden:  // Wooden enemy stats
                     HP_Median = 120f * scale;
                     Atk_Median = 12f * scale;
                     Def_Median = 0.01f * scale;
-                    switch (typeOfStat)
+                    switch (area.typeOfStatDrop)
                     {
-                        case TypeOfStatIncrease.ATK: AmountOfStatToGive = 0.5f; break;
-                        case TypeOfStatIncrease.DEF: AmountOfStatToGive = 0.0025f; break;
-                        case TypeOfStatIncrease.HP: AmountOfStatToGive = 1; break;
+                        case TypeOfStatIncrease.ATK: tempArea.amountOfStatToGive = 0.5f * scale; return tempArea;
+                        case TypeOfStatIncrease.DEF: tempArea.amountOfStatToGive = 0.001f; return tempArea;
+                        case TypeOfStatIncrease.HP: tempArea.amountOfStatToGive = 1 * scale; return tempArea;
                     }
                     break;
                 case WeaponType.Flame:
                     HP_Median = 1200f * scale;
                     Atk_Median = 120f * scale;
                     Def_Median = 0.03f * scale;
-                    switch (typeOfStat)
+                    switch (area.typeOfStatDrop)
                     {
-                        case TypeOfStatIncrease.ATK: AmountOfStatToGive = 2f * (scale - (scale / 3)); break;
-                        case TypeOfStatIncrease.DEF: AmountOfStatToGive = 0.005f; break;
-                        case TypeOfStatIncrease.HP: AmountOfStatToGive = 20 * (scale - (scale / 3)); break;
+                        case TypeOfStatIncrease.ATK: tempArea.amountOfStatToGive = 2f * scale; return tempArea;
+                        case TypeOfStatIncrease.DEF: tempArea.amountOfStatToGive = 0.0015f; return tempArea;
+                        case TypeOfStatIncrease.HP: tempArea.amountOfStatToGive = 20 * (scale - (scale / 3)); return tempArea;
                     }
                     break;
                 case WeaponType.Silver:
@@ -138,15 +138,16 @@ public class SpawnEnemies : MonoBehaviour, ISpawner {
                     HP_Median = 10000f * scale;
                     Atk_Median = 1000f * scale;
                     Def_Median = 0.1f * scale;
-                    switch (typeOfStat)
+                    switch (area.typeOfStatDrop)
                     {
-                        case TypeOfStatIncrease.ATK: AmountOfStatToGive = 50f * (scale - (scale / 3)); break;
-                        case TypeOfStatIncrease.DEF: AmountOfStatToGive = 0.005f; break;
-                        case TypeOfStatIncrease.HP: AmountOfStatToGive = 200f * (scale - (scale / 3)); break;
+                        case TypeOfStatIncrease.ATK: tempArea.amountOfStatToGive = 50f * (scale - (scale / 3)); return tempArea;
+                        case TypeOfStatIncrease.DEF: tempArea.amountOfStatToGive = 0.005f; return tempArea;
+                        case TypeOfStatIncrease.HP: tempArea.amountOfStatToGive = 200f * (scale - (scale / 3)); return tempArea;
                     }
                     break;
             }
         }
+        return null;
     }
 
     public void Died(Enemy enemy) // called from enemy that died
@@ -161,16 +162,16 @@ public class SpawnEnemies : MonoBehaviour, ISpawner {
         }
     }
 
-    public void ScaleToYaxis(float y, TypeOfStatIncrease type)
+    public void ScaleToYaxis(float y, SpawnArea area)
     {
         if (y < 20f) // easy
-            ScaleEnemyToWeaponType(1, type);
+            ScaleEnemyToWeaponType(1, area);
         else if (y > 20f && y < 80f) // moderate
-            ScaleEnemyToWeaponType(2, type);
+            ScaleEnemyToWeaponType(2, area);
         else if (y > 80f && y < 170f) // hard
-            ScaleEnemyToWeaponType(4, type);
+            ScaleEnemyToWeaponType(4, area);
         else if (y > 170f)
-            ScaleEnemyToWeaponType(5, type);
+            ScaleEnemyToWeaponType(5, area);
     }
 
     IEnumerator RespawnEnemy(SpawnResult sr)
@@ -189,7 +190,7 @@ public class SpawnEnemies : MonoBehaviour, ISpawner {
         }
 
         float y = sr.source.spawnLocation.position.y;
-        ScaleToYaxis(y, sr.source.typeOfStatDrop);
+        ScaleToYaxis(y, sr.source);
 
         if (sr.source.typeOfEnemy == TypeOfEnemy.Skeleton)
         {

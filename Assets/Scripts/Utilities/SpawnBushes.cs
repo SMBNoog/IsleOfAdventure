@@ -78,7 +78,7 @@ public class SpawnBushes : MonoBehaviour, ISpawner
                     }
 
                     float y = spawnAreas[u].spawnLocation.position.y;
-                    ScaleToYaxis(y, spawnAreas[u]);
+                    //ScaleToYaxis(y, spawnAreas[u]);
 
                     SpawnAreaBush tempBush = new SpawnAreaBush();
                     if (y < 20f)
@@ -125,9 +125,9 @@ public class SpawnBushes : MonoBehaviour, ISpawner
                     Def_Median = 0f;
                     switch (area.typeOfStatDrop)
                     {
-                        case TypeOfStatIncrease.ATK: tempArea.amountOfStatToGive = 0.5f; return tempArea; 
+                        case TypeOfStatIncrease.ATK: tempArea.amountOfStatToGive = 0.5f * (scale - (scale / 3)); return tempArea; 
                         case TypeOfStatIncrease.DEF: tempArea.amountOfStatToGive = 0.001f; return tempArea;
-                        case TypeOfStatIncrease.HP: tempArea.amountOfStatToGive = 1; return tempArea;
+                        case TypeOfStatIncrease.HP: tempArea.amountOfStatToGive = 1 * (scale - (scale / 3)); return tempArea;
                     }
                     break;
                 case WeaponType.Flame:

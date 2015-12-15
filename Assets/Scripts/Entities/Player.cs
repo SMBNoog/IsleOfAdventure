@@ -52,6 +52,8 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
     public GameObject hpStatUp;
     public GameObject atkStatUp;
     public GameObject defStatUp;
+
+
     
     // IAttacker interface
     public WellBeingState wellBeing { get; set; }
@@ -77,6 +79,8 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
 
     private bool playingSwingSound = false;
 
+    private SpriteRenderer sr;
+
     public void OnEnable()
     {
         // Search the children to find Weapons.
@@ -89,6 +93,8 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
 
     void Awake()
     {
+        sr = GetComponent<SpriteRenderer>();
+
         wellBeing = WellBeingState.Alive;           
         
         //if(!GameInfo.TutorialCompleted)     
@@ -104,10 +110,6 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
             SaveAttributes(true);       
             Debug.Log("Player Starting HP: " + HP + " | ATK: " + Atk + " | DEF: " + Def);
         }
-        else
-        {
-          
-        }
     }
 
     void Start () {
@@ -118,14 +120,14 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
 
         LoadAttributes();
         LoadWeapon(currentWeapon);
-        // Hard code positions to spawn in each zone
+
         if (GameInfo.AreaToTeleportTo == GameInfo.Area.World)
             rb2D.transform.position = GameInfo.LastPos;
         else if (GameInfo.AreaToTeleportTo == GameInfo.Area.TutorialArea)
             rb2D.transform.position = new Vector2(-84.2f, -107.5f);
         else if (GameInfo.AreaToTeleportTo == GameInfo.Area.Forest)
         {
-            int r = (int)UnityEngine.Random.Range(0f, 4f);
+            int r = (int)UnityEngine.Random.Range(0f, 5f);
             switch (r)
             {
                 case 1: rb2D.transform.position = new Vector2(2f, 2f); break;
@@ -233,7 +235,7 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
             anim.SetFloat("Vertical Input", vertical);
 
             // Move Player
-            rb2D.velocity = new Vector2(horizontal * Speed, vertical * Speed);
+            rb2D.velocity = new Vector2(horizontal/* * Speed*/, vertical /** Speed*/).normalized * Speed;
             
             // If the conditions for idle exist...
             if (rb2D.velocity == Vector2.zero && actionState != ActionState.EngagedInBattle)
@@ -276,10 +278,35 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
                 if (canTakeDamage)
                 {
                     canTakeDamage = false;
+                    //anim.SetTrigger("Blink");
+
+                    StartCoroutine(AdjustAlphaWhenHit());
+
                     DamagedBy(dmg);
                     StartCoroutine(DelayWhenDamageCanBeRecieved());
                 }
             }
+        }
+    }
+
+    IEnumerator AdjustAlphaWhenHit()
+    {
+        for(int i=0; i<3; i++)
+        {
+            Color color = sr.material.color;
+            color.a = .7f;
+            sr.material.color = color;
+            yield return new WaitForSeconds(.15f);
+            color.a = 1f;
+            sr.material.color = color;
+            yield return new WaitForSeconds(.08f);
+            color.a = .5f;
+            sr.material.color = color;
+            yield return new WaitForSeconds(.1f);
+            color.a = 1f;
+            sr.material.color = color;
+            yield return new WaitForSeconds(.06f);
+
         }
     }
 
@@ -331,7 +358,7 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
         {
             switch (stat)
             {
-                case TypeOfStatIncrease.HP: maxHP += amount;
+                case TypeOfStatIncrease.HP: maxHP = maxHP + amount >= HP_Cap ? HP_Cap : maxHP + amount;
                     GameObject obj1 = Instantiate(hpStatUp) as GameObject;                    
                     obj1.transform.SetParent(transform);
                     obj1.transform.localPosition = new Vector3(0, 0);
@@ -343,7 +370,7 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
                     obj2.transform.localPosition = new Vector3(0, 0);
                     obj2.transform.localScale = new Vector3(1f, 1f, 1f);
                     obj2.gameObject.SetActive(true); break; 
-                case TypeOfStatIncrease.DEF: Def += amount;
+                case TypeOfStatIncrease.DEF: Def = Def + amount >= DEF_Cap ? 0.5f : Def + amount;
                     GameObject obj3 = Instantiate(defStatUp) as GameObject;
                     obj3.transform.SetParent(transform);
                     obj3.transform.localPosition = new Vector3(0, 0);

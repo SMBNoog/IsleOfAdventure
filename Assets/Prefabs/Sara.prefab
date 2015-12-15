@@ -219,7 +219,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &140212
 GameObject:
   m_ObjectHideFlags: 0
@@ -671,7 +671,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 140212}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -84.266975, y: -107.55485, z: 0}
+  m_LocalPosition: {x: -6.97, y: -3.74, z: 0}
   m_LocalScale: {x: 5, y: 5, z: 1}
   m_Children:
   - {fileID: 471690}
@@ -767,7 +767,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 163720}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.144, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 447062}
@@ -1051,7 +1051,7 @@ Rigidbody2D:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!50 &5084356
 Rigidbody2D:
@@ -1230,9 +1230,9 @@ EdgeCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   m_Points:
-  - {x: 0.1924569, y: -0.032617867}
+  - {x: 0.19542691, y: -0.04845179}
   - {x: -0.1497326, y: 0.0075376835}
-  - {x: 0.18894885, y: 0.059939757}
+  - {x: 0.1889481, y: 0.07181495}
 --- !u!68 &6869448
 EdgeCollider2D:
   m_ObjectHideFlags: 1
@@ -1353,7 +1353,7 @@ TrailRenderer:
   m_CastShadows: 0
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: a270197c1273144bfb3c9ca7709cc81e, type: 2}
+  - {fileID: 2100000, guid: 8cfd0704f62504d3a8b2ad5bb661f1a6, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -1370,7 +1370,7 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_Time: 0.5
-  m_StartWidth: 4
+  m_StartWidth: 2.5
   m_EndWidth: 0.5
   m_Colors:
     m_Color[0]:
@@ -1388,7 +1388,7 @@ TrailRenderer:
     m_Color[4]:
       serializedVersion: 2
       rgba: 16777215
-  m_MinVertexDistance: 0.1
+  m_MinVertexDistance: 0
   m_Autodestruct: 0
 --- !u!96 &9667348
 TrailRenderer:
@@ -1400,7 +1400,7 @@ TrailRenderer:
   m_CastShadows: 0
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: a270197c1273144bfb3c9ca7709cc81e, type: 2}
+  - {fileID: 2100000, guid: 99000a8205e184abca1d3f940788708d, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -1417,8 +1417,8 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_Time: 0.5
-  m_StartWidth: 1.5
-  m_EndWidth: 0.5
+  m_StartWidth: 2.5
+  m_EndWidth: 0.2
   m_Colors:
     m_Color[0]:
       serializedVersion: 2
@@ -1435,7 +1435,7 @@ TrailRenderer:
     m_Color[4]:
       serializedVersion: 2
       rgba: 16777215
-  m_MinVertexDistance: 0.1
+  m_MinVertexDistance: 0
   m_Autodestruct: 0
 --- !u!96 &9684346
 TrailRenderer:
@@ -1824,7 +1824,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 419fbe8a52e33334a8dac200d6c271ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numberOfParticles: 50
+  numberOfParticles: 100
 --- !u!114 &11471830
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -7007,7 +7007,7 @@ ParticleSystem:
       minMaxState: 0
     randomizeRotationDirection: 0
     gravityModifier: 0
-    maxNumParticles: 100
+    maxNumParticles: 50
     rotation3D: 0
   ShapeModule:
     serializedVersion: 2

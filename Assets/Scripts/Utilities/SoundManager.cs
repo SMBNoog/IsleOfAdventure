@@ -18,7 +18,6 @@ public class SoundManager : MonoBehaviour
 {
 
     public List<AudioSource_Files> audioSources;
-    public AudioSource mainMusic;
 
     public static SoundManager Instance;
 
@@ -28,7 +27,7 @@ public class SoundManager : MonoBehaviour
         //DontDestroyOnLoad(this);
     }
 
-    void OnEnable()
+    void Start()
     {
         UpdateBackgroundMusic();
     }
