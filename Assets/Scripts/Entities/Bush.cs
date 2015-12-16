@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 public class Bush : Enemy, IBushDie
 {
-    public ISpawner Spawner  // reference to the interface to Respawn this enemy when it dies
+    public ISpawner Spawner
     {
         get; set;
     }
