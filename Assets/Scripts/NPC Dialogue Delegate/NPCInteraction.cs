@@ -113,7 +113,7 @@ public class NPCInteraction : MonoBehaviour {
         {
             // ************************* Tutorial
             case TypeOfNPC.InTutorialToWorld:  // Tutorial >>> World
-                if (Skeleton.numberOfTutorialSkeletons > 0) // Do checks here for weapon or enemies killed
+                if (Skeleton.numberOfTutorialSkeletons > 0) 
                 {
                     message = DialogueDictionary.NPCMessage_Dictionary[DictionaryKey.InTutorialToWorld_NotCompleted];
                     okButton = DialogueDictionary.NPCButtonOKText_Dictionary[DictionaryKey.InTutorialToWorld_NotCompleted];
