@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public enum TypeOfClip
 {
@@ -53,21 +54,24 @@ public class SoundManager : MonoBehaviour
 
     public void UpdateBackgroundMusic()
     {
+        //Debug.Log(SceneManager.GetActiveScene().name);
+        //Debug.Log(GameInfo.Area.MainMenu.ToString());
         StopAll();
-        if (GameInfo.AreaToTeleportTo == GameInfo.Area.World || GameInfo.AreaToTeleportTo == GameInfo.Area.TutorialArea)
+        if (SceneManager.GetActiveScene().name == GameInfo.Area.MainMenu.ToString())
+            Play(TypeOfClip.TitleMusic);
+        else if(SceneManager.GetActiveScene().name == GameInfo.Area.TutorialArea.ToString() ||
+            SceneManager.GetActiveScene().name == GameInfo.Area.World.ToString())
         {
             Play(TypeOfClip.WorldMusic);
         }
-        else if (GameInfo.AreaToTeleportTo == GameInfo.Area.Forest)
+        else if (SceneManager.GetActiveScene().name == GameInfo.Area.Forest.ToString())
         {
             Play(TypeOfClip.ForestMusic);
         }
-        else if (GameInfo.AreaToTeleportTo == GameInfo.Area.Castle)
+        else if (SceneManager.GetActiveScene().name == GameInfo.Area.Castle.ToString())
         {
             Play(TypeOfClip.CastleMusic);
         }
-        else
-            Play(TypeOfClip.TitleMusic);
     }
 
     //public void ChangeSoundFxVolume(Slider slider)

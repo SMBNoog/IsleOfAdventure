@@ -48,25 +48,25 @@ public class Chest : MonoBehaviour, INPCMessageAndAction
 
     void GiveWeapon()
     {
-        if (UnityEngine.Random.Range(0f, 1f) < .70f)
+        if (UnityEngine.Random.Range(0f, 1f) < 0.02f)
         {
-            weaponreward = WeaponType.Flame;
-            message = "You Made it!\n You Found a Flame Sword";
+            weaponreward = WeaponType.Epic;
+            message = "You Made it!\n You Found the Epic Sword!";
         }
-        else if (UnityEngine.Random.Range(0f, 1f) < .90f)
-        {
-            weaponreward = WeaponType.Silver;
-            message = "You Made it!\n You Found a Silver Sword";
-        }
-        else if (UnityEngine.Random.Range(0f, 1f) < .98f)
+        else if (UnityEngine.Random.Range(0f, 1f) < 0.10f)
         {
             weaponreward = WeaponType.Gold;
             message = "You Made it!\n You Found a Gold Sword";
         }
+        else if (UnityEngine.Random.Range(0f, 1f) < 0.30f)
+        {
+            weaponreward = WeaponType.Silver;
+            message = "You Made it!\n You Found a Silver Sword";
+        }
         else
         {
-            weaponreward = WeaponType.Epic;
-            message = "You Made it!\n You Found the Epic Sword!";
+            weaponreward = WeaponType.Flame;
+            message = "You Made it!\n You Found a Flame Sword";
         }
     }
 

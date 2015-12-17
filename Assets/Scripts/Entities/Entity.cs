@@ -29,7 +29,7 @@ public abstract class Entity : MonoBehaviour {
     protected float Speed;
 
     protected Animator anim;
-
+        
     protected virtual void DamagedBy(float dmg)
     {
         //    Debug.Log(this + ":  Current HP: " + HP);

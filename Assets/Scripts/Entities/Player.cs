@@ -22,7 +22,7 @@ public class Weapons
 //    }
 //}
 
-public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManager, ICurrentHP, ICurrentPos
+public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManager, ICurrentHP, ICurrentPos, IDebugChangeWeapon
 {
     public List<Weapons> weaponList;  // Set list of weapons in the inspector
 
@@ -120,6 +120,14 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
 
         LoadAttributes();
         LoadWeapon(currentWeapon);
+
+        if(SceneManager.GetActiveScene().name == GameInfo.Area.World.ToString() ||
+            SceneManager.GetActiveScene().name == GameInfo.Area.TutorialArea.ToString() ||
+            SceneManager.GetActiveScene().name == GameInfo.Area.Forest.ToString() ||
+            SceneManager.GetActiveScene().name == GameInfo.Area.Castle.ToString()) 
+        {
+            FindObjectOfType<PauseMenuController>().SetPauseButtonActive();
+        }
 
         if (GameInfo.AreaToTeleportTo == GameInfo.Area.World)
             rb2D.transform.position = GameInfo.LastPos;
@@ -406,7 +414,7 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
         LoadWeapon(type);
     }
 
-    public void DebugChangeToBronzeButton()
+    public void DebugChangeToFlameButton()
     {
         UpgradeWeapon(WeaponType.Flame);
     }

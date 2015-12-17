@@ -7,6 +7,7 @@ public class MazeMaker : MonoBehaviour
     public GameObject Tile;
     public GameObject RLTile;
     public GameObject UDTile;
+    //public GameObject Chest;
 
     void Start()
     {
@@ -16,6 +17,8 @@ public class MazeMaker : MonoBehaviour
         {
             Dungeon[k] = new char[100];
         }
+
+        //choose a random i value and j value within range (30, 70) and place chest prefab there;
 
         for (int i = 0; i < 100; i+=2)
             for (int j = 0; j < 100; j+=2)
@@ -34,6 +37,8 @@ public class MazeMaker : MonoBehaviour
                     continue;
                 else if (i >= 2 && i <= 6 && j >= 96 && j <= 100)
                     continue;
+                //else if (i = i value of chest && j = j value of chest)
+                    //continue;
                 else if (Random.Range(0f, 1f) < 0.15f)
                 {
                     Dungeon[i][j] = 'B';
