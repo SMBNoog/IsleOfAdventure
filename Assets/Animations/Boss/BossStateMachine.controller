@@ -50,9 +50,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetSpeed: 1
-  speed: 4
+  speed: 7
   wallTestDistance: 0.1
-  flamespersecond: 0.0001
+  flamespersecond: 1.5
 --- !u!114 &11461212
 MonoBehaviour:
   m_ObjectHideFlags: 1

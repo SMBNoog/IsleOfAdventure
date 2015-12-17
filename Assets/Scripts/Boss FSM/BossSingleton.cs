@@ -8,6 +8,8 @@ public class BossSingleton : MonoBehaviour
 
     public GameObject attackingsprite;
     public GameObject fireball;
+    public Transform transformf;
+    public float health = 500000f;
 
     private BossSingleton()
     { }
@@ -25,6 +27,7 @@ public class BossSingleton : MonoBehaviour
         if(collider2D.gameObject.tag == "Player")
         {
             animator.SetBool("In Fireball Area", false);
+            attackingsprite.SetActive(false);
         }
     }
 
@@ -32,5 +35,11 @@ public class BossSingleton : MonoBehaviour
     {
         instance = this;
         animator = GetComponent<Animator>();
+    }
+
+    void OnCollisionEnter2D (Collision2D collision)
+    {
+        //check for weapon
+        //deal damage to boss based on weapon type
     }
 }

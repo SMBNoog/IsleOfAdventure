@@ -5,15 +5,15 @@ public class FireballAttack : StateMachineBehaviour
 {
     bool movingRight = true;
     public float targetSpeed = 1f;
-    public float speed = 4f;
+    public float speed = 7f;
     private Rigidbody2D myrigidbody2D;
     public float wallTestDistance = 0.1f;
     private Transform transformw;
-    private Vector2 centerPoint1 = new Vector2(35f, 108.5f);
-    private Vector2 centerPoint2 = new Vector2(-15f, 108.5f);
+    private Vector2 centerPoint1 = new Vector2(17.15f, 312.5f);
+    private Vector2 centerPoint2 = new Vector2(-15.3f, 312.5f);
     private Vector2 velocity;
 
-    public float flamespersecond = 2f;
+    public float flamespersecond = 1.5f;
     private float lastflamefired = 0f;
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
@@ -54,8 +54,13 @@ public class FireballAttack : StateMachineBehaviour
         if (Time.time - lastflamefired > 1f / flamespersecond)
         {
             BossSingleton.instance.attackingsprite.SetActive(true);
-            GameObject Fireball = Instantiate(BossSingleton.instance.fireball, transformw.position, transformw.rotation) as GameObject;
+            GameObject Fireball = Instantiate(BossSingleton.instance.fireball, BossSingleton.instance.transformf.position, BossSingleton.instance.transformf.rotation) as GameObject;
+            lastflamefired = Time.time;
         }
+
+        if (Time.time > lastflamefired + 0.5f)
+            BossSingleton.instance.attackingsprite.SetActive(false);
+            
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
