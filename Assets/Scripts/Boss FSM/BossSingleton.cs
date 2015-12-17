@@ -6,6 +6,9 @@ public class BossSingleton : MonoBehaviour
     private Animator animator; 
     public static BossSingleton instance;
 
+    public GameObject attackingsprite;
+    public GameObject fireball;
+
     private BossSingleton()
     { }
 

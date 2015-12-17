@@ -13,7 +13,7 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -38,18 +38,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0717d8dc5cbd356458d88e95eb75b94c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &11461212
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d72e20f785e37e5499b98d419973023f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &11476594
+--- !u!114 &11442592
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -61,7 +50,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetSpeed: 1
+  speed: 4
   wallTestDistance: 0.1
+  flamespersecond: 0.0001
+--- !u!114 &11461212
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d72e20f785e37e5499b98d419973023f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1101 &110106426
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -257,7 +259,7 @@ AnimatorState:
   m_Transitions:
   - {fileID: 110169726}
   m_StateMachineBehaviours:
-  - {fileID: 11476594}
+  - {fileID: 11442592}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
