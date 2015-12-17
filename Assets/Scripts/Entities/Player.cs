@@ -53,7 +53,7 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
     public GameObject atkStatUp;
     public GameObject defStatUp;
 
-
+    public Transform rayStartPoint;
     
     // IAttacker interface
     public WellBeingState wellBeing { get; set; }
@@ -219,20 +219,17 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
             {
                 bool platform = false;
                 bool abyss = false;
-                bool player = false;
 
-                RaycastHit2D[] hits = Physics2D.RaycastAll(transform.localPosition, transform.right, 0.1f);
+                RaycastHit2D[] hits = Physics2D.RaycastAll(rayStartPoint.position, Vector2.right, 0.1f);
                 foreach (RaycastHit2D hit in hits)
                 {
                     if (hit.collider.gameObject.tag == "Platform")
                         platform = true;
-                    if (hit.collider.gameObject.tag == "Player")
-                        player = true;
                     if (hit.collider.gameObject.tag == "Abyss")
                         abyss = true;
                 }
 
-                if(!platform && !player && abyss)
+                if(!platform && abyss)
                 {
                     anim.SetTrigger("Fall");
                     Die();
@@ -524,6 +521,6 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
 
     void OnDrawGizmos()
     {
-        Gizmos.DrawLine(transform.localPosition, transform.right);
+        Gizmos.DrawLine(rayStartPoint.position, transform.right);
     }
 }

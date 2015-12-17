@@ -96,6 +96,7 @@ public class SpawnEnemies : MonoBehaviour, ISpawner {
                     result.source = spawnAreas[u];  
                     spawnResults.Add(result); // add enemy to the list of spawned enemies
                 }
+                yield return new WaitForSeconds(0.05f);
             }
             yield return null;
         }
