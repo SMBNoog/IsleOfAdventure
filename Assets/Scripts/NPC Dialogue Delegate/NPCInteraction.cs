@@ -37,7 +37,8 @@ public class NPCInteraction : MonoBehaviour {
     
     void Start()
     {
-        StartCoroutine(DelayThenTurnOnCollider());
+        if(typeOfNPC != TypeOfNPC.InTutorialIntro)
+            StartCoroutine(DelayThenTurnOnCollider());
     }
 
     IEnumerator DelayThenTurnOnCollider()
@@ -101,11 +102,7 @@ public class NPCInteraction : MonoBehaviour {
 
     }
 
-    IEnumerator DelayThenEnableCollider()
-    {
-        yield return new WaitForSeconds(1.5f);
-        GetComponent<Collider2D>().enabled = true;
-    }
+
 
     void AssignMessage()
     {
@@ -191,7 +188,12 @@ public class NPCInteraction : MonoBehaviour {
                 StartCoroutine(DelayThenEnableCollider());
             }
             else { Debug.LogError("Dialogue could not be found."); }
-        }
-        
+        }        
+    }
+
+    IEnumerator DelayThenEnableCollider()
+    {
+        yield return new WaitForSeconds(1.5f);
+        GetComponent<Collider2D>().enabled = true;
     }
 }

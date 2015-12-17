@@ -58,6 +58,14 @@ public interface INPCMessageAndAction
     void OnClickOK();
 }
 
+public interface IDebugChangeWeapon
+{
+    void DebugChangeToFlameButton();
+    void DebugChangeToSilverButton();
+    void DebugChangeToGoldButton();
+    void DebugChangeToEpicButton();
+}
+
 public interface ICurrentPos
 {
     Vector2 postion { get; }
