@@ -4,13 +4,17 @@ using System.Collections;
 public class FireballAttack : StateMachineBehaviour
 {
     bool movingRight = true;
-    public float targetSpeed = 50f;
+    public float targetSpeed = 1f;
+    public float speed = 7f;
     private Rigidbody2D myrigidbody2D;
     public float wallTestDistance = 0.1f;
     private Transform transformw;
-    private Vector2 centerPoint1 = new Vector2(20f, 108.5f);
-    private Vector2 centerPoint2 = new Vector2(0f, 108.5f);
+    private Vector2 centerPoint1 = new Vector2(17.15f, 312.5f);
+    private Vector2 centerPoint2 = new Vector2(-15.3f, 312.5f);
     private Vector2 velocity;
+
+    public float flamespersecond = 1.5f;
+    private float lastflamefired = 0f;
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -23,10 +27,11 @@ public class FireballAttack : StateMachineBehaviour
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        //straffing the boss
         if (movingRight && velocity.x < targetSpeed)
-            myrigidbody2D.MovePosition(transformw.position + Vector3.right * Time.deltaTime);
+            myrigidbody2D.MovePosition(transformw.position + Vector3.right * speed * Time.fixedDeltaTime );
         else if (!movingRight && velocity.x > -targetSpeed)
-            myrigidbody2D.MovePosition(transformw.position + -Vector3.right * Time.deltaTime);
+            myrigidbody2D.MovePosition(transformw.position + -Vector3.right * speed * Time.fixedDeltaTime);
 
         if (movingRight)
         {
@@ -44,6 +49,18 @@ public class FireballAttack : StateMachineBehaviour
                 movingRight = true;
             }
         }
+
+        //firing the fireball
+        if (Time.time - lastflamefired > 1f / flamespersecond)
+        {
+            BossSingleton.instance.attackingsprite.SetActive(true);
+            GameObject Fireball = Instantiate(BossSingleton.instance.fireball, BossSingleton.instance.transformf.position, BossSingleton.instance.transformf.rotation) as GameObject;
+            lastflamefired = Time.time;
+        }
+
+        if (Time.time > lastflamefired + 0.5f)
+            BossSingleton.instance.attackingsprite.SetActive(false);
+            
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
