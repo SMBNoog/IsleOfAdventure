@@ -46,7 +46,7 @@ GameObject:
   - 114: {fileID: 11400176}
   - 114: {fileID: 11405098}
   m_Layer: 5
-  m_Name: Bronze Button
+  m_Name: Flame Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -64,6 +64,7 @@ GameObject:
   - 114: {fileID: 11475968}
   - 114: {fileID: 11408190}
   - 114: {fileID: 11455954}
+  - 114: {fileID: 11471450}
   m_Layer: 5
   m_Name: Debug Canvas  Sara
   m_TagString: Untagged
@@ -117,7 +118,7 @@ GameObject:
   - 222: {fileID: 22207222}
   - 114: {fileID: 11460650}
   m_Layer: 5
-  m_Name: Text
+  m_Name: Flame Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -277,8 +278,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: DebugChangeToSilverButton
+      - m_Target: {fileID: 11455954}
+        m_MethodName: ChangeToSilver
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -329,8 +330,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: DebugChangeToBronzeButton
+      - m_Target: {fileID: 11455954}
+        m_MethodName: ChangeToFlame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -476,8 +477,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: DebugChangeToGoldButton
+      - m_Target: {fileID: 11455954}
+        m_MethodName: ChangeToSilver
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -555,8 +556,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: DebugChangeToEpicButton
+      - m_Target: {fileID: 11455954}
+        m_MethodName: ChangeToEpic
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -672,7 +673,18 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Bronze
+  m_Text: Flame
+--- !u!114 &11471450
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 128660}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb80f228f1a241d4e8b70b9588326d17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11475968
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -846,7 +858,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: 
 --- !u!222 &22207222
 CanvasRenderer:
   m_ObjectHideFlags: 1
@@ -1056,8 +1068,8 @@ RectTransform:
   m_RootOrder: 1
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1196, y: 640}
-  m_SizeDelta: {x: 167, y: 151}
+  m_AnchoredPosition: {x: -1213.4, y: 655.7}
+  m_SizeDelta: {x: 132.3, y: 119.6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &22463450
 RectTransform:
