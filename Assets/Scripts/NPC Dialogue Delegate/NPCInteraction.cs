@@ -19,7 +19,8 @@ public enum TypeOfNPC
     InCastleFirstDoor,
     InCastleSecondDoor,
     InCastleToWorld,
-    Boss
+    Boss,
+    InWorldIntro
 }
 
 public class NPCInteraction : MonoBehaviour {
@@ -37,7 +38,7 @@ public class NPCInteraction : MonoBehaviour {
     
     void Start()
     {
-        if(typeOfNPC != TypeOfNPC.InTutorialIntro)
+        if(typeOfNPC != TypeOfNPC.InTutorialIntro || typeOfNPC != TypeOfNPC.InWorldIntro)
             StartCoroutine(DelayThenTurnOnCollider());
     }
 
@@ -155,6 +156,9 @@ public class NPCInteraction : MonoBehaviour {
                 message = DialogueDictionary.NPCMessage_Dictionary[DictionaryKey.InWorldToForest]; break;
             case TypeOfNPC.SignAtSpawnIn: // Sing at spawn in
                 message = DialogueDictionary.NPCMessage_Dictionary[DictionaryKey.SignAtSpawnIn]; break;
+            case TypeOfNPC.InWorldIntro: // World Intro Narration
+                message = DialogueDictionary.NPCMessage_Dictionary[DictionaryKey.InWorldIntroNarration];
+                Destroy(gameObject, .01f); break; 
 
         }
     }

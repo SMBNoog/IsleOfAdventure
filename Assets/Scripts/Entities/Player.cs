@@ -214,6 +214,31 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
             }
             if(!savingAttributes)
                 StartCoroutine(AutoSave());
+
+            if(SceneManager.GetActiveScene().name == GameInfo.Area.Castle.ToString())
+            {
+                bool platform = false;
+                bool abyss = false;
+                bool player = false;
+
+                RaycastHit2D[] hits = Physics2D.RaycastAll(transform.localPosition, transform.right, 0.1f);
+                foreach (RaycastHit2D hit in hits)
+                {
+                    if (hit.collider.gameObject.tag == "Platform")
+                        platform = true;
+                    if (hit.collider.gameObject.tag == "Player")
+                        player = true;
+                    if (hit.collider.gameObject.tag == "Abyss")
+                        abyss = true;
+                }
+
+                if(!platform && !player && abyss)
+                {
+                    anim.SetTrigger("Fall");
+                    Die();
+                    SoundManager.Instance.Play(TypeOfClip.Fall);
+                }
+            }       
         } 
     }// end Update
 
@@ -495,5 +520,10 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
             }
         }
         respawnButton.gameObject.SetActive(false);
+    }
+
+    void OnDrawGizmos()
+    {
+        Gizmos.DrawLine(transform.localPosition, transform.right);
     }
 }

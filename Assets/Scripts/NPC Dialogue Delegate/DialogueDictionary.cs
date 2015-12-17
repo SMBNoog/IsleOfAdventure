@@ -34,28 +34,29 @@ public class DialogueDictionary : MonoBehaviour
         // NPCButtonCancelText_Dictionary.Add(DictionaryKey. , "");
 
         /********* IN TUTORIAL **********/
-        /********************************/
+        //------------------------------//
 
         /********* Intro narration. **********/
         NPCMessage_Dictionary.Add(DictionaryKey.InTutorialIntroNarration, "The Isle has been taken over by an evil Dragon! Use the power of your Sword to vanquish the evil Dragon Overlord!");
         NPCButtonOKText_Dictionary.Add(DictionaryKey.InTutorialIntroNarration, "OK!");
-        
+                
         /********* How to increase attributes **********/
         NPCMessage_Dictionary.Add(DictionaryKey.InTutorialInfo, "Bush's can incrase your Health, Attack and Defense. Check out the Menu to see your current stats.");
         NPCButtonOKText_Dictionary.Add(DictionaryKey.InTutorialInfo, "Got it!");
 
         /********* NPC teleport to World **********/
-        NPCMessage_Dictionary.Add(DictionaryKey.InTutorialToWorld_NotCompleted, "Help defeat the skeletons!");
+        NPCMessage_Dictionary.Add(DictionaryKey.InTutorialToWorld_NotCompleted, "Help! Save me from these skeletons!");
         NPCButtonOKText_Dictionary.Add(DictionaryKey.InTutorialToWorld_NotCompleted, "On it!");
 
-        NPCMessage_Dictionary.Add(DictionaryKey.InTutorialToWorld_Completed, "Thanks for saving me! I can show you the way to the Isle where the Dragon has his Castle.");
+        NPCMessage_Dictionary.Add(DictionaryKey.InTutorialToWorld_Completed, "Thanks for saving me! I can show you the way to the Isle.");
         NPCButtonOKText_Dictionary.Add(DictionaryKey.InTutorialToWorld_Completed, "Ok!");
         NPCButtonCancelText_Dictionary.Add(DictionaryKey.InTutorialToWorld_Completed, "I like it here!");
 
         /********* IN WORLD **********/
-        /*****************************/
+        //---------------------------//
 
         /********* Intro to World narration **********/
+        NPCMessage_Dictionary.Add(DictionaryKey.InWorldIntroNarration, "Welcome to the Isle. Aquire a new sword in the Forest to defeat the Dragon in the Castle.");
 
 
         /********* NPC teleport to Castle. **********/
@@ -68,7 +69,7 @@ public class DialogueDictionary : MonoBehaviour
 
 
         /********* IN CASTLE **********/
-        /******************************/
+        //----------------------------//
 
         /********* First Door Check for Weapon **********/
         NPCMessage_Dictionary.Add(DictionaryKey.InCastleFirstDoorWooden, "You won't have a chance with that Wooden Sword. Go to the Forest to obtain a new one.");
@@ -88,17 +89,16 @@ public class DialogueDictionary : MonoBehaviour
         NPCButtonCancelText_Dictionary.Add(DictionaryKey.InCastleToWorld, "Nah");
 
         /********* IN FOREST **********/
-        /******************************/
+        //----------------------------//
 
         /********* Intro narration **********/
         NPCMessage_Dictionary.Add(DictionaryKey.InForestIntroNarration, "Find the chest before the time runs out.");
 
         /********* IN WORLD SIGNS **********/
-        /***********************************/
+        //---------------------------------//
 
         // Near Spawn in Area
-        NPCMessage_Dictionary.Add(DictionaryKey.SignAtSpawnIn, "Forst West\nCastle North");
-        
+        NPCMessage_Dictionary.Add(DictionaryKey.SignAtSpawnIn, "Forst West\nCastle North");      
         
     }
 }
