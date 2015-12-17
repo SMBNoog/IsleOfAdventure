@@ -1,0 +1,398 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &103414
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 462272}
+  m_Layer: 0
+  m_Name: Skeleton Spawn A
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &120036
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 420336}
+  m_Layer: 0
+  m_Name: Skeleton Spawn D
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &128820
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 412334}
+  - 114: {fileID: 11424942}
+  m_Layer: 0
+  m_Name: Enemy Spawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &131482
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 411742}
+  m_Layer: 0
+  m_Name: Tutorial Skeleton Spawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &138168
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 430840}
+  m_Layer: 0
+  m_Name: Skeleton Spawn B
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &157034
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 486390}
+  m_Layer: 0
+  m_Name: Skeleton Spawn E
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &166204
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 489542}
+  m_Layer: 0
+  m_Name: Skeleton Spawn C
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &173830
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 473242}
+  m_Layer: 0
+  m_Name: Skeleton Spawn F
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &197224
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 407704}
+  m_Layer: 0
+  m_Name: Solider Spawn A
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &407704
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 197224}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 23.7000008, y: 38.0999985, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 412334}
+  m_RootOrder: 6
+--- !u!4 &411742
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 131482}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -37.7999992, y: -67.0999985, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 412334}
+  m_RootOrder: 7
+--- !u!4 &412334
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 128820}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -27, y: -15, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 462272}
+  - {fileID: 430840}
+  - {fileID: 489542}
+  - {fileID: 420336}
+  - {fileID: 486390}
+  - {fileID: 473242}
+  - {fileID: 407704}
+  - {fileID: 411742}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+--- !u!4 &420336
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 120036}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 70.4000015, y: 84.4000015, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 412334}
+  m_RootOrder: 3
+--- !u!4 &430840
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 138168}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -37.0999985, y: 47.2000008, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 412334}
+  m_RootOrder: 1
+--- !u!4 &462272
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 103414}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 4, y: 23, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 412334}
+  m_RootOrder: 0
+--- !u!4 &473242
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 173830}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 51.0999985, y: 191.300003, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 412334}
+  m_RootOrder: 5
+--- !u!4 &486390
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 157034}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 47.4000015, y: 144.300003, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 412334}
+  m_RootOrder: 4
+--- !u!4 &489542
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 166204}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -33.5999985, y: 21.3999996, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 412334}
+  m_RootOrder: 2
+--- !u!114 &11424942
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 128820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07d529bfea0bd7548a920d278ff2ae39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interfaceProvider: {fileID: 0}
+  spawnAreas: []
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: spawnAreas.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: spawnAreas.Array.data[0].name
+      value: ToForest01
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: spawnAreas.Array.data[0].spawnLocation
+      value: 
+      objectReference: {fileID: 462272}
+    - target: {fileID: 0}
+      propertyPath: spawnAreas.Array.data[0].prefab
+      value: 
+      objectReference: {fileID: 136932, guid: 59fb698acc1d93b40989614e160b23a4, type: 2}
+    - target: {fileID: 0}
+      propertyPath: spawnAreas.Array.data[0].numberToSpawn
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: spawnAreas.Array.data[1].name
+      value: ToForest02
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: spawnAreas.Array.data[1].spawnLocation
+      value: 
+      objectReference: {fileID: 430840}
+    - target: {fileID: 0}
+      propertyPath: spawnAreas.Array.data[1].prefab
+      value: 
+      objectReference: {fileID: 136932, guid: 59fb698acc1d93b40989614e160b23a4, type: 2}
+    - target: {fileID: 0}
+      propertyPath: spawnAreas.Array.data[1].numberToSpawn
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: spawnAreas.Array.data[2].name
+      value: ByBeachWest
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: spawnAreas.Array.data[2].spawnLocation
+      value: 
+      objectReference: {fileID: 489542}
+    - target: {fileID: 0}
+      propertyPath: spawnAreas.Array.data[2].prefab
+      value: 
+      objectReference: {fileID: 136932, guid: 59fb698acc1d93b40989614e160b23a4, type: 2}
+    - target: {fileID: 0}
+      propertyPath: spawnAreas.Array.data[2].numberToSpawn
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: spawnAreas.Array.data[3].name
+      value: ToTown01
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: spawnAreas.Array.data[3].spawnLocation
+      value: 
+      objectReference: {fileID: 420336}
+    - target: {fileID: 0}
+      propertyPath: spawnAreas.Array.data[3].prefab
+      value: 
+      objectReference: {fileID: 136932, guid: 59fb698acc1d93b40989614e160b23a4, type: 2}
+    - target: {fileID: 0}
+      propertyPath: spawnAreas.Array.data[3].numberToSpawn
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: spawnAreas.Array.data[4].name
+      value: Castle
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: spawnAreas.Array.data[4].spawnLocation
+      value: 
+      objectReference: {fileID: 486390}
+    - target: {fileID: 0}
+      propertyPath: spawnAreas.Array.data[4].prefab
+      value: 
+      objectReference: {fileID: 136932, guid: 59fb698acc1d93b40989614e160b23a4, type: 2}
+    - target: {fileID: 0}
+      propertyPath: spawnAreas.Array.data[4].numberToSpawn
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: spawnAreas.Array.data[5].name
+      value: Castle Spawn
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: spawnAreas.Array.data[5].spawnLocation
+      value: 
+      objectReference: {fileID: 473242}
+    - target: {fileID: 0}
+      propertyPath: spawnAreas.Array.data[5].prefab
+      value: 
+      objectReference: {fileID: 136932, guid: 59fb698acc1d93b40989614e160b23a4, type: 2}
+    - target: {fileID: 0}
+      propertyPath: spawnAreas.Array.data[5].numberToSpawn
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: spawnAreas.Array.data[6].name
+      value: Tutorial Spawn
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: spawnAreas.Array.data[6].spawnLocation
+      value: 
+      objectReference: {fileID: 411742}
+    - target: {fileID: 0}
+      propertyPath: spawnAreas.Array.data[6].prefab
+      value: 
+      objectReference: {fileID: 136932, guid: 59fb698acc1d93b40989614e160b23a4, type: 2}
+    - target: {fileID: 0}
+      propertyPath: spawnAreas.Array.data[6].numberToSpawn
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: spawnAreas.Array.data[6].tutorialSkeleton
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 128820}
+  m_IsPrefabParent: 1
