@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public enum TypeOfClip
 {
-    SwordMiss, SwordHit, ForestMusic, BackgroundMusic
+    SwordMiss, SwordHit, ForestMusic, WorldMusic, CastleMusic, Fall, ChestOpen, PowerUp, BushHit, TitleMusic
 }
 
 [System.Serializable]
@@ -18,14 +18,18 @@ public class SoundManager : MonoBehaviour
 {
 
     public List<AudioSource_Files> audioSources;
-    public AudioSource mainMusic;
 
     public static SoundManager Instance;
 
     void Awake()
     {
         Instance = this;
-        DontDestroyOnLoad(this);
+        //DontDestroyOnLoad(this);
+    }
+
+    void Start()
+    {
+        UpdateBackgroundMusic();
     }
 
     public void Play(TypeOfClip type)
@@ -37,6 +41,33 @@ public class SoundManager : MonoBehaviour
                 file.source.Play();
             }
         }
+    }
+
+    public void StopAll()
+    {
+        foreach (AudioSource_Files file in audioSources)
+        {
+            file.source.Stop();
+        }
+    }
+
+    public void UpdateBackgroundMusic()
+    {
+        StopAll();
+        if (GameInfo.AreaToTeleportTo == GameInfo.Area.World || GameInfo.AreaToTeleportTo == GameInfo.Area.TutorialArea)
+        {
+            Play(TypeOfClip.WorldMusic);
+        }
+        else if (GameInfo.AreaToTeleportTo == GameInfo.Area.Forest)
+        {
+            Play(TypeOfClip.ForestMusic);
+        }
+        else if (GameInfo.AreaToTeleportTo == GameInfo.Area.Castle)
+        {
+            Play(TypeOfClip.CastleMusic);
+        }
+        else
+            Play(TypeOfClip.TitleMusic);
     }
 
     //public void ChangeSoundFxVolume(Slider slider)

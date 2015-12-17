@@ -13,7 +13,7 @@ public class SwordParticle : MonoBehaviour {
     void Start()
     {
         ps = GetComponent<ParticleSystem>();
-        //ParticleSystem.MinMaxCurve = 0f;
+
         //ps.emission.rate = 0f;
 
         StartCoroutine(EmitSwordEffectParticles());

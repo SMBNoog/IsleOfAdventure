@@ -34,12 +34,12 @@ public class MazeMaker : MonoBehaviour
                     continue;
                 else if (i >= 2 && i <= 6 && j >= 96 && j <= 100)
                     continue;
-                else if (Random.Range(0f, 1f) < 0.05f)
+                else if (Random.Range(0f, 1f) < 0.15f)
                 {
                     Dungeon[i][j] = 'B';
                     Instantiate(RLTile, new Vector3(i, j, 0f), Quaternion.identity);
                 }
-                else if (Random.Range(0f, 1f) < 0.1f)
+                else if (Random.Range(0f, 1f) < 0.15f)
                 {
                     Dungeon[i][j] = 'C';
                     Instantiate(UDTile, new Vector3(i, j, 0f), Quaternion.identity);

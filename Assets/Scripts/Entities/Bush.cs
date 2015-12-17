@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 public class Bush : Enemy, IBushDie
 {
-    public ISpawner Spawner  // reference to the interface to Respawn this enemy when it dies
+    public ISpawner Spawner
     {
         get; set;
     }
@@ -34,7 +34,7 @@ public class Bush : Enemy, IBushDie
 
     public override void Die()
     {
-        int r = (int)UnityEngine.Random.Range(1f, 8f);
+        int r = (int)UnityEngine.Random.Range(1f, 5f);
         switch (r)
         {
             case 1: GiveStatsToPlayerAponDeath(amountOfStatToGiveAponDeath, typeOfStatIncrease); break;

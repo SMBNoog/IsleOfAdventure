@@ -46,6 +46,8 @@ public class Skeleton : Enemy, IAttacker
 
         amountOfStatToGiveAponDeath = amountToStatToGive;
         typeOfStatIncrease = stat;
+
+        //Debug.Log("Skeleton Stats: "+transform.position+" HP=" + HP + " Atk=" + Atk + " Def=" + Def + " StatAmount=" + amountToStatToGive);
         
     }
 
@@ -92,6 +94,7 @@ public class Skeleton : Enemy, IAttacker
         anim.SetBool("Death", true);
         anim.SetTrigger("DeathAni");
         //Debug.Log("I am of type : " + typeOfStatIncrease);
+        SoundManager.Instance.Play(TypeOfClip.PowerUp);
         GiveStatsToPlayerAponDeath(amountOfStatToGiveAponDeath, typeOfStatIncrease);
         rb2D.isKinematic = true;
         ////rb2D.constraints = RigidbodyConstraints2D.FreezeAll;

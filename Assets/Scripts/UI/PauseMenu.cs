@@ -39,16 +39,16 @@ public class PauseMenu : MonoBehaviour
             IPlayerCurrentWeapon weap = Interface.Find<IPlayerCurrentWeapon>(interfaceSupplier);
             if(weap != null)
             {
-                int weapAtk = 0;
+                int totalAtk = 0;
                 switch (weap.weaponType) { 
-                    case WeaponType.Wooden: weapAtk = 10; break;
-                    case WeaponType.Bronze: weapAtk = 50; break;
-                    case WeaponType.Silver: weapAtk = 500; break;
-                    case WeaponType.Gold: weapAtk = 750; break;
-                    case WeaponType.Epic: weapAtk = 2000; break;
+                    case WeaponType.Wooden: totalAtk = 10; break;
+                    case WeaponType.Flame: totalAtk = 100; break;
+                    case WeaponType.Silver: totalAtk = 1000; break;
+                    case WeaponType.Gold: totalAtk = 1750; break;
+                    case WeaponType.Epic: totalAtk = 5000; break;
                     default: break;
                 }
-                    item.atkText.text = ((int)GameInfo.PlayerAtk + weapAtk) + "";
+                    item.atkText.text = ((int)GameInfo.PlayerAtk + totalAtk) + "";
             }
             item.defText.text = (GameInfo.PlayerDef)*100f+"";
         }

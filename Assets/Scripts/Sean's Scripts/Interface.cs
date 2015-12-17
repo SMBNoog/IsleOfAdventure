@@ -7,7 +7,7 @@ public enum Team { Player, Enemy }
 public enum WellBeingState { Alive, Dead }
 public enum ActionState { Idle, Patrolling, EngagedInBattle, AggroByEnemy, ChargeAtPlayer, Running }
 public enum TypeOfStatIncrease { HP, ATK, DEF }
-public enum WeaponType { Wooden, Bronze, Silver, Gold, Epic, Any }
+public enum WeaponType { Wooden, Flame, Silver, Gold, Epic, Any }
 
 public interface IAttacker
 {
@@ -47,6 +47,7 @@ public interface IMessageDelegate
     void OnClickOkButtonDuo();
     void OnClickCancelDuo();
     void ShowMessageWithOkCancel(string dialogMessage, string okButton, string cancelButton, Dialogue.DialogueDelegate onClickOK);
+    void ShowMessageWithOkCancel(string dialogMessage, string okButton, string cancelButton, Dialogue.DialogueDelegate onClickOK, Dialogue.DialogueDelegate onClickCancel);
     void ShowMessageWithOk(string dialogMessage, string okButton, Dialogue.DialogueDelegate onClickOK);
     void ShowMessageWithOk(string dialogMessage, string okButton);
 }

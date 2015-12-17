@@ -18,7 +18,7 @@ public class MainMenuController : MonoBehaviour {
     void Start()
     {
         inputCanvas.SetActive(false);
-        PlayerPrefs.DeleteAll();   ////////////////////// REMOVE LATER
+        PlayerPrefs.DeleteAll();
         //Debug.Log(GameInfo.TutorialCompleted);
 
         if (userName.text == "noname")
@@ -75,7 +75,7 @@ public class MainMenuController : MonoBehaviour {
     public void ClearPlayerPrefs()
     {
         PlayerPrefs.DeleteAll();
-        GameInfo.TutorialCompleted = true;
+        GameInfo.TutorialCompleted = false;
     }
 
     public void SetPlayerName(Text name)
