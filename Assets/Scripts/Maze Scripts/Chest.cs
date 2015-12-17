@@ -50,52 +50,52 @@ public class Chest : MonoBehaviour, INPCMessageAndAction
     {
         if (UnityEngine.Random.Range(0f, 1f) < 0.02f)
         {
-            weaponreward = WeaponType.Epic;
+            weaponreward = WeaponType.EpicCrusader;
             message = "You Made it!\n You Found the Epic Sword!";
         }
         else if (UnityEngine.Random.Range(0f, 1f) < 0.10f)
         {
-            weaponreward = WeaponType.Gold;
+            weaponreward = WeaponType.GoldOathkeeper;
             message = "You Made it!\n You Found a Gold Sword";
         }
         else if (UnityEngine.Random.Range(0f, 1f) < 0.30f)
         {
-            weaponreward = WeaponType.Silver;
+            weaponreward = WeaponType.SilverDoomBringer;
             message = "You Made it!\n You Found a Silver Sword";
         }
         else
         {
-            weaponreward = WeaponType.Flame;
+            weaponreward = WeaponType.FlamingBlade;
             message = "You Made it!\n You Found a Flame Sword";
         }
     }
 
     public void OnClickOK()
     {
-        if (weaponreward == WeaponType.Flame)
+        if (weaponreward == WeaponType.FlamingBlade)
         {
-            if (playerscript.weaponType == WeaponType.Silver || playerscript.weaponType == WeaponType.Flame || playerscript.weaponType == WeaponType.Gold || playerscript.weaponType == WeaponType.Epic)
+            if (playerscript.weaponType == WeaponType.SilverDoomBringer || playerscript.weaponType == WeaponType.FlamingBlade || playerscript.weaponType == WeaponType.GoldOathkeeper || playerscript.weaponType == WeaponType.EpicCrusader)
                 Debug.Log("Cannot Upgrade");
             else
                 playerscript.UpgradeWeapon(weaponreward);
         }
-        else if(weaponreward == WeaponType.Silver)
+        else if(weaponreward == WeaponType.SilverDoomBringer)
         {
-            if(playerscript.weaponType == WeaponType.Gold || playerscript.weaponType == WeaponType.Silver || playerscript.weaponType == WeaponType.Epic)
+            if(playerscript.weaponType == WeaponType.GoldOathkeeper || playerscript.weaponType == WeaponType.SilverDoomBringer || playerscript.weaponType == WeaponType.EpicCrusader)
                 Debug.Log("Cannot Upgrade");
             else
                 playerscript.UpgradeWeapon(weaponreward);
         }
-        else if (weaponreward == WeaponType.Gold)
+        else if (weaponreward == WeaponType.GoldOathkeeper)
         {
-            if (playerscript.weaponType == WeaponType.Gold || playerscript.weaponType == WeaponType.Epic)
+            if (playerscript.weaponType == WeaponType.GoldOathkeeper || playerscript.weaponType == WeaponType.EpicCrusader)
                 Debug.Log("Cannot Upgrade");
             else
                 playerscript.UpgradeWeapon(weaponreward);
         }
-        else if (weaponreward == WeaponType.Epic)
+        else if (weaponreward == WeaponType.EpicCrusader)
         {
-            if (playerscript.weaponType == WeaponType.Epic)
+            if (playerscript.weaponType == WeaponType.EpicCrusader)
                 Debug.Log("Cannot Upgrade");
             else
                 playerscript.UpgradeWeapon(weaponreward);

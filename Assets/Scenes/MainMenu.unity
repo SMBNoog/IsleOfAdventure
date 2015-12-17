@@ -1363,7 +1363,7 @@ GameObject:
   - 222: {fileID: 194553471}
   - 114: {fileID: 194553470}
   m_Layer: 5
-  m_Name: Image (3)
+  m_Name: Silver Icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1407,7 +1407,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 20ebfc67e6ed63c49bb3d16217a73b65, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b69cd4eaf43e55d499c994655a72eb26, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -1953,14 +1953,14 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 322950142}
   m_TextComponent: {fileID: 1713871909}
   m_Placeholder: {fileID: 1630376510}
-  m_ContentType: 5
+  m_ContentType: 9
   m_InputType: 0
   m_AsteriskChar: 42
   m_KeyboardType: 0
   m_LineType: 0
   m_HideMobileInput: 0
-  m_CharacterValidation: 4
-  m_CharacterLimit: 0
+  m_CharacterValidation: 3
+  m_CharacterLimit: 12
   m_OnEndEdit:
     m_PersistentCalls:
       m_Calls:
@@ -2560,7 +2560,7 @@ GameObject:
   - 222: {fileID: 437534504}
   - 114: {fileID: 437534503}
   m_Layer: 5
-  m_Name: Image (4)
+  m_Name: Gold Icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2604,7 +2604,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 20ebfc67e6ed63c49bb3d16217a73b65, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b69cd4eaf43e55d499c994655a72eb26, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -6580,7 +6580,7 @@ GameObject:
   - 222: {fileID: 1357946332}
   - 114: {fileID: 1357946331}
   m_Layer: 5
-  m_Name: Image (2)
+  m_Name: Flame Icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6624,7 +6624,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 20ebfc67e6ed63c49bb3d16217a73b65, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b69cd4eaf43e55d499c994655a72eb26, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -7594,7 +7594,7 @@ GameObject:
   - 114: {fileID: 1624663102}
   - 114: {fileID: 1624663106}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: Title Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8031,7 +8031,7 @@ GameObject:
   - 222: {fileID: 1670692116}
   - 114: {fileID: 1670692115}
   m_Layer: 5
-  m_Name: Image (1)
+  m_Name: Wooden Icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8075,7 +8075,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 20ebfc67e6ed63c49bb3d16217a73b65, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7288b69539a116a4ca36b9eaacd9e995, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -8671,7 +8671,7 @@ GameObject:
   - 222: {fileID: 1727706558}
   - 114: {fileID: 1727706557}
   m_Layer: 5
-  m_Name: Image (5)
+  m_Name: Epic Icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8715,7 +8715,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 20ebfc67e6ed63c49bb3d16217a73b65, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b69cd4eaf43e55d499c994655a72eb26, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -9257,7 +9257,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2100072589}
-        m_MethodName: ChangeToSilver
+        m_MethodName: ChangeToGold
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

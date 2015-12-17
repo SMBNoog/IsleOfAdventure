@@ -431,32 +431,32 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
         switch (type)
         {   // When upgrading weapon boost max HP
             case WeaponType.Wooden: maxHP += 100f; break;
-            case WeaponType.Flame: maxHP += 1000f; break;
-            case WeaponType.Silver: maxHP += 10000f; break;
-            case WeaponType.Gold: maxHP += 2500f; break;
-            case WeaponType.Epic: maxHP += 7500f; break;
+            case WeaponType.FlamingBlade: maxHP += 1000f; break;
+            case WeaponType.SilverDoomBringer: maxHP += 10000f; break;
+            case WeaponType.GoldOathkeeper: maxHP += 2500f; break;
+            case WeaponType.EpicCrusader: maxHP += 7500f; break;
         }
         LoadWeapon(type);
     }
 
     public void DebugChangeToFlameButton()
     {
-        UpgradeWeapon(WeaponType.Flame);
+        UpgradeWeapon(WeaponType.FlamingBlade);
     }
 
     public void DebugChangeToSilverButton()
     {
-        UpgradeWeapon(WeaponType.Silver);
+        UpgradeWeapon(WeaponType.SilverDoomBringer);
     }
 
     public void DebugChangeToGoldButton()
     {
-        UpgradeWeapon(WeaponType.Gold);
+        UpgradeWeapon(WeaponType.GoldOathkeeper);
     }
 
     public void DebugChangeToEpicButton()
     {
-        UpgradeWeapon(WeaponType.Epic);
+        UpgradeWeapon(WeaponType.EpicCrusader);
     }
 
     public override void Die()

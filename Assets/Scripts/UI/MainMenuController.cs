@@ -36,8 +36,7 @@ public class MainMenuController : MonoBehaviour {
     }
 
 	public void PlayButton()
-    {        
-        
+    {
         if (!GameInfo.TutorialCompleted)
         {
             GameInfo.AreaToTeleportTo = GameInfo.Area.TutorialArea;
@@ -49,6 +48,7 @@ public class MainMenuController : MonoBehaviour {
         {            
             GameInfo.AreaToTeleportTo = GameInfo.Area.World;
             inputCanvas.SetActive(true);
+            DialogueDictionary.FillDictionary();
             SceneManager.LoadScene("SceneLoader");
         }
     }
@@ -58,6 +58,7 @@ public class MainMenuController : MonoBehaviour {
         if (userName.text != "")
         {
             inputCanvas.SetActive(true);
+            DialogueDictionary.FillDictionary();
             SceneManager.LoadScene("SceneLoader");
         }
         else

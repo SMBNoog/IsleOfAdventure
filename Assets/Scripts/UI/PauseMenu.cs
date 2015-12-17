@@ -42,10 +42,10 @@ public class PauseMenu : MonoBehaviour
                 int totalAtk = 0;
                 switch (weap.weaponType) { 
                     case WeaponType.Wooden: totalAtk = 10; break;
-                    case WeaponType.Flame: totalAtk = 100; break;
-                    case WeaponType.Silver: totalAtk = 1000; break;
-                    case WeaponType.Gold: totalAtk = 1750; break;
-                    case WeaponType.Epic: totalAtk = 5000; break;
+                    case WeaponType.FlamingBlade: totalAtk = 100; break;
+                    case WeaponType.SilverDoomBringer: totalAtk = 1000; break;
+                    case WeaponType.GoldOathkeeper: totalAtk = 1750; break;
+                    case WeaponType.EpicCrusader: totalAtk = 5000; break;
                     default: break;
                 }
                     item.atkText.text = ((int)GameInfo.PlayerAtk + totalAtk) + "";

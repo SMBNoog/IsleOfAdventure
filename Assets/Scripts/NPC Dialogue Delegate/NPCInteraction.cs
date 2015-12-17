@@ -20,7 +20,8 @@ public enum TypeOfNPC
     InCastleSecondDoor,
     InCastleToWorld,
     Boss,
-    InWorldIntro
+    InWorldIntro,
+    InWorldAtForest
 }
 
 public class NPCInteraction : MonoBehaviour {
@@ -33,12 +34,12 @@ public class NPCInteraction : MonoBehaviour {
     private Player player;
 
     string message = "No Message";
-    string okButton = "Ok";
-    string cancelButton = "Cancel";
+    string okButton = "Ok!";
+    string cancelButton = "Not Yet.";
     
     void Start()
     {
-        if(typeOfNPC != TypeOfNPC.InTutorialIntro || typeOfNPC != TypeOfNPC.InWorldIntro)
+        if(typeOfNPC != TypeOfNPC.InTutorialIntro && typeOfNPC != TypeOfNPC.InWorldIntro)
             StartCoroutine(DelayThenTurnOnCollider());
     }
 
@@ -94,6 +95,8 @@ public class NPCInteraction : MonoBehaviour {
             }
         }
         //else
+        //    gameObject.SetActive(false);
+        //else
         //{
         //    if (GameInfo.AreaToTeleportTo == GameInfo.Area.Castle)
         //    {
@@ -126,12 +129,14 @@ public class NPCInteraction : MonoBehaviour {
                 message = DialogueDictionary.NPCMessage_Dictionary[DictionaryKey.InTutorialIntroNarration];
                 okButton = DialogueDictionary.NPCButtonOKText_Dictionary[DictionaryKey.InTutorialIntroNarration];
                 Destroy(gameObject, .01f); break;
-            case TypeOfNPC.InTutorialInfo: // Bush Info
-                message = DialogueDictionary.NPCMessage_Dictionary[DictionaryKey.InTutorialInfo];
-                okButton = DialogueDictionary.NPCButtonOKText_Dictionary[DictionaryKey.InTutorialInfo];
-                Destroy(gameObject, .01f); break;
+            //case TypeOfNPC.InTutorialInfo: // Bush Info
+            //    message = DialogueDictionary.NPCMessage_Dictionary[DictionaryKey.InTutorialInfo];
+            //    okButton = DialogueDictionary.NPCButtonOKText_Dictionary[DictionaryKey.InTutorialInfo];
+            //    Destroy(gameObject, .01f); break;
 
             // ************************* Castle
+            // *************************
+            // *************************
             case TypeOfNPC.InCastleFirstDoor:   // Castle First Door
                 if(player.weaponType == WeaponType.Wooden)
                 {
@@ -150,16 +155,19 @@ public class NPCInteraction : MonoBehaviour {
                 cancelButton = DialogueDictionary.NPCButtonCancelText_Dictionary[DictionaryKey.InCastleToWorld]; break;
 
             // ************************* World
+            // *************************
+            // *************************
             case TypeOfNPC.InWorldToCastle: // World >>> Castle
                 message = DialogueDictionary.NPCMessage_Dictionary[DictionaryKey.InWorldToCastle]; break;
+            case TypeOfNPC.InWorldAtForest: // World npc at Forest
+                message = DialogueDictionary.NPCMessage_Dictionary[DictionaryKey.InWorldAtForest]; break;
             case TypeOfNPC.InWorldToForest: // World >>> Forest
                 message = DialogueDictionary.NPCMessage_Dictionary[DictionaryKey.InWorldToForest]; break;
             case TypeOfNPC.SignAtSpawnIn: // Sing at spawn in
                 message = DialogueDictionary.NPCMessage_Dictionary[DictionaryKey.SignAtSpawnIn]; break;
-            case TypeOfNPC.InWorldIntro: // World Intro Narration
-                message = DialogueDictionary.NPCMessage_Dictionary[DictionaryKey.InWorldIntroNarration];
+            case TypeOfNPC.InWorldIntro: // World Intro NPC
+                message = DialogueDictionary.NPCMessage_Dictionary[DictionaryKey.InWorldNPCIntro];
                 Destroy(gameObject, .01f); break; 
-
         }
     }
 

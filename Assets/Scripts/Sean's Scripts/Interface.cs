@@ -7,7 +7,7 @@ public enum Team { Player, Enemy }
 public enum WellBeingState { Alive, Dead }
 public enum ActionState { Idle, Patrolling, EngagedInBattle, AggroByEnemy, ChargeAtPlayer, Running }
 public enum TypeOfStatIncrease { HP, ATK, DEF }
-public enum WeaponType { Wooden, Flame, Silver, Gold, Epic, Any }
+public enum WeaponType { Wooden, FlamingBlade, SilverDoomBringer, GoldOathkeeper, EpicCrusader, Any }
 
 public interface IAttacker
 {

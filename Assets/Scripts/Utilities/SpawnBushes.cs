@@ -130,7 +130,7 @@ public class SpawnBushes : MonoBehaviour, ISpawner
                         case TypeOfStatIncrease.HP: tempArea.amountOfStatToGive = 1 * (scale - (scale / 3)); return tempArea;
                     }
                     break;
-                case WeaponType.Flame:
+                case WeaponType.FlamingBlade:
                     HP_Median = 1f;
                     Atk_Median = 10f;
                     Def_Median = 0f;
@@ -141,9 +141,9 @@ public class SpawnBushes : MonoBehaviour, ISpawner
                         case TypeOfStatIncrease.HP: tempArea.amountOfStatToGive = 10 * (scale - (scale / 3)); return tempArea;
                     }
                     break;
-                case WeaponType.Silver:
-                case WeaponType.Gold:
-                case WeaponType.Epic:
+                case WeaponType.SilverDoomBringer:
+                case WeaponType.GoldOathkeeper:
+                case WeaponType.EpicCrusader:
                     HP_Median = 1f;
                     Atk_Median = 10f;
                     Def_Median = 0f;

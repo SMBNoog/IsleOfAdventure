@@ -57,22 +57,22 @@ public class NPCMessageThenTeleport : MonoBehaviour, INPCMessageAndAction {
                             message = m.message;
                             break;
                         }
-                        else if (m.weapon == WeaponType.Flame)
+                        else if (m.weapon == WeaponType.FlamingBlade)
                         {
                             message = m.message;
                             break;
                         }
-                        else if (m.weapon == WeaponType.Silver)
+                        else if (m.weapon == WeaponType.SilverDoomBringer)
                         {
                             message = m.message;
                             break;
                         }
-                        else if (m.weapon == WeaponType.Gold)
+                        else if (m.weapon == WeaponType.GoldOathkeeper)
                         {
                             message = m.message;
                             break;
                         }
-                        else if (m.weapon == WeaponType.Epic)
+                        else if (m.weapon == WeaponType.EpicCrusader)
                         {
                             message = m.message;
                             break;

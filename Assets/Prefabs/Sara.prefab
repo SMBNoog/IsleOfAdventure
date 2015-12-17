@@ -137,6 +137,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &135026
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 436572}
+  - 96: {fileID: 9679114}
+  m_Layer: 8
+  m_Name: TrailSword (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &135948
 GameObject:
   m_ObjectHideFlags: 1
@@ -583,7 +599,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &194868
 GameObject:
   m_ObjectHideFlags: 0
@@ -666,6 +682,7 @@ Transform:
   m_Children:
   - {fileID: 447860}
   - {fileID: 427824}
+  - {fileID: 436572}
   - {fileID: 465284}
   m_Father: {fileID: 488198}
   m_RootOrder: 0
@@ -688,7 +705,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 140212}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.8, y: 2.7147691, z: 0}
+  m_LocalPosition: {x: -84.266975, y: -107.55485, z: 0}
   m_LocalScale: {x: 5, y: 5, z: 1}
   m_Children:
   - {fileID: 471690}
@@ -777,6 +794,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 410020}
   m_RootOrder: 9
+--- !u!4 &436572
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 135026}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.087, y: 0, z: -7}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 406982}
+  m_RootOrder: 2
 --- !u!4 &440684
 Transform:
   m_ObjectHideFlags: 1
@@ -879,7 +908,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 406982}
-  m_RootOrder: 2
+  m_RootOrder: 3
 --- !u!4 &469490
 Transform:
   m_ObjectHideFlags: 1
@@ -1512,6 +1541,53 @@ TrailRenderer:
       serializedVersion: 2
       rgba: 16777215
   m_MinVertexDistance: 0
+  m_Autodestruct: 0
+--- !u!96 &9679114
+TrailRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 135026}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 1
+  m_Materials:
+  - {fileID: 2100000, guid: d7d96f4e0755840d3a4990edeaccd247, type: 2}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 0
+  m_ReflectionProbeUsage: 1
+  m_ProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_Time: 0.4
+  m_StartWidth: 4
+  m_EndWidth: 0.3
+  m_Colors:
+    m_Color[0]:
+      serializedVersion: 2
+      rgba: 4294945536
+    m_Color[1]:
+      serializedVersion: 2
+      rgba: 4293246575
+    m_Color[2]:
+      serializedVersion: 2
+      rgba: 4294949281
+    m_Color[3]:
+      serializedVersion: 2
+      rgba: 4294963956
+    m_Color[4]:
+      serializedVersion: 2
+      rgba: 16776385
+  m_MinVertexDistance: 0.1
   m_Autodestruct: 0
 --- !u!96 &9684346
 TrailRenderer:

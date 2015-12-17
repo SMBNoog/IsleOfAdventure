@@ -121,7 +121,7 @@ public class SpawnEnemies : MonoBehaviour, ISpawner {
                         case TypeOfStatIncrease.HP: tempArea.amountOfStatToGive = 1 * scale; return tempArea;
                     }
                     break;
-                case WeaponType.Flame:
+                case WeaponType.FlamingBlade:
                     HP_Median = 1200f * scale;
                     Atk_Median = 120f * scale;
                     Def_Median = 0.03f * scale;
@@ -132,9 +132,9 @@ public class SpawnEnemies : MonoBehaviour, ISpawner {
                         case TypeOfStatIncrease.HP: tempArea.amountOfStatToGive = 20 * (scale - (scale / 3)); return tempArea;
                     }
                     break;
-                case WeaponType.Silver:
-                case WeaponType.Gold:
-                case WeaponType.Epic:
+                case WeaponType.SilverDoomBringer:
+                case WeaponType.GoldOathkeeper:
+                case WeaponType.EpicCrusader:
                     HP_Median = 10000f * scale;
                     Atk_Median = 1000f * scale;
                     Def_Median = 0.1f * scale;
