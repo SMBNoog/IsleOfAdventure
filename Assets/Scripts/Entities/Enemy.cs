@@ -31,9 +31,11 @@ public class Enemy : Entity {
         player.IncreaseStat(amount, stat);
     }
 
-    // When the Players Weapon hits this enemy, take damage and engage
+    //When the Players Weapon hits this enemy, take damage and engage
     protected void OnCollisionEnter2D(Collision2D other)
-    {   
+    {
+        //protected void OnTriggerEnter2D(Collider2D other)
+        //{
 
         IWeapon weapon = Interface.Find<IWeapon>(other.collider.gameObject);
         if (weapon != null)
@@ -46,12 +48,12 @@ public class Enemy : Entity {
             //actionState = ActionState.EngagedInBattle;
             SoundManager.Instance.Play(TypeOfClip.SwordHit);            
         }
+        else
+        {
+            Debug.Log("No weapon");
+        }
     }   
-
-    protected void OnTriggerEnter2D(Collider2D other)
-    {
-
-    }
+    
 
     public override void Die()
     {

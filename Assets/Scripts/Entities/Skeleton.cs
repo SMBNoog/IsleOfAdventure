@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine.UI;
 using System;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class Skeleton : Enemy, IAttacker
 {
@@ -103,7 +104,8 @@ public class Skeleton : Enemy, IAttacker
             col.enabled = false;
         }
 
-        Spawner.Died(this);
+        if(SceneManager.GetActiveScene().name != GameInfo.Area.Castle.ToString())
+            Spawner.Died(this);
 
         //CastleController.RoomOneEnemies -= 1;
 

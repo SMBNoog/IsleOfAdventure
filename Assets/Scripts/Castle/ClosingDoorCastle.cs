@@ -7,7 +7,7 @@ public class ClosingDoorCastle : MonoBehaviour {
 
     void OnTriggerExit2D(Collider2D other)
     {
-        if(other.gameObject.transform.position.y > transform.position.y)
+        if(other.gameObject.tag == "Player" && other.gameObject.transform.position.y > transform.position.y)
         {
             closingDoor.gameObject.SetActive(true);
         }

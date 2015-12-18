@@ -20,9 +20,9 @@ TagManager:
   - Player
   - EnvironmentCollider
   - Enemy
-  - 
-  - 
-  - 
+  - Abyss
+  - Floor
+  - CastleEnemyBounds
   - 
   - 
   - 

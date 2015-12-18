@@ -8,6 +8,8 @@ public class DestructableBush : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D other)
     {
+    //    void OnTriggerEnter2D(Collider2D other)
+    //{
         IWeapon weapon = Interface.Find<IWeapon>(other.collider.gameObject);
         if(weapon != null)
         {  

@@ -223,17 +223,16 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
                 RaycastHit2D[] hits = Physics2D.RaycastAll(rayStartPoint.position, Vector2.right, 0.1f);
                 foreach (RaycastHit2D hit in hits)
                 {
-                    if (hit.collider.gameObject.tag == "Platform")
+                    if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Floor"))
                         platform = true;
-                    if (hit.collider.gameObject.tag == "Abyss")
+                    if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Abyss"))
                         abyss = true;
                 }
 
                 if(!platform && abyss)
                 {
-                    anim.SetTrigger("Fall");
-                    Die();
                     SoundManager.Instance.Play(TypeOfClip.Fall);
+                    FallDeath();
                 }
             }       
         } 
@@ -468,6 +467,28 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
         }        
     }
 
+    public void FallDeath()
+    {
+        if (wellBeing != WellBeingState.Dead)
+        {
+            HP_Slider.value = 0f;
+            wellBeing = WellBeingState.Dead;
+            rb2D.isKinematic = true;
+            SaveAttributes(false);
+            StartCoroutine(DelayForAnimationFallThenRespawn()); //delay for tombstone            
+        }
+    }
+
+    // Wait for Death animation
+    IEnumerator DelayForAnimationFallThenRespawn()
+    {
+        anim.SetTrigger("Fall");
+        yield return new WaitForSeconds(2f);
+        transform.localScale = new Vector3(5f, 5f, 1f);
+        respawnButton.gameObject.SetActive(true);
+        Time.timeScale = 0.0f;  //pause until button pressed
+    }
+
     // Wait for Death animation
     IEnumerator DelayForAnimationThenRespawn()
     {
@@ -479,7 +500,6 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
 
     public void RespawnPlayerButton()
     {
-
         //HP = maxHP;
         Time.timeScale = 1.0f;
         foreach (Weapons w in weaponList)

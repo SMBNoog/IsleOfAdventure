@@ -90,8 +90,7 @@ public class NewEnemyAI : MonoBehaviour {
                 target = null;
                 return;
                 //pathIsEnded = true;
-            }
-            
+            }            
 
             if (myT.position != target.position)
             {
