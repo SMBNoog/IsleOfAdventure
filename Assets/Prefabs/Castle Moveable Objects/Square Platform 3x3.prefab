@@ -250,9 +250,6 @@ GameObject:
   - 4: {fileID: 402532}
   - 50: {fileID: 5085816}
   - 61: {fileID: 6159462}
-  - 114: {fileID: 11469410}
-  - 114: {fileID: 11486202}
-  - 114: {fileID: 11485008}
   m_Layer: 0
   m_Name: Square Platform 3x3
   m_TagString: Untagged
@@ -551,86 +548,11 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_Offset: {x: 2, y: -2}
   serializedVersion: 2
   m_Size: {x: 8, y: 8}
---- !u!114 &11469410
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 184212}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 969e06548d792a44fbf66269ab4fb10a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &11485008
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 184212}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0401554a0e6f9466db3c1a798d358b8c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tweenName: 
-  playAutomatically: 1
-  delay: 0
-  type: 17
-  showIconInInspector: 1
-  keys:
-  - speed
-  - easetype
-  - looptype
-  - path
-  indexes: 00000000000000000000000000000000
-  metadatas:
-  - 
-  - 
-  - 
-  - p
-  ints: 
-  floats:
-  - 5
-  bools: 
-  strings:
-  - Platform 17 (Hard)
-  vector3s: []
-  colors: []
-  spaces: 
-  easeTypes: 15000000
-  loopTypes: 02000000
-  gameObjects: []
-  transforms: []
-  audioClips: []
-  audioSources: []
-  vector3Arrays: []
-  transformArrays: []
-  paths: []
---- !u!114 &11486202
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 184212}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d2ef3b15c32eb43108261a87963b8937, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pathName: Platform 17 (Hard)
-  pathColor: {r: 0, g: 1, b: 1, a: 1}
-  nodes:
-  - {x: -50, y: 117, z: 0}
-  - {x: -13, y: 117, z: 0}
-  nodeCount: 2
-  initialized: 1
-  initialName: New Path 1
 --- !u!212 &21206748
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -1151,6 +1073,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_SortingOrder
       value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

@@ -19,9 +19,10 @@ public class BlockRL : MonoBehaviour
 
     IEnumerator DelayMovement()
     {
+        yield return new WaitForSeconds(Random.Range(1f,2f));
         while (true)
         {
-            float DelayTime = Random.Range(4f, 6f);
+            float DelayTime = Random.Range(4f, 8f);
             yield return new WaitForSeconds(DelayTime);
             DelayTime = Random.Range(1f, 3f);
 

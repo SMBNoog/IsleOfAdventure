@@ -28,14 +28,14 @@ public class PlatformMove : MonoBehaviour {
             myTransform.position = new Vector3(origin.x - Mathf.PingPong(Time.time * speed, length), myTransform.position.y, myTransform.position.z);
     }
 
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.tag == "Player")
-        {
-            if (other.gameObject.transform.parent != null)
-                other.gameObject.transform.parent = null;
+        //void OnTriggerEnter(Collider other)
+        //{
+        //    if (other.gameObject.tag == "Player")
+        //    {
+        //        if (other.gameObject.transform.parent != null)
+        //            other.gameObject.transform.parent = null;
             
-            other.gameObject.transform.parent = this.transform;
-        }
-    }
+        //        other.gameObject.transform.parent = this.transform;
+        //    }
+        //}
 }

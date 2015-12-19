@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - Weapon
   - Abyss
+  - FireBallDestroyer
   layers:
   - Default
   - TransparentFX
