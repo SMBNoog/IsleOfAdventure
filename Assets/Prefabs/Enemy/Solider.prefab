@@ -491,7 +491,6 @@ MonoBehaviour:
   fMode: 1
   pathIsEnded: 0
   nextWaypointDistance: 3
-  townNPC: 0
 --- !u!212 &21244388
 SpriteRenderer:
   m_ObjectHideFlags: 1

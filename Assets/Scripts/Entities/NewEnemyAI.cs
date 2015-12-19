@@ -33,9 +33,7 @@ public class NewEnemyAI : MonoBehaviour {
 
     // The waypoint we are currently moving towards
     private int currentWaypoint = 0;
-
-    public bool townNPC = false;
-    private GameObject clockTower;
+    
 
     void Start()
     {
@@ -43,7 +41,7 @@ public class NewEnemyAI : MonoBehaviour {
         rb = GetComponent<Rigidbody2D>();
         myT = GetComponent<Transform>();
         anim = GetComponent<Animator>();
-
+        
         //clockTower = FindObjectOfType<ClockTower>().gameObject;
         //if (townNPC)
         //{
@@ -55,7 +53,7 @@ public class NewEnemyAI : MonoBehaviour {
         //    StartCoroutine(UpdatePath());
         //}
 
-            if (target == null)
+        if (target == null)
         {
             //Debug.LogError("No Player found");
             return;
@@ -72,7 +70,7 @@ public class NewEnemyAI : MonoBehaviour {
             RaycastHit2D rayToPlayer = Physics2D.Linecast(transform.position, target.position, 1 << LayerMask.NameToLayer("Player"));
 
             float dis = rayToPlayer.distance;
-
+            Debug.Log("Distance from player : " + dis);
             anim.SetFloat("DistanceFromTarget", dis);
 
             if (myT.position != target.position)
@@ -88,7 +86,7 @@ public class NewEnemyAI : MonoBehaviour {
             //    target = null;
             //    return;
             //}
-            
+                        
             if (dis > 30f)
             {
                 anim.SetBool("CanSeePlayer", false);
@@ -134,9 +132,9 @@ public class NewEnemyAI : MonoBehaviour {
         //Move AI
         rb.AddForce(dir, fMode);
 
-        if (dotAngle < 0.10 && dotAngle > -0.10)
+        if (dotAngle < 0.10f && dotAngle > -0.10f)
         {
-            rb.AddForce(dir * 2f, fMode);
+            rb.AddForce(dir * 1.75f, fMode);
         }
 
         float dist = Vector3.Distance(transform.position, path.vectorPath[currentWaypoint]);
@@ -162,7 +160,8 @@ public class NewEnemyAI : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.gameObject.tag != "Enemy")
+
+        if (other.gameObject.tag != "Enemy")
         {
             IAttacker attacker = Interface.Find<IAttacker>(other.gameObject);
             if (attacker != null && attacker.Team == Team.Player)
@@ -171,10 +170,7 @@ public class NewEnemyAI : MonoBehaviour {
                 anim.SetBool("Idle", false);
                 anim.SetBool("Patrol", false);
                 ////Debug.Log("Can see the player!");
-                //if (!townNPC)
-                //{
-                //    target = other.gameObject.transform;
-                //}
+                target = other.gameObject.transform;
                 seeker.StartPath(transform.position, target.position, OnPathComplete);
                 StartCoroutine(UpdatePath());
             }

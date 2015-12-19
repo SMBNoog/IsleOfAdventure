@@ -328,7 +328,6 @@ MonoBehaviour:
   fMode: 1
   pathIsEnded: 0
   nextWaypointDistance: 3
-  townNPC: 0
 --- !u!114 &11440404
 MonoBehaviour:
   m_ObjectHideFlags: 1
