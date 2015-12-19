@@ -67,11 +67,11 @@ public class NewEnemyAI : MonoBehaviour {
 
         if(target != null)
         {
-            RaycastHit2D rayToPlayer = Physics2D.Linecast(transform.position, target.position, 1 << LayerMask.NameToLayer("Player"));
-
-            float dis = rayToPlayer.distance;
-            Debug.Log("Distance from player : " + dis);
-            anim.SetFloat("DistanceFromTarget", dis);
+            //RaycastHit2D rayToPlayer = Physics2D.Linecast(transform.position, target.position, 1 << LayerMask.NameToLayer("Player"));
+            float distance = Vector3.Distance(transform.position, target.position);
+            //float dis = rayToPlayer.distance;
+            Debug.Log("Distance from player : " + distance);
+            anim.SetFloat("DistanceFromTarget", distance);
 
             if (myT.position != target.position)
             {
@@ -86,8 +86,8 @@ public class NewEnemyAI : MonoBehaviour {
             //    target = null;
             //    return;
             //}
-                        
-            if (dis > 30f)
+
+            if (distance > 30f)
             {
                 anim.SetBool("CanSeePlayer", false);
                 anim.SetBool("Idle", true);
@@ -201,5 +201,5 @@ public class NewEnemyAI : MonoBehaviour {
             currentWaypoint = 0;
             //anim.SetBool("CanSeePlayer", false);
         }
-    }
+    }    
 }

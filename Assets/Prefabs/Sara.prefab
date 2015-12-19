@@ -79,7 +79,7 @@ GameObject:
   - 224: {fileID: 22415932}
   - 222: {fileID: 22203710}
   - 114: {fileID: 11474726}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -335,7 +335,7 @@ GameObject:
   - 4: {fileID: 461886}
   - 96: {fileID: 9667348}
   - 114: {fileID: 11435636}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: TrailSword
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -386,6 +386,7 @@ GameObject:
   - 4: {fileID: 440684}
   - 114: {fileID: 11405598}
   - 50: {fileID: 5044218}
+  - 68: {fileID: 6888466}
   m_Layer: 8
   m_Name: Flame Sword(Bronze)
   m_TagString: Weapon
@@ -524,7 +525,7 @@ GameObject:
   - 222: {fileID: 22259776}
   - 114: {fileID: 11422382}
   - 114: {fileID: 11478730}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Respawn Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -576,7 +577,6 @@ GameObject:
   - 4: {fileID: 447062}
   - 212: {fileID: 21276046}
   - 114: {fileID: 11410176}
-  - 58: {fileID: 5849608}
   - 68: {fileID: 6869448}
   m_Layer: 8
   m_Name: Sprite
@@ -763,7 +763,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 128954}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.17, z: 0}
+  m_LocalPosition: {x: 0, y: -0.225, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 410020}
@@ -1206,20 +1206,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!58 &5849608
-CircleCollider2D:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 193526}
-  m_Enabled: 0
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_Offset: {x: 0.04, y: 0.16}
-  serializedVersion: 2
-  m_Radius: 0.18463443
 --- !u!58 &5894898
 CircleCollider2D:
   m_ObjectHideFlags: 1
@@ -1328,6 +1314,22 @@ EdgeCollider2D:
   - {x: -0.095610045, y: -0.07375946}
   - {x: 0.45005494, y: 0.0024765015}
   - {x: -0.10461884, y: 0.0743454}
+--- !u!68 &6888466
+EdgeCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 163720}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  m_Points:
+  - {x: 0.12446568, y: -0.04358186}
+  - {x: -0.10461435, y: -0.0020211572}
+  - {x: 0.12151001, y: 0.056872398}
 --- !u!81 &8173162
 AudioListener:
   m_ObjectHideFlags: 1
@@ -1353,7 +1355,7 @@ Animator:
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 75de8abbe16ad404181cf9cd2084b422, type: 2}
   m_CullingMode: 0
-  m_UpdateMode: 0
+  m_UpdateMode: 1
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
