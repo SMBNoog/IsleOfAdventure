@@ -33,7 +33,7 @@ public class BossSingleton : Enemy, IAttacker
 
     void Start()
     {
-        HP = 10000000f;
+        HP = 5000000f;
         Atk = 0;
         Def = 0.25f;
         rb2D = GetComponent<Rigidbody2D>();

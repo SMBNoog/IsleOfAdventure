@@ -21,16 +21,16 @@ public class BlockUD : MonoBehaviour
     {
         while (true)
         {
-            float DelayTime = Random.Range(3f, 5f);
+            float DelayTime = Random.Range(4f, 7f);
             yield return new WaitForSeconds(DelayTime);
             DelayTime = Random.Range(1f, 3f);
             while (DelayTime > 0)
             {
                 DelayTime -= Time.fixedDeltaTime;
                 if (movingUp && velocity.y < targetSpeed)
-                    myrigidbody2D.MovePosition(transform.position + Vector3.up * Time.deltaTime);
+                    myrigidbody2D.MovePosition(transform.position + Vector3.up * Time.fixedDeltaTime);
                 else if (!movingUp && velocity.y > -targetSpeed)
-                    myrigidbody2D.MovePosition(transform.position + -Vector3.up * Time.deltaTime);
+                    myrigidbody2D.MovePosition(transform.position + -Vector3.up * Time.fixedDeltaTime);
                 yield return new WaitForFixedUpdate();
             }
             myrigidbody2D.velocity = new Vector2(0f, 0f);

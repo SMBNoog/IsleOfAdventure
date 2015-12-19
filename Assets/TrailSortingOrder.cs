@@ -10,6 +10,6 @@ public class TrailSortingOrder : MonoBehaviour {
         tr = GetComponent<TrailRenderer>();
 
         tr.sortingLayerName = "Default";
-        tr.sortingOrder = 300;
+        tr.sortingOrder = 50;
     }
 }

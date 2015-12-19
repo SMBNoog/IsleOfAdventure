@@ -21,7 +21,7 @@ public class BlockRL : MonoBehaviour
     {
         while (true)
         {
-            float DelayTime = Random.Range(3f, 5f);
+            float DelayTime = Random.Range(4f, 6f);
             yield return new WaitForSeconds(DelayTime);
             DelayTime = Random.Range(1f, 3f);
 
@@ -29,9 +29,9 @@ public class BlockRL : MonoBehaviour
             {
                 DelayTime -= Time.fixedDeltaTime;
                 if (movingRight && velocity.x < targetSpeed)
-                    myrigidbody2D.MovePosition(transform.position + Vector3.right * Time.deltaTime);
+                    myrigidbody2D.MovePosition(transform.position + Vector3.right * Time.fixedDeltaTime);
                 else if (!movingRight && velocity.x > -targetSpeed)
-                    myrigidbody2D.MovePosition(transform.position + -Vector3.right * Time.deltaTime);
+                    myrigidbody2D.MovePosition(transform.position + -Vector3.right * Time.fixedDeltaTime);
                 yield return new WaitForFixedUpdate();
             }
             myrigidbody2D.velocity = new Vector2(0f, 0f); 

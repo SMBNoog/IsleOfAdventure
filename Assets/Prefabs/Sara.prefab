@@ -9,14 +9,15 @@ GameObject:
   m_Component:
   - 4: {fileID: 432514}
   - 114: {fileID: 11453030}
-  - 50: {fileID: 5083760}
+  - 50: {fileID: 5033560}
+  - 68: {fileID: 6852212}
   m_Layer: 8
   m_Name: Wooden Sword(Wooden)
   m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &104524
 GameObject:
   m_ObjectHideFlags: 1
@@ -59,7 +60,8 @@ GameObject:
   m_Component:
   - 4: {fileID: 488198}
   - 114: {fileID: 11416438}
-  - 50: {fileID: 5089046}
+  - 50: {fileID: 5087334}
+  - 68: {fileID: 6805274}
   m_Layer: 8
   m_Name: New Sword(Epic)
   m_TagString: Weapon
@@ -94,8 +96,6 @@ GameObject:
   - 4: {fileID: 406982}
   - 212: {fileID: 21236256}
   - 114: {fileID: 11410408}
-  - 58: {fileID: 5832972}
-  - 68: {fileID: 6841488}
   m_Layer: 8
   m_Name: Sprite
   m_TagString: Weapon
@@ -246,14 +246,15 @@ GameObject:
   m_Component:
   - 4: {fileID: 472298}
   - 114: {fileID: 11436132}
-  - 50: {fileID: 5084356}
+  - 68: {fileID: 6881630}
+  - 50: {fileID: 5019190}
   m_Layer: 8
   m_Name: Purple Sword(Silver)
   m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &140212
 GameObject:
   m_ObjectHideFlags: 0
@@ -487,7 +488,6 @@ GameObject:
   - 4: {fileID: 450240}
   - 212: {fileID: 21277938}
   - 114: {fileID: 11494986}
-  - 68: {fileID: 6851678}
   m_Layer: 8
   m_Name: Sprite
   m_TagString: Weapon
@@ -541,8 +541,6 @@ GameObject:
   - 4: {fileID: 458452}
   - 212: {fileID: 21262498}
   - 114: {fileID: 11403682}
-  - 58: {fileID: 5811144}
-  - 68: {fileID: 6864044}
   m_Layer: 8
   m_Name: Sprite
   m_TagString: Weapon
@@ -596,7 +594,8 @@ GameObject:
   m_Component:
   - 4: {fileID: 401744}
   - 114: {fileID: 11431704}
-  - 50: {fileID: 5000704}
+  - 50: {fileID: 5080376}
+  - 68: {fileID: 6820206}
   m_Layer: 8
   m_Name: New Sword(Gold)
   m_TagString: Weapon
@@ -634,8 +633,6 @@ GameObject:
   - 4: {fileID: 480932}
   - 212: {fileID: 21230742}
   - 114: {fileID: 11443506}
-  - 58: {fileID: 5895606}
-  - 68: {fileID: 6897636}
   m_Layer: 8
   m_Name: Sprite
   m_TagString: Weapon
@@ -742,7 +739,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 140212}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.34, y: -3.8, z: -1}
+  m_LocalPosition: {x: -84.266975, y: -107.55485, z: 0}
   m_LocalScale: {x: 5, y: 5, z: 1}
   m_Children:
   - {fileID: 471690}
@@ -1107,13 +1104,13 @@ Camera:
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
   m_StereoMirrorMode: 0
---- !u!50 &5000704
+--- !u!50 &5019190
 Rigidbody2D:
   serializedVersion: 2
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 193554}
+  m_GameObject: {fileID: 140004}
   m_UseAutoMass: 0
   m_Mass: 0.0001
   m_LinearDrag: 0
@@ -1122,7 +1119,24 @@ Rigidbody2D:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!50 &5033560
+Rigidbody2D:
+  serializedVersion: 2
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 103710}
+  m_UseAutoMass: 0
+  m_Mass: 0.0001
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
   m_Constraints: 0
 --- !u!50 &5044218
 Rigidbody2D:
@@ -1158,30 +1172,13 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!50 &5083760
+--- !u!50 &5080376
 Rigidbody2D:
   serializedVersion: 2
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 103710}
-  m_UseAutoMass: 0
-  m_Mass: 0.0001
-  m_LinearDrag: 0
-  m_AngularDrag: 0.00001
-  m_GravityScale: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 1
-  m_Constraints: 0
---- !u!50 &5084356
-Rigidbody2D:
-  serializedVersion: 2
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 140004}
+  m_GameObject: {fileID: 193554}
   m_UseAutoMass: 0
   m_Mass: 0.0001
   m_LinearDrag: 0
@@ -1190,9 +1187,9 @@ Rigidbody2D:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 1
+  m_CollisionDetection: 0
   m_Constraints: 0
---- !u!50 &5089046
+--- !u!50 &5087334
 Rigidbody2D:
   serializedVersion: 2
   m_ObjectHideFlags: 1
@@ -1200,43 +1197,15 @@ Rigidbody2D:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 112962}
   m_UseAutoMass: 0
-  m_Mass: 0.001
+  m_Mass: 0.0001
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 1
+  m_CollisionDetection: 0
   m_Constraints: 0
---- !u!58 &5811144
-CircleCollider2D:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 185142}
-  m_Enabled: 0
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_Offset: {x: 0.08, y: 0.12}
-  serializedVersion: 2
-  m_Radius: 0.20233594
---- !u!58 &5832972
-CircleCollider2D:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 118158}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_Offset: {x: -0.04, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.07499901
 --- !u!58 &5849608
 CircleCollider2D:
   m_ObjectHideFlags: 1
@@ -1279,26 +1248,12 @@ CircleCollider2D:
   m_Offset: {x: 0, y: -0.05}
   serializedVersion: 2
   m_Radius: 0.107040405
---- !u!58 &5895606
-CircleCollider2D:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 195392}
-  m_Enabled: 0
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_Offset: {x: -0.06, y: -0.0000019073486}
-  serializedVersion: 2
-  m_Radius: 0.09086914
---- !u!68 &6841488
+--- !u!68 &6805274
 EdgeCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 118158}
+  m_GameObject: {fileID: 112962}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
@@ -1306,15 +1261,15 @@ EdgeCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   m_Points:
-  - {x: 0.21759447, y: -0.071543716}
-  - {x: -0.15270647, y: -0.00052185677}
-  - {x: 0.21338217, y: 0.11851214}
---- !u!68 &6851678
+  - {x: -0.12483368, y: -0.11620789}
+  - {x: 0.71452945, y: -0.0042434693}
+  - {x: -0.14021301, y: 0.07012635}
+--- !u!68 &6820206
 EdgeCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 176494}
+  m_GameObject: {fileID: 193554}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
@@ -1322,15 +1277,15 @@ EdgeCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   m_Points:
-  - {x: -0.16698933, y: -0.27871236}
-  - {x: 0.03205897, y: 0.3414178}
-  - {x: 0.30606973, y: -0.24518026}
---- !u!68 &6864044
+  - {x: -0.097790286, y: -0.1016037}
+  - {x: 0.5534365, y: 0.0006881714}
+  - {x: -0.115437075, y: 0.09580536}
+--- !u!68 &6852212
 EdgeCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 185142}
+  m_GameObject: {fileID: 103710}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
@@ -1338,9 +1293,9 @@ EdgeCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   m_Points:
-  - {x: 0.19542691, y: -0.04845179}
-  - {x: -0.1497326, y: 0.0075376835}
-  - {x: 0.1889481, y: 0.07181495}
+  - {x: -0.11637494, y: 0.07812347}
+  - {x: 0.35599595, y: -0.017948914}
+  - {x: -0.11656721, y: -0.13129579}
 --- !u!68 &6869448
 EdgeCollider2D:
   m_ObjectHideFlags: 1
@@ -1357,12 +1312,12 @@ EdgeCollider2D:
   - {x: 0.12446568, y: -0.04358186}
   - {x: -0.10461435, y: -0.0020211572}
   - {x: 0.12151001, y: 0.056872398}
---- !u!68 &6897636
+--- !u!68 &6881630
 EdgeCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 195392}
+  m_GameObject: {fileID: 140004}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
@@ -1370,9 +1325,9 @@ EdgeCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   m_Points:
-  - {x: 0.23120964, y: -0.04592668}
-  - {x: -0.15264416, y: 0.0032175463}
-  - {x: 0.21862166, y: 0.07555932}
+  - {x: -0.095610045, y: -0.07375946}
+  - {x: 0.45005494, y: 0.0024765015}
+  - {x: -0.10461884, y: 0.0743454}
 --- !u!81 &8173162
 AudioListener:
   m_ObjectHideFlags: 1
@@ -2707,7 +2662,7 @@ ParticleSystem:
         rgba: 4290032820
       minMaxState: 0
     startSize:
-      scalar: 3.5
+      scalar: 2
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -2875,7 +2830,7 @@ ParticleSystem:
     serializedVersion: 2
     m_Type: 0
     rate:
-      scalar: 0
+      scalar: 2
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -7204,7 +7159,7 @@ ParticleSystem:
         rgba: 4290032820
       minMaxState: 0
     startSize:
-      scalar: 0.4
+      scalar: 1
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -7372,7 +7327,7 @@ ParticleSystem:
     serializedVersion: 2
     m_Type: 0
     rate:
-      scalar: 10
+      scalar: 5
       maxCurve:
         serializedVersion: 2
         m_Curve:
