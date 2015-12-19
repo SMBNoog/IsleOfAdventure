@@ -15,7 +15,7 @@ public class PlatformMove : MonoBehaviour {
 
     void Start()
     {
-        //speed = Random.Range(2f, 8f); //If you want to make it random uncomment this and make speed a private flaot variable above
+        speed = Random.Range(2f, 8f); //If you want to make it random uncomment this and make speed a private flaot variable above
         myTransform = transform;
         origin = transform.position;
     }

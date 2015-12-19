@@ -113,9 +113,7 @@ public class Skeleton : Enemy, IAttacker
 
         if(SceneManager.GetActiveScene().name != GameInfo.Area.Castle.ToString())
             Spawner.Died(this);
-
-        //CastleController.RoomOneEnemies -= 1;
-
+        
         Destroy(gameObject, 3f); //wait until respawn, disable
     }    
     

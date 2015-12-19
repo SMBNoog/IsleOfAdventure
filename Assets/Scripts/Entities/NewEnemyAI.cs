@@ -74,12 +74,20 @@ public class NewEnemyAI : MonoBehaviour {
             float dis = rayToPlayer.distance;
 
             anim.SetFloat("DistanceFromTarget", dis);
-            
-            if(dis < 1)
+
+            if (myT.position != target.position)
             {
-                target = null;
-                return;
+                direction = target.position - myT.position;
+                direction.Normalize();
+                anim.SetFloat("DirectionX", direction.x);
+                anim.SetFloat("DirectionY", direction.y);
             }
+
+            //if (dis < 1)
+            //{
+            //    target = null;
+            //    return;
+            //}
             
             if (dis > 30f)
             {
@@ -90,18 +98,8 @@ public class NewEnemyAI : MonoBehaviour {
                 target = null;
                 return;
                 //pathIsEnded = true;
-            }            
-
-            if (myT.position != target.position)
-            {
-                direction = target.position - myT.position;
-                direction.Normalize();
-                anim.SetFloat("DirectionX", direction.x);
-                anim.SetFloat("DirectionY", direction.y);
-            }
+            } 
         }
-
-      
     }
 
     void FixedUpdate()
@@ -136,7 +134,7 @@ public class NewEnemyAI : MonoBehaviour {
         //Move AI
         rb.AddForce(dir, fMode);
 
-        if(dotAngle < 0.10 && dotAngle > -0.10)
+        if (dotAngle < 0.10 && dotAngle > -0.10)
         {
             rb.AddForce(dir * 2f, fMode);
         }
@@ -164,20 +162,22 @@ public class NewEnemyAI : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D other)
     {
-
-        IAttacker attacker = Interface.Find<IAttacker>(other.gameObject);
-        if (attacker != null && attacker.Team == Team.Player)
+        if(other.gameObject.tag != "Enemy")
         {
-            anim.SetBool("CanSeePlayer", true);
-            anim.SetBool("Idle", false);
-            anim.SetBool("Patrol", false);
-            //Debug.Log("Can see the player!");
-            if (!townNPC)
+            IAttacker attacker = Interface.Find<IAttacker>(other.gameObject);
+            if (attacker != null && attacker.Team == Team.Player)
             {
-                target = other.gameObject.transform;
+                anim.SetBool("CanSeePlayer", true);
+                anim.SetBool("Idle", false);
+                anim.SetBool("Patrol", false);
+                ////Debug.Log("Can see the player!");
+                //if (!townNPC)
+                //{
+                //    target = other.gameObject.transform;
+                //}
+                seeker.StartPath(transform.position, target.position, OnPathComplete);
+                StartCoroutine(UpdatePath());
             }
-            seeker.StartPath(transform.position, target.position, OnPathComplete);
-            StartCoroutine(UpdatePath());
         }
     }
 
