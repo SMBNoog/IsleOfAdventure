@@ -423,14 +423,20 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
 
     public void UpgradeWeapon(WeaponType type)
     {
+        WeaponType tempCurrent = currentWeapon;
         currentWeapon = type;
         switch (type)
         {   // When upgrading weapon boost max HP
             case WeaponType.Wooden: maxHP += 100f; break;
             case WeaponType.FlamingBlade: maxHP += 1000f; break;
             case WeaponType.SilverDoomBringer: maxHP += 10000f; break;
-            case WeaponType.GoldOathkeeper: maxHP += 2500f; break;
-            case WeaponType.EpicCrusader: maxHP += 7500f; break;
+            case WeaponType.GoldOathkeeper:
+                if (tempCurrent == WeaponType.SilverDoomBringer) maxHP += 2500f;
+                else maxHP += 12500; break;
+            case WeaponType.EpicCrusader:
+                if (tempCurrent == WeaponType.SilverDoomBringer) maxHP += 9500f;
+                else if (tempCurrent == WeaponType.GoldOathkeeper) maxHP += 7000f;
+                else maxHP += 20000; break;
         }
         LoadWeapon(type);
     }
