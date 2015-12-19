@@ -8,6 +8,7 @@ using UnityEngine.SceneManagement;
 public class Skeleton : Enemy, IAttacker
 {
     public static int numberOfTutorialSkeletons;
+    public static int numberOfCastleSkeletons;
     public Slider HP_Slider;
 
     public ISpawner Spawner  // reference to the interface to Respawn this enemy when it dies
@@ -44,6 +45,9 @@ public class Skeleton : Enemy, IAttacker
 
         if(GameInfo.AreaToTeleportTo == GameInfo.Area.TutorialArea)
             numberOfTutorialSkeletons += 1;
+
+        if (GameInfo.AreaToTeleportTo == GameInfo.Area.Castle)
+            numberOfCastleSkeletons += 1;
 
         amountOfStatToGiveAponDeath = amountToStatToGive;
         typeOfStatIncrease = stat;
@@ -91,6 +95,9 @@ public class Skeleton : Enemy, IAttacker
     {
         if(GameInfo.AreaToTeleportTo == GameInfo.Area.TutorialArea)
             numberOfTutorialSkeletons -= 1;
+
+        if (GameInfo.AreaToTeleportTo == GameInfo.Area.Castle)
+            numberOfCastleSkeletons -= 1;
 
         anim.SetBool("Death", true);
         anim.SetTrigger("DeathAni");
