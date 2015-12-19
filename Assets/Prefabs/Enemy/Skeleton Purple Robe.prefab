@@ -438,7 +438,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ef3a62392b34e644bff6779f1208191, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  updateRate: 1
+  updateRate: 2
   speed: 160
   fMode: 1
   pathIsEnded: 0
@@ -705,6 +705,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_Layer
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: updateRate
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

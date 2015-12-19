@@ -465,6 +465,7 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
     {        
         if(wellBeing != WellBeingState.Dead)
         {
+            Skeleton.numberOfCastleSkeletons = 0;
             HP_Slider.value = 0f;
             wellBeing = WellBeingState.Dead;
             rb2D.isKinematic = true; 
@@ -477,6 +478,7 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
     {
         if (wellBeing != WellBeingState.Dead)
         {
+            Skeleton.numberOfCastleSkeletons = 0;
             HP_Slider.value = 0f;
             wellBeing = WellBeingState.Dead;
             rb2D.isKinematic = true;

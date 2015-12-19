@@ -138,9 +138,7 @@ public class NewEnemyAI : MonoBehaviour {
 
         if(dotAngle < 0.10 && dotAngle > -0.10)
         {
-            //Debug.Log("Dot Angle: " + dotAngle);
-            //Debug.Log("WEEEEEEEEE");
-            rb.AddForce(dir * 1.75f, fMode);
+            rb.AddForce(dir * 3f, fMode);
         }
 
         float dist = Vector3.Distance(transform.position, path.vectorPath[currentWaypoint]);
