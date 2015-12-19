@@ -1,9 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class SecondDoorInCastle : MonoBehaviour {
-
-    public GameObject door;
+public class ThridDoorLeft : MonoBehaviour {
 
     bool startCheckingForSkeletons = false;
 
@@ -14,13 +12,13 @@ public class SecondDoorInCastle : MonoBehaviour {
 
     void Update()
     {
-        if (Skeleton.numberOfCastleSkeletons == 30 && startCheckingForSkeletons) // first room cleared
+        if (Skeleton.numberOfCastleSkeletons == 15 && startCheckingForSkeletons) // first room cleared
             Destroy(gameObject);
     }
 
     IEnumerator DelayThenCheck()
     {
-        yield return new WaitForSeconds(10f);
+        yield return new WaitForSeconds(5f);
         startCheckingForSkeletons = true;
     }
 }

@@ -541,6 +541,6 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
 
     void OnDrawGizmos()
     {
-        Gizmos.DrawLine(rayStartPoint.position, transform.right);
+        Gizmos.DrawLine(rayStartPoint.position, rayStartPoint.position + new Vector3(0.1f, 0f, 0f));
     }
 }

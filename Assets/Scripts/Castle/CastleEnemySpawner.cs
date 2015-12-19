@@ -69,9 +69,9 @@ public class CastleEnemySpawner : MonoBehaviour
                 //result.enemy = skeleton;
                 //result.source = area;
                 //spawnResults.Add(result); // add enemy to the list of spawned enemies
-                yield return new WaitForSeconds(1f);
+                yield return new WaitForSeconds(.05f);
             }
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(.5f);
         }
     }
 

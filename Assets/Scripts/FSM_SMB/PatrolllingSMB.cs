@@ -23,16 +23,18 @@ public class PatrolllingSMB : StateMachineBehaviour {
     {
         // Patrolling
         if(rb != null)
+        {
             rb.velocity = (new Vector2(x, y) * 1f).normalized;
 
-        if (rb.transform.position != lastPos)
-        {
-            Vector3 direction = rb.transform.position - lastPos;
-            direction.Normalize();
-            animator.SetFloat("DirectionX", direction.x);
-            animator.SetFloat("DirectionY", direction.y);
+            if (rb.transform.position != lastPos)
+            {
+                Vector3 direction = rb.transform.position - lastPos;
+                direction.Normalize();
+                animator.SetFloat("DirectionX", direction.x);
+                animator.SetFloat("DirectionY", direction.y);
+            }
+            lastPos = rb.transform.position;
         }
-        lastPos = rb.transform.position;
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state

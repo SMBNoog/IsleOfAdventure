@@ -3,13 +3,15 @@ using System.Collections;
 
 public class ClosingDoorCastle : MonoBehaviour {
 
-    public GameObject closingDoor;
+    public GameObject closingDoorL;
+    public GameObject closingDoorR;
 
     void OnTriggerExit2D(Collider2D other)
     {
         if(other.gameObject.tag == "Player" && other.gameObject.transform.position.y > transform.position.y)
         {
-            closingDoor.gameObject.SetActive(true);
+            closingDoorL.gameObject.SetActive(true);
+            closingDoorR.gameObject.SetActive(true);
         }
     }
 }
