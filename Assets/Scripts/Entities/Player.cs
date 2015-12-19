@@ -145,7 +145,11 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
             }
         }
         else if (GameInfo.AreaToTeleportTo == GameInfo.Area.Castle)
-            rb2D.transform.position = new Vector2(1f, -7f); 
+        {
+            rb2D.transform.position = new Vector2(1f, -7f);
+            Skeleton.numberOfCastleSkeletons = 0;
+        }
+            
 
         HP = maxHP;
     }
@@ -465,7 +469,6 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
     {        
         if(wellBeing != WellBeingState.Dead)
         {
-            Skeleton.numberOfCastleSkeletons = 0;
             HP_Slider.value = 0f;
             wellBeing = WellBeingState.Dead;
             rb2D.isKinematic = true; 
@@ -477,8 +480,7 @@ public class Player : Entity, IAttacker, IPlayerCurrentWeapon, IAttributesManage
     public void FallDeath()
     {
         if (wellBeing != WellBeingState.Dead)
-        {
-            Skeleton.numberOfCastleSkeletons = 0;
+        {            
             HP_Slider.value = 0f;
             wellBeing = WellBeingState.Dead;
             rb2D.isKinematic = true;

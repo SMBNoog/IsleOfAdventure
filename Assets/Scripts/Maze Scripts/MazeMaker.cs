@@ -39,17 +39,17 @@ public class MazeMaker : MonoBehaviour
                     continue;
                 //else if (i = i value of chest && j = j value of chest)
                     //continue;
-                else if (Random.Range(0f, 1f) < 0.1f)
+                else if (Random.Range(0f, 1f) < 0.08f)
                 {
                     Dungeon[i][j] = 'B';
                     Instantiate(RLTile, new Vector3(i, j, 0f), Quaternion.identity);
                 }
-                else if (Random.Range(0f, 1f) < 0.1f)
+                else if (Random.Range(0f, 1f) < 0.08f)
                 {
                     Dungeon[i][j] = 'C';
                     Instantiate(UDTile, new Vector3(i, j, 0f), Quaternion.identity);
                 }
-                else if (Random.Range(0f, 1f) <  0.3f)
+                else if (Random.Range(0f, 1f) <  0.25f)
                 {
                     Dungeon[i][j] = 'D';
                     Instantiate(Tile, new Vector3(i, j, 0f), Quaternion.identity);

@@ -61,7 +61,7 @@ public class CastleEnemySpawner : MonoBehaviour
         {
             for (int i = 0; i < area.amountOfEnemy; i++)
             {
-                CastleSpawnArea result = new CastleSpawnArea();
+                //CastleSpawnArea result = new CastleSpawnArea();
                 var skeleton = CreateEnemy(area.castleEnemy.prefab_Enemy, area.position,
                     area.castleEnemy.HP, area.castleEnemy.Atk, area.castleEnemy.Def,
                     area.castleEnemy.amountOfStatToGive, area.castleEnemy.type);

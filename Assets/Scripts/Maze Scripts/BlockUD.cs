@@ -19,22 +19,28 @@ public class BlockUD : MonoBehaviour
 
     IEnumerator DelayMovement()
     {
+        yield return new WaitForSeconds(Random.Range(1f, 2f));
         while (true)
         {
-            float DelayTime = Random.Range(4f, 7f);
+            float DelayTime = Random.Range(4f, 8f);
             yield return new WaitForSeconds(DelayTime);
             DelayTime = Random.Range(1f, 3f);
             while (DelayTime > 0)
             {
                 DelayTime -= Time.fixedDeltaTime;
                 if (movingUp && velocity.y < targetSpeed)
+                {
                     myrigidbody2D.MovePosition(transform.position + Vector3.up * Time.fixedDeltaTime);
+                }
                 else if (!movingUp && velocity.y > -targetSpeed)
+                {
                     myrigidbody2D.MovePosition(transform.position + -Vector3.up * Time.fixedDeltaTime);
+                }
                 yield return new WaitForFixedUpdate();
             }
             myrigidbody2D.velocity = new Vector2(0f, 0f);
         }
+
     }
 
     void FixedUpdate()

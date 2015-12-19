@@ -138,7 +138,7 @@ public class NewEnemyAI : MonoBehaviour {
 
         if(dotAngle < 0.10 && dotAngle > -0.10)
         {
-            rb.AddForce(dir * 3f, fMode);
+            rb.AddForce(dir * 2f, fMode);
         }
 
         float dist = Vector3.Distance(transform.position, path.vectorPath[currentWaypoint]);

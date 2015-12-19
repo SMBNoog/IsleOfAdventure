@@ -84,7 +84,13 @@ public class Fireball : MonoBehaviour, IAttacker
     {
         if (collision.gameObject.tag == "Player")
         {
-            Destroy(fireball, 0.1f);
+            Destroy(gameObject, 0.1f);
         }
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "FireBallDestroyer")
+            Destroy(gameObject);
     }
 }
